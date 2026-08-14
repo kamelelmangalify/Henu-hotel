@@ -1,0 +1,158 @@
+{
+  "name": "03 — Zoho Books Execution",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "input-trigger",
+      "name": "Receive Parsed Data",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "outputKey": "GUEST_CHECKIN",
+              "conditions": {
+                "conditions": [{
+                  "leftValue": "={{ $json.transaction_type }}",
+                  "rightValue": "GUEST_CHECKIN",
+                  "operator": { "type": "string", "operation": "equals" }
+                }]
+              }
+            },
+            {
+              "outputKey": "CAFE_SHIFT",
+              "conditions": {
+                "conditions": [{
+                  "leftValue": "={{ $json.transaction_type }}",
+                  "rightValue": "CAFE_SHIFT",
+                  "operator": { "type": "string", "operation": "equals" }
+                }]
+              }
+            },
+            {
+              "outputKey": "EXPENSE_BILL",
+              "conditions": {
+                "conditions": [{
+                  "leftValue": "={{ $json.transaction_type }}",
+                  "rightValue": "EXPENSE_BILL",
+                  "operator": { "type": "string", "operation": "equals" }
+                }]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "router",
+      "name": "Route by Transaction Type",
+      "type": "n8n-nodes-base.switch",
+      "position": [480, 300]
+    },
+
+    {
+      "parameters": {
+        "jsCode": "// ══════════════════════════════════════════════════════════\n// GUEST_CHECKIN → إنشاء فاتورة مبيعات (Invoice)\n// ══════════════════════════════════════════════════════════\nconst data = $input.first().json;\nconst nights = data.details?.nights || 1;\nconst rate_per_night = data.amount / nights;\n\n// حساب المبالغ (إذا كان الـ amount يشمل الضرائب، نستخرج الصافي)\nlet net_amount = data.amount;\nif (data.details?.tax_included) {\n  // الإجمالي = الصافي × (1 + 14%) → الصافي = الإجمالي / 1.14\n  net_amount = Math.round((data.amount / 1.14) * 100) / 100;\n}\n\nconst invoice = {\n  customer_name: data.details?.guest_name || 'Walk-in Guest',\n  date: new Date().toISOString().split('T')[0],\n  payment_terms: 0, // دفع فوري\n  notes: `Room ${data.details?.room_number || 'N/A'} — ${nights} night(s) | Source: WhatsApp`,\n  line_items: [\n    {\n      name:       `Room Accommodation — ${data.details?.room_number || 'Room'}`,\n      description: `${nights} night(s) × ${rate_per_night} EGP/night`,\n      quantity:   nights,\n      rate:       Math.round((net_amount / nights) * 100) / 100,\n      tax_name:   'VAT 14%',\n      account_id: 'PLACEHOLDER_ROOM_REVENUE_ID' // يُستبدل بـ ID فعلي من الخطوة 4\n    }\n  ],\n  tags: [{ tag_option_value: 'Rooms' }],\n  payment_options: {\n    payment_gateways: []\n  }\n};\n\n// إضافة بيانات الدفع\nif (data.payment_method === 'cash') {\n  invoice.cash_as_payment = true;\n}\n\nreturn [{ json: { zoho_payload: invoice, original: data } }];"
+      },
+      "id": "build-invoice",
+      "name": "Build Invoice Payload",
+      "type": "n8n-nodes-base.code",
+      "position": [740, 160]
+    },
+    {
+      "parameters": {
+        "url": "=https://www.zohoapis.com/books/v3/invoices?organization_id={{ $env.ZOHO_ORG_ID }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{ JSON.stringify($json.zoho_payload) }}",
+        "options": {}
+      },
+      "id": "create-invoice",
+      "name": "POST Invoice to Zoho",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [980, 160]
+    },
+
+    {
+      "parameters": {
+        "jsCode": "// ══════════════════════════════════════════════════════════\n// CAFE_SHIFT → إنشاء قيد يومية (Journal Entry)\n// ══════════════════════════════════════════════════════════\nconst data = $input.first().json;\nconst total_collected = data.amount; // الإجمالي المحصّل\n\n// توزيع المبالغ:\n// الإجمالي = صافي الإيراد × (1 + VAT 14%) × (1 + SC 12%)\n// نعكس: صافي = الإجمالي / (1.14 × 1.12) = / 1.2768\nconst net_revenue   = Math.round((total_collected / 1.2768) * 100) / 100;\nconst vat_amount    = Math.round((net_revenue * 0.14) * 100) / 100;\nconst sc_amount     = Math.round((net_revenue * 0.12) * 100) / 100;\nconst check_total   = net_revenue + vat_amount + sc_amount;\n// تصحيح الفروق في التقريب\nconst rounding_diff = Math.round((total_collected - check_total) * 100) / 100;\n\nconst now = new Date();\nconst shift_ref = `CAFE-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${data.details?.shift || 'EVE'}`;\n\nconst journal = {\n  journal_date: now.toISOString().split('T')[0],\n  reference_number: shift_ref,\n  notes: `Cafe shift closing — ${data.details?.shift || 'Evening'} | via WhatsApp`,\n  line_items: [\n    // Debit: الصندوق (ما دخل)\n    {\n      account_name: data.payment_method === 'card' ? 'POS Cash' : 'Main Cash',\n      debit_or_credit: 'debit',\n      amount: total_collected,\n      description: 'Cash/POS collected'\n    },\n    // Credit: إيراد الكافيه (الصافي)\n    {\n      account_name: 'Cafe & Restaurant Sales',\n      debit_or_credit: 'credit',\n      amount: net_revenue + rounding_diff,\n      description: 'Net F&B Revenue',\n      tags: [{ tag_option_value: 'Cafe & Restaurant' }]\n    },\n    // Credit: ضريبة القيمة المضافة\n    {\n      account_name: 'Output VAT 14%',\n      debit_or_credit: 'credit',\n      amount: vat_amount,\n      description: 'VAT 14% payable'\n    },\n    // Credit: رسم الخدمة\n    {\n      account_name: 'Service Charge Pool',\n      debit_or_credit: 'credit',\n      amount: sc_amount,\n      description: 'Service Charge 12%'\n    }\n  ]\n};\n\nreturn [{ json: { zoho_payload: journal, original: data, breakdown: { net_revenue, vat_amount, sc_amount, total_collected } } }];"
+      },
+      "id": "build-journal",
+      "name": "Build Journal Entry Payload",
+      "type": "n8n-nodes-base.code",
+      "position": [740, 300]
+    },
+    {
+      "parameters": {
+        "url": "=https://www.zohoapis.com/books/v3/journals?organization_id={{ $env.ZOHO_ORG_ID }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{ JSON.stringify($json.zoho_payload) }}",
+        "options": {}
+      },
+      "id": "create-journal",
+      "name": "POST Journal to Zoho",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [980, 300]
+    },
+
+    {
+      "parameters": {
+        "jsCode": "// ══════════════════════════════════════════════════════════\n// EXPENSE_BILL → إنشاء فاتورة شراء (Bill) مع WHT\n// ══════════════════════════════════════════════════════════\nconst data = $input.first().json;\n\n// تحديد نسبة WHT حسب نوع المورد/الخدمة\nconst notes_lower = (data.details?.notes || '').toLowerCase();\nconst is_service = notes_lower.includes('صيان') ||\n                   notes_lower.includes('خدم') ||\n                   notes_lower.includes('service') ||\n                   notes_lower.includes('مقاول');\n\nconst wht_rate      = is_service ? 0.03 : 0.01;\nconst wht_tax_name  = is_service ? 'WHT Services 3%' : 'WHT Purchase 1%';\nconst wht_amount    = Math.round((data.amount * wht_rate) * 100) / 100;\nconst net_payable   = Math.round((data.amount - wht_amount) * 100) / 100;\n\n// تحديد حساب المصروف\nlet expense_account = 'Guest Amenities'; // افتراضي\nif (notes_lower.includes('صيان') || notes_lower.includes('اصلاح')) {\n  expense_account = 'Maintenance';\n} else if (notes_lower.includes('كهرباء') || notes_lower.includes('ماء') || notes_lower.includes('غاز')) {\n  expense_account = 'Utilities';\n} else if (notes_lower.includes('طعام') || notes_lower.includes('مشروب') || notes_lower.includes('خام')) {\n  expense_account = 'F&B COGS';\n}\n\nconst now = new Date();\nconst bill = {\n  vendor_name: data.details?.vendor_name || 'Unknown Vendor',\n  date: now.toISOString().split('T')[0],\n  due_date: now.toISOString().split('T')[0],\n  reference_number: `BILL-${Date.now()}`,\n  notes: `WHT ${wht_rate*100}% applied — Net payable: ${net_payable} EGP | via WhatsApp`,\n  line_items: [\n    {\n      account_name: expense_account,\n      description: data.details?.notes || 'Purchase/Expense',\n      quantity: 1,\n      rate: data.amount,\n      tax_name: wht_tax_name\n    }\n  ],\n  tags: [{ tag_option_value: 'General & Admin' }]\n};\n\nreturn [{ json: {\n  zoho_payload: bill,\n  original: data,\n  wht_summary: { wht_rate, wht_amount, net_payable, expense_account, wht_tax_name }\n}}];"
+      },
+      "id": "build-bill",
+      "name": "Build Bill Payload",
+      "type": "n8n-nodes-base.code",
+      "position": [740, 460]
+    },
+    {
+      "parameters": {
+        "url": "=https://www.zohoapis.com/books/v3/bills?organization_id={{ $env.ZOHO_ORG_ID }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{ JSON.stringify($json.zoho_payload) }}",
+        "options": {}
+      },
+      "id": "create-bill",
+      "name": "POST Bill to Zoho",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [980, 460]
+    },
+
+    {
+      "parameters": {
+        "jsCode": "// دمج نتائج الـ 3 فروع في output موحد للـ Auto-Response\nconst input = $input.first().json;\nconst response = input.response || input;\nconst original = $('Route by Transaction Type').item?.json || {};\n\nconst type = original.transaction_type;\nlet ref_number = 'N/A';\nlet success = false;\n\nif (response.code === 0 || response.invoice || response.journal || response.bill) {\n  success = true;\n  if (response.invoice)      ref_number = response.invoice.invoice_number;\n  else if (response.journal) ref_number = response.journal.reference_number;\n  else if (response.bill)    ref_number = response.bill.bill_number;\n}\n\nreturn [{ json: {\n  success,\n  transaction_type: type,\n  ref_number,\n  amount: original.amount,\n  from_number: original.from_number,\n  contact_name: original.contact_name,\n  zoho_response: response\n}}];"
+      },
+      "id": "merge-results",
+      "name": "Merge Results",
+      "type": "n8n-nodes-base.code",
+      "position": [1220, 300]
+    }
+  ],
+  "connections": {
+    "Receive Parsed Data": {
+      "main": [[{ "node": "Route by Transaction Type", "type": "main", "index": 0 }]]
+    },
+    "Route by Transaction Type": {
+      "main": [
+        [{ "node": "Build Invoice Payload",       "type": "main", "index": 0 }],
+        [{ "node": "Build Journal Entry Payload",  "type": "main", "index": 0 }],
+        [{ "node": "Build Bill Payload",           "type": "main", "index": 0 }]
+      ]
+    },
+    "Build Invoice Payload":       { "main": [[{ "node": "POST Invoice to Zoho", "type": "main", "index": 0 }]] },
+    "Build Journal Entry Payload": { "main": [[{ "node": "POST Journal to Zoho", "type": "main", "index": 0 }]] },
+    "Build Bill Payload":          { "main": [[{ "node": "POST Bill to Zoho",    "type": "main", "index": 0 }]] },
+    "POST Invoice to Zoho":        { "main": [[{ "node": "Merge Results",        "type": "main", "index": 0 }]] },
+    "POST Journal to Zoho":        { "main": [[{ "node": "Merge Results",        "type": "main", "index": 0 }]] },
+    "POST Bill to Zoho":           { "main": [[{ "node": "Merge Results",        "type": "main", "index": 0 }]] }
+  }
+}

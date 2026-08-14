@@ -1,0 +1,137 @@
+{
+  "name": "02 — LLM Parser (Gemini Flash — Hotel Transaction Analyzer)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "input-trigger",
+      "name": "Receive from Webhook",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [240, 300]
+    },
+
+    {
+      "parameters": {
+        "jsCode": "// تحضير الـ prompt للرسائل النصية\nconst data = $input.first().json;\nconst text = data.body_text || data.transcribed_text || '';\n\nconst systemPrompt = `أنت مساعد محاسبي متخصص لفندق مصري اسمه هوستل الأهرامات.\n\nمهمتك: تحليل رسالة واتساب من موظف الفندق وإخراج JSON منظّم فقط بدون أي نص إضافي.\n\nأنواع العمليات الممكنة:\n1. GUEST_CHECKIN — دخول نزيل\n   مؤشرات: دخول، نزيل، تسجيل، check in، غرفة، ليلة\n2. CAFE_SHIFT — تقفيل وردية الكافيه/المطعم\n   مؤشرات: تقفيل، كافيه، مطعم، وردية، مبيعات، إجمالي\n3. EXPENSE_BILL — فاتورة مشتريات/مصروف\n   مؤشرات: فاتورة، مصروف، شراء، مورد، صيانة\n\nقواعد صارمة:\n- إذا لم تستطع تحديد النوع، اجعل transaction_type = UNKNOWN\n- المبالغ دائماً بالجنيه المصري\n- إذا ذُكرت الضرائب، اجعل tax_included = true\n- إذا لم يُذكر طريقة الدفع، اجعل payment_method = unknown\n- أخرج JSON فقط بهذا الشكل بالضبط:\n{\n  \"transaction_type\": \"GUEST_CHECKIN | CAFE_SHIFT | EXPENSE_BILL | UNKNOWN\",\n  \"amount\": 0.00,\n  \"payment_method\": \"cash | card | transfer | unknown\",\n  \"details\": {\n    \"guest_name\": \"\",\n    \"room_number\": \"\",\n    \"nights\": 0,\n    \"vendor_name\": \"\",\n    \"tax_included\": true,\n    \"shift\": \"morning | evening | night\",\n    \"notes\": \"\"\n  }\n}`;\n\nconst payload = {\n  contents: [\n    {\n      parts: [\n        { text: systemPrompt },\n        { text: `حلّل هذه الرسالة:\\n\\n${text}` }\n      ]\n    }\n  ],\n  generationConfig: {\n    temperature: 0.1,\n    maxOutputTokens: 512,\n    responseMimeType: \"application/json\"\n  }\n};\n\nreturn [{ json: { gemini_payload: payload, original: data, is_image: false } }];"
+      },
+      "id": "build-text-prompt",
+      "name": "Build Text Prompt",
+      "type": "n8n-nodes-base.code",
+      "position": [480, 160]
+    },
+
+    {
+      "parameters": {
+        "jsCode": "// تحضير الـ prompt لصور الفواتير (Vision)\nconst data = $input.first().json;\nconst imageBase64 = $input.first().binary?.data\n  ? Buffer.from($input.first().binary.data).toString('base64')\n  : '';\n\nconst systemPrompt = `أنت نظام OCR + تحليل محاسبي. استخرج بيانات الفاتورة من الصورة.\nاجعل transaction_type = EXPENSE_BILL دائماً لصور الفواتير.\nأخرج JSON فقط بهذا الشكل:\n{\n  \"transaction_type\": \"EXPENSE_BILL\",\n  \"amount\": 0.00,\n  \"payment_method\": \"unknown\",\n  \"details\": {\n    \"vendor_name\": \"\",\n    \"tax_included\": true,\n    \"notes\": \"\"\n  }\n}`;\n\nconst payload = {\n  contents: [\n    {\n      parts: [\n        { text: systemPrompt },\n        {\n          inline_data: {\n            mime_type: \"image/jpeg\",\n            data: imageBase64\n          }\n        },\n        { text: \"استخرج بيانات هذه الفاتورة وأخرج JSON:\" }\n      ]\n    }\n  ],\n  generationConfig: {\n    temperature: 0.1,\n    maxOutputTokens: 512,\n    responseMimeType: \"application/json\"\n  }\n};\n\nreturn [{ json: { gemini_payload: payload, original: data, is_image: true } }];"
+      },
+      "id": "build-vision-prompt",
+      "name": "Build Vision Prompt",
+      "type": "n8n-nodes-base.code",
+      "position": [480, 420]
+    },
+
+    {
+      "parameters": {
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={{ $env.GOOGLE_API_KEY }}",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{ JSON.stringify($json.gemini_payload) }}",
+        "options": {
+          "response": { "response": { "responseFormat": "json" } }
+        }
+      },
+      "id": "call-gemini-text",
+      "name": "Gemini Flash — Text",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [740, 160],
+      "notes": "استدعاء Gemini 1.5 Flash للنصوص — مجاناً حتى 15 req/min"
+    },
+
+    {
+      "parameters": {
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={{ $env.GOOGLE_API_KEY }}",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{ JSON.stringify($json.gemini_payload) }}",
+        "options": {
+          "response": { "response": { "responseFormat": "json" } }
+        }
+      },
+      "id": "call-gemini-vision",
+      "name": "Gemini Flash — Vision (Bill OCR)",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [740, 420],
+      "notes": "استدعاء Gemini 1.5 Flash مع Vision لقراءة صور الفواتير — مجاناً"
+    },
+
+    {
+      "parameters": {
+        "jsCode": "// استخراج JSON من استجابة Gemini والتحقق منه\nconst raw = $input.first().json;\nconst originalData = $('Receive from Webhook').item?.json || {};\n\nlet parsed;\ntry {\n  // Gemini يُرجع النص داخل candidates[0].content.parts[0].text\n  const rawText = raw?.candidates?.[0]?.content?.parts?.[0]?.text || '{}';\n  // تنظيف أي markdown كودي\n  const cleaned = rawText\n    .replace(/```json\\n?/gi, '')\n    .replace(/```\\n?/gi, '')\n    .trim();\n  parsed = JSON.parse(cleaned);\n} catch (e) {\n  return [{ json: {\n    transaction_type: 'UNKNOWN',\n    parse_error: true,\n    error_detail: e.message,\n    raw_response: raw,\n    from_number: originalData.from_number,\n    contact_name: originalData.contact_name,\n    is_valid: false\n  }}];\n}\n\n// التحقق من الحقول الأساسية\nconst isValid =\n  parsed.transaction_type &&\n  parsed.transaction_type !== 'UNKNOWN' &&\n  parsed.amount > 0;\n\nreturn [{ json: {\n  ...parsed,\n  from_number: originalData.from_number,\n  contact_name: originalData.contact_name,\n  is_valid: isValid,\n  parsed_at: new Date().toISOString()\n}}];"
+      },
+      "id": "parse-gemini-response",
+      "name": "Parse Gemini Response",
+      "type": "n8n-nodes-base.code",
+      "position": [1000, 300]
+    },
+
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "leftValue": "={{ $json.is_valid }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ]
+        }
+      },
+      "id": "check-valid",
+      "name": "Is Valid?",
+      "type": "n8n-nodes-base.if",
+      "position": [1240, 300]
+    },
+
+    {
+      "parameters": {
+        "url": "=https://graph.facebook.com/v18.0/{{ $env.WA_PHONE_NUMBER_ID }}/messages",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $json.from_number }}\",\n  \"type\": \"text\",\n  \"text\": { \"body\": \"⚠️ لم أستطع فهم رسالتك.\\n\\nأمثلة صحيحة:\\n✅ دخول نزيل: أحمد، غرفة 12، 3 ليالي، نقد، 900 جـ\\n✅ تقفيل كافيه: إجمالي 2850 جـ\\n✅ أرسل صورة الفاتورة\" }\n}",
+        "options": {}
+      },
+      "id": "send-error-reply",
+      "name": "Send Error Reply (WA)",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [1480, 440]
+    }
+  ],
+
+  "connections": {
+    "Receive from Webhook": {
+      "main": [
+        [{ "node": "Build Text Prompt",   "type": "main", "index": 0 }],
+        [{ "node": "Build Vision Prompt", "type": "main", "index": 0 }]
+      ]
+    },
+    "Build Text Prompt":   { "main": [[{ "node": "Gemini Flash — Text",             "type": "main", "index": 0 }]] },
+    "Build Vision Prompt": { "main": [[{ "node": "Gemini Flash — Vision (Bill OCR)", "type": "main", "index": 0 }]] },
+    "Gemini Flash — Text":             { "main": [[{ "node": "Parse Gemini Response", "type": "main", "index": 0 }]] },
+    "Gemini Flash — Vision (Bill OCR)": { "main": [[{ "node": "Parse Gemini Response", "type": "main", "index": 0 }]] },
+    "Parse Gemini Response": { "main": [[{ "node": "Is Valid?", "type": "main", "index": 0 }]] },
+    "Is Valid?": {
+      "main": [
+        [{ "node": "03 — Zoho Execution", "type": "main", "index": 0 }],
+        [{ "node": "Send Error Reply (WA)", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+
+  "settings": { "executionOrder": "v1" },
+
+  "_notes": {
+    "model": "gemini-1.5-flash",
+    "pricing": "مجاناً — 15 request/minute و 1 million tokens/day",
+    "vision": "يدعم قراءة صور الفواتير مجاناً",
+    "api_key_source": "https://aistudio.google.com/app/apikey"
+  }
+}

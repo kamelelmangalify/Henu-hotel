@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LuxStay – نظام حجز الفنادق الفاخرة</title>
+  <meta name="description" content="احجز إقامتك المثالية في أفخم الفنادق حول العالم مع LuxStay – تجربة حجز سهلة وآمنة" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">LuxStay</span>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="nav-link active" onclick="showPage('home')">الرئيسية</a>
+      <a href="#" class="nav-link" onclick="showPage('hotels')">الفنادق</a>
+      <a href="#" class="nav-link" onclick="showPage('bookings')">حجوزاتي</a>
+      <a href="#" class="nav-link" onclick="showPage('contact')">تواصل معنا</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-ghost" id="loginBtn" onclick="openModal('loginModal')">تسجيل الدخول</button>
+      <button class="btn-primary" onclick="openModal('registerModal')">إنشاء حساب</button>
+    </div>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#" onclick="showPage('home'); toggleMobileMenu()">الرئيسية</a>
+    <a href="#" onclick="showPage('hotels'); toggleMobileMenu()">الفنادق</a>
+    <a href="#" onclick="showPage('bookings'); toggleMobileMenu()">حجوزاتي</a>
+    <button class="btn-primary" style="width:100%;margin-top:1rem" onclick="openModal('loginModal')">تسجيل الدخول</button>
+  </div>
+</nav>
+
+<!-- ========== HOME PAGE ========== -->
+<div id="homePage" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>✦</span> أكثر من 500 فندق فاخر حول العالم
+      </div>
+      <h1 class="hero-title">
+        اكتشف إقامتك<br/>
+        <span class="gradient-text">المثالية</span>
+      </h1>
+      <p class="hero-subtitle">احجز في أرقى الفنادق بأسعار حصرية وتجربة لا تُنسى</p>
+
+      <!-- SEARCH BOX -->
+      <div class="search-box glass-card">
+        <div class="search-field">
+          <label>🏙️ الوجهة</label>
+          <input type="text" id="searchDestination" placeholder="إلى أين تريد السفر؟" />
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-field">
+          <label>📅 تاريخ الوصول</label>
+          <input type="date" id="searchCheckin" />
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-field">
+          <label>📅 تاريخ المغادرة</label>
+          <input type="date" id="searchCheckout" />
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-field">
+          <label>👥 الضيوف</label>
+          <select id="searchGuests">
+            <option value="1">1 ضيف</option>
+            <option value="2" selected>2 ضيوف</option>
+            <option value="3">3 ضيوف</option>
+            <option value="4">4 ضيوف</option>
+            <option value="5">5+ ضيوف</option>
+          </select>
+        </div>
+        <button class="btn-search" onclick="doSearch()">
+          <span>🔍</span> بحث
+        </button>
+      </div>
+
+      <!-- STATS -->
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">500+</span><span class="stat-label">فندق فاخر</span></div>
+        <div class="stat-sep"></div>
+        <div class="stat"><span class="stat-num">50K+</span><span class="stat-label">عميل سعيد</span></div>
+        <div class="stat-sep"></div>
+        <div class="stat"><span class="stat-num">98%</span><span class="stat-label">رضا العملاء</span></div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-dot"></div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">لماذا LuxStay؟</span>
+        <h2>تجربة حجز استثنائية</h2>
+        <p>نقدم لك أفضل الخدمات لضمان إقامة مريحة ولا تُنسى</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card glass-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>حجز آمن 100%</h3>
+          <p>بياناتك محمية بأعلى معايير التشفير والأمان الرقمي</p>
+        </div>
+        <div class="feature-card glass-card">
+          <div class="feature-icon">💰</div>
+          <h3>أفضل الأسعار</h3>
+          <p>نضمن لك أفضل سعر أو نُعيد لك الفرق فوراً</p>
+        </div>
+        <div class="feature-card glass-card">
+          <div class="feature-icon">⚡</div>
+          <h3>حجز فوري</h3>
+          <p>أتمّ حجزك في ثوانٍ واستلم تأكيدك على الفور</p>
+        </div>
+        <div class="feature-card glass-card">
+          <div class="feature-icon">🎧</div>
+          <h3>دعم 24/7</h3>
+          <p>فريق خدمة عملاء متاح على مدار الساعة لمساعدتك</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED HOTELS -->
+  <section class="hotels-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">الأكثر طلباً</span>
+        <h2>الفنادق المميزة</h2>
+        <p>اختر من بين أرقى الفنادق المختارة بعناية لك</p>
+      </div>
+      <div class="hotels-grid" id="featuredHotels"></div>
+      <div class="text-center" style="margin-top:3rem">
+        <button class="btn-outline" onclick="showPage('hotels')">عرض جميع الفنادق ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">آراء عملائنا</span>
+        <h2>ماذا يقول ضيوفنا؟</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card glass-card">
+          <div class="stars">★★★★★</div>
+          <p>"تجربة حجز رائعة! الموقع سهل الاستخدام والفندق كان بالضبط كما هو موصوف. سأعود بالتأكيد!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">أح</div>
+            <div><strong>أحمد حسن</strong><span>القاهرة، مصر</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card glass-card">
+          <div class="stars">★★★★★</div>
+          <p>"خدمة العملاء ممتازة وأسعار لا تُقارن. وجدت الفندق المثالي لشهر العسل في دقائق معدودة."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">سم</div>
+            <div><strong>سارة محمد</strong><span>دبي، الإمارات</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card glass-card">
+          <div class="stars">★★★★★</div>
+          <p>"أنصح الجميع باستخدام LuxStay. التنوع في الخيارات والأسعار التنافسية جعلت رحلتي مميزة جداً."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">خع</div>
+            <div><strong>خالد العمري</strong><span>الرياض، السعودية</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="margin-bottom:1rem"><span class="logo-icon">✦</span><span class="logo-text">LuxStay</span></div>
+          <p>وجهتك الأولى لحجز أفخم الفنادق حول العالم بأسعار حصرية وتجربة لا مثيل لها.</p>
+        </div>
+        <div class="footer-col"><h4>روابط سريعة</h4><a href="#">الرئيسية</a><a href="#">الفنادق</a><a href="#">العروض</a><a href="#">المدونة</a></div>
+        <div class="footer-col"><h4>الدعم</h4><a href="#">مركز المساعدة</a><a href="#">سياسة الإلغاء</a><a href="#">الشروط والأحكام</a><a href="#">الخصوصية</a></div>
+        <div class="footer-col"><h4>تواصل معنا</h4><p>📧 info@luxstay.com</p><p>📞 +966 11 234 5678</p><p>💬 دردشة مباشرة</p></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 LuxStay. جميع الحقوق محفوظة.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">𝕏</a>
+          <a href="#" class="social-link">f</a>
+          <a href="#" class="social-link">in</a>
+          <a href="#" class="social-link">📸</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ========== HOTELS PAGE ========== -->
+<div id="hotelsPage" class="page">
+  <div class="page-hero small">
+    <div class="hero-overlay"></div>
+    <div class="page-hero-content">
+      <h1>استكشف فنادقنا</h1>
+      <p>أكثر من 500 فندق فاخر في أكثر من 80 مدينة حول العالم</p>
+    </div>
+  </div>
+  <div class="container" style="margin-top:3rem">
+    <div class="hotels-layout">
+      <!-- FILTERS SIDEBAR -->
+      <aside class="filters-sidebar glass-card">
+        <h3>🔍 تصفية النتائج</h3>
+        <div class="filter-group">
+          <label>المدينة / الوجهة</label>
+          <input type="text" id="filterCity" placeholder="أدخل اسم المدينة..." oninput="filterHotels()" />
+        </div>
+        <div class="filter-group">
+          <label>تقييم النجوم</label>
+          <div class="star-filters">
+            <label class="star-check"><input type="checkbox" value="5" onchange="filterHotels()" /> ⭐⭐⭐⭐⭐</label>
+            <label class="star-check"><input type="checkbox" value="4" onchange="filterHotels()" /> ⭐⭐⭐⭐</label>
+            <label class="star-check"><input type="checkbox" value="3" onchange="filterHotels()" /> ⭐⭐⭐</label>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>السعر لكل ليلة (ريال)</label>
+          <div class="price-range">
+            <input type="range" id="priceRange" min="200" max="5000" value="5000" oninput="updatePriceLabel(); filterHotels()" />
+            <span id="priceLabel">حتى 5,000 ريال</span>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>المرافق</label>
+          <div class="amenity-filters">
+            <label class="amenity-check"><input type="checkbox" value="wifi" onchange="filterHotels()" /> 📶 واي فاي مجاني</label>
+            <label class="amenity-check"><input type="checkbox" value="pool" onchange="filterHotels()" /> 🏊 مسبح</label>
+            <label class="amenity-check"><input type="checkbox" value="spa" onchange="filterHotels()" /> 💆 سبا</label>
+            <label class="amenity-check"><input type="checkbox" value="gym" onchange="filterHotels()" /> 🏋️ صالة رياضية</label>
+            <label class="amenity-check"><input type="checkbox" value="restaurant" onchange="filterHotels()" /> 🍽️ مطعم</label>
+            <label class="amenity-check"><input type="checkbox" value="parking" onchange="filterHotels()" /> 🅿️ موقف سيارات</label>
+          </div>
+        </div>
+        <button class="btn-outline" style="width:100%" onclick="resetFilters()">إعادة تعيين</button>
+      </aside>
+      <!-- HOTELS LIST -->
+      <div class="hotels-results">
+        <div class="results-header">
+          <span id="resultsCount" class="results-count">جاري التحميل...</span>
+          <select id="sortSelect" onchange="filterHotels()">
+            <option value="rating">ترتيب حسب: التقييم</option>
+            <option value="price-asc">السعر: من الأقل</option>
+            <option value="price-desc">السعر: من الأعلى</option>
+            <option value="name">الاسم أبجدياً</option>
+          </select>
+        </div>
+        <div class="hotels-list" id="hotelsList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== HOTEL DETAIL PAGE ========== -->
+<div id="hotelDetailPage" class="page">
+  <div id="hotelDetailContent"></div>
+</div>
+
+<!-- ========== BOOKINGS PAGE ========== -->
+<div id="bookingsPage" class="page">
+  <div class="page-hero small" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)">
+    <div class="page-hero-content">
+      <h1>حجوزاتي</h1>
+      <p>تتبع جميع حجوزاتك في مكان واحد</p>
+    </div>
+  </div>
+  <div class="container" style="margin-top:3rem">
+    <div id="bookingsList"></div>
+  </div>
+</div>
+
+<!-- ========== MODALS ========== -->
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal" onclick="closeModalOnOverlay(event, 'loginModal')">
+  <div class="modal glass-card">
+    <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    <div class="modal-header">
+      <span class="logo-icon" style="font-size:2rem">✦</span>
+      <h2>تسجيل الدخول</h2>
+      <p>أهلاً بك مجدداً في LuxStay</p>
+    </div>
+    <form onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label>البريد الإلكتروني</label>
+        <input type="email" id="loginEmail" placeholder="example@email.com" required />
+      </div>
+      <div class="form-group">
+        <label>كلمة المرور</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" required />
+      </div>
+      <div class="form-row">
+        <label class="checkbox-label"><input type="checkbox" /> تذكرني</label>
+        <a href="#" class="text-accent">نسيت كلمة المرور؟</a>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;margin-top:1rem">تسجيل الدخول</button>
+    </form>
+    <p class="modal-footer-text">ليس لديك حساب؟ <a href="#" onclick="closeModal('loginModal'); openModal('registerModal')">إنشاء حساب جديد</a></p>
+  </div>
+</div>
+
+<!-- REGISTER MODAL -->
+<div class="modal-overlay" id="registerModal" onclick="closeModalOnOverlay(event, 'registerModal')">
+  <div class="modal glass-card">
+    <button class="modal-close" onclick="closeModal('registerModal')">✕</button>
+    <div class="modal-header">
+      <span class="logo-icon" style="font-size:2rem">✦</span>
+      <h2>إنشاء حساب</h2>
+      <p>انضم إلى آلاف العملاء السعداء</p>
+    </div>
+    <form onsubmit="handleRegister(event)">
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>الاسم الأول</label>
+          <input type="text" id="regFirstName" placeholder="الاسم الأول" required />
+        </div>
+        <div class="form-group">
+          <label>الاسم الأخير</label>
+          <input type="text" id="regLastName" placeholder="الاسم الأخير" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>البريد الإلكتروني</label>
+        <input type="email" id="regEmail" placeholder="example@email.com" required />
+      </div>
+      <div class="form-group">
+        <label>رقم الهاتف</label>
+        <input type="tel" id="regPhone" placeholder="+966 5x xxx xxxx" />
+      </div>
+      <div class="form-group">
+        <label>كلمة المرور</label>
+        <input type="password" id="regPassword" placeholder="••••••••" required minlength="6" />
+      </div>
+      <label class="checkbox-label" style="margin-bottom:1rem;display:flex;gap:.5rem">
+        <input type="checkbox" required /> أوافق على <a href="#" class="text-accent">الشروط والأحكام</a>
+      </label>
+      <button type="submit" class="btn-primary" style="width:100%">إنشاء الحساب</button>
+    </form>
+    <p class="modal-footer-text">لديك حساب بالفعل؟ <a href="#" onclick="closeModal('registerModal'); openModal('loginModal')">تسجيل الدخول</a></p>
+  </div>
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="bookingModal" onclick="closeModalOnOverlay(event, 'bookingModal')">
+  <div class="modal modal-lg glass-card">
+    <button class="modal-close" onclick="closeModal('bookingModal')">✕</button>
+    <div class="modal-header">
+      <h2>🏨 تأكيد الحجز</h2>
+      <p id="bookingModalSubtitle"></p>
+    </div>
+    <div class="booking-modal-body">
+      <div class="booking-summary">
+        <h3>ملخص الحجز</h3>
+        <div id="bookingSummaryContent"></div>
+      </div>
+      <form onsubmit="confirmBooking(event)" class="booking-form-modal">
+        <h3>بيانات النزيل</h3>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>الاسم الأول</label>
+            <input type="text" id="guestFirstName" placeholder="الاسم الأول" required />
+          </div>
+          <div class="form-group">
+            <label>الاسم الأخير</label>
+            <input type="text" id="guestLastName" placeholder="الاسم الأخير" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>البريد الإلكتروني</label>
+          <input type="email" id="guestEmail" placeholder="example@email.com" required />
+        </div>
+        <div class="form-group">
+          <label>رقم الهاتف</label>
+          <input type="tel" id="guestPhone" placeholder="+966 5x xxx xxxx" required />
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>تاريخ الوصول</label>
+            <input type="date" id="bookCheckin" required />
+          </div>
+          <div class="form-group">
+            <label>تاريخ المغادرة</label>
+            <input type="date" id="bookCheckout" required onchange="updateBookingTotal()" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>عدد الضيوف</label>
+          <select id="bookGuests">
+            <option>1 ضيف</option><option selected>2 ضيف</option><option>3 ضيوف</option><option>4 ضيوف</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>طلبات خاصة (اختياري)</label>
+          <textarea id="specialRequests" placeholder="مثال: غرفة في طابق عالٍ، احتياجات خاصة..." rows="3"></textarea>
+        </div>
+        <h3 style="margin-top:1.5rem">بيانات الدفع</h3>
+        <div class="payment-methods">
+          <label class="payment-method active" id="pm1" onclick="selectPayment('card', 'pm1')">
+            <input type="radio" name="payment" value="card" checked /> 💳 بطاقة بنكية
+          </label>
+          <label class="payment-method" id="pm2" onclick="selectPayment('apple', 'pm2')">
+            <input type="radio" name="payment" value="apple" />  Apple Pay
+          </label>
+          <label class="payment-method" id="pm3" onclick="selectPayment('transfer', 'pm3')">
+            <input type="radio" name="payment" value="transfer" /> 🏦 تحويل بنكي
+          </label>
+        </div>
+        <div id="cardFields">
+          <div class="form-group">
+            <label>رقم البطاقة</label>
+            <input type="text" id="cardNumber" placeholder="**** **** **** ****" maxlength="19" oninput="formatCard(this)" />
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>تاريخ الانتهاء</label>
+              <input type="text" placeholder="MM/YY" maxlength="5" />
+            </div>
+            <div class="form-group">
+              <label>CVV</label>
+              <input type="text" placeholder="***" maxlength="3" />
+            </div>
+          </div>
+        </div>
+        <div class="total-box">
+          <div class="total-row"><span>سعر الغرفة / الليلة</span><span id="totalRoomPrice">-</span></div>
+          <div class="total-row"><span>عدد الليالي</span><span id="totalNights">-</span></div>
+          <div class="total-row"><span>ضريبة القيمة المضافة (15%)</span><span id="totalTax">-</span></div>
+          <div class="total-row total-final"><span>المجموع الكلي</span><span id="totalAmount">-</span></div>
+        </div>
+        <button type="submit" class="btn-primary btn-large" style="width:100%;margin-top:1rem">
+          ✅ تأكيد الحجز والدفع
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal glass-card" style="text-align:center;max-width:500px">
+    <div class="success-animation">
+      <div class="success-circle">✓</div>
+    </div>
+    <h2 style="color:#10b981;margin:1rem 0 .5rem">تم الحجز بنجاح! 🎉</h2>
+    <p id="successMessage">سيتم إرسال تفاصيل حجزك إلى بريدك الإلكتروني</p>
+    <div id="successBookingRef" class="booking-ref"></div>
+    <div style="display:flex;gap:1rem;margin-top:2rem;justify-content:center">
+      <button class="btn-primary" onclick="closeModal('successModal'); showPage('bookings')">عرض حجوزاتي</button>
+      <button class="btn-outline" onclick="closeModal('successModal')">العودة للرئيسية</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

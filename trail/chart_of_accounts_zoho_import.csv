@@ -1,0 +1,19 @@
+Account Name,Account Type,Account Code,Description
+Guest Ledger,Accounts Receivable,1100,حساب النزلاء الحاليين - يسجل مديونيات النزلاء المقيمين في الفندق
+City Ledger,Accounts Receivable,1110,حساب النزلاء الشركات والوكالات - مديونيات العملاء الآجلة
+Main Cash,Cash,1200,صندوق النقدية الرئيسي - الاستقبال والعمليات العامة
+POS Cash,Cash,1210,صندوق نقطة البيع - الكافيه والمطعم
+F&B Inventory,Inventory,1300,مخزون المواد الغذائية والمشروبات للكافيه والمطعم
+Operating Supplies,Other Current Asset,1310,مستلزمات التشغيل - أدوات نظافة ومستهلكات الغرف
+Guest Deposits,Other Current Liability,2100,أمانات النزلاء - المبالغ المقدمة مسبقاً قبل الإقامة
+Output VAT 14%,Other Current Liability,2200,ضريبة القيمة المضافة المستحقة للسلطة الضريبية 14%
+WHT Payable,Other Current Liability,2210,ضريبة الخصم والتحصيل المستحقة - 1% مشتريات / 3% خدمات
+Service Charge Pool,Other Current Liability,2220,رسم الخدمة 12% المحتجز لتوزيعه على الموظفين
+Room Revenue,Income,4100,إيراد إيجار الغرف والإقامة
+Cafe & Restaurant Sales,Income,4200,إيراد مبيعات الكافيه والمطعم
+Laundry & Services,Income,4300,إيراد خدمات الغسيل والخدمات الإضافية للنزلاء
+F&B COGS,Cost of Goods Sold,5100,تكلفة البضاعة المباعة للكافيه والمطعم - المواد الخام
+Guest Amenities,Expense,5200,مصروفات مستلزمات النزلاء - مستهلكات الغرف والاستقبال
+OTA Commission,Expense,5300,عمولات منصات الحجز الإلكتروني - Booking.com - Airbnb
+Utilities,Expense,5400,مصروفات المرافق - كهرباء وماء وغاز وانترنت
+Maintenance,Expense,5500,مصروفات الصيانة والإصلاحات الدورية والطارئة

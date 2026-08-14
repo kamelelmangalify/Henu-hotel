@@ -1,0 +1,84 @@
+{
+  "employees": [
+    {
+      "id": "EMP-001",
+      "name": "محمد المنسي",
+      "department": "Reception",
+      "position": "موظف استقبال",
+      "shift": "08:00 AM - 04:00 PM (8 ساعات)",
+      "base_salary": 6000,
+      "hire_date": "2026-08-01",
+      "status": "نشط"
+    },
+    {
+      "id": "EMP-002",
+      "name": "يوسف",
+      "department": "Reception",
+      "position": "موظف استقبال",
+      "shift": "12:00 PM - 12:00 AM (12 ساعة)",
+      "base_salary": 8500,
+      "hire_date": "2026-08-01",
+      "status": "نشط"
+    },
+    {
+      "id": "EMP-003",
+      "name": "علي",
+      "department": "Reception",
+      "position": "موظف استقبال",
+      "shift": "12:00 AM - 08:00 AM (8 ساعات ليلي)",
+      "base_salary": 4000,
+      "hire_date": "2026-08-01",
+      "status": "نشط"
+    },
+    {
+      "id": "EMP-004",
+      "name": "مدحت",
+      "department": "Housekeeping",
+      "position": "خدمة غرف ونظافة",
+      "shift": "04:00 PM - 12:00 AM (8 ساعات)",
+      "base_salary": 6000,
+      "hire_date": "2026-08-01",
+      "status": "نشط"
+    },
+    {
+      "id": "EMP-005",
+      "name": "جومانا",
+      "department": "Housekeeping",
+      "position": "خدمة غرف ونظافة",
+      "shift": "08:00 AM - 04:00 PM (8 ساعات)",
+      "base_salary": 4000,
+      "hire_date": "2026-08-01",
+      "status": "نشط"
+    },
+    {
+      "id": "EMP-006",
+      "name": "علا",
+      "department": "Housekeeping",
+      "position": "خدمة غرف ونظافة",
+      "shift": "08:00 AM - 04:00 PM (8 ساعات)",
+      "base_salary": 6000,
+      "hire_date": "2026-08-01",
+      "status": "نشط"
+    },
+    {
+      "id": "EMP-007",
+      "name": "هادي",
+      "department": "Housekeeping",
+      "position": "خدمة غرف ونظافة",
+      "shift": "08:00 AM - 04:00 PM (8 ساعات)",
+      "base_salary": 6000,
+      "hire_date": "2026-08-01",
+      "status": "نشط"
+    },
+    {
+      "id": "EMP-008",
+      "name": "أحمد البار",
+      "department": "Management",
+      "position": "إداري",
+      "shift": "غير محدد",
+      "base_salary": 5000,
+      "hire_date": "2026-08-01",
+      "status": "نشط"
+    }
+  ]
+}

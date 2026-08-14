@@ -1,0 +1,1890 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>شراكة فندق هينو ومدرسة ستارز الفندقية</title>
+  
+  <!-- Google Fonts: Cairo for Arabic & Outfit for English/Numbers -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* CSS VARIABLES FOR PREMIUM THEME */
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: rgba(20, 27, 45, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #2563eb;
+      --primary-light: #60a5fa;
+      --secondary: #10b981;
+      --secondary-light: #34d399;
+      --accent: #f59e0b;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --font-ar: 'Cairo', sans-serif;
+      --font-en: 'Outfit', sans-serif;
+      --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* GENERAL STYLES */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-ar);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      user-select: none;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.3) 0px, transparent 100%);
+      background-attachment: fixed;
+    }
+
+    /* PRESENTATION CONTAINER & ENGINE */
+    .presentation-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .slides-wrapper {
+      position: relative;
+      flex-grow: 1;
+      width: 100%;
+      height: 80%;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.98) translateY(10px);
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 6rem;
+      z-index: 1;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateY(0);
+      z-index: 10;
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .slide-title {
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      background: linear-gradient(135deg, #ffffff 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .slide-title i {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2.5rem;
+    }
+
+    .slide-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      text-align: center;
+      max-width: 800px;
+      line-height: 1.6;
+    }
+
+    /* SLIDE-SPECIFIC COMPONENTS */
+    
+    /* SLIDE 1: COVER */
+    .cover-content {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 1000px;
+    }
+
+    .logos-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .logo-card {
+      width: 160px;
+      height: 160px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-glow);
+      backdrop-filter: blur(12px);
+      padding: 1rem;
+      text-align: center;
+      transition: var(--transition-smooth);
+    }
+
+    .logo-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary-light);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+    }
+
+    .logo-img {
+      max-width: 85%;
+      max-height: 85%;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .logo-placeholder {
+      font-size: 2.5rem;
+      color: var(--secondary-light);
+      margin-bottom: 8px;
+    }
+
+    .logo-placeholder-text {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .logo-divider {
+      font-size: 2.5rem;
+      color: rgba(255, 255, 255, 0.15);
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    .main-title {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #ffffff 30%, #93c5fd 70%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
+    }
+
+    .tagline {
+      font-size: 1.6rem;
+      color: var(--secondary-light);
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 2rem;
+      background: linear-gradient(90deg, var(--secondary-light), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .badge-date {
+      display: inline-block;
+      padding: 0.5rem 1.2rem;
+      background: rgba(37, 99, 235, 0.1);
+      border: 1px solid rgba(37, 99, 235, 0.3);
+      color: var(--primary-light);
+      border-radius: 50px;
+      font-family: var(--font-en);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* SLIDE 2: VISION */
+    .vision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      width: 100%;
+      max-width: 1100px;
+      margin-top: 1rem;
+    }
+
+    .vision-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vision-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    }
+
+    .vision-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .vision-icon {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .vision-card h3 {
+      font-size: 1.6rem;
+      color: #ffffff;
+    }
+
+    .vision-card p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* SLIDE 3: WIN-WIN-WIN MODEL */
+    .win-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      width: 100%;
+      max-width: 1150px;
+    }
+
+    .win-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: var(--transition-smooth);
+    }
+
+    .win-card.student { border-top: 4px solid var(--primary-light); }
+    .win-card.school { border-top: 4px solid var(--secondary-light); }
+    .win-card.hotel { border-top: 4px solid var(--accent); }
+
+    .win-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .win-card.student:hover { border-color: var(--primary-light); }
+    .win-card.school:hover { border-color: var(--secondary-light); }
+    .win-card.hotel:hover { border-color: var(--accent); }
+
+    .win-icon-wrapper {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    .win-card.student .win-icon-wrapper { background: rgba(37, 99, 235, 0.1); color: var(--primary-light); }
+    .win-card.school .win-icon-wrapper { background: rgba(16, 185, 129, 0.1); color: var(--secondary-light); }
+    .win-card.hotel .win-icon-wrapper { background: rgba(245, 158, 11, 0.1); color: var(--accent); }
+
+    .win-card h3 {
+      font-size: 1.4rem;
+      color: #ffffff;
+      margin-bottom: 1rem;
+    }
+
+    .win-list {
+      list-style: none;
+      width: 100%;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .win-list li {
+      font-size: 1rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+
+    .win-list li i {
+      margin-top: 4px;
+      font-size: 0.85rem;
+    }
+
+    .win-card.student li i { color: var(--primary-light); }
+    .win-card.school li i { color: var(--secondary-light); }
+    .win-card.hotel li i { color: var(--accent); }
+
+    /* SLIDE 4: INTERACTIVE TRAINING PLAN */
+    .plan-interactive-container {
+      display: flex;
+      gap: 2.5rem;
+      width: 100%;
+      max-width: 1100px;
+      height: 480px;
+    }
+
+    .tabs-side-menu {
+      width: 250px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .tab-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.2rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: right;
+      font-family: var(--font-ar);
+      font-size: 1.15rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: var(--transition-smooth);
+    }
+
+    .tab-btn i {
+      font-size: 1.3rem;
+      transition: var(--transition-smooth);
+    }
+
+    .tab-btn:hover {
+      border-color: rgba(255,255,255,0.15);
+      color: #ffffff;
+      transform: translateX(-5px);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--primary) 0%, rgba(37, 99, 235, 0.4) 100%);
+      border-color: var(--primary-light);
+      color: #ffffff;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .tab-btn.active i {
+      transform: scale(1.2);
+    }
+
+    .tab-btn.reception.active { background: linear-gradient(135deg, var(--primary) 0%, rgba(37, 99, 235, 0.4) 100%); border-color: var(--primary-light); }
+    .tab-btn.housekeeping.active { background: linear-gradient(135deg, var(--secondary) 0%, rgba(16, 185, 129, 0.4) 100%); border-color: var(--secondary-light); }
+    .tab-btn.service.active { background: linear-gradient(135deg, var(--accent) 0%, rgba(245, 158, 11, 0.4) 100%); border-color: var(--accent); }
+
+    .tab-content-panel {
+      flex-grow: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow-y: auto;
+      display: none;
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+
+    .tab-content-panel.active {
+      display: block;
+    }
+
+    .tab-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tab-header-title {
+      font-size: 1.8rem;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tab-badge {
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .reception-badge { background: rgba(37, 99, 235, 0.1); color: var(--primary-light); border: 1px solid rgba(37, 99, 235, 0.2); }
+    .housekeeping-badge { background: rgba(16, 185, 129, 0.1); color: var(--secondary-light); border: 1px solid rgba(16, 185, 129, 0.2); }
+    .service-badge { background: rgba(245, 158, 11, 0.1); color: var(--accent); border: 1px solid rgba(245, 158, 11, 0.2); }
+
+    .days-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .day-column {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 16px;
+      padding: 1.2rem;
+      transition: var(--transition-smooth);
+    }
+
+    .day-column:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    .day-num {
+      font-family: var(--font-en);
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .reception .day-num { color: var(--primary-light); }
+    .housekeeping .day-num { color: var(--secondary-light); }
+    .service .day-num { color: var(--accent); }
+
+    .day-num span {
+      font-size: 0.9rem;
+      font-family: var(--font-ar);
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .day-tasks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .day-tasks li {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .day-tasks li i {
+      margin-top: 3px;
+      font-size: 0.75rem;
+    }
+
+    .reception .day-tasks li i { color: var(--primary-light); }
+    .housekeeping .day-tasks li i { color: var(--secondary-light); }
+    .service .day-tasks li i { color: var(--accent); }
+
+    .timeline-footer-note {
+      margin-top: 2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      color: var(--text-main);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    /* SLIDE 5: EVALUATION & SCREENING */
+    .eval-container {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      width: 100%;
+      max-width: 1100px;
+      align-items: center;
+    }
+
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .flow-step-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      backdrop-filter: blur(10px);
+      transition: var(--transition-smooth);
+    }
+
+    .flow-step-item:hover {
+      transform: translateX(-5px);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .flow-step-number {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
+      font-family: var(--font-en);
+      font-size: 1.3rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+    }
+
+    .flow-step-text h4 {
+      font-size: 1.15rem;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .flow-step-text p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .funnel-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .funnel-header {
+      font-size: 1.3rem;
+      color: #ffffff;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .funnel-split {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .funnel-option {
+      border-radius: 16px;
+      padding: 1.2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border: 1px solid transparent;
+    }
+
+    .funnel-option.reject {
+      background: rgba(239, 68, 68, 0.05);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .funnel-option.retain {
+      background: rgba(16, 185, 129, 0.05);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    .funnel-option-icon {
+      font-size: 1.5rem;
+      margin-top: 2px;
+    }
+
+    .funnel-option.reject .funnel-option-icon { color: #f87171; }
+    .funnel-option.retain .funnel-option-icon { color: var(--secondary-light); }
+
+    .funnel-option h5 {
+      font-size: 1.1rem;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .funnel-option p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* SLIDE 6: FUTURE EXPANSION */
+    .expansion-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .expansion-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      backdrop-filter: blur(10px);
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .expansion-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .expansion-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-glow);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .expansion-badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      color: var(--accent);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .expansion-card h3 {
+      font-size: 1.6rem;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .expansion-card h3 i {
+      color: var(--primary-light);
+    }
+
+    .expansion-card p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .expansion-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .expansion-features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .expansion-features li i {
+      color: var(--secondary-light);
+      font-size: 0.9rem;
+    }
+
+    /* SLIDE 7: FINANCIAL & LOGISTICS & CALCULATOR */
+    .financial-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .logistics-details {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .logistics-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .logistics-item-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .logistics-item-text h4 {
+      font-size: 1.15rem;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .logistics-item-text p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* CALCULATOR ELEMENT */
+    .calculator-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .calc-title {
+      font-size: 1.4rem;
+      color: #ffffff;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .calc-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .calc-input-group label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .calc-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .calc-input-wrapper input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      color: #ffffff;
+      font-family: var(--font-en);
+      font-size: 1.2rem;
+      font-weight: 600;
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+
+    .calc-input-wrapper input:focus {
+      border-color: var(--primary-light);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .calc-input-unit {
+      position: absolute;
+      left: 12px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .calc-results {
+      background: rgba(255,255,255,0.02);
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1rem;
+    }
+
+    .calc-row-label {
+      color: var(--text-muted);
+    }
+
+    .calc-row-value {
+      font-family: var(--font-en);
+      font-weight: 700;
+      color: #ffffff;
+      font-size: 1.15rem;
+    }
+
+    .calc-row.total {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 0.8rem;
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .calc-row.total .calc-row-label {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .calc-row.total .calc-row-value {
+      color: var(--secondary-light);
+      font-size: 1.4rem;
+    }
+
+    /* SLIDE 8: CALL TO ACTION */
+    .cta-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .timeline-steps {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .timeline-steps::before {
+      content: '';
+      position: absolute;
+      top: 25px;
+      left: 5%;
+      right: 5%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 1;
+    }
+
+    .t-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 28%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .t-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      transition: var(--transition-smooth);
+    }
+
+    .t-step:hover .t-circle {
+      border-color: var(--primary-light);
+      color: var(--primary-light);
+      box-shadow: var(--shadow-glow);
+      transform: scale(1.1);
+    }
+
+    .t-step.done .t-circle {
+      background: var(--primary);
+      border-color: var(--primary-light);
+      color: #ffffff;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .t-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .t-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      border: none;
+      border-radius: 50px;
+      color: #ffffff;
+      font-family: var(--font-ar);
+      font-size: 1.3rem;
+      font-weight: 700;
+      padding: 1rem 3rem;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+      transition: var(--transition-smooth);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 1.5rem;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(37, 99, 235, 0.5);
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+    }
+
+    .action-btn:active {
+      transform: translateY(-2px);
+    }
+
+    /* FOOTER & PRESENTATION CONTROLS */
+    .presentation-footer {
+      background: rgba(9, 13, 22, 0.8);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--card-border);
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .slide-progress-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.05);
+      z-index: 101;
+    }
+
+    .slide-progress-bar {
+      height: 100%;
+      width: 12.5%;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .slides-counter {
+      font-family: var(--font-en);
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .nav-btn {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: var(--transition-smooth);
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      border-color: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05);
+      color: #ffffff;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .nav-btn i {
+      transition: transform 0.2s;
+    }
+
+    #prev-slide-btn i { transform: scaleX(-1); } /* flip back arrow because RTL flips directionality */
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .footer-brand strong {
+      color: #ffffff;
+    }
+
+    /* KEYBOARD HINTS */
+    .keyboard-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-family: var(--font-en);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.5; }
+    }
+
+    /* CONFETTI CANVAS */
+    #confetti-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    /* PRINT LAYOUT FOR PRINTING SLIDES TO PDF */
+    @media print {
+      body {
+        overflow: visible;
+        background: #ffffff !important;
+        color: #000000 !important;
+        height: auto;
+        width: auto;
+      }
+      .presentation-container {
+        height: auto;
+        display: block;
+      }
+      .slides-wrapper {
+        height: auto;
+        display: block;
+      }
+      .slide {
+        position: relative;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: none !important;
+        display: flex !important;
+        page-break-after: always;
+        height: 100vh;
+        padding: 2rem !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: none !important;
+      }
+      .slide-title {
+        color: #000000 !important;
+        background: none !important;
+        -webkit-text-fill-color: initial !important;
+      }
+      .slide-title i {
+        background: none !important;
+        -webkit-text-fill-color: initial !important;
+        color: #2563eb !important;
+      }
+      .main-title, .tagline {
+        color: #000000 !important;
+        background: none !important;
+        -webkit-text-fill-color: initial !important;
+      }
+      .logo-card, .vision-card, .win-card, .tab-content-panel, .flow-step-item, .funnel-container, .expansion-card, .logistics-details, .calculator-box {
+        background: #f9fafb !important;
+        border: 1px solid #e5e7eb !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+      }
+      .win-card h3, .vision-card h3, .flow-step-text h4, .logistics-item-text h4, .calc-title, .calc-row-value, .t-title {
+        color: #000000 !important;
+      }
+      .win-list li, .vision-card p, .flow-step-text p, .logistics-item-text p, .calc-row-label, .t-desc {
+        color: #4b5563 !important;
+      }
+      .tab-content-panel {
+        display: block !important;
+        margin-top: 1rem;
+      }
+      .tabs-side-menu, .presentation-footer, .slide-progress-container, .keyboard-hint {
+        display: none !important;
+      }
+      .plan-interactive-container {
+        display: block !important;
+        height: auto !important;
+      }
+      .day-column {
+        background: #f3f4f6 !important;
+        border: 1px solid #e5e7eb !important;
+      }
+      .day-tasks li {
+        color: #374151 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="presentation-container">
+    
+    <!-- Top slide progress indicator bar -->
+    <div class="slide-progress-container">
+      <div class="slide-progress-bar" id="progress-bar"></div>
+    </div>
+
+    <!-- Wrapper containing all slides -->
+    <div class="slides-wrapper">
+
+      <!-- SLIDE 1: COVER -->
+      <div class="slide active" id="slide-1">
+        <div class="cover-content">
+          <div class="logos-container">
+            <div class="logo-card">
+              <img src="../../02_Contracts_and_Legal/شعار_الفندق_عقود.jpg" alt="HENU Hotel Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+              <div class="logo-placeholder" style="display:none;"><i class="fa-solid fa-hotel"></i></div>
+              <div class="logo-placeholder-text">فندق هينو HENU</div>
+            </div>
+            
+            <div class="logo-divider">
+              <i class="fa-solid fa-handshake"></i>
+            </div>
+            
+            <div class="logo-card">
+              <div class="logo-placeholder"><i class="fa-solid fa-graduation-cap"></i></div>
+              <div class="logo-placeholder-text">مدرسة ستارز الفندقية</div>
+            </div>
+          </div>
+          
+          <h1 class="main-title">شراكة استراتيجية لبناء الكوادر الفندقية المستقبلية</h1>
+          <p class="tagline">مبادرة التدريب والتطوير المهني المشترك</p>
+          
+          <div>
+            <span class="badge-date"><i class="fa-regular fa-calendar-days"></i> أغسطس 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: THE VISION -->
+      <div class="slide" id="slide-2">
+        <h2 class="slide-title"><i class="fa-solid fa-compass"></i> رؤية وأهداف الشراكة</h2>
+        <p class="slide-subtitle">تأسيس تعاون متكامل يربط بين التعليم الفني الأكاديمي والخبرة المهنية الميدانية لخلق مهارات تشغيلية استثنائية.</p>
+        
+        <div class="vision-grid">
+          <div class="vision-card">
+            <div class="vision-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h3>تجسير الفجوة التعليمية</h3>
+            <p>تمكين الطلاب من تطبيق المناهج الفندقية النظرية التي يدرسونها في المدرسة داخل بيئة تشغيل حقيقية وحيوية بفندق هينو (26-27 غرفة)، مما يسرع عملية اندماجهم في سوق العمل.</p>
+          </div>
+          
+          <div class="vision-card">
+            <div class="vision-icon"><i class="fa-solid fa-award"></i></div>
+            <h3>تأصيل معايير الجودة والانضباط</h3>
+            <p>غرس الروح الفندقية الراقية والانضباط الأخلاقي والمهني في سلوكيات الطلاب، مع التركيز التام على إرضاء النزيل وجودة الخدمة وخصوصية العمل الفندقي.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: WIN-WIN-WIN MODEL -->
+      <div class="slide" id="slide-3">
+        <h2 class="slide-title"><i class="fa-solid fa-circle-nodes"></i> نموذج المنفعة الثلاثية المشتركة</h2>
+        <p class="slide-subtitle">إستراتيجية تشغيلية مستدامة تحقق عوائد وفوائد ملموسة لجميع الأطراف المعنية بالشراكة.</p>
+        
+        <div class="win-grid">
+          <!-- Student Card -->
+          <div class="win-card student">
+            <div class="win-icon-wrapper">
+              <i class="fa-solid fa-user-graduate"></i>
+            </div>
+            <h3>👨‍🎓 المتدرب (الطالب)</h3>
+            <ul class="win-list">
+              <li><i class="fa-solid fa-circle-check"></i> اكتساب خبرة حقيقية موثقة بسوق العمل الفندقي.</li>
+              <li><i class="fa-solid fa-circle-check"></i> مكافأة مالية شهرية تغطي مصاريف الانتقال والتحفيز.</li>
+              <li><i class="fa-solid fa-circle-check"></i> أولوية توظيف بعد التخرج وشهادة خبرة معتمدة.</li>
+            </ul>
+          </div>
+
+          <!-- School Card -->
+          <div class="win-card school">
+            <div class="win-icon-wrapper">
+              <i class="fa-solid fa-school"></i>
+            </div>
+            <h3>🏫 مدرسة ستارز الفندقية</h3>
+            <ul class="win-list">
+              <li><i class="fa-solid fa-circle-check"></i> رفع تصنيف وكفاءة خريجي المدرسة الفنية عملياً.</li>
+              <li><i class="fa-solid fa-circle-check"></i> دعاية تسويقية ممتازة للمدرسة وزيادة إقبال الطلاب الجدد.</li>
+              <li><i class="fa-solid fa-circle-check"></i> علاقة مستدامة مع فندق رائد في قطاع الإقامة.</li>
+            </ul>
+          </div>
+
+          <!-- Hotel Card -->
+          <div class="win-card hotel">
+            <div class="win-icon-wrapper">
+              <i class="fa-solid fa-hotel"></i>
+            </div>
+            <h3>🏨 فندق هينو (HENU)</h3>
+            <ul class="win-list">
+              <li><i class="fa-solid fa-circle-check"></i> قوة تشغيلية نشيطة ومتحمسة بأسعار وتكاليف معقولة.</li>
+              <li><i class="fa-solid fa-circle-check"></i> تصفية وانتقاء أفضل الكفاءات لضمهم بشكل دائم.</li>
+              <li><i class="fa-solid fa-circle-check"></i> تنويع قنوات الإيرادات وبناء ذراع تدريبية قوية.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: DETAILED ROTATIONAL TRAINING PLAN -->
+      <div class="slide" id="slide-4">
+        <h2 class="slide-title"><i class="fa-solid fa-arrows-spin"></i> برنامج التدريب الدوار التفاعلي</h2>
+        <p class="slide-subtitle">يبدأ الطالب بالدوران على أقسام الفندق الثلاثة الرئيسية لمدة 3 أيام في كل قسم (إجمالي 9 أيام) لاكتشاف مهاراته واهتماماته.</p>
+        
+        <div class="plan-interactive-container">
+          <!-- Side Tabs Menu -->
+          <div class="tabs-side-menu">
+            <button class="tab-btn reception active" onclick="switchPlanTab('reception-panel', this)">
+              <i class="fa-solid fa-bell-concierge"></i> قسم الاستقبال (3 أيام)
+            </button>
+            <button class="tab-btn housekeeping" onclick="switchPlanTab('housekeeping-panel', this)">
+              <i class="fa-solid fa-broom"></i> الإشراف الداخلي (3 أيام)
+            </button>
+            <button class="tab-btn service" onclick="switchPlanTab('service-panel', this)">
+              <i class="fa-solid fa-utensils"></i> قسم الخدمة (3 أيام)
+            </button>
+          </div>
+          
+          <!-- Tab Content Panels -->
+          <!-- Tab 1: Reception -->
+          <div class="tab-content-panel active reception" id="reception-panel">
+            <div class="tab-header">
+              <div class="tab-header-title">
+                <i class="fa-solid fa-bell-concierge" style="color: var(--primary-light);"></i> قسم الاستقبال والترحيب
+              </div>
+              <span class="tab-badge reception-badge">9 أيام تدوير ← الاستقبال</span>
+            </div>
+            
+            <div class="days-grid">
+              <div class="day-column">
+                <div class="day-num">01 <span>اليوم الأول</span></div>
+                <ul class="day-tasks">
+                  <li><i class="fa-solid fa-chevron-left"></i> فهم الهيكل الإداري للمكتب الأمامي.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> التعرف على كود الزي الرسمي ومعايير اللباقة والمظهر الفندقي.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> كيفية استقبال النزلاء والترحيب الأولي.</li>
+                </ul>
+              </div>
+              
+              <div class="day-column">
+                <div class="day-num">02 <span>اليوم الثاني</span></div>
+                <ul class="day-tasks">
+                  <li><i class="fa-solid fa-chevron-left"></i> فهم دورة النزيل (Check-in / Check-out).</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> التعامل المبدئي مع استفسارات النزلاء وتوجيههم.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> فهم الاتصالات والتنسيق الداخلي بين الأقسام.</li>
+                </ul>
+              </div>
+              
+              <div class="day-column">
+                <div class="day-num">03 <span>اليوم الثالث</span></div>
+                <ul class="day-tasks">
+                  <li><i class="fa-solid fa-chevron-left"></i> التدريب على مهارات استخدام الهاتف الفندقي.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> محاكاة التعامل مع حالات الشكاوى والاستفسارات الشائعة.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> تقييم أولي للمهارات التواصلية للطالب.</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="timeline-footer-note">
+              <i class="fa-solid fa-circle-info" style="color: var(--primary-light);"></i>
+              بعد مرحلة التدوير، يمكن للطالب التخصص بالاستقبال لبقية فترة التدريب (من 1 إلى 3 أشهر).
+            </div>
+          </div>
+
+          <!-- Tab 2: Housekeeping -->
+          <div class="tab-content-panel housekeeping" id="housekeeping-panel">
+            <div class="tab-header">
+              <div class="tab-header-title">
+                <i class="fa-solid fa-broom" style="color: var(--secondary-light);"></i> قسم الإشراف الداخلي والتدبير
+              </div>
+              <span class="tab-badge housekeeping-badge">9 أيام تدوير ← الإشراف الداخلي</span>
+            </div>
+            
+            <div class="days-grid">
+              <div class="day-column">
+                <div class="day-num">01 <span>اليوم الأول</span></div>
+                <ul class="day-tasks">
+                  <li><i class="fa-solid fa-chevron-left"></i> شرح دور قسم التدبير الداخلي في المحافظة على سمعة الفندق.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> التعرف على أدوات ومواد النظافة والتعقيم الأمنة.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> قواعد السلامة والصحة المهنية أثناء العمل.</li>
+                </ul>
+              </div>
+              
+              <div class="day-column">
+                <div class="day-num">02 <span>اليوم الثاني</span></div>
+                <ul class="day-tasks">
+                  <li><i class="fa-solid fa-chevron-left"></i> التدريب العملي على فنيات ترتيب وصنع الأسرّة الفندقية.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> خطوات تنظيف وتطهير الغرفة الفندقية وحمام الغرفة بشكل احترافي.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> جرد مستلزمات الحمام وإعادة التعبئة (Guest Amenities).</li>
+                </ul>
+              </div>
+              
+              <div class="day-column">
+                <div class="day-num">03 <span>اليوم الثالث</span></div>
+                <ul class="day-tasks">
+                  <li><i class="fa-solid fa-chevron-left"></i> كيفية استلام طلبات النزلاء الخاصة (مكواة، مناشف إضافية).</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> العمل بقسم المغسلة الفندقية وفهم دورة الكتان المتسخ والنظيف.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> فحص جودة الغرفة قبل إقرارها كـ "جاهزة للاستخدام".</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="timeline-footer-note">
+              <i class="fa-solid fa-circle-info" style="color: var(--secondary-light);"></i>
+              بعد مرحلة التدوير، يمكن للطالب التخصص بالهاوس كيبنج لبقية فترة التدريب (من 1 إلى 3 أشهر).
+            </div>
+          </div>
+
+          <!-- Tab 3: Service -->
+          <div class="tab-content-panel service" id="service-panel">
+            <div class="tab-header">
+              <div class="tab-header-title">
+                <i class="fa-solid fa-utensils" style="color: var(--accent);"></i> قسم الخدمة (الأغذية والمشروبات)
+              </div>
+              <span class="tab-badge service-badge">9 أيام تدوير ← السيرفس</span>
+            </div>
+            
+            <div class="days-grid">
+              <div class="day-column">
+                <div class="day-num">01 <span>اليوم الأول</span></div>
+                <ul class="day-tasks">
+                  <li><i class="fa-solid fa-chevron-left"></i> قواعد النظافة الشخصية والاشتراطات الصحية الصارمة.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> التعرف على أنواع الأواني والمعدات وترتيب الطاولات (Setup).</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> التدريب على حمل الصواني والأطباق بطريقة صحيحة.</li>
+                </ul>
+              </div>
+              
+              <div class="day-column">
+                <div class="day-num">02 <span>اليوم الثاني</span></div>
+                <ul class="day-tasks">
+                  <li><i class="fa-solid fa-chevron-left"></i> بروتوكولات تقديم الأغذية والمشروبات (السرفيس المهني).</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> فهم قائمة الطعام والمشروبات بالفندق وشرحها للعميل.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> مهارات استقبال طلبات النزلاء وتدوينها.</li>
+                </ul>
+              </div>
+              
+              <div class="day-column">
+                <div class="day-num">03 <span>اليوم الثالث</span></div>
+                <ul class="day-tasks">
+                  <li><i class="fa-solid fa-chevron-left"></i> مهارات تنظيف الطاولات (Busboy) وتهيئة المكان بسرعة.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> تقديم خدمة الغرف (Room Service) للنزلاء باحترافية.</li>
+                  <li><i class="fa-solid fa-chevron-left"></i> إدارة شكاوى النزلاء الخاصة بالمطعم وكيفية احتوائها.</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="timeline-footer-note">
+              <i class="fa-solid fa-circle-info" style="color: var(--accent);"></i>
+              بعد مرحلة التدوير، يمكن للطالب التخصص في قسم الخدمة لبقية فترة التدريب (من 1 إلى 3 أشهر).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: EVALUATION AND SCREENING -->
+      <div class="slide" id="slide-5">
+        <h2 class="slide-title"><i class="fa-solid fa-user-check"></i> آلية التقييم والتصفية والاستبقاء</h2>
+        <p class="slide-subtitle">نظام تقييم عادل وصارم لضمان جودة الأداء الفندقي وفرز الكفاءات الجديرة بالاستمرار والتوظيف المباشر.</p>
+        
+        <div class="eval-container">
+          <div class="flow-steps">
+            <div class="flow-step-item">
+              <div class="flow-step-number">1</div>
+              <div class="flow-step-text">
+                <h4>التقييم الأسبوعي المستمر</h4>
+                <p>استمارة أداء أسبوعية يملؤها رئيس القسم المباشر (الحضور، السلوك، جودة العمل، الرغبة في التعلم).</p>
+              </div>
+            </div>
+            
+            <div class="flow-step-item">
+              <div class="flow-step-number">2</div>
+              <div class="flow-step-text">
+                <h4>التخصيص بعد 9 أيام</h4>
+                <p>توجيه الطالب للقسم الأنسب بناءً على درجات تقييمه الأسبوعي الأول ورغبته التشغيلية.</p>
+              </div>
+            </div>
+            
+            <div class="flow-step-item">
+              <div class="flow-step-number">3</div>
+              <div class="flow-step-text">
+                <h4>التصفية للمقصرين</h4>
+                <p>المقصرون في الحضور أو السلوك المهني يتم إنهاء تدريبهم فوراً بالتنسيق مع المدرسة واستبدالهم.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="funnel-container">
+            <div class="funnel-header">
+              <i class="fa-solid fa-filter" style="color: var(--primary-light);"></i> نتائج الفرز والتأهيل
+            </div>
+            
+            <div class="funnel-split">
+              <div class="funnel-option reject">
+                <div class="funnel-option-icon"><i class="fa-solid fa-circle-xmark"></i></div>
+                <div>
+                  <h5>عدم الالتزام والأداء الضعيف</h5>
+                  <p>الاستغناء الفوري يضمن بقاء المتدربين الجادين فقط ويحمي معايير الخدمة الراقية لنزلاء فندق هينو.</p>
+                </div>
+              </div>
+              
+              <div class="funnel-option retain">
+                <div class="funnel-option-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <div>
+                  <h5>الأداء المتميز والاستثنائي</h5>
+                  <p>الاحتفاظ بهم، منحهم شهادات خبرة فندقية، وتقديمهم كصفوة مدربة للفنادق الشريكة أو تعيينهم مباشرة بالفندق.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: FUTURE EXPANSION -->
+      <div class="slide" id="slide-6">
+        <h2 class="slide-title"><i class="fa-solid fa-chart-line"></i> الرؤية المستقبلية للتوسع والتطوير</h2>
+        <p class="slide-subtitle">تطوير الشراكة لتصبح مركزاً إقليمياً لتدريب وتوريد العمالة المعتمدة للقطاع السياحي بالكامل.</p>
+        
+        <div class="expansion-container">
+          <!-- Card 1 -->
+          <div class="expansion-card">
+            <span class="expansion-badge">المرحلة الثانية</span>
+            <h3><i class="fa-solid fa-people-carry-box"></i> وكالة توريد العمالة المدربة</h3>
+            <p>تأسيس إدارة لتشغيل وتوريد خريجي مدرسة ستارز المتميزين للفنادق الأخرى بعقود توريد مهنية:</p>
+            <ul class="expansion-features">
+              <li><i class="fa-solid fa-square-check"></i> تحقيق قناة دخل وإيرادات جديدة للفندق من عقود التوظيف.</li>
+              <li><i class="fa-solid fa-square-check"></i> تزويد الفنادق الشريكة بكفاءات جاهزة ومجربة تشغيلياً.</li>
+              <li><i class="fa-solid fa-square-check"></i> ترسيخ اسم فندق هينو كـ "مدرسة تدريب وتأهيل عملية".</li>
+            </ul>
+          </div>
+          
+          <!-- Card 2 -->
+          <div class="expansion-card">
+            <span class="expansion-badge">المرحلة الثالثة</span>
+            <h3><i class="fa-solid fa-graduation-cap"></i> أكاديمية التدريب المفتوحة</h3>
+            <p>تقديم دورات تدريبية مهنية مكثفة للراغبين في العمل السياحي من خارج خريجي المدرسة برسوم مدفوعة:</p>
+            <ul class="expansion-features">
+              <li><i class="fa-solid fa-square-check"></i> التدريس النظري والمحاضرات تتم داخل فصول مدرسة ستارز.</li>
+              <li><i class="fa-solid fa-square-check"></i> التدريب والتطبيق العملي المكثف يتم داخل أروقة فندق هينو.</li>
+              <li><i class="fa-solid fa-square-check"></i> تقسيم رسوم الاشتراكات بنسب ربحية متفق عليها بين الطرفين.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 7: FINANCIAL, LOGISTICS & ESTIMATOR -->
+      <div class="slide" id="slide-7">
+        <h2 class="slide-title"><i class="fa-solid fa-calculator"></i> الإطار المالي واللوجيستي والتقديري</h2>
+        <p class="slide-subtitle">إقرار الامتيازات والمزايا الممنوحة للطلاب وتأمين بيئة تدريب قانونية ومحفزة للإنتاج.</p>
+        
+        <div class="financial-container">
+          <div class="logistics-details">
+            <div class="logistics-item">
+              <div class="logistics-item-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+              <div class="logistics-item-text">
+                <h4>مكافأة التدريب التشجيعية</h4>
+                <p>صرف مكافأة شهرية ثابتة للمتدرب كتحفيز له وبديل لمصاريف الانتقال اليومية.</p>
+              </div>
+            </div>
+            
+            <div class="logistics-item">
+              <div class="logistics-item-icon"><i class="fa-solid fa-bowl-food"></i></div>
+              <div class="logistics-item-text">
+                <h4>المزايا العينية الفندقية</h4>
+                <p>توفير وجبات غذائية متكاملة خلال شفت العمل وتوفير الزي الرسمي الموحد (Uniform) مجاناً.</p>
+              </div>
+            </div>
+            
+            <div class="logistics-item">
+              <div class="logistics-item-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+              <div class="logistics-item-text">
+                <h4>الغطاء القانوني والأمان الوظيفي</h4>
+                <p>توقيع "عقد تدريب وقبول ولي أمر" للقصر، و"عقد مؤقت وتعهد فندقي" للبالغين لضمان الالتزام والسلامة.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="calculator-box">
+            <div class="calc-title">
+              <i class="fa-solid fa-coins" style="color: var(--accent);"></i> حاسبة تقدير ميزانية التدريب الشهري
+            </div>
+            
+            <div class="calc-input-group">
+              <label for="student-count">عدد الطلاب المتوقع تدريبهم بالفندق:</label>
+              <div class="calc-input-wrapper">
+                <input type="number" id="student-count" value="5" min="1" max="25" oninput="calculateBudget()">
+                <span class="calc-input-unit">طالب</span>
+              </div>
+            </div>
+
+            <div class="calc-input-group">
+              <label for="student-stipend">المكافأة التشجيعية المقترحة شهرياً للطالب:</label>
+              <div class="calc-input-wrapper">
+                <input type="number" id="student-stipend" value="1500" min="500" max="5000" step="100" oninput="calculateBudget()">
+                <span class="calc-input-unit">ج.م / طالب</span>
+              </div>
+            </div>
+            
+            <div class="calc-results">
+              <div class="calc-row">
+                <span class="calc-row-label">إجمالي مكافآت الطلاب:</span>
+                <span class="calc-row-value" id="total-stipends">7,500 ج.م</span>
+              </div>
+              <div class="calc-row">
+                <span class="calc-row-label">التكلفة التقديرية للوجبات والزي:</span>
+                <span class="calc-row-value" id="total-meals">2,500 ج.م</span>
+              </div>
+              <div class="calc-row total">
+                <span class="calc-row-label">إجمالي تكلفة المبادرة التشغيلية:</span>
+                <span class="calc-row-value" id="grand-total">10,000 ج.م</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 8: CALL TO ACTION -->
+      <div class="slide" id="slide-8">
+        <h2 class="slide-title"><i class="fa-solid fa-circle-check"></i> تفعيل الشراكة والخطوات التنفيذية</h2>
+        <p class="slide-subtitle">خارطة طريق واضحة ومحددة لبدء تفعيل التعاون بشكل عملي في فندق هينو ومدرسة ستارز.</p>
+        
+        <div class="cta-container">
+          <div class="timeline-steps">
+            <div class="t-step done">
+              <div class="t-circle"><i class="fa-solid fa-file-signature"></i></div>
+              <div class="t-title">1. المقترح الأولي</div>
+              <div class="t-desc">مناقشة وتعديل هذا المقترح الفني واللوجيستي وتحديد الأعداد.</div>
+            </div>
+            
+            <div class="t-step">
+              <div class="t-circle">2</div>
+              <div class="t-title">2. توقيع البروتوكول</div>
+              <div class="t-desc">صياغة اتفاقية تعاون إطارية رسمية وتوثيق العقود والبنود المالية.</div>
+            </div>
+            
+            <div class="t-step">
+              <div class="t-circle">3</div>
+              <div class="t-title">3. انطلاق المبادرة</div>
+              <div class="t-desc">توزيع الدفعة الأولى من الطلاب بالفندق وبدء التدوير (9 أيام).</div>
+            </div>
+          </div>
+          
+          <button class="action-btn" onclick="triggerConfetti()">
+            <i class="fa-solid fa-rocket"></i> إطلاق وتفعيل الشراكة المباركة
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PRESENTATION FOOTER & CONTROLS -->
+    <div class="presentation-footer">
+      <div class="footer-left">
+        <div class="slides-counter">Slide <span id="current-slide-num">1</span> of 8</div>
+        <div class="keyboard-hint"><i class="fa-solid fa-keyboard"></i> استخدم الأسهم للتنقل (← / →) أو المسطرة</div>
+      </div>
+      
+      <div class="nav-controls">
+        <button class="nav-btn" id="prev-slide-btn" onclick="prevSlide()" disabled><i class="fa-solid fa-arrow-right"></i></button>
+        <button class="nav-btn" id="next-slide-btn" onclick="nextSlide()"><i class="fa-solid fa-arrow-left"></i></button>
+      </div>
+      
+      <div class="footer-brand">
+        <span>شراكة <strong>مدرسة ستارز</strong> & <strong>فندق هينو</strong></span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // PRESENTATION ENGINE SCRIPT
+    const slides = document.querySelectorAll('.slide');
+    const currentSlideNum = document.getElementById('current-slide-num');
+    const prevBtn = document.getElementById('prev-slide-btn');
+    const nextBtn = document.getElementById('next-slide-btn');
+    const progressBar = document.getElementById('progress-bar');
+    
+    let activeSlideIndex = 0;
+
+    function updatePresentationUI() {
+      // Deactivate all slides
+      slides.forEach(slide => slide.classList.remove('active'));
+      
+      // Activate target slide
+      slides[activeSlideIndex].classList.add('active');
+      
+      // Update counter and progress
+      currentSlideNum.textContent = activeSlideIndex + 1;
+      const progressPercent = ((activeSlideIndex + 1) / slides.length) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+      
+      // Update button disabled states
+      prevBtn.disabled = activeSlideIndex === 0;
+      nextBtn.disabled = activeSlideIndex === slides.length - 1;
+    }
+
+    function nextSlide() {
+      if (activeSlideIndex < slides.length - 1) {
+        activeSlideIndex++;
+        updatePresentationUI();
+      }
+    }
+
+    function prevSlide() {
+      if (activeSlideIndex > 0) {
+        activeSlideIndex--;
+        updatePresentationUI();
+      }
+    }
+
+    // Keyboard controls
+    document.addEventListener('keydown', (e) => {
+      // In RTL, ArrowLeft moves forward (next slide), ArrowRight moves backward (prev slide)
+      if (e.key === 'ArrowLeft') {
+        nextSlide();
+      } else if (e.key === 'ArrowRight') {
+        prevSlide();
+      } else if (e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault();
+        nextSlide();
+      }
+    });
+
+    // Plan slide interactive tabs
+    function switchPlanTab(tabId, btnElement) {
+      // Deactivate all buttons & panels in Slide 4
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      const panels = document.querySelectorAll('.tab-content-panel');
+      
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      
+      // Activate selected
+      btnElement.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // Financial Calculator logic
+    function calculateBudget() {
+      const studentCount = parseInt(document.getElementById('student-count').value) || 0;
+      const studentStipend = parseInt(document.getElementById('student-stipend').value) || 0;
+      
+      // Calculations
+      const totalStipends = studentCount * studentStipend;
+      // Assume meal & uniform costs average 500 EGP per student per month
+      const totalMeals = studentCount * 500; 
+      const grandTotal = totalStipends + totalMeals;
+      
+      // Display
+      document.getElementById('total-stipends').textContent = `${totalStipends.toLocaleString('ar-EG')} ج.م`;
+      document.getElementById('total-meals').textContent = `${totalMeals.toLocaleString('ar-EG')} ج.م`;
+      document.getElementById('grand-total').textContent = `${grandTotal.toLocaleString('ar-EG')} ج.م`;
+    }
+
+    // CONFETTI ANIMATION ON SUCCESS CLICK
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let confetti = [];
+    const colors = ['#2563eb', '#10b981', '#f59e0b', '#ec4899', '#3b82f6'];
+    let animationFrameId = null;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class ConfettiPiece {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * -canvas.height;
+        this.size = Math.random() * 8 + 6;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.speedX = Math.random() * 3 - 1.5;
+        this.speedY = Math.random() * 4 + 4;
+        this.rotation = Math.random() * 360;
+        this.rotationSpeed = Math.random() * 4 - 2;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.rotation += this.rotationSpeed;
+        if (this.y > canvas.height) {
+          this.y = -10;
+          this.x = Math.random() * canvas.width;
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation * Math.PI / 180);
+        ctx.fillStyle = this.color;
+        ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+        ctx.restore();
+      }
+    }
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetti.forEach(c => {
+        c.update();
+        c.draw();
+      });
+      animationFrameId = requestAnimationFrame(animateConfetti);
+    }
+
+    function triggerConfetti() {
+      if (confetti.length === 0) {
+        for (let i = 0; i < 150; i++) {
+          confetti.push(new ConfettiPiece());
+        }
+        animateConfetti();
+        // Stop after 5 seconds to conserve CPU
+        setTimeout(() => {
+          cancelAnimationFrame(animationFrameId);
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          confetti = [];
+        }, 5000);
+      }
+    }
+    
+    // Initial run
+    calculateBudget();
+  </script>
+</body>
+</html>

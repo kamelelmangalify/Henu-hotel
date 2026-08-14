@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  antigravity-master:
+    build: .
+    container_name: antigravity_orchestrator
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - WA_PHONE_NUMBER_ID=${WA_PHONE_NUMBER_ID}
+      - WA_ACCESS_TOKEN=${WA_ACCESS_TOKEN}
+      - WA_VERIFY_TOKEN=${WA_VERIFY_TOKEN}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    volumes:
+      - ./tools/schedules.json:/app/tools/schedules.json

@@ -1,0 +1,162 @@
+{
+  "name": "01 — WhatsApp Webhook Receiver",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "whatsapp-incoming",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-verify",
+      "name": "Webhook Verify (GET)",
+      "type": "n8n-nodes-base.webhook",
+      "position": [240, 200],
+      "webhookId": "whatsapp-incoming"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-incoming",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-receive",
+      "name": "Webhook Receive (POST)",
+      "type": "n8n-nodes-base.webhook",
+      "position": [240, 400],
+      "webhookId": "whatsapp-incoming"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.query['hub.challenge'] }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "respond-verify",
+      "name": "Respond Hub Challenge",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [500, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "OK",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "respond-ok",
+      "name": "Respond 200 OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [500, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// استخراج بيانات الرسالة من payload الواتساب\nconst body = $input.first().json.body;\nconst entry = body?.entry?.[0];\nconst changes = entry?.changes?.[0];\nconst value = changes?.value;\nconst message = value?.messages?.[0];\nconst contact = value?.contacts?.[0];\n\nif (!message) {\n  // ليس رسالة فعلية (status update مثلاً)\n  return [];\n}\n\nconst from_number = message.from;\nconst msg_type = message.type; // text | audio | image | document\nconst timestamp = message.timestamp;\n\nlet body_text = '';\nlet media_id = '';\n\nif (msg_type === 'text') {\n  body_text = message.text?.body || '';\n} else if (msg_type === 'audio') {\n  media_id = message.audio?.id || '';\n} else if (msg_type === 'image') {\n  media_id = message.image?.id || '';\n  body_text = message.image?.caption || '';\n} else if (msg_type === 'document') {\n  media_id = message.document?.id || '';\n  body_text = message.document?.caption || '';\n}\n\nreturn [{\n  json: {\n    from_number,\n    msg_type,\n    body_text,\n    media_id,\n    timestamp,\n    contact_name: contact?.profile?.name || 'Unknown',\n    raw_message: message\n  }\n}];"
+      },
+      "id": "extract-message",
+      "name": "Extract Message Data",
+      "type": "n8n-nodes-base.code",
+      "position": [740, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.msg_type }}",
+              "rightValue": "text",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ]
+        }
+      },
+      "id": "switch-type",
+      "name": "Switch: Message Type",
+      "type": "n8n-nodes-base.if",
+      "position": [980, 400]
+    },
+    {
+      "parameters": {
+        "url": "=https://graph.facebook.com/v18.0/{{ $env.WA_PHONE_NUMBER_ID }}/media/{{ $json.media_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "get-media-url",
+      "name": "Get Media URL",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [1220, 560],
+      "notes": "يجلب رابط تحميل الملف (صورة أو صوت)"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "response": { "response": { "responseFormat": "file" } }
+        }
+      },
+      "id": "download-media",
+      "name": "Download Media",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [1460, 560]
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "model": "whisper-1",
+        "options": {}
+      },
+      "id": "whisper-transcribe",
+      "name": "Whisper Transcription",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [1700, 640],
+      "notes": "تحويل الصوت لنص — يُفعَّل فقط إذا msg_type = audio"
+    }
+  ],
+  "connections": {
+    "Webhook Verify (GET)": {
+      "main": [[{ "node": "Respond Hub Challenge", "type": "main", "index": 0 }]]
+    },
+    "Webhook Receive (POST)": {
+      "main": [[{ "node": "Respond 200 OK", "type": "main", "index": 0 }]]
+    },
+    "Respond 200 OK": {
+      "main": [[{ "node": "Extract Message Data", "type": "main", "index": 0 }]]
+    },
+    "Extract Message Data": {
+      "main": [[{ "node": "Switch: Message Type", "type": "main", "index": 0 }]]
+    },
+    "Switch: Message Type": {
+      "main": [
+        [{ "node": "02 — LLM Parser", "type": "main", "index": 0 }],
+        [{ "node": "Get Media URL",   "type": "main", "index": 0 }]
+      ]
+    },
+    "Get Media URL": {
+      "main": [[{ "node": "Download Media", "type": "main", "index": 0 }]]
+    },
+    "Download Media": {
+      "main": [[{ "node": "Whisper Transcription", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "instanceId": "hotel-automation",
+    "templateCredsSetupCompleted": true
+  },
+  "_comment": {
+    "setup_notes": [
+      "1. أضف Environment Variable: WA_PHONE_NUMBER_ID",
+      "2. أضف Credential من نوع HTTP Header Auth باسم 'Meta WA Token' بقيمة: Authorization: Bearer YOUR_META_ACCESS_TOKEN",
+      "3. الـ Webhook URL ستكون: https://YOUR-N8N-URL/webhook/whatsapp-incoming",
+      "4. سجّل هذا الرابط في Meta Developer Portal > Webhooks"
+    ]
+  }
+}

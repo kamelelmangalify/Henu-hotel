@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>أمر توريد - شركة كوين للمنسوجات - فندق هينو الأهرامات</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+        
+        @page {
+            size: A4;
+            margin: 8mm 12mm 8mm 12mm;
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Arial, sans-serif;
+            color: #111827;
+            line-height: 1.5;
+            margin: 0;
+            padding: 5px;
+            background-color: #ffffff;
+            direction: rtl;
+        }
+
+        .container {
+            border: 2px solid #1e3a8a;
+            padding: 15px 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            position: relative;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px double #1e3a8a;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-logo {
+            max-width: 80px;
+            height: auto;
+            border-radius: 4px;
+            margin-left: 15px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hotel-name-en {
+            font-size: 16pt;
+            font-weight: 800;
+            color: #1e3a8a;
+            line-height: 1.2;
+        }
+
+        .hotel-name-ar {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #4b5563;
+            margin-top: 2px;
+        }
+
+        .header-left {
+            text-align: left;
+        }
+
+        .doc-title {
+            font-size: 16pt;
+            font-weight: 800;
+            color: #b91c1c;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .po-number {
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: #4b5563;
+            margin-top: 5px;
+        }
+
+        .meta-box {
+            border: 1px solid #d1d5db;
+            padding: 8px 15px;
+            border-radius: 6px;
+            background-color: #f9fafb;
+            margin-bottom: 12px;
+        }
+
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .meta-table td {
+            padding: 6px 4px;
+            font-size: 10pt;
+        }
+
+        .meta-label {
+            font-weight: 700;
+            color: #1e3a8a;
+            width: 12%;
+            vertical-align: top;
+        }
+
+        .meta-value {
+            color: #1f2937;
+            width: 38%;
+            vertical-align: top;
+        }
+
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 12px;
+        }
+
+        .items-table th {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 10pt;
+            padding: 6px;
+            border: 1px solid #1e3a8a;
+            text-align: center;
+        }
+
+        .items-table td {
+            padding: 6px;
+            border: 1px solid #e5e7eb;
+            font-size: 10pt;
+            text-align: center;
+            color: #1f2937;
+        }
+
+        .items-table tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .text-right {
+            text-align: right !important;
+        }
+
+        .totals-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 12px;
+        }
+
+        .totals-table {
+            width: 50%;
+            border-collapse: collapse;
+        }
+
+        .totals-table td {
+            border: 1px solid #d1d5db;
+            padding: 5px 10px;
+            font-size: 10pt;
+            font-weight: 700;
+        }
+
+        .totals-label {
+            background-color: #f3f4f6;
+            color: #374151;
+            width: 60%;
+            text-align: right;
+        }
+
+        .totals-value {
+            text-align: center;
+            width: 40%;
+        }
+
+        .total-sum {
+            background-color: #eff6ff;
+            color: #1e3a8a;
+            font-size: 11pt;
+        }
+
+        .advance-sum {
+            background-color: #fff7ed;
+            color: #c2410c;
+            font-size: 11pt;
+        }
+
+        .remaining-sum {
+            background-color: #f0fdf4;
+            color: #15803d;
+            font-size: 11pt;
+        }
+
+        .terms-section {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .terms-title {
+            font-size: 11pt;
+            font-weight: 800;
+            color: #1e3a8a;
+            margin: 0 0 5px 0;
+        }
+
+        .terms-list {
+            margin: 0;
+            padding-right: 20px;
+            font-size: 9.5pt;
+            color: #374151;
+        }
+
+        .terms-list li {
+            margin-bottom: 4px;
+            text-align: justify;
+        }
+
+        .signatures-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            page-break-inside: avoid;
+        }
+
+        .sig-col {
+            width: 50%;
+            text-align: center;
+            vertical-align: top;
+            padding: 5px;
+        }
+
+        .sig-title {
+            font-weight: 700;
+            color: #111827;
+            font-size: 11pt;
+            margin-bottom: 25px;
+        }
+
+        .sig-space {
+            font-weight: 600;
+            color: #6b7280;
+            font-size: 9.5pt;
+            margin-bottom: 5px;
+        }
+
+        .sig-line {
+            color: #9ca3af;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- الهيدر الرئيسي مع الشعار -->
+    <div class="header-container">
+        <div class="header-right">
+            <img src="شعار_الفندق_عقود.jpg" class="brand-logo" alt="Henu Hotel Logo">
+            <div class="header-text">
+                <span class="hotel-name-en">Henu Hotel</span>
+                <span class="hotel-name-ar">فندق هينو - إدارة المشتريات والتجهيزات</span>
+            </div>
+        </div>
+        <div class="header-left">
+            <h1 class="doc-title">أمر توريد (Purchase Order)</h1>
+            <div class="po-number">رقم الأمر: PO-2026-0811-V1</div>
+        </div>
+    </div>
+
+    <!-- صندوق البيانات الأساسية -->
+    <div class="meta-box">
+        <table class="meta-table">
+            <tr>
+                <td class="meta-label">إلى الشركة:</td>
+                <td class="meta-value">شركة كوين لتصنيع وتجهيز المنسوجات</td>
+                <td class="meta-label">التاريخ:</td>
+                <td class="meta-value">11 أغسطس 2026</td>
+            </tr>
+            <tr>
+                <td class="meta-label">الجهة الطالبة:</td>
+                <td class="meta-value">فندق Henu Hotel</td>
+                <td class="meta-label">رقم عرض السعر:</td>
+                <td class="meta-value">عرض سعر رقم SAL-QTN-2026-00855 بتاريخ 11/08/2026</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- جدول الأصناف والكميات -->
+    <table class="items-table">
+        <thead>
+            <tr>
+                <th style="width: 5%;">م</th>
+                <th style="width: 45%;">بيان الأصناف (المواصفات)</th>
+                <th style="width: 12%;">الكمية</th>
+                <th style="width: 10%;">الوحدة</th>
+                <th style="width: 13%;">سعر الوحدة</th>
+                <th style="width: 15%;">الإجمالي (جنيه)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td class="text-right">لحاف فايبر أبيض مقاس 170×230سم</td>
+                <td>2</td>
+                <td>قطعة</td>
+                <td>720</td>
+                <td>1,440</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td class="text-right">كفر لحاف سادة أبيض عامرية مقاس 180×240سم</td>
+                <td>10</td>
+                <td>قطعة</td>
+                <td>550</td>
+                <td>5,500</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td class="text-right">لحاف فايبر أبيض مقاس 220×240سم</td>
+                <td>4</td>
+                <td>قطعة</td>
+                <td>990</td>
+                <td>3,960</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td class="text-right">كفر لحاف سادة أبيض عامرية مقاس 235×250سم</td>
+                <td>4</td>
+                <td>قطعة</td>
+                <td>690</td>
+                <td>2,760</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ملخص المبالغ والنسب -->
+    <div class="totals-container">
+        <table class="totals-table">
+            <tr>
+                <td class="totals-label">إجمالي قيمة أمر التوريد:</td>
+                <td class="totals-value total-sum">13,660 جنيه</td>
+            </tr>
+            <tr>
+                <td class="totals-label">الدفعة المقدمة (50%):</td>
+                <td class="totals-value advance-sum">6,830 جنيه</td>
+            </tr>
+            <tr>
+                <td class="totals-label">المبلغ المتبقي عند الاستلام (50%):</td>
+                <td class="totals-value remaining-sum">6,830 جنيه</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- الشروط والأحكام -->
+    <div class="terms-section">
+        <h2 class="terms-title">شروط وأحكام أمر التوريد:</h2>
+        <ul class="terms-list">
+            <li><strong>مكان التوريد ومهلة التسليم:</strong> يتم التسليم بمقر الفندق بنزلة السمان خلال مدة أقصاها <strong>يومين عمل</strong> من تاريخ دفع الدفعة المقدمة.</li>
+            <li><strong>غرامة التأخير:</strong> في حالة تأخر المورد عن التسليم بعد انقضاء مهلة اليومين، تطبق غرامة تأخير بواقع <strong>1% يومياً</strong> من إجمالي قيمة أمر التوريد عن كل يوم تأخير.</li>
+            <li><strong>المعاينة والاسترجاع:</strong> يحق للفندق الفحص والمعاينة عند الاستلام، وله الحق الكامل في استرجاع أو استبدال أي أصناف بها عيوب تصنيع أو غير مطابقة للمواصفات والأوزان المحددة.</li>
+            <li><strong>شروط الدفع:</strong> سداد دفعة مقدمة بنسبة <strong>50%</strong> (مبلغ <strong>6,830 جنيه</strong>) عند توقيع أمر التوريد، وسداد باقي المبلغ <strong>50%</strong> (مبلغ <strong>6,830 جنيه</strong>) فور التوريد والمعاينة.</li>
+            <li>الأسعار الموضحة غير شاملة ضريبة القيمة المضافة.</li>
+        </ul>
+    </div>
+
+    <!-- التوقيعات والاعتماد -->
+    <table class="signatures-table">
+        <tr>
+            <td class="sig-col">
+                <div class="sig-title">إدارة المشتريات - Henu Hotel</div>
+                <div class="sig-space">التوقيع والخاتم</div>
+                <div class="sig-line">......................................................</div>
+            </td>
+            <td class="sig-col">
+                <div class="sig-title">الاعتماد / إدارة الفندق</div>
+                <div class="sig-space">التوقيع والاعتماد</div>
+                <div class="sig-line">......................................................</div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

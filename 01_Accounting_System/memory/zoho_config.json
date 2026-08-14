@@ -1,0 +1,11 @@
+{
+  "client_id": "1000.BWXN8IH1B12TASLCH2ZM3EWFT1PZ7M",
+  "client_secret": "5a8881c2fb572355fdc85c52f7926f1d69269d87b6",
+  "redirect_uri": "http://localhost/zoho/callback",
+  "scopes": "ZohoBooks.fullaccess.all,ZohoBooks.expenses.CREATE,ZohoBooks.invoices.CREATE,ZohoBooks.contacts.CREATE",
+  "data_center": "com",
+  "organization_id": "934223341",
+  "access_token": "1000.b86535eebf4e312d2b83f59849a40258.6228cbddd0fc94710aee9cb71524ecb1",
+  "refresh_token": "1000.ae650771d73c0e7b54396a550d2fafa7.7f1aaa6dd7cf2c7a6c236d4fbed757d2",
+  "token_expiry": "2026-08-10 16:55:50"
+}

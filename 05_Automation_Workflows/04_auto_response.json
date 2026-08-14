@@ -1,0 +1,87 @@
+{
+  "name": "04 — WhatsApp Auto-Response",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "input-trigger",
+      "name": "Receive Zoho Result",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// بناء رسالة الرد حسب نوع العملية\nconst data = $input.first().json;\nconst now = new Date();\nconst timeStr = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', hour12: false });\nconst dateStr = now.toLocaleDateString('ar-EG', { day: '2-digit', month: '2-digit', year: 'numeric' });\n\nif (!data.success) {\n  return [{ json: {\n    to: data.from_number,\n    message: `❌ حدث خطأ أثناء تسجيل العملية في النظام.\\nيرجى التواصل مع المحاسب.\\n\\n🕐 ${timeStr} — ${dateStr}`\n  }}];\n}\n\nconst type = data.transaction_type;\nconst ref  = data.ref_number;\nconst amount = new Intl.NumberFormat('ar-EG', { minimumFractionDigits: 2 }).format(data.amount || 0);\n\nlet msg = '';\n\nif (type === 'GUEST_CHECKIN') {\n  msg = [\n    `✅ *تم تسجيل دخول النزيل بنجاح*`,\n    ``,\n    `📋 *رقم الفاتورة:* ${ref}`,\n    `💰 *الإجمالي:* ${amount} جـ (شامل VAT 14%)`,\n    `👤 *الاسم:* ${data.contact_name || 'N/A'}`,\n    `🕐 *الوقت:* ${timeStr} — ${dateStr}`,\n    ``,\n    `_تم التسجيل تلقائياً في Zoho Books_`\n  ].join('\\n');\n\n} else if (type === 'CAFE_SHIFT') {\n  msg = [\n    `✅ *تم تقفيل وردية الكافيه بنجاح*`,\n    ``,\n    `📋 *رقم القيد:* ${ref}`,\n    `💰 *الإجمالي المحصّل:* ${amount} جـ`,\n    `🕐 *الوقت:* ${timeStr} — ${dateStr}`,\n    ``,\n    `_تم ترحيل الإيراد وتوزيع الضرائب تلقائياً_`\n  ].join('\\n');\n\n} else if (type === 'EXPENSE_BILL') {\n  msg = [\n    `✅ *تم تسجيل الفاتورة بنجاح*`,\n    ``,\n    `📋 *رقم الفاتورة:* ${ref}`,\n    `💰 *إجمالي الفاتورة:* ${amount} جـ`,\n    `🏷️ *تم تطبيق ضريبة الخصم (WHT)*`,\n    `🕐 *الوقت:* ${timeStr} — ${dateStr}`,\n    ``,\n    `_تم التسجيل تلقائياً في Zoho Books_`\n  ].join('\\n');\n}\n\nreturn [{ json: {\n  to: data.from_number,\n  message: msg\n}}];"
+      },
+      "id": "build-reply",
+      "name": "Build Reply Message",
+      "type": "n8n-nodes-base.code",
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "url": "=https://graph.facebook.com/v18.0/{{ $env.WA_PHONE_NUMBER_ID }}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $json.to }}\",\n  \"type\": \"text\",\n  \"text\": { \"body\": {{ JSON.stringify($json.message) }} }\n}",
+        "options": {
+          "response": { "response": { "responseFormat": "json" } }
+        }
+      },
+      "id": "send-whatsapp",
+      "name": "Send WhatsApp Reply",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [720, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [{
+            "leftValue": "={{ $json.messages?.[0]?.id }}",
+            "rightValue": "",
+            "operator": { "type": "string", "operation": "isNotEmpty" }
+          }]
+        }
+      },
+      "id": "check-sent",
+      "name": "Sent OK?",
+      "type": "n8n-nodes-base.if",
+      "position": [960, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// تسجيل نجاح الإرسال\nconst msg_id = $input.first().json.messages?.[0]?.id;\nconsole.log(`[${new Date().toISOString()}] WhatsApp reply sent: ${msg_id}`);\nreturn [{ json: { status: 'sent', message_id: msg_id } }];"
+      },
+      "id": "log-success",
+      "name": "Log Success",
+      "type": "n8n-nodes-base.code",
+      "position": [1200, 220]
+    },
+    {
+      "parameters": {
+        "jsCode": "// تسجيل فشل الإرسال\nconst error = $input.first().json;\nconsole.error(`[${new Date().toISOString()}] WhatsApp reply FAILED:`, JSON.stringify(error));\nreturn [{ json: { status: 'failed', error } }];"
+      },
+      "id": "log-error",
+      "name": "Log Error",
+      "type": "n8n-nodes-base.code",
+      "position": [1200, 400]
+    }
+  ],
+  "connections": {
+    "Receive Zoho Result":   { "main": [[{ "node": "Build Reply Message",   "type": "main", "index": 0 }]] },
+    "Build Reply Message":   { "main": [[{ "node": "Send WhatsApp Reply",   "type": "main", "index": 0 }]] },
+    "Send WhatsApp Reply":   { "main": [[{ "node": "Sent OK?",             "type": "main", "index": 0 }]] },
+    "Sent OK?": {
+      "main": [
+        [{ "node": "Log Success", "type": "main", "index": 0 }],
+        [{ "node": "Log Error",   "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "_reply_examples": {
+    "GUEST_CHECKIN": "✅ تم تسجيل دخول النزيل بنجاح\n📋 رقم الفاتورة: INV-2026-0042\n💰 الإجمالي: 1,596.00 جـ (شامل VAT 14%)\n🕐 14:35 — 05/08/2026",
+    "CAFE_SHIFT":    "✅ تم تقفيل وردية الكافيه بنجاح\n📋 رقم القيد: CAFE-20260805-EVE\n💰 الإجمالي المحصّل: 3,200.00 جـ\n🕐 23:00 — 05/08/2026",
+    "EXPENSE_BILL":  "✅ تم تسجيل الفاتورة بنجاح\n📋 رقم الفاتورة: BILL-1754658935\n💰 إجمالي الفاتورة: 850.00 جـ\n🏷️ تم تطبيق ضريبة الخصم (WHT)\n🕐 11:20 — 05/08/2026"
+  }
+}

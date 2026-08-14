@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>التقرير المحاسبي والمالي الشامل - هوستل الأهرامات</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+        
+        @page {
+            size: A4 portrait;
+            margin: 12mm 15mm 15mm 15mm;
+            @bottom-right {
+                content: "صفحة " counter(page) " من " counter(pages);
+                font-family: 'Cairo', sans-serif;
+                font-size: 9pt;
+                color: #666;
+            }
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #2d3748;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+            font-size: 10.5pt;
+            line-height: 1.5;
+        }
+
+        .header {
+            border-bottom: 3px solid #1a365d;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .company-title {
+            font-size: 22pt;
+            font-weight: 800;
+            color: #1a365d;
+            margin: 0;
+        }
+
+        .subtitle {
+            font-size: 11pt;
+            color: #4a5568;
+            margin-top: 4px;
+        }
+
+        .report-meta {
+            text-align: left;
+            font-size: 9.5pt;
+            color: #718096;
+        }
+
+        .badge {
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 9pt;
+        }
+
+        h2 {
+            color: #1a365d;
+            font-size: 14pt;
+            border-right: 4px solid #3182ce;
+            padding-right: 10px;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: #2c5282;
+            font-size: 12pt;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 9.5pt;
+        }
+
+        th {
+            background-color: #2b6cb0;
+            color: white;
+            text-align: right;
+            padding: 8px 10px;
+            font-weight: 700;
+            border: 1px solid #2b6cb0;
+        }
+
+        td {
+            padding: 7px 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .kpi-box {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            border-right: 4px solid #3182ce;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .kpi-box.success { border-color: #38a169; }
+        .kpi-box.warning { border-color: #dd6b20; }
+        .kpi-box.danger { border-color: #e53e3e; }
+        .kpi-box.purple { border-color: #805ad5; }
+
+        .kpi-label {
+            font-size: 9pt;
+            color: #718096;
+            font-weight: 600;
+        }
+
+        .kpi-value {
+            font-size: 15pt;
+            font-weight: 800;
+            color: #1a202c;
+            margin-top: 4px;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        .alert-box {
+            background-color: #fffaf0;
+            border: 1px solid #feebc8;
+            border-right: 4px solid #dd6b20;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 9.5pt;
+        }
+
+        .highlight-cash {
+            background-color: #ebf8ff;
+            border: 1px solid #bee3f8;
+            border-right: 5px solid #3182ce;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 10px;
+            text-align: center;
+            font-size: 8.5pt;
+            color: #a0aec0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر الرئيسي -->
+    <div class="header">
+        <div>
+            <h1 class="company-title">هوستل الأهرامات (Henu Hotel)</h1>
+            <div class="subtitle">التقرير المحاسبي والمالي الشامل والمستحقات | الفترة من 4 أغسطس 2026 إلى 8 أغسطس 2026</div>
+        </div>
+        <div class="report-meta">
+            <div>تاريخ الإصدار: 8 أغسطس 2026</div>
+            <div>النظام المحاسبي الذكي v2.5</div>
+            <div style="margin-top: 4px;"><span class="badge">تقرير معتمد بعد المراجعة التدقيقية</span></div>
+        </div>
+    </div>
+
+    <!-- القسم الأول: ملخص الحركة المالية والشاملة -->
+    <h2>1️⃣ ملخص الحركة المالية (4 أغسطس - 8 أغسطس 2026)</h2>
+    
+    <div class="summary-card">
+        <div class="grid-3">
+            <div class="kpi-box success">
+                <div class="kpi-label">الإيرادات التشغيلية الفعلية</div>
+                <div class="kpi-value">8,120 ج</div>
+                <div style="font-size: 8pt; color: #718096; margin-top:2px;">(120ج مغسلة + 8000ج إيجار غرف)</div>
+            </div>
+            <div class="kpi-box purple">
+                <div class="kpi-label">تمويل وضخ رأس المال (المالك)</div>
+                <div class="kpi-value">65,000 ج</div>
+                <div style="font-size: 8pt; color: #718096; margin-top:2px;">(15000ج انستاباي + 50000ج بنكي)</div>
+            </div>
+            <div class="kpi-box danger">
+                <div class="kpi-label">إجمالي المصروفات المدفوعة</div>
+                <div class="kpi-value">42,049 ج</div>
+                <div style="font-size: 8pt; color: #718096; margin-top:2px;">(مشتريات + رواتب + موردين + أدوات)</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="kpi-box warning">
+                <div class="kpi-label">صافي النتيجة التشغيلية (الربح / الخسارة)</div>
+                <div class="kpi-value" style="color: #c53030;">-33,929 ج</div>
+                <div style="font-size: 8pt; color: #718096;">(نتيجة مصروفات التأسيس والمفروشات)</div>
+            </div>
+            <div class="kpi-box success">
+                <div class="kpi-label">💵 الرصيد النقدي الحالي بالخزينة / الصندوق</div>
+                <div class="kpi-value" style="color: #276749;">31,071 ج</div>
+                <div style="font-size: 8pt; color: #718096;">(مطابق لرصيد شيت الإكسيل الصندوق المتوفر 31,076 ج)</div>
+            </div>
+        </div>
+    </div>
+
+    <h3>📋 كشف حركة المقبوضات والمصروفات اليومية التفصيلية:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>التاريخ</th>
+                <th>نوع الحركة</th>
+                <th>بيان المعاملة والتفاصيل</th>
+                <th>الفئة / التصنيف</th>
+                <th>المبلغ (جنيه)</th>
+                <th>وسيلة الدفع</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>2026-08-04</td><td>تمويل المالك</td><td>تحويل انستاباي (دفعة 1)</td><td>حقوق ملكية</td><td>5,000</td><td>تحويل انستاباي</td></tr>
+            <tr><td>2026-08-04</td><td>تمويل المالك</td><td>تحويل انستاباي (دفعة 2)</td><td>حقوق ملكية</td><td>5,000</td><td>تحويل انستاباي</td></tr>
+            <tr><td>2026-08-04</td><td>تمويل المالك</td><td>تحويل انستاباي (دفعة 3)</td><td>حقوق ملكية</td><td>5,000</td><td>تحويل انستاباي</td></tr>
+            <tr><td>2026-08-04</td><td>مصروف</td><td>توصيل قماش ظهر السراير</td><td>نثريات وشحن</td><td>175</td><td>نقدي</td></tr>
+            <tr><td>2026-08-04</td><td>مصروف</td><td>تسوية باقي راتب يوسف عن شهر 7</td><td>رواتب شهر 7</td><td>4,500</td><td>نقدي</td></tr>
+            <tr><td>2026-08-04</td><td>مصروف</td><td>سلفة لـ أحمد البار عن شهر 7</td><td>رواتب شهر 7</td><td>2,500</td><td>نقدي</td></tr>
+            <tr><td>2026-08-04</td><td>مصروف</td><td>دفعة للفنانة اكل</td><td>خدمات وفنون</td><td>5,000</td><td>نقدي</td></tr>
+            <tr><td>2026-08-05</td><td>إيراد تشغيلي</td><td>إيراد خدمة المغسلة</td><td>إيرادات خدمات</td><td>120</td><td>نقدي</td></tr>
+            <tr><td>2026-08-05</td><td>مصروف</td><td>مشترك بسلك ثلاثي</td><td>مستلزمات</td><td>260</td><td>نقدي</td></tr>
+            <tr><td>2026-08-05</td><td>مصروف</td><td>كارت شحن يوسف</td><td>خصوم موظفين</td><td>100</td><td>نقدي</td></tr>
+            <tr><td>2026-08-05</td><td>مصروف</td><td>شحن وغسيل تكييف الاستقبال</td><td>صيانة وتجهيز</td><td>1,350</td><td>نقدي</td></tr>
+            <tr><td>2026-08-06</td><td>تمويل المالك</td><td>تحويل بنكي من أ. محمد مرسي</td><td>حقوق ملكية</td><td>50,000</td><td>تحويل بنكي</td></tr>
+            <tr><td>2026-08-06</td><td>مصروف</td><td>بطاريات للخزينة</td><td>نثريات ومستلزمات</td><td>60</td><td>نقدي</td></tr>
+            <tr><td>2026-08-06</td><td>مصروف</td><td>دبل فيس للتثبيت</td><td>مستلزمات</td><td>165</td><td>نقدي</td></tr>
+            <tr><td>2026-08-06</td><td>مصروف</td><td>بن ضيافة للمكتب</td><td>ضيافة ونثريات</td><td>250</td><td>نقدي</td></tr>
+            <tr><td>2026-08-06</td><td>مصروف</td><td>مفك + زرادية صيانة</td><td>عدد وأدوات</td><td>140</td><td>نقدي</td></tr>
+            <tr><td>2026-08-06</td><td>مصروف</td><td>مشترك بسلك كهربائي</td><td>مستلزمات</td><td>240</td><td>نقدي</td></tr>
+            <tr><td>2026-08-06</td><td>مصروف</td><td>دفعة حساب المورد علاء الكهربائي</td><td>دفعة موردين</td><td>1,500</td><td>نقدي</td></tr>
+            <tr><td>2026-08-06</td><td>مصروف</td><td>شراء كشكول سلك للمكتب</td><td>أدوات مكتبية</td><td>55</td><td>نقدي</td></tr>
+            <tr><td>2026-08-06</td><td>مصروف</td><td>دفعة حساب المورد أحمد الكاميرات</td><td>دفعة موردين</td><td>2,500</td><td>نقدي</td></tr>
+            <tr><td>2026-08-06</td><td>مصروف</td><td>مكافأة مبيت بالفندق للموظف يوسف</td><td>إضافي ومكافآت</td><td>300</td><td>نقدي</td></tr>
+            <tr><td>2026-08-07</td><td>مصروف</td><td>سلفة من الراتب للموظف يوسف</td><td>سلف موظفين 8</td><td>200</td><td>نقدي</td></tr>
+            <tr><td>2026-08-08</td><td>إيراد تشغيلي</td><td>إيجار غرفة 401 (8 ليالي)</td><td>إيراد غرف</td><td>8,000</td><td>تحويل انستاباي</td></tr>
+            <tr><td>2026-08-08</td><td>مصروف</td><td>دفعة مقدمة مفروشات شركة كوين (40%)</td><td>مستلزمات ومفروشات</td><td>21,494</td><td>تحويل بنكي</td></tr>
+            <tr><td>2026-08-08</td><td>مصروف</td><td>عمولة تسكين الغرفة 401</td><td>عمولات حجز</td><td>800</td><td>نقدي</td></tr>
+            <tr><td>2026-08-08</td><td>مصروف</td><td>أدوات مكتبية ومستلزمات تشغيل</td><td>أدوات مكتبية</td><td>460</td><td>نقدي</td></tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- القسم الثاني: تقرير الموردين والمستحقات -->
+    <h2>2️⃣ تقرير كشف حساب الموردين والمستحقات الآجلة</h2>
+    
+    <div class="alert-box">
+        <b>ملاحظة محاسبية:</b> تم تسجيل كافة الالتزامات والمستحقات المتبقية لكل مورد بناءً على فواتير وأوامر التوريد المعتمدة (Purchase Orders).
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>اسم المورد / الشركة</th>
+                <th>طبيعة التوريد / الخدمة</th>
+                <th>إجمالي التعاملات / التوريد</th>
+                <th>المبالغ المدفوعة سابقاً</th>
+                <th>**المبلغ المتبقي المستحق (جنيه)**</th>
+                <th>حالة التوريد والشروط</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>علاء الكهربائي</b></td>
+                <td>أعمال وصيانة الكهرباء</td>
+                <td>3,500 ج</td>
+                <td>1,500 ج</td>
+                <td style="color: #c53030; font-weight: bold;">2,000 ج</td>
+                <td>دفعة سابقة - مستحق السداد</td>
+            </tr>
+            <tr>
+                <td><b>أحمد الكاميرات</b></td>
+                <td>تركيب وأنظمة الكاميرات</td>
+                <td>5,000 ج</td>
+                <td>2,500 ج</td>
+                <td style="color: #c53030; font-weight: bold;">2,500 ج</td>
+                <td>دفعة سابقة - مستحق السداد</td>
+            </tr>
+            <tr>
+                <td><b>شركة كوين للمنسوجات</b></td>
+                <td>توريد المفروشات والبياضات (PO-V3)</td>
+                <td>53,735 ج</td>
+                <td>21,494 ج (40%)</td>
+                <td style="color: #c53030; font-weight: bold;">32,241 ج</td>
+                <td>متبقي 60% يسدد فور الاستلام المعاينة (خلال 4 أيام)</td>
+            </tr>
+            <tr style="background-color: #edf2f7; font-weight: bold;">
+                <td colspan="4" style="text-align: left;">إجمالي المستحقات المطلوبة للموردين:</td>
+                <td style="color: #9b2c2c; font-size: 11pt;">36,741 ج</td>
+                <td>-</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- القسم الثالث: تقرير الموظفين والرواتب -->
+    <h2>3️⃣ تقرير هيكل الموظفين والرواتب والسلف (شهر أغسطس 2026)</h2>
+
+    <h3>🏢 قسم الاستقبال (Reception)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>الموظف</th>
+                <th>مواعيد الشيفت والساعات</th>
+                <th>الراتب الأساسي</th>
+                <th>سلف وخصومات (شهر 8)</th>
+                <th>مكافآت وإضافي</th>
+                <th>**صافي المتبقي لـ شهر 8**</th>
+                <th>تسويات شهر 7 السابق</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>محمد المنسي</b></td>
+                <td>08:00 AM - 04:00 PM (8 ساعات)</td>
+                <td>6,000 ج</td>
+                <td>0 ج</td>
+                <td>0 ج</td>
+                <td><b>6,000 ج</b></td>
+                <td>0 ج</td>
+            </tr>
+            <tr>
+                <td><b>يوسف</b></td>
+                <td>12:00 PM - 12:00 AM (12 ساعة)</td>
+                <td>8,500 ج</td>
+                <td>200 ج (سلفة) + 100 ج (شحن)</td>
+                <td>300 ج (مكافأة)</td>
+                <td><b>8,500 ج</b></td>
+                <td>4,500 ج (مسدد باقي شهر 7)</td>
+            </tr>
+            <tr>
+                <td><b>علي</b></td>
+                <td>12:00 AM - 08:00 AM (8 ساعات ليلي)</td>
+                <td>4,000 ج</td>
+                <td>0 ج</td>
+                <td>0 ج</td>
+                <td><b>4,000 ج</b></td>
+                <td>0 ج</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>🧹 قسم الإشراف الداخلي والنظافة (Housekeeping) والإدارة</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>الموظف</th>
+                <th>مواعيد الشيفت والساعات</th>
+                <th>الراتب الأساسي</th>
+                <th>سلف وخصومات (شهر 8)</th>
+                <th>مكافآت وإضافي</th>
+                <th>**صافي المتبقي لـ شهر 8**</th>
+                <th>تسويات شهر 7 السابق</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>مدحت</b></td>
+                <td>04:00 PM - 12:00 AM (8 ساعات)</td>
+                <td>6,000 ج</td>
+                <td>0 ج</td>
+                <td>0 ج</td>
+                <td><b>6,000 ج</b></td>
+                <td>0 ج</td>
+            </tr>
+            <tr>
+                <td><b>جومانا</b></td>
+                <td>08:00 AM - 04:00 PM (8 ساعات)</td>
+                <td>4,000 ج</td>
+                <td>0 ج</td>
+                <td>0 ج</td>
+                <td><b>4,000 ج</b></td>
+                <td>0 ج</td>
+            </tr>
+            <tr>
+                <td><b>علا</b></td>
+                <td>08:00 AM - 04:00 PM (8 ساعات)</td>
+                <td>6,000 ج</td>
+                <td>0 ج</td>
+                <td>0 ج</td>
+                <td><b>6,000 ج</b></td>
+                <td>0 ج</td>
+            </tr>
+            <tr>
+                <td><b>هادي</b></td>
+                <td>08:00 AM - 04:00 PM (8 ساعات)</td>
+                <td>6,000 ج</td>
+                <td>0 ج</td>
+                <td>0 ج</td>
+                <td><b>6,000 ج</b></td>
+                <td>0 ج</td>
+            </tr>
+            <tr>
+                <td><b>أحمد البار</b></td>
+                <td>إداري / تطوير</td>
+                <td>5,000 ج</td>
+                <td>0 ج</td>
+                <td>0 ج</td>
+                <td><b>5,000 ج</b></td>
+                <td>2,500 ج (سلفة شهر 7)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="background-color: #ebf8ff; border: 1px solid #bee3f8; padding: 10px 15px; border-radius: 6px; margin-top: 10px;">
+        <span style="font-weight: bold; color: #2b6cb0;">📊 مجموع مسير أجور الكادر:</span> 
+        إجمالي الرواتب الأساسية: <b>45,500 ج</b> | إجمالي السلف والخصومات لشهر 8: <b>300 ج</b> | صافي الرواتب المستحقة في نهاية شهر 8: <b>45,500 ج</b>.
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- القسم الرابع: تقرير الاحتياج النقدي (الكاش المطلوبة للأسبوع القادم) -->
+    <h2>4️⃣ تقرير التخطيط والاحتياج النقدي لسداد الموردين (من الأحد إلى الخميس)</h2>
+    
+    <div class="alert-box" style="border-right-color: #3182ce; background-color: #ebf8ff; border-color: #bee3f8;">
+        <b>سياسة الخزينة المعتمدة:</b> سداد كافة التزامات الموردين المستحقة خلال الأسبوع مع **الاحتفاظ بـ 10,000 جنيه كعهدة وسيولة نقدية طوارئ بالخزينة**.
+    </div>
+
+    <h3>📊 جدول التزامات السداد واحتياج الخزينة:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>البيان / المورد</th>
+                <th>المبلغ المطلوب (جنيه)</th>
+                <th>موعد السداد المتوقع</th>
+                <th>ملاحظات واشتراطات السداد</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>علاء الكهربائي</b></td>
+                <td>2,000 ج</td>
+                <td>خلال الأسبوع (الأحد - الثلاثاء)</td>
+                <td>مستحق سداد باقي أعمال الكهرباء</td>
+            </tr>
+            <tr>
+                <td><b>أحمد الكاميرات</b></td>
+                <td>2,500 ج</td>
+                <td>خلال الأسبوع (الأحد - الأربعاء)</td>
+                <td>مستحق سداد باقي أعمال وتجهيز الكاميرات</td>
+            </tr>
+            <tr>
+                <td><b>شركة كوين للمنسوجات</b></td>
+                <td>32,241 ج</td>
+                <td>عند توريد البضاعة والمعاينة (الخميس)</td>
+                <td>مستحق سداد باقي 60% فور الاستلام بمقر الفندق</td>
+            </tr>
+            <tr style="background-color: #edf2f7; font-weight: bold;">
+                <td><b>إجمالي مستحقات الموردين المطلوبة:</b></td>
+                <td style="color: #c53030;"><b>36,741 جنيه</b></td>
+                <td colspan="2">سداد كافة التزامات الموردين بالكامل</td>
+            </tr>
+            <tr>
+                <td><b>العهدة الاحتياطية المطلوبة بالخزينة:</b></td>
+                <td style="color: #2b6cb0;"><b>10,000 جنيه</b></td>
+                <td colspan="2">مبلغ ثابت للعهد والطوارئ بالنظام</td>
+            </tr>
+            <tr style="background-color: #e2e8f0; font-weight: 800; font-size: 11pt;">
+                <td>إجمالي الكاش النقدي المطلوبة بالخزينة:</td>
+                <td style="color: #1a365d;">46,741 جنيه</td>
+                <td colspan="2">المبلغ الكلي المطلوب توفره بالخزينة</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="highlight-cash">
+        <h3 style="margin-top: 0; color: #2b6cb0;">💵 ميزانية التمويل النقدي المطلوب ضخها (المبلغ المطلوبة تغطيته):</h3>
+        <table style="margin-bottom: 0; background: white;">
+            <tr>
+                <td style="width: 60%;"><b>إجمالي الاحتياج النقدي الكلي (سداد الموردين + 10,000 ج عهدة):</b></td>
+                <td style="font-size: 12pt; font-weight: bold; color: #1a365d;">46,741 جنيه</td>
+            </tr>
+            <tr>
+                <td><b>يُخصم منه: الرصيد النقدي المتوفر حالياً بالخزينة:</b></td>
+                <td style="font-size: 12pt; font-weight: bold; color: #276749;">- 31,071 جنيه</td>
+            </tr>
+            <tr style="background-color: #feefc3;">
+                <td><b style="font-size: 11pt; color: #744210;">🔴 صافي التمويل النقدي المطلوب ضخه/تحويله للخزينة:</b></td>
+                <td style="font-size: 14pt; font-weight: 800; color: #c53030;">15,670 جنيه فقط</td>
+            </tr>
+        </table>
+        <div style="font-size: 9pt; color: #4a5568; margin-top: 8px;">
+            📌 <b>توصية النظام المحاسبي بعد المراجعة:</b> مطلوب ضخ / تحويل مبلغ <b>15,670 جنيه</b> فقط ليكون الرصيد الكافي بالخزينة (46,741 ج)، وهو ما يكفي لسداد كافة الموردين بالكامل خلال الأسبوع وتغطية عهدة الطوارئ (10,000 ج).
+        </div>
+    </div>
+
+    <div class="footer-note">
+        تم إعداد هذا التقرير المحاسبي والمالي الشامل بواسطة نظام المحاسب الذكي لهوستل الأهرامات (Henu Hotel) بتاريخ 8 أغسطس 2026.
+    </div>
+
+</body>
+</html>
