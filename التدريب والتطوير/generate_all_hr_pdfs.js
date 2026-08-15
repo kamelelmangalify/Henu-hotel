@@ -4,6 +4,14 @@ const { execSync } = require('child_process');
 
 const baseDir = path.join(__dirname);
 
+// قراءة شعار الفندق الرسمي وتحويله لـ Base64
+const logoPath = path.join('d:', 'Henu', '02_Contracts_and_Legal', 'شعار_الفندق_عقود.jpg');
+let logoDataUrl = '';
+if (fs.existsSync(logoPath)) {
+  const logoBase64 = fs.readFileSync(logoPath).toString('base64');
+  logoDataUrl = `data:image/jpeg;base64,${logoBase64}`;
+}
+
 // إنشاء المجلدات الفرعية
 const folders = {
   reception: path.join(baseDir, '01_الاستقبال_والمكاتب_الأمامية'),
@@ -13,12 +21,10 @@ const folders = {
 };
 
 Object.values(folders).forEach(folder => {
-  if (!fs.existsSync(folder)) {
-    fs.mkdirSync(folder, { recursive: true });
-  }
+  if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true });
 });
 
-// قالب HTML مرن للتحويل إلى PDF
+// قالب HTML مرن مع اللوجو واسم فندق هينو
 function getHtmlTemplate(title, roleName, jdHtml, kpiHtml, sopHtml) {
   return `<!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -29,73 +35,86 @@ function getHtmlTemplate(title, roleName, jdHtml, kpiHtml, sopHtml) {
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
     @page {
       size: A4;
-      margin: 12mm 15mm 12mm 15mm;
+      margin: 10mm 15mm 10mm 15mm;
     }
     body {
       font-family: 'Tajawal', Arial, sans-serif;
       color: #1a202c;
       line-height: 1.6;
       margin: 0;
-      padding: 10px;
+      padding: 5px;
       direction: rtl;
     }
     .header {
       text-align: center;
-      border-bottom: 3px double #1F4E78;
-      padding-bottom: 15px;
-      margin-bottom: 25px;
+      border-bottom: 2px double #b45309;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
     }
-    .hotel-title {
-      font-size: 16pt;
+    .brand-logo {
+      max-width: 100px;
+      height: auto;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    .hotel-name-en {
+      font-size: 14pt;
       font-weight: 800;
-      color: #1F4E78;
+      color: #78350f;
+      letter-spacing: 2px;
       margin: 0;
     }
+    .hotel-name-ar {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #92400e;
+      margin: 2px 0 6px 0;
+    }
     .doc-title {
-      font-size: 20pt;
+      font-size: 18pt;
       font-weight: 800;
-      color: #D9822B;
-      margin: 5px 0 0 0;
+      color: #1F4E78;
+      margin: 4px 0 0 0;
     }
     .subtitle {
-      font-size: 11pt;
+      font-size: 10.5pt;
       color: #4a5568;
       margin-top: 4px;
     }
     .section-title {
-      font-size: 14pt;
+      font-size: 13pt;
       font-weight: 700;
       color: #1F4E78;
       background-color: #EDF2F7;
-      border-right: 5px solid #D9822B;
-      padding: 6px 12px;
-      margin-top: 20px;
-      margin-bottom: 12px;
+      border-right: 5px solid #b45309;
+      padding: 5px 12px;
+      margin-top: 18px;
+      margin-bottom: 10px;
     }
     .card {
       background: #FFFFFF;
       border: 1px solid #E2E8F0;
       border-radius: 6px;
-      padding: 15px 18px;
-      margin-bottom: 15px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
     }
     ul, ol {
       padding-right: 20px;
       margin: 5px 0;
     }
     li {
-      margin-bottom: 6px;
-      font-size: 10.5pt;
+      margin-bottom: 5px;
+      font-size: 10pt;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 15px 0;
-      font-size: 10pt;
+      margin: 12px 0;
+      font-size: 9.5pt;
     }
     th, td {
       border: 1px solid #CBD5E0;
-      padding: 8px 10px;
+      padding: 7px 9px;
       text-align: center;
     }
     th {
@@ -107,28 +126,22 @@ function getHtmlTemplate(title, roleName, jdHtml, kpiHtml, sopHtml) {
       background-color: #F7FAFC;
     }
     .alert-box {
-      background-color: #EBF8FF;
-      border-right: 4px solid #3182CE;
-      padding: 10px 14px;
-      font-size: 10pt;
-      margin: 15px 0;
+      background-color: #FEF3C7;
+      border-right: 4px solid #b45309;
+      padding: 8px 12px;
+      font-size: 9.5pt;
+      margin: 12px 0;
       border-radius: 4px;
-    }
-    .badge {
-      display: inline-block;
-      background: #D9822B;
-      color: #fff;
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-size: 10pt;
-      font-weight: bold;
+      color: #78350f;
     }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <div class="hotel-title">فندق نزلة السمان (25 غرفة بوتيك)</div>
+    ${logoDataUrl ? `<img src="${logoDataUrl}" alt="HENU Hotel Logo" class="brand-logo">` : ''}
+    <div class="hotel-name-en">H E N U  H O T E L  P Y R A M I D S</div>
+    <div class="hotel-name-ar">فندق هينو الأهرامات — نزلة السمان (25 غرفة)</div>
     <div class="doc-title">${roleName}</div>
     <div class="subtitle">دليل الوصف الوظيفي، معايير التقييم والـ KPIs (25%)، وإجراءات العمل القياسية (SOPs)</div>
   </div>
@@ -141,7 +154,7 @@ function getHtmlTemplate(title, roleName, jdHtml, kpiHtml, sopHtml) {
   <div class="section-title">🎯 ثانياً: نظام تقييم الأداء الشهري ومكافأة الـ KPIs (25%)</div>
   <div class="card">
     <div class="alert-box">
-      <strong>معادلة الراتب:</strong> الراتب الثابت (75%) + حافز الـ KPI المتغير (25%) بناءً على نتيجة التقييم من 100 درجة.
+      <strong>معادلة راتب فندق هينو:</strong> الراتب الثابت (75%) + حافز الـ KPI المتغير (25%) بناءً على التقييم الشهري من 100 درجة.
     </div>
     ${kpiHtml}
   </div>
@@ -172,14 +185,15 @@ function convertHtmlToPdf(htmlPath, pdfPath) {
 }
 
 // ----------------------------------------------------
-// 1. وظيفة موظف استقبال ومشرف مكاتب أمامية
+// بيانات الوظائف
 // ----------------------------------------------------
 const receptionJd = `
-<p><strong>المسمى الوظيفي:</strong> موظف استقبال بمسؤوليات إشرافية (Front Office Supervisor & Receptionist)</p>
+<p><strong>المسمى الوظيفي:</strong> موظف استقبال ومشرف مكاتب أمامية (Front Office Supervisor & Receptionist)</p>
+<p><strong>الجهة المنظمة:</strong> فندق هينو الأهرامات (HENU Hotel Pyramids)</p>
 <p><strong>الهدف العام:</strong> إتاحة تجربة ترحيب فندقية راقية للنزلاء (أجانب ومصريين)، وإدارة التسكين والمغادرة والتحصيل المالي وتقفيل الخزينة والرقابة الإشرافية على الوردية.</p>
 <strong>المهام والمسؤوليات الرئيسية:</strong>
 <ul>
-  <li>إنجاز إجراءات التسكين (Check-in) والمغادرة (Check-out) بابتسامة وترحاب فندقي.</li>
+  <li>إنجاز إجراءات التسكين (Check-in) والمغادرة (Check-out) بابتسامة وترحاب فندقي راقٍ.</li>
   <li>تدوين وتسجيل هويات وجوازات النزلاء بدقة على النظام ووزارة السياحة والشرطة.</li>
   <li>تحصيل المستحقات وإصدار الفواتير وتقفيل الخزينة والوردية (Shift Closure) بدون أي فروقات مالية.</li>
   <li>التنسيق اللحظي مع الإشراف الداخلي والصيانة بشأن جاهزية الغرف.</li>
@@ -189,7 +203,7 @@ const receptionJd = `
 const receptionKpi = `
 <table>
   <thead>
-    <tr><th>عنصر التقييم</th><th>الدرجة</th><th>معايير التقييم القياسية</th></tr>
+    <tr><th>عنصر التقييم</th><th>الدرجة</th><th>معايير التقييم القياسية بفندق هينو</th></tr>
   </thead>
   <tbody>
     <tr><td>الانضباط والمظهر والتوقيت</td><td>20</td><td>الالتزام التام بالزي الرسمي وحضور الشفت في الموعد.</td></tr>
@@ -201,20 +215,18 @@ const receptionKpi = `
 </table>`;
 
 const receptionSop = `
-<strong>إجراءات التسكين الفندقي (Check-in Sequence):</strong>
+<strong>إجراءات التسكين الفندقي بفندق هينو (Check-in Sequence):</strong>
 <ol>
-  <li>الترحيب والتحية الفندقية الفورية (Welcome to the Hotel).</li>
+  <li>الترحيب والتحية الفندقية الفورية (Welcome to HENU Hotel Pyramids).</li>
   <li>طلب الجوازات/الهوية وتوثيقها فوراً.</li>
   <li>تحصيل المبلغ المطلوب نقدياً/فيزا وإصدار فاتورة الاستلام.</li>
   <li>تسليم المفتاح، وشرح مواعيد الإفطار والواي فاي وتوجيه النزيل للغرفة.</li>
   <li>المغادرة: تسلم المفتاح، مراجعة حساب الكافيه، والتأكد من الغرفة مع النظافة وتوديع النزيل.</li>
 </ol>`;
 
-// ----------------------------------------------------
-// 2. وظيفة عامل نظافة وإشراف داخلي
-// ----------------------------------------------------
 const hkAttendantJd = `
 <p><strong>المسمى الوظيفي:</strong> عامل نظافة غرف وأماكن عامة (Housekeeping Attendant)</p>
+<p><strong>الجهة المنظمة:</strong> فندق هينو الأهرامات (HENU Hotel Pyramids)</p>
 <p><strong>الهدف العام:</strong> تنظيف وتعقيم الغرف والأماكن العامة بالفندق وفق أعلى مستويات الجودة الفندقية.</p>
 <strong>المهام والمسؤوليات الرئيسية:</strong>
 <ul>
@@ -227,7 +239,7 @@ const hkAttendantJd = `
 const hkAttendantKpi = `
 <table>
   <thead>
-    <tr><th>عنصر التقييم</th><th>الدرجة</th><th>معايير التقييم القياسية</th></tr>
+    <tr><th>عنصر التقييم</th><th>الدرجة</th><th>معايير التقييم القياسية بفندق هينو</th></tr>
   </thead>
   <tbody>
     <tr><td>الانضباط والنظافة الشخصية</td><td>20</td><td>الزي النظيف والنظافة الشخصية والالتزام بالمواعيد.</td></tr>
@@ -239,7 +251,7 @@ const hkAttendantKpi = `
 </table>`;
 
 const hkAttendantSop = `
-<strong>خطة الـ 15 دقيقة لتنظيف الغرفة:</strong>
+<strong>خطة الـ 15 دقيقة لتنظيف غرفة فندق هينو:</strong>
 <ol>
   <li>طرق الباب 3 مرات والتنبيه بصوت واضح (Housekeeping).</li>
   <li>تهوية الغرفة وتفريغ القمامة.</li>
@@ -248,11 +260,9 @@ const hkAttendantSop = `
   <li>مسح الأسطح والأرضية ورش معطر جو إغلاق الباب.</li>
 </ol>`;
 
-// ----------------------------------------------------
-// 3. وظيفة مشرفة قسم الإشراف الداخلي
-// ----------------------------------------------------
 const hkSupJd = `
 <p><strong>المسمى الوظيفي:</strong> مشرفة الإشراف الداخلي (Housekeeping Supervisor)</p>
+<p><strong>الجهة المنظمة:</strong> فندق هينو الأهرامات (HENU Hotel Pyramids)</p>
 <p><strong>الهدف العام:</strong> التفتيش الدقيق على نظافة الغرف، إدارة مخزون المنظفات والمفروشات، وتدريب فريق عمال النظافة.</p>
 <strong>المهام والمسؤوليات الرئيسية:</strong>
 <ul>
@@ -264,7 +274,7 @@ const hkSupJd = `
 const hkSupKpi = `
 <table>
   <thead>
-    <tr><th>عنصر التقييم</th><th>الدرجة</th><th>معايير التقييم القياسية</th></tr>
+    <tr><th>عنصر التقييم</th><th>الدرجة</th><th>معايير التقييم القياسية بفندق هينو</th></tr>
   </thead>
   <tbody>
     <tr><td>دقة التفتيش وجودة الغرف</td><td>30</td><td>عدم خروج أي غرفة غير مكتملة النظافة.</td></tr>
@@ -276,7 +286,7 @@ const hkSupKpi = `
 </table>`;
 
 const hkSupSop = `
-<strong>قائمة التفتيش الـ 6 للغرفة الجاهزة:</strong>
+<strong>قائمة التفتيش الـ 6 للغرفة الجاهزة بفندق هينو:</strong>
 <ol>
   <li>السرير: مشدود تماماً وبدون أي تجاعيد أو بقع.</li>
   <li>الحمام: جاف وتلمع المرايا والفوط مطوية بانتظام.</li>
@@ -285,11 +295,9 @@ const hkSupSop = `
   <li>الرائحة: رائحة الغرفة زكية ونظيفة.</li>
 </ol>`;
 
-// ----------------------------------------------------
-// 4. وظيفة ويتر ومقدم خدمة المطعم والكافيه
-// ----------------------------------------------------
 const waiterJd = `
 <p><strong>المسمى الوظيفي:</strong> ويتر مطعم وكافيه (F&B Waiter)</p>
+<p><strong>الجهة المنظمة:</strong> فندق هينو الأهرامات (HENU Hotel Pyramids)</p>
 <p><strong>الهدف العام:</strong> تقديم الوجبات والمشروبات بأسلوب راقٍ وسريع، والنظافة التامة للمطعم والكافيه.</p>
 <strong>المهام والمسؤوليات الرئيسية:</strong>
 <ul>
@@ -301,7 +309,7 @@ const waiterJd = `
 const waiterKpi = `
 <table>
   <thead>
-    <tr><th>عنصر التقييم</th><th>الدرجة</th><th>معايير التقييم القياسية</th></tr>
+    <tr><th>عنصر التقييم</th><th>الدرجة</th><th>معايير التقييم القياسية بفندق هينو</th></tr>
   </thead>
   <tbody>
     <tr><td>المظهر والنظافة الشخصية</td><td>20</td><td>حلاقة الذقن، الزي النظيف والمظهر الفندقي.</td></tr>
@@ -313,7 +321,7 @@ const waiterKpi = `
 </table>`;
 
 const waiterSop = `
-<strong>خطوات تقديم الخدمة بالمطعم والكافيه:</strong>
+<strong>خطوات تقديم الخدمة بمطعم وكافيه فندق هينو:</strong>
 <ol>
   <li>الترحيب بالنزيل وإجلاسه فور دخوله.</li>
   <li>تقديم المنيو والإفطار مع المشروب الترحيبي.</li>
@@ -321,11 +329,9 @@ const waiterSop = `
   <li>المتابعة بعد 5 دقائق والتطهير الفوري للطاولة بعد مغادرة النزيل.</li>
 </ol>`;
 
-// ----------------------------------------------------
-// 5. وظيفة مشرف ومدير مطعم وكافيه
-// ----------------------------------------------------
 const fbManagerJd = `
 <p><strong>المسمى الوظيفي:</strong> مشرف ومدير مطعم وكافيه (F&B Supervisor / Manager)</p>
+<p><strong>الجهة المنظمة:</strong> فندق هينو الأهرامات (HENU Hotel Pyramids)</p>
 <p><strong>الهدف العام:</strong> التخطيط والإدارة التشغيلية والمالية للمطعم والكافيه، وضبط التكلفة (Food Cost) ونظافة الصالة.</p>
 <strong>المهام والمسؤوليات الرئيسية:</strong>
 <ul>
@@ -337,7 +343,7 @@ const fbManagerJd = `
 const fbManagerKpi = `
 <table>
   <thead>
-    <tr><th>عنصر التقييم</th><th>الدرجة</th><th>معايير التقييم القياسية</th></tr>
+    <tr><th>عنصر التقييم</th><th>الدرجة</th><th>معايير التقييم القياسية بفندق هينو</th></tr>
   </thead>
   <tbody>
     <tr><td>تحقيق أهداف مبيعات الكافيه</td><td>30</td><td>زيادة مبيعات الكافيه والمأكولات.</td></tr>
@@ -349,7 +355,7 @@ const fbManagerKpi = `
 </table>`;
 
 const fbManagerSop = `
-<strong>إجراءات إدارة الوردية بالمطعم والكافيه:</strong>
+<strong>إجراءات إدارة الوردية بمطعم وكافيه فندق هينو:</strong>
 <ol>
   <li>فحص تجهيز البوفيه ونظافة الصالة قبل مواعيد الإفطار.</li>
   <li>متابعة سرعة خروج الطلبات من المطبخ والكافيه.</li>
@@ -364,7 +370,7 @@ const tasks = [
   {
     folder: folders.reception,
     fileBase: 'الوصف_الوظيفي_والتقييم_والإجراءات_الاستقبال',
-    title: 'قسم المكاتب الأمامية — الاستقبال',
+    title: 'قسم المكاتب الأمامية — فندق هينو',
     role: 'موظف استقبال ومشرف مكاتب أمامية',
     jd: receptionJd,
     kpi: receptionKpi,
@@ -373,7 +379,7 @@ const tasks = [
   {
     folder: folders.housekeeping,
     fileBase: 'عامل_النظافة_الوصف_والتقييم_والإجراءات',
-    title: 'قسم الإشراف الداخلي — عامل نظافة',
+    title: 'قسم الإشراف الداخلي — فندق هينو',
     role: 'عامل نظافة وتجهيز الغرف (Housekeeping Attendant)',
     jd: hkAttendantJd,
     kpi: hkAttendantKpi,
@@ -382,7 +388,7 @@ const tasks = [
   {
     folder: folders.housekeeping,
     fileBase: 'مشرفة_الغرف_الوصف_والتقييم_والإجراءات',
-    title: 'قسم الإشراف الداخلي — مشرفة غرف',
+    title: 'قسم الإشراف الداخلي — فندق هينو',
     role: 'مشرفة قسم الإشراف الداخلي (Housekeeping Supervisor)',
     jd: hkSupJd,
     kpi: hkSupKpi,
@@ -391,7 +397,7 @@ const tasks = [
   {
     folder: folders.restaurant,
     fileBase: 'مقدم_الخدمة_الويتر_الوصف_والتقييم_والإجراءات',
-    title: 'قسم الأغذية والمشروبات — ويتر',
+    title: 'قسم الأغذية والمشروبات — فندق هينو',
     role: 'مقدم خدمة ويتر (F&B Waiter)',
     jd: waiterJd,
     kpi: waiterKpi,
@@ -400,7 +406,7 @@ const tasks = [
   {
     folder: folders.restaurant,
     fileBase: 'مشرف_ومدير_المطعم_الوصف_والتقييم_والإجراءات',
-    title: 'قسم الأغذية والمشروبات — إشراف وإدارة',
+    title: 'قسم الأغذية والمشروبات — فندق هينو',
     role: 'مشرف ومدير مطعم وكافيه (F&B Manager / Supervisor)',
     jd: fbManagerJd,
     kpi: fbManagerKpi,
@@ -418,4 +424,4 @@ tasks.forEach(t => {
   convertHtmlToPdf(htmlPath, pdfPath);
 });
 
-console.log('\n✨ ALL HR & SOP PDF DOCUMENTS GENERATED AND ORGANIZED SUCCESSFULLY!');
+console.log('\n✨ ALL HENU HOTEL HR & SOP PDF DOCUMENTS UPDATED WITH BRAND LOGO SUCCESSFULLY!');

@@ -4,7 +4,14 @@ const { execSync } = require('child_process');
 
 const baseDir = path.join(__dirname);
 
-// إنشاء المجلدات الفرعية
+// قراءة شعار الفندق الرسمي وتحويله لـ Base64
+const logoPath = path.join('d:', 'Henu', '02_Contracts_and_Legal', 'شعار_الفندق_عقود.jpg');
+let logoDataUrl = '';
+if (fs.existsSync(logoPath)) {
+  const logoBase64 = fs.readFileSync(logoPath).toString('base64');
+  logoDataUrl = `data:image/jpeg;base64,${logoBase64}`;
+}
+
 const folderTraining = path.join(baseDir, '05_برامج_التدريب_السهلة');
 const folderChecklists = path.join(baseDir, '06_استمارات_التعريف_والفحص');
 
@@ -27,40 +34,39 @@ function convertHtmlToPdf(htmlPath, pdfPath) {
   }
 }
 
-// ----------------------------------------------------
-// 1. خطة التدريب 3 أيام لكل محطة عمل
-// ----------------------------------------------------
+// 1. خطة التدريب 3 أيام
 const trainingHtml = `<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>خطة التدريب الميداني (3 أيام لكل محطة عمل) — فندق نزلة السمان</title>
+  <title>خطة التدريب الميداني (3 أيام لكل محطة عمل) — فندق هينو الأهرامات</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
-    @page { size: A4; margin: 12mm 15mm; }
-    body { font-family: 'Tajawal', Arial, sans-serif; color: #1a202c; line-height: 1.6; margin: 0; padding: 10px; direction: rtl; }
-    .header { text-align: center; border-bottom: 3px double #1F4E78; padding-bottom: 12px; margin-bottom: 20px; }
-    .hotel-title { font-size: 15pt; font-weight: 800; color: #1F4E78; }
-    .doc-title { font-size: 19pt; font-weight: 800; color: #D9822B; margin-top: 4px; }
-    .station-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-right: 5px solid #1F4E78; border-radius: 6px; padding: 15px; margin-bottom: 20px; }
-    .day-title { font-size: 12pt; font-weight: 700; color: #D9822B; margin-top: 10px; margin-bottom: 4px; }
-    ul { padding-right: 20px; margin: 4px 0; }
-    li { margin-bottom: 4px; font-size: 10pt; }
-    .badge { display: inline-block; background: #1F4E78; color: #fff; padding: 3px 10px; border-radius: 12px; font-size: 10pt; font-weight: bold; }
+    @page { size: A4; margin: 10mm 15mm; }
+    body { font-family: 'Tajawal', Arial, sans-serif; color: #1a202c; line-height: 1.5; margin: 0; padding: 5px; direction: rtl; }
+    .header { text-align: center; border-bottom: 2px double #b45309; padding-bottom: 10px; margin-bottom: 15px; }
+    .brand-logo { max-width: 90px; height: auto; border-radius: 6px; margin-bottom: 4px; }
+    .hotel-title-en { font-size: 13pt; font-weight: 800; color: #78350f; letter-spacing: 2px; }
+    .hotel-title-ar { font-size: 12pt; font-weight: 700; color: #92400e; }
+    .doc-title { font-size: 18pt; font-weight: 800; color: #1F4E78; margin-top: 4px; }
+    .station-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-right: 5px solid #1F4E78; border-radius: 6px; padding: 12px; margin-bottom: 15px; }
+    .day-title { font-size: 11pt; font-weight: 700; color: #D9822B; margin-top: 8px; margin-bottom: 3px; }
+    ul { padding-right: 20px; margin: 3px 0; }
+    li { margin-bottom: 3px; font-size: 9.5pt; }
+    .badge { display: inline-block; background: #1F4E78; color: #fff; padding: 3px 10px; border-radius: 12px; font-size: 9.5pt; font-weight: bold; }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <div class="hotel-title">فندق نزلة السمان (25 غرفة بوتيك)</div>
+    ${logoDataUrl ? `<img src="${logoDataUrl}" alt="HENU Hotel Logo" class="brand-logo">` : ''}
+    <div class="hotel-title-en">H E N U  H O T E L  P Y R A M I D S</div>
+    <div class="hotel-title-ar">فندق هينو الأهرامات — نزلة السمان (25 غرفة)</div>
     <div class="doc-title">برنامج التدريب الميداني السريع (3 أيام لكل محطة عمل)</div>
-    <div style="font-size: 10pt; color: #718096; margin-top: 4px;">دليل تدريب الموظفين الجدد والمتدربين على المحطات الأساسية (الاستقبال، الإشراف الداخلي، والخدمة)</div>
   </div>
 
-  <!-- محطة الاستقبال -->
   <div class="station-card">
     <span class="badge">المحطة الأولى: قسم الاستقبال والمكاتب الأمامية (Reception Station)</span>
-    
     <div class="day-title">🗓️ اليوم الأول: الترحيب، النظام، والتسكين الأساسي (Check-in Basics)</div>
     <ul>
       <li>التعرف على بروتوكول الترحيب الفندقي والابتسامة (Welcome Greeting).</li>
@@ -83,10 +89,8 @@ const trainingHtml = `<!DOCTYPE html>
     </ul>
   </div>
 
-  <!-- محطة الإشراف الداخلي -->
   <div class="station-card" style="border-right-color: #38A169;">
     <span class="badge" style="background: #38A169;">المحطة الثانية: قسم الإشراف الداخلي والغرف (Housekeeping Station)</span>
-    
     <div class="day-title">🗓️ اليوم الأول: السلامة، استخدام المواد، وسحب المفروشات</div>
     <ul>
       <li>التعرف على المواد المنظفة وأدوات التعقيم وتجهيز عربة النظافة (Housekeeping Trolley).</li>
@@ -97,7 +101,7 @@ const trainingHtml = `<!DOCTYPE html>
     <div class="day-title">🗓️ اليوم الثاني: خطة الـ 15 دقيقة لتنظيف الغرفة والحمام</div>
     <ul>
       <li>تدريب عملي على تركيب وطوي الملاءات والألحفة الفندقية بأسلوب مشدود ومضبوط.</li>
-      <li>خطوات غسيل وتعقيم الحمام (المرحاض، الدش، الأحواض، والمرايا) وتزويد الفوط والمستلزمات.</li>
+      <li>خطوات غسيل وتعقيم الحمام (المرحاض، الدش، الأحواض، والمرايا) وتزويد الفوط والصابون.</li>
       <li>مسح الغبار من التلفزيون والأرضيات، والتفتيش الشخصي ورش معطر الجو.</li>
     </ul>
 
@@ -109,10 +113,8 @@ const trainingHtml = `<!DOCTYPE html>
     </ul>
   </div>
 
-  <!-- محطة المطعم والكافيه -->
   <div class="station-card" style="border-right-color: #D9822B;">
     <span class="badge" style="background: #D9822B;">المحطة الثالثة: قسم الخدمة والمطعم والكافيه (F&B Service Station)</span>
-    
     <div class="day-title">🗓️ اليوم الأول: النظافة الشخصية، الترحيب، وتجهيز الصالة</div>
     <ul>
       <li>قواعد المظهر الفندقي، حلاقة الذقن، نظافة اليدين، والزي الرسمي.</li>
@@ -138,32 +140,32 @@ const trainingHtml = `<!DOCTYPE html>
 </body>
 </html>`;
 
-// ----------------------------------------------------
-// 2. نموذج التعريف والتهيئة للموظف الجديد (Orientation Sheet)
-// ----------------------------------------------------
+// 2. نموذج التعريف
 const orientationHtml = `<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>نموذج التعريف والتهيئة للموظف الجديد (Employee Orientation Sheet)</title>
+  <title>نموذج التعريف والتهيئة للموظف الجديد — فندق هينو الأهرامات</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
-    @page { size: A4; margin: 12mm 15mm; }
-    body { font-family: 'Tajawal', Arial, sans-serif; color: #1a202c; line-height: 1.5; margin: 0; padding: 10px; direction: rtl; }
-    .header { text-align: center; border-bottom: 2px solid #1F4E78; padding-bottom: 10px; margin-bottom: 15px; }
-    .title { font-size: 18pt; font-weight: 800; color: #1F4E78; }
-    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 9.5pt; }
-    th, td { border: 1px solid #CBD5E0; padding: 8px; text-align: right; }
+    @page { size: A4; margin: 10mm 12mm; }
+    body { font-family: 'Tajawal', Arial, sans-serif; color: #1a202c; line-height: 1.4; margin: 0; padding: 5px; direction: rtl; }
+    .header { text-align: center; border-bottom: 2px double #b45309; padding-bottom: 8px; margin-bottom: 12px; }
+    .brand-logo { max-width: 85px; height: auto; border-radius: 4px; margin-bottom: 2px; }
+    .title { font-size: 16pt; font-weight: 800; color: #1F4E78; }
+    table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 9pt; }
+    th, td { border: 1px solid #CBD5E0; padding: 6px; text-align: right; }
     th { background-color: #1F4E78; color: white; text-align: center; }
     .check-box { width: 20px; text-align: center; font-weight: bold; }
-    .sig-table { margin-top: 20px; width: 100%; }
-    .sig-table td { width: 50%; vertical-align: top; background: #F8FAFC; padding: 10px; }
+    .sig-table { margin-top: 15px; width: 100%; }
+    .sig-table td { width: 50%; vertical-align: top; background: #F8FAFC; padding: 8px; }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <div style="font-size: 14pt; font-weight: bold; color: #D9822B;">فندق نزلة السمان (25 غرفة)</div>
+    ${logoDataUrl ? `<img src="${logoDataUrl}" alt="HENU Hotel Logo" class="brand-logo">` : ''}
+    <div style="font-size: 11pt; font-weight: bold; color: #78350f;">H E N U  H O T E L  P Y R A M I D S</div>
     <div class="title">استمارة تعريف وتهيئة الموظف الجديد (Employee Orientation Sheet)</div>
   </div>
 
@@ -178,7 +180,7 @@ const orientationHtml = `<!DOCTYPE html>
     </tr>
   </table>
 
-  <h3 style="color: #1F4E78; font-size: 11pt; margin-top: 15px;">📋 قائمة مراجعة التعريف اليوم الأول (Orientation Checklist):</h3>
+  <h3 style="color: #1F4E78; font-size: 10.5pt; margin-top: 10px; margin-bottom: 5px;">📋 قائمة مراجعة التعريف اليوم الأول:</h3>
 
   <table>
     <thead>
@@ -252,36 +254,35 @@ const orientationHtml = `<!DOCTYPE html>
 </body>
 </html>`;
 
-// ----------------------------------------------------
-// 3. قوائم الفحص والتفتيش Checklists لجميع الأقسام
-// ----------------------------------------------------
+// 3. قوائم الفحص Checklists
 const checklistsHtml = `<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>قوائم الفحص والتفتيش اليومي (Daily Checklists) — فندق نزلة السمان</title>
+  <title>قوائم الفحص والتفتيش اليومي — فندق هينو الأهرامات</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
     @page { size: A4; margin: 10mm 12mm; }
-    body { font-family: 'Tajawal', Arial, sans-serif; color: #1a202c; line-height: 1.4; margin: 0; padding: 10px; direction: rtl; }
-    .header { text-align: center; border-bottom: 2px solid #1F4E78; padding-bottom: 8px; margin-bottom: 12px; }
-    .title { font-size: 17pt; font-weight: 800; color: #1F4E78; }
-    .section-box { border: 1px solid #CBD5E0; border-radius: 6px; padding: 10px; margin-bottom: 12px; background: #FFFFFF; }
-    .box-title { font-size: 11pt; font-weight: 700; color: #FFFFFF; background: #1F4E78; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
-    table { width: 100%; border-collapse: collapse; font-size: 9pt; }
-    th, td { border: 1px solid #E2E8F0; padding: 5px 8px; text-align: right; }
+    body { font-family: 'Tajawal', Arial, sans-serif; color: #1a202c; line-height: 1.4; margin: 0; padding: 5px; direction: rtl; }
+    .header { text-align: center; border-bottom: 2px double #b45309; padding-bottom: 6px; margin-bottom: 10px; }
+    .brand-logo { max-width: 80px; height: auto; border-radius: 4px; }
+    .title { font-size: 16pt; font-weight: 800; color: #1F4E78; }
+    .section-box { border: 1px solid #CBD5E0; border-radius: 6px; padding: 8px; margin-bottom: 10px; background: #FFFFFF; }
+    .box-title { font-size: 10.5pt; font-weight: 700; color: #FFFFFF; background: #1F4E78; padding: 4px 10px; border-radius: 4px; margin-bottom: 6px; }
+    table { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+    th, td { border: 1px solid #E2E8F0; padding: 4px 6px; text-align: right; }
     th { background: #EDF2F7; text-align: center; color: #2D3748; }
-    .chk { text-align: center; width: 30px; font-weight: bold; }
+    .chk { text-align: center; width: 25px; font-weight: bold; }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <div style="font-size: 13pt; font-weight: bold; color: #D9822B;">فندق نزلة السمان (25 غرفة)</div>
+    ${logoDataUrl ? `<img src="${logoDataUrl}" alt="HENU Hotel Logo" class="brand-logo">` : ''}
+    <div style="font-size: 10pt; font-weight: bold; color: #78350f;">H E N U  H O T E L  P Y R A M I D S</div>
     <div class="title">قوائم الفحص والتفتيش اليومي (Daily Operational Checklists)</div>
   </div>
 
-  <!-- 1. قائمة فحص الاستقبال -->
   <div class="section-box">
     <div class="box-title">1️⃣ قائمة فحص وتسليم وردية الاستقبال (Front Office Shift Handover Checklist)</div>
     <table>
@@ -298,7 +299,6 @@ const checklistsHtml = `<!DOCTYPE html>
     </table>
   </div>
 
-  <!-- 2. قائمة فحص الغرف والحمامات -->
   <div class="section-box">
     <div class="box-title" style="background: #38A169;">2️⃣ قائمة فحص وتفتيش نظافة الغرفة والحمام (Housekeeping Room Checklist)</div>
     <table>
@@ -316,7 +316,6 @@ const checklistsHtml = `<!DOCTYPE html>
     </table>
   </div>
 
-  <!-- 3. قائمة فحص المطعم والكافيه -->
   <div class="section-box">
     <div class="box-title" style="background: #D9822B;">3️⃣ قائمة فحص افتتاح واغلاق المطعم والكافيه (F&B Service Checklist)</div>
     <table>
@@ -336,9 +335,6 @@ const checklistsHtml = `<!DOCTYPE html>
 </body>
 </html>`;
 
-// ----------------------------------------------------
-// حفظ الملفات وتحويلها إلى PDF
-// ----------------------------------------------------
 const docs = [
   {
     htmlPath: path.join(folderTraining, 'خطة_التدريب_الـ3_أيام_لجميع_المحطات.html'),
@@ -363,4 +359,4 @@ docs.forEach(doc => {
   convertHtmlToPdf(doc.htmlPath, doc.pdfPath);
 });
 
-console.log('\n✨ ALL TRAINING PLANS, ORIENTATION SHEETS & CHECKLISTS GENERATED SUCCESSFULLY!');
+console.log('\n✨ ALL TRAINING PLANS, ORIENTATION SHEETS & CHECKLISTS UPDATED WITH BRAND LOGO SUCCESSFULLY!');
