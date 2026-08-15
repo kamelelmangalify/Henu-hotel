@@ -153,92 +153,97 @@ async function createPayrollWorkbook() {
   }
 
   // =========================================================
-  // 2. كشف الحضور والانصراف المطبوع العرضي (Landscape A4 - 20 صفاً)
+  // 2. كشف الحضور والانصراف الأسبوعي بالتوقيعات (A4 Landscape)
   // =========================================================
-  const attSheet = workbook.addWorksheet('كشف حضور وانصراف شهري', {
+  const weeklyAttSheet = workbook.addWorksheet('حضور أسبوعي بالتوقيعات', {
     views: [{ rightToLeft: true }],
-    pageSetup: {
-      paperSize: 9,
-      orientation: 'landscape', // 👈 طباعة عرضية!
-      fitToPage: true,
-      fitToWidth: 1,
-      fitToHeight: 1
-    }
+    pageSetup: { paperSize: 9, orientation: 'landscape', fitToPage: true, fitToWidth: 1, fitToHeight: 1 }
   });
 
-  attSheet.mergeCells('A1:AK1');
-  const attTitle = attSheet.getCell('A1');
-  attTitle.value = '🏨 فندق هينو الأهرامات — كشف الحضور والانصراف والدوام الشهري (قابل للطباعة العرضية)';
-  attTitle.font = { name: 'Arial', size: 14, bold: true, color: { argb: 'FFFFFFFF' } };
-  attTitle.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1F4E78' } };
-  attTitle.alignment = { horizontal: 'center', vertical: 'middle' };
+  weeklyAttSheet.mergeCells('A1:AJ1');
+  const wAttTitle = weeklyAttSheet.getCell('A1');
+  wAttTitle.value = '🏨 فندق هينو الأهرامات — كشف الحضور والانصراف والدوام الأسبوعي بتوقيع الموظفين (قابل للطباعة العرضية)';
+  wAttTitle.font = { name: 'Arial', size: 14, bold: true, color: { argb: 'FFFFFFFF' } };
+  wAttTitle.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1F4E78' } };
+  wAttTitle.alignment = { horizontal: 'center', vertical: 'middle' };
 
-  attSheet.mergeCells('A2:D2');
-  attSheet.mergeCells('E2:Q2');
-  attSheet.mergeCells('R2:AD2');
-  attSheet.mergeCells('AE2:AK2');
+  weeklyAttSheet.mergeCells('A2:D2');
+  weeklyAttSheet.mergeCells('E2:L2');
+  weeklyAttSheet.mergeCells('M2:AB2');
+  weeklyAttSheet.mergeCells('AC2:AJ2');
 
-  const ac1 = attSheet.getCell('A2'); ac1.value = 'الشهر: ................. 2026م';
-  const ac2 = attSheet.getCell('E2'); ac2.value = 'القسم: ...........................................';
-  const ac3 = attSheet.getCell('R2'); ac3.value = 'الرموز: (ح: حضور | غ: غياب | ج: إجازة | خ: تأخير)';
-  const ac4 = attSheet.getCell('AE2'); ac4.value = 'اعتماد المدير: ..............................';
+  const wc1 = weeklyAttSheet.getCell('A2'); wc1.value = 'الأسبوع رقم: [ &nbsp; ] (من ..... إلى ..... / 2026م)';
+  const wc2 = weeklyAttSheet.getCell('E2'); wc2.value = 'القسم: ...........................................';
+  const wc3 = weeklyAttSheet.getCell('M2'); wc3.value = 'تعليمات: يوقع الموظف بالحضور والانصراف يومياً أمام مشرف الوردية';
+  const wc4 = weeklyAttSheet.getCell('AC2'); wc4.value = 'اعتماد المشرف: ..............................';
 
-  [ac1, ac2, ac3, ac4].forEach(cell => {
+  [wc1, wc2, wc3, wc4].forEach(cell => {
     cell.font = { name: 'Arial', size: 9, bold: true, color: { argb: 'FF1F4E78' } };
     cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'F2F4F8' } };
     cell.alignment = { horizontal: 'center', vertical: 'middle' };
     cell.border = { top: { style: 'thin' }, bottom: { style: 'thin' }, left: { style: 'thin' }, right: { style: 'thin' } };
   });
 
-  attSheet.getRow(2).height = 24;
-  attSheet.addRow([]);
+  weeklyAttSheet.getRow(2).height = 24;
 
-  const attHeaders = ['م', 'كود', 'اسم الموظف', 'القسم / الوظيفة'];
-  for (let day = 1; day <= 31; day++) attHeaders.push(`${day}`);
-  attHeaders.push('حضور', 'غياب', 'إجازة', 'تأخير', 'ملاحظات / التوقيع');
+  weeklyAttSheet.mergeCells(3, 1, 4, 1); weeklyAttSheet.getCell(3, 1).value = 'م';
+  weeklyAttSheet.mergeCells(3, 2, 4, 2); weeklyAttSheet.getCell(3, 2).value = 'كود';
+  weeklyAttSheet.mergeCells(3, 3, 4, 3); weeklyAttSheet.getCell(3, 3).value = 'اسم الموظف';
+  weeklyAttSheet.mergeCells(3, 4, 4, 4); weeklyAttSheet.getCell(3, 4).value = 'القسم / الوظيفة';
 
-  const attHRow = attSheet.addRow(attHeaders);
-  attHRow.height = 26;
-  attHRow.eachCell(cell => {
-    cell.font = { name: 'Arial', size: 8.5, bold: true, color: { argb: 'FFFFFFFF' } };
-    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF2F5597' } };
-    cell.alignment = { horizontal: 'center', vertical: 'middle' };
-    cell.border = {
-      top: { style: 'thin', color: { argb: 'CCCCCC' } },
-      bottom: { style: 'medium', color: { argb: '1F4E78' } },
-      left: { style: 'thin', color: { argb: 'CCCCCC' } },
-      right: { style: 'thin', color: { argb: 'CCCCCC' } }
-    };
+  const daysOfWeek = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+  let startCol = 5;
+  daysOfWeek.forEach(dayName => {
+    const endCol = startCol + 3;
+    weeklyAttSheet.mergeCells(3, startCol, 3, endCol);
+    const dayCell = weeklyAttSheet.getCell(3, startCol);
+    dayCell.value = dayName;
+    dayCell.font = { name: 'Arial', size: 9.5, bold: true, color: { argb: 'FFFFFFFF' } };
+    dayCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF2F5597' } };
+    dayCell.alignment = { horizontal: 'center', vertical: 'middle' };
+
+    weeklyAttSheet.getCell(4, startCol).value = 'حضور';
+    weeklyAttSheet.getCell(4, startCol + 1).value = 'توقيع';
+    weeklyAttSheet.getCell(4, startCol + 2).value = 'انصراف';
+    weeklyAttSheet.getCell(4, startCol + 3).value = 'توقيع';
+
+    startCol += 4;
   });
 
-  // إضافة 20 صفاً متناسقة تماماً للطباعة العرضية
-  const attStartRowIndex = 5;
+  weeklyAttSheet.mergeCells(3, 33, 4, 33); weeklyAttSheet.getCell(3, 33).value = 'أيام الحضور';
+  weeklyAttSheet.mergeCells(3, 34, 4, 36); weeklyAttSheet.getCell(3, 34).value = 'ملاحظات المشرف والتفريغ';
+
+  [3, 4].forEach(rIdx => {
+    const r = weeklyAttSheet.getRow(rIdx);
+    r.height = 22;
+    r.eachCell(cell => {
+      cell.font = { name: 'Arial', size: 8.5, bold: true, color: { argb: 'FFFFFFFF' } };
+      cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1F4E78' } };
+      cell.alignment = { horizontal: 'center', vertical: 'middle' };
+      cell.border = {
+        top: { style: 'thin', color: { argb: 'CCCCCC' } },
+        bottom: { style: 'medium', color: { argb: '1F4E78' } },
+        left: { style: 'thin', color: { argb: 'CCCCCC' } },
+        right: { style: 'thin', color: { argb: 'CCCCCC' } }
+      };
+    });
+  });
+
   for (let i = 0; i < 20; i++) {
     const emp = employees[i] || { id: '', name: '', role: '' };
-    const r = attStartRowIndex + i;
-
     const rowValues = [i + 1, emp.id, emp.name, emp.role];
-
-    for (let day = 1; day <= 31; day++) {
-      let code = 'ح';
-      if (day % 7 === 0) code = 'ج';
-      else if (i % 5 === 2 && day === 15) code = 'غ';
-      else if (i % 4 === 1 && day === 22) code = 'خ';
-      rowValues.push(code);
+    for (let day = 0; day < 7; day++) {
+      rowValues.push('08:00 ص', '', '04:00 م', '');
     }
-
-    rowValues.push({ formula: `COUNTIF(E${r}:AI${r}, "ح")` });
-    rowValues.push({ formula: `COUNTIF(E${r}:AI${r}, "غ")` });
-    rowValues.push({ formula: `COUNTIF(E${r}:AI${r}, "ج")` });
-    rowValues.push({ formula: `COUNTIF(E${r}:AI${r}, "خ")` });
+    rowValues.push(7);
     rowValues.push('');
 
-    const row = attSheet.addRow(rowValues);
-    row.height = 20;
+    const row = weeklyAttSheet.addRow(rowValues);
+    row.height = 22;
     const bg = i % 2 === 0 ? 'F9FAFB' : 'FFFFFF';
 
     row.eachCell((cell, colNum) => {
-      cell.font = { name: 'Arial', size: 8.5 };
+      cell.font = { name: 'Arial', size: 8 };
       cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: bg } };
       cell.alignment = { horizontal: colNum <= 4 ? 'right' : 'center', vertical: 'middle' };
       cell.border = {
@@ -248,33 +253,20 @@ async function createPayrollWorkbook() {
         right: { style: 'thin', color: { argb: 'E5E7EB' } }
       };
 
-      if (colNum >= 5 && colNum <= 35) {
-        if (cell.value === 'ح') cell.font = { name: 'Arial', size: 8.5, bold: true, color: { argb: 'FF276749' } };
-        if (cell.value === 'غ') {
-          cell.font = { name: 'Arial', size: 8.5, bold: true, color: { argb: 'FFC53030' } };
-          cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF5F5' } };
-        }
-        if (cell.value === 'ج') cell.font = { name: 'Arial', size: 8.5, bold: true, color: { argb: 'FFD97706' } };
-        if (cell.value === 'خ') cell.font = { name: 'Arial', size: 8.5, bold: true, color: { argb: 'FFDD6B20' } };
-      }
-
-      if (colNum >= 36 && colNum <= 39) {
+      if (colNum === 33) {
         cell.font = { name: 'Arial', size: 9, bold: true, color: { argb: 'FF1F4E78' } };
         cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'EDF2F7' } };
       }
     });
   }
 
-  attSheet.getColumn(1).width = 4.5;
-  attSheet.getColumn(2).width = 10;
-  attSheet.getColumn(3).width = 20;
-  attSheet.getColumn(4).width = 20;
-  for (let c = 5; c <= 35; c++) attSheet.getColumn(c).width = 4.2;
-  attSheet.getColumn(36).width = 7.5;
-  attSheet.getColumn(37).width = 7.5;
-  attSheet.getColumn(38).width = 7.5;
-  attSheet.getColumn(39).width = 7.5;
-  attSheet.getColumn(40).width = 16;
+  weeklyAttSheet.getColumn(1).width = 4;
+  weeklyAttSheet.getColumn(2).width = 9;
+  weeklyAttSheet.getColumn(3).width = 18;
+  weeklyAttSheet.getColumn(4).width = 18;
+  for (let c = 5; c <= 32; c++) weeklyAttSheet.getColumn(c).width = 6.2;
+  weeklyAttSheet.getColumn(33).width = 9;
+  weeklyAttSheet.getColumn(34).width = 18;
 
   // =========================================================
   // 3. الشيت المطبوع الميداني للـ KPIs
@@ -584,7 +576,7 @@ async function createPayrollWorkbook() {
   let outputPath = path.join(__dirname, 'جدول_رواتب_وتقييم_الموظفين_الشهري.xlsx');
   try {
     await workbook.xlsx.writeFile(outputPath);
-    console.log(`Master Payroll Workbook with Attendance created at: ${outputPath}`);
+    console.log(`Master Payroll Workbook with Weekly Signature Attendance created at: ${outputPath}`);
   } catch (err) {
     if (err.code === 'EBUSY') {
       outputPath = path.join(__dirname, 'جدول_رواتب_وتقييم_30_موظف_الشهري.xlsx');
