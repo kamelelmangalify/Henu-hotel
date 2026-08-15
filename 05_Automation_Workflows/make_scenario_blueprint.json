@@ -1,0 +1,55 @@
+{
+  "name": "Antigravity AI Master Orchestrator — Make.com Scenario",
+  "description": "سيناريو Make.com المجاني لتلقي رسائل الواتساب، توجيه المعاملات بالذكاء الاصطناعي، وإرسال المواعيد والتذكيرات",
+  "modules": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebhook",
+      "version": 1,
+      "parameters": {
+        "hook": "whatsapp_incoming"
+      },
+      "notes": "استقبال إشعارات وتحديات الواتساب من Meta"
+    },
+    {
+      "id": 2,
+      "module": "gateway:WebhookResponse",
+      "version": 1,
+      "parameters": {
+        "status": 200,
+        "body": "={{query['hub.challenge']}}"
+      },
+      "notes": "الرد التلقائي للتأكيد على Meta Webhook"
+    },
+    {
+      "id": 3,
+      "module": "http:ActionMakeRequest",
+      "version": 3,
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+        "method": "POST",
+        "headers": [
+          { "name": "Content-Type", "value": "application/json" }
+        ],
+        "qs": [
+          { "name": "key", "value": "YOUR_GEMINI_API_KEY" }
+        ]
+      },
+      "notes": "تحليل النية بالذكاء الاصطناعي وتوجيه المحاسب/القانوني/المواعيد"
+    },
+    {
+      "id": 4,
+      "module": "http:ActionMakeRequest",
+      "version": 3,
+      "parameters": {
+        "url": "https://graph.facebook.com/v18.0/YOUR_WA_PHONE_NUMBER_ID/messages",
+        "method": "POST",
+        "headers": [
+          { "name": "Authorization", "value": "Bearer YOUR_META_ACCESS_TOKEN" },
+          { "name": "Content-Type", "value": "application/json" }
+        ]
+      },
+      "notes": "إرسال الرد الفوري المنسق على الواتساب"
+    }
+  ]
+}
