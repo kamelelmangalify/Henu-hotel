@@ -1,0 +1,655 @@
+{
+  "rooms": [
+    {
+      "id": "101",
+      "floor": "الدور الأول",
+      "type": "دابل شبك",
+      "beds": "1 سرير دابل",
+      "price": 1200,
+      "status": "clean",
+      "guest": null,
+      "notes": "شباك / شبك"
+    },
+    {
+      "id": "102",
+      "floor": "الدور الأول",
+      "type": "سرير كينج",
+      "beds": "1 سرير كينج",
+      "price": 1400,
+      "status": "occupied",
+      "guest": {
+        "name": "أحمد محمود",
+        "phone": "01012345678",
+        "checkin": "2026-08-14",
+        "checkout": "2026-08-17",
+        "paid": 2800,
+        "total": 4200
+      },
+      "notes": "سكن Staf / سرير كينج"
+    },
+    {
+      "id": "103",
+      "floor": "الدور الأول",
+      "type": "سويت فندقي",
+      "beds": "1 سرير كينج + صالة",
+      "price": 2500,
+      "status": "occupied",
+      "guest": {
+        "name": "د. طارق علي",
+        "phone": "01122334455",
+        "checkin": "2026-08-15",
+        "checkout": "2026-08-18",
+        "paid": 7500,
+        "total": 7500
+      },
+      "notes": "سويت فندقي فاخر"
+    },
+    {
+      "id": "104",
+      "floor": "الدور الأول",
+      "type": "كينج شبك",
+      "beds": "1 سرير كينج",
+      "price": 1500,
+      "status": "clean",
+      "guest": null,
+      "notes": "سرير كينج شبك"
+    },
+    {
+      "id": "201",
+      "floor": "الدور الثاني",
+      "type": "سنجل بلكونه",
+      "beds": "1 سرير سنجل",
+      "price": 900,
+      "status": "clean",
+      "guest": null,
+      "notes": "إطلالة بلكونة"
+    },
+    {
+      "id": "202",
+      "floor": "الدور الثاني",
+      "type": "دابل بلكونه",
+      "beds": "1 سرير دابل",
+      "price": 1300,
+      "status": "occupied",
+      "guest": {
+        "name": "جون سميث (John Smith)",
+        "phone": "+447911123456",
+        "checkin": "2026-08-12",
+        "checkout": "2026-08-16",
+        "paid": 5200,
+        "total": 5200
+      },
+      "notes": "نزيل أجنبي - بلكونة"
+    },
+    {
+      "id": "203",
+      "floor": "الدور الثاني",
+      "type": "دابل",
+      "beds": "1 سرير دابل",
+      "price": 1200,
+      "status": "cleaning",
+      "guest": null,
+      "notes": "جاري تغيير المفروشات"
+    },
+    {
+      "id": "204",
+      "floor": "الدور الثاني",
+      "type": "سرير كينج",
+      "beds": "1 سرير كينج",
+      "price": 1500,
+      "status": "occupied",
+      "guest": {
+        "name": "سارة إبراهيم",
+        "phone": "01299887766",
+        "checkin": "2026-08-15",
+        "checkout": "2026-08-19",
+        "paid": 3000,
+        "total": 6000
+      },
+      "notes": "سرير كينج"
+    },
+    {
+      "id": "205",
+      "floor": "الدور الثاني",
+      "type": "دابل",
+      "beds": "1 سرير دابل",
+      "price": 1200,
+      "status": "maintenance",
+      "guest": null,
+      "notes": "التكييف يحتاج فحص فريون"
+    },
+    {
+      "id": "206",
+      "floor": "الدور الثاني",
+      "type": "ترابل شبك جانبي",
+      "beds": "3 سراير سنجل",
+      "price": 1800,
+      "status": "clean",
+      "guest": null,
+      "notes": "مناسبة للعائلات"
+    },
+    {
+      "id": "207",
+      "floor": "الدور الثاني",
+      "type": "دابل شبك جانبي",
+      "beds": "1 سرير دابل",
+      "price": 1250,
+      "status": "clean",
+      "guest": null,
+      "notes": "شبك جانبي"
+    },
+    {
+      "id": "301",
+      "floor": "الدور الثالث",
+      "type": "سنجل بلكونه",
+      "beds": "1 سرير سنجل",
+      "price": 950,
+      "status": "clean",
+      "guest": null,
+      "notes": "بلكونة هادئة"
+    },
+    {
+      "id": "302",
+      "floor": "الدور الثالث",
+      "type": "دابل بلكونه",
+      "beds": "1 سرير دابل",
+      "price": 1350,
+      "status": "occupied",
+      "guest": {
+        "name": "م. خالد عبد الرحمن",
+        "phone": "01005544332",
+        "checkin": "2026-08-14",
+        "checkout": "2026-08-18",
+        "paid": 2700,
+        "total": 5400
+      },
+      "notes": "بلكونة دور ثالث"
+    },
+    {
+      "id": "303",
+      "floor": "الدور الثالث",
+      "type": "سرير كينج",
+      "beds": "1 سرير كينج",
+      "price": 1550,
+      "status": "clean",
+      "guest": null,
+      "notes": "سرير كينج"
+    },
+    {
+      "id": "304",
+      "floor": "الدور الثالث",
+      "type": "سرير كينج",
+      "beds": "1 سرير كينج",
+      "price": 1550,
+      "status": "occupied",
+      "guest": {
+        "name": "أليكسيس دوفال",
+        "phone": "+33612345678",
+        "checkin": "2026-08-15",
+        "checkout": "2026-08-20",
+        "paid": 7750,
+        "total": 7750
+      },
+      "notes": "سائح فرنسي"
+    },
+    {
+      "id": "305",
+      "floor": "الدور الثالث",
+      "type": "سرير كينج",
+      "beds": "1 سرير كينج",
+      "price": 1550,
+      "status": "clean",
+      "guest": null,
+      "notes": "جاهزة للتسكين"
+    },
+    {
+      "id": "306",
+      "floor": "الدور الثالث",
+      "type": "كينج بلكونه جانبي",
+      "beds": "1 سرير كينج",
+      "price": 1650,
+      "status": "cleaning",
+      "guest": null,
+      "notes": "تطهير وتعقيم الحمام"
+    },
+    {
+      "id": "307",
+      "floor": "الدور الثالث",
+      "type": "دبل شبك جانبي",
+      "beds": "1 سرير دابل",
+      "price": 1300,
+      "status": "clean",
+      "guest": null,
+      "notes": "شبك جانبي"
+    },
+    {
+      "id": "401",
+      "floor": "الدور الرابع (الروف)",
+      "type": "سنجل بلكونه",
+      "beds": "1 سرير سنجل",
+      "price": 1000,
+      "status": "clean",
+      "guest": null,
+      "notes": "إطلالة علوية"
+    },
+    {
+      "id": "402",
+      "floor": "الدور الرابع (الروف)",
+      "type": "دابل بلكونه",
+      "beds": "1 سرير دابل",
+      "price": 1400,
+      "status": "clean",
+      "guest": null,
+      "notes": "بلكونة واسعة"
+    },
+    {
+      "id": "403",
+      "floor": "الدور الرابع (الروف)",
+      "type": "سرير كينج - روف أهرامات",
+      "beds": "1 سرير كينج",
+      "price": 2000,
+      "status": "occupied",
+      "guest": {
+        "name": "عمر الفاروق",
+        "phone": "01111223344",
+        "checkin": "2026-08-13",
+        "checkout": "2026-08-17",
+        "paid": 8000,
+        "total": 8000
+      },
+      "notes": "إطلالة مباشرة على الأهرامات"
+    },
+    {
+      "id": "404",
+      "floor": "الدور الرابع (الروف)",
+      "type": "سرير كينج - روف أهرامات",
+      "beds": "1 سرير كينج",
+      "price": 2000,
+      "status": "occupied",
+      "guest": {
+        "name": "ماريا كوستاس",
+        "phone": "+30691234567",
+        "checkin": "2026-08-15",
+        "checkout": "2026-08-19",
+        "paid": 4000,
+        "total": 8000
+      },
+      "notes": "إطلالة الأهرامات المباشرة"
+    },
+    {
+      "id": "405",
+      "floor": "الدور الرابع (الروف)",
+      "type": "دابل",
+      "beds": "1 سرير دابل",
+      "price": 1350,
+      "status": "clean",
+      "guest": null,
+      "notes": "جاهزة للتسكين"
+    },
+    {
+      "id": "406",
+      "floor": "الدور الرابع (الروف)",
+      "type": "ترابل شبك جانبي",
+      "beds": "3 سراير سنجل",
+      "price": 1900,
+      "status": "maintenance",
+      "guest": null,
+      "notes": "إصلاح تسريب سباكة بالحمام"
+    },
+    {
+      "id": "407",
+      "floor": "الدور الرابع (الروف)",
+      "type": "دابل شبك جانبي",
+      "beds": "1 سرير دابل",
+      "price": 1350,
+      "status": "clean",
+      "guest": null,
+      "notes": "شبك جانبي"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "RES-1001",
+      "guestName": "أحمد محمود",
+      "nationalId": "29801011234567",
+      "phone": "01012345678",
+      "roomId": "102",
+      "checkin": "2026-08-14",
+      "checkout": "2026-08-17",
+      "status": "checked_in",
+      "dailyRate": 1400,
+      "nights": 3,
+      "totalAmount": 4200,
+      "paidAmount": 2800,
+      "balance": 1400,
+      "paymentMethod": "cash",
+      "notes": "دفعة مقدمة 2800 ج"
+    },
+    {
+      "id": "RES-1002",
+      "guestName": "د. طارق علي",
+      "nationalId": "28504041234589",
+      "phone": "01122334455",
+      "roomId": "103",
+      "checkin": "2026-08-15",
+      "checkout": "2026-08-18",
+      "status": "checked_in",
+      "dailyRate": 2500,
+      "nights": 3,
+      "totalAmount": 7500,
+      "paidAmount": 7500,
+      "balance": 0,
+      "paymentMethod": "visa",
+      "notes": "مدفوع بالكامل بالفيزا"
+    },
+    {
+      "id": "RES-1003",
+      "guestName": "جون سميث (John Smith)",
+      "nationalId": "PASSPORT-UK98765",
+      "phone": "+447911123456",
+      "roomId": "202",
+      "checkin": "2026-08-12",
+      "checkout": "2026-08-16",
+      "status": "checked_in",
+      "dailyRate": 1300,
+      "nights": 4,
+      "totalAmount": 5200,
+      "paidAmount": 5200,
+      "balance": 0,
+      "paymentMethod": "visa",
+      "notes": "مغادرة غداً 12 ظهراً"
+    },
+    {
+      "id": "RES-1004",
+      "guestName": "سارة إبراهيم",
+      "nationalId": "29909091234123",
+      "phone": "01299887766",
+      "roomId": "204",
+      "checkin": "2026-08-15",
+      "checkout": "2026-08-19",
+      "status": "checked_in",
+      "dailyRate": 1500,
+      "nights": 4,
+      "totalAmount": 6000,
+      "paidAmount": 3000,
+      "balance": 3000,
+      "paymentMethod": "cash",
+      "notes": "متبقي 3000 جنيه عند المغادرة"
+    },
+    {
+      "id": "RES-1005",
+      "guestName": "م. خالد عبد الرحمن",
+      "nationalId": "28211029876543",
+      "phone": "01005544332",
+      "roomId": "302",
+      "checkin": "2026-08-14",
+      "checkout": "2026-08-18",
+      "status": "checked_in",
+      "dailyRate": 1350,
+      "nights": 4,
+      "totalAmount": 5400,
+      "paidAmount": 2700,
+      "balance": 2700,
+      "paymentMethod": "cash",
+      "notes": "طلب سرير إضافي للأطفال"
+    },
+    {
+      "id": "RES-1006",
+      "guestName": "أليكسيس دوفال",
+      "nationalId": "PASSPORT-FR54321",
+      "phone": "+33612345678",
+      "roomId": "304",
+      "checkin": "2026-08-15",
+      "checkout": "2026-08-20",
+      "status": "checked_in",
+      "dailyRate": 1550,
+      "nights": 5,
+      "totalAmount": 7750,
+      "paidAmount": 7750,
+      "balance": 0,
+      "paymentMethod": "visa",
+      "notes": "تم سداد الحساب بالكامل"
+    },
+    {
+      "id": "RES-1007",
+      "guestName": "عمر الفاروق",
+      "nationalId": "29003031212121",
+      "phone": "01111223344",
+      "roomId": "403",
+      "checkin": "2026-08-13",
+      "checkout": "2026-08-17",
+      "status": "checked_in",
+      "dailyRate": 2000,
+      "nights": 4,
+      "totalAmount": 8000,
+      "paidAmount": 8000,
+      "balance": 0,
+      "paymentMethod": "cash",
+      "notes": "جناح الروف الأهرامات"
+    },
+    {
+      "id": "RES-1008",
+      "guestName": "ماريا كوستاس",
+      "nationalId": "PASSPORT-GR88776",
+      "phone": "+30691234567",
+      "roomId": "404",
+      "checkin": "2026-08-15",
+      "checkout": "2026-08-19",
+      "status": "checked_in",
+      "dailyRate": 2000,
+      "nights": 4,
+      "totalAmount": 8000,
+      "paidAmount": 4000,
+      "balance": 4000,
+      "paymentMethod": "visa",
+      "notes": "سداد نصف المبلغ فيزا"
+    }
+  ],
+  "financials": {
+    "shift": {
+      "id": "SHIFT-20260815-1",
+      "cashier": "أحمد حسام (وردية الصباح)",
+      "startTime": "2026-08-15 08:00",
+      "openingBalance": 5000,
+      "maxSafeCashLimit": 15000,
+      "cashPolicyStatus": "التزام كامل بالحد الأقصى للنقدية (Safe Cash Policy Compliant)"
+    },
+    "transactions": [
+      {
+        "id": "TXN-101",
+        "time": "09:30",
+        "type": "revenue",
+        "method": "cash",
+        "amount": 2800,
+        "category": "تسكين غرف",
+        "description": "دفعة غرفة 102 - أحمد محمود",
+        "ref": "RES-1001"
+      },
+      {
+        "id": "TXN-102",
+        "time": "10:15",
+        "type": "revenue",
+        "method": "visa",
+        "amount": 7500,
+        "category": "تسكين غرف",
+        "description": "كامل الإقامة سويت 103 - د. طارق علي",
+        "ref": "RES-1002"
+      },
+      {
+        "id": "TXN-103",
+        "time": "11:00",
+        "type": "revenue",
+        "method": "cash",
+        "amount": 3000,
+        "category": "تسكين غرف",
+        "description": "دفعة غرفة 204 - سارة إبراهيم",
+        "ref": "RES-1004"
+      },
+      {
+        "id": "TXN-104",
+        "time": "12:20",
+        "type": "expense",
+        "method": "cash",
+        "amount": 450,
+        "category": "مصروفات نثرية",
+        "description": "شراء شوينات ومستلزمات نفعية للاستقبال",
+        "ref": "EXP-88"
+      },
+      {
+        "id": "TXN-105",
+        "time": "14:00",
+        "type": "revenue",
+        "method": "visa",
+        "amount": 7750,
+        "category": "تسكين غرف",
+        "description": "كامل الإقامة غرفة 304 - أليكسيس دوفال",
+        "ref": "RES-1006"
+      },
+      {
+        "id": "TXN-106",
+        "time": "15:10",
+        "type": "revenue",
+        "method": "cash",
+        "amount": 4000,
+        "category": "تسكين غرف",
+        "description": "دفعة مقدمة روف 404 - ماريا كوستاس",
+        "ref": "RES-1008"
+      }
+    ]
+  },
+  "hr": [
+    {
+      "id": "EMP-101",
+      "name": "محمود عبد الفتاح",
+      "role": "استقبال (Front Desk)",
+      "shift": "صباحية",
+      "status": "present",
+      "dailySalary": 250,
+      "score": 4.9,
+      "notes": "ممتاز في سرعة التسكين والرد على النزلاء"
+    },
+    {
+      "id": "EMP-102",
+      "name": "مصطفى رجب",
+      "role": "مشرِف غرف (Housekeeping Supervisor)",
+      "shift": "صباحية",
+      "status": "present",
+      "dailySalary": 280,
+      "score": 4.8,
+      "notes": "إشراف دقيق على الأدوار 2 و3"
+    },
+    {
+      "id": "EMP-103",
+      "name": "حسن علي",
+      "role": "عامل غرف (Housekeeping)",
+      "shift": "صباحية",
+      "status": "present",
+      "dailySalary": 200,
+      "score": 4.5,
+      "notes": "تنظيف وتجهيز 6 غرف في الموعد"
+    },
+    {
+      "id": "EMP-104",
+      "name": "إبراهيم السيد",
+      "role": "فني صيانة (Maintenance Tech)",
+      "shift": "صباحية",
+      "status": "present",
+      "dailySalary": 260,
+      "score": 4.6,
+      "notes": "معالجة عطل السباكة بالغرفة 406"
+    },
+    {
+      "id": "EMP-105",
+      "name": "كريم عادل",
+      "role": "استقبال (Front Desk)",
+      "shift": "مسائية",
+      "status": "present",
+      "dailySalary": 250,
+      "score": 4.7,
+      "notes": "جاهز لاستلام الوردية المسائية"
+    }
+  ],
+  "inventory": [
+    {
+      "id": "INV-101",
+      "name": "ملاءة سرير كينج (King Bed Sheet)",
+      "category": "مفروشات",
+      "currentStock": 22,
+      "parLevel": 22,
+      "unit": "طقم",
+      "status": "ok"
+    },
+    {
+      "id": "INV-102",
+      "name": "ملاءة سرير دابل (Double Bed Sheet)",
+      "category": "مفروشات",
+      "currentStock": 12,
+      "parLevel": 18,
+      "unit": "طقم",
+      "status": "warning"
+    },
+    {
+      "id": "INV-103",
+      "name": "ملاءة سرير سنجل (Single Bed Sheet)",
+      "category": "مفروشات",
+      "currentStock": 16,
+      "parLevel": 16,
+      "unit": "طقم",
+      "status": "ok"
+    },
+    {
+      "id": "INV-104",
+      "name": "لحاف وكيس لحاف (Duvet Set)",
+      "category": "مفروشات",
+      "currentStock": 35,
+      "parLevel": 42,
+      "unit": "عدد",
+      "status": "warning"
+    },
+    {
+      "id": "INV-105",
+      "name": "مخدات فندقية (Hotel Pillows)",
+      "category": "مفروشات",
+      "currentStock": 96,
+      "parLevel": 96,
+      "unit": "عدد",
+      "status": "ok"
+    },
+    {
+      "id": "INV-106",
+      "name": "طقم مناشف وجه وحمام (Towel Sets)",
+      "category": "مستلزمات الغرف",
+      "currentStock": 28,
+      "parLevel": 50,
+      "unit": "طقم",
+      "status": "critical"
+    },
+    {
+      "id": "INV-107",
+      "name": "صابون وشامبو فندقي (Hotel Amenities)",
+      "category": "مستلزمات الغرف",
+      "currentStock": 45,
+      "parLevel": 100,
+      "unit": "عبوة",
+      "status": "critical"
+    },
+    {
+      "id": "INV-108",
+      "name": "منظفات ومطهرات أرضيات (Cleaning Liquids)",
+      "category": "نظافة",
+      "currentStock": 15,
+      "parLevel": 10,
+      "unit": "لتر",
+      "status": "ok"
+    },
+    {
+      "id": "INV-109",
+      "name": "مجموعات شاي ونسكافيه للغرف (Tea & Coffee Kits)",
+      "category": "أغذية ومشروبات",
+      "currentStock": 60,
+      "parLevel": 120,
+      "unit": "كيس",
+      "status": "warning"
+    }
+  ]
+}

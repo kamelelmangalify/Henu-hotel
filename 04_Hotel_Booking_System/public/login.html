@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول | نظام إدارة فندق هينو الأهرامات PMS</title>
+  <link rel="stylesheet" href="css/pms_style.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #153755 0%, #1f4e78 50%, #0f172a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .login-card {
+      background: #ffffff;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 450px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .login-logo {
+      width: 70px;
+      height: 70px;
+      background: #d97706;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      color: white;
+      margin: 0 auto 1.25rem;
+      box-shadow: 0 0 20px rgba(217, 119, 6, 0.4);
+    }
+    .login-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #1f4e78;
+      margin-bottom: 4px;
+    }
+    .login-subtitle {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 2rem;
+    }
+    .role-quick-select {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 1.5rem;
+      text-align: right;
+    }
+    .role-quick-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #1f4e78;
+      margin-bottom: 8px;
+    }
+    .role-buttons {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .role-btn-chip {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex: 1;
+      text-align: center;
+    }
+    .role-btn-chip:hover {
+      background: #1f4e78;
+      color: white;
+      border-color: #1f4e78;
+    }
+    .form-group {
+      text-align: right;
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #1f4e78;
+      margin-bottom: 6px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .form-control:focus {
+      border-color: #1f4e78;
+      box-shadow: 0 0 0 3px rgba(31, 78, 120, 0.15);
+    }
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: #1f4e78;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-login:hover {
+      background: #153755;
+    }
+    .auth-footer {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <div class="login-logo">🏛️</div>
+    <h2 class="login-title">فندق هينو الأهرامات</h2>
+    <p class="login-subtitle">نظام الإدارة الفندقية الموحد (HENU Pyramids PMS)</p>
+
+    <!-- Quick Credentials Selector for Demo Testing -->
+    <div class="role-quick-select">
+      <div class="role-quick-title">⚡ دخول سريع كـ (اختر الصلاحية):</div>
+      <div class="role-buttons">
+        <button class="role-btn-chip" onclick="fillLogin('admin', '123')">👑 مدير الفندق</button>
+        <button class="role-btn-chip" onclick="fillLogin('reception', '123')">🛎️ استقبال</button>
+        <button class="role-btn-chip" onclick="fillLogin('housekeeping', '123')">🧹 مشرف نظافة</button>
+      </div>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+      <div class="form-group">
+        <label>اسم المستخدم أو البريد الإلكتروني</label>
+        <input type="text" id="loginUsername" class="form-control" placeholder="أدخل اسم المستخدم" required value="admin">
+      </div>
+      <div class="form-group">
+        <label>كلمة المرور</label>
+        <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required value="123">
+      </div>
+
+      <div id="loginErrorMessage" style="color:#ef4444; font-size:0.85rem; margin-bottom:1rem; display:none;"></div>
+
+      <button type="submit" class="btn-login">تسجيل الدخول للنظام 🚀</button>
+    </form>
+
+    <div class="auth-footer">
+      🔒 يدعم Firebase Authentication & RBAC • محمي بنظام التشفير الفندقي
+    </div>
+  </div>
+
+  <script>
+    function fillLogin(user, pass) {
+      document.getElementById('loginUsername').value = user;
+      document.getElementById('loginPassword').value = pass;
+    }
+
+    async function handleLoginSubmit(e) {
+      e.preventDefault();
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+      const errMsg = document.getElementById('loginErrorMessage');
+
+      errMsg.style.display = 'none';
+
+      // Smart API Base Resolver: works both on http://localhost:3000 and direct file:// opening
+      const apiBase = (window.location.protocol === 'file:') ? 'http://localhost:3000' : '';
+
+      try {
+        const res = await fetch(apiBase + '/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          // Save logged in user in LocalStorage (Firebase Auth Local Persistence)
+          localStorage.setItem('henu_pms_user', JSON.stringify(data.user));
+          window.location.href = 'index.html';
+        } else {
+          errMsg.innerText = data.error || 'عفواً، بيانات الدخول غير صحيحة';
+          errMsg.style.display = 'block';
+        }
+      } catch (err) {
+        errMsg.innerText = 'عفواً، تعذر الاتصال بالخادم. يرجى التأكد من كتابة http://localhost:3000 في المتصفح أو التأكد من تشغيل السيرفر.';
+        errMsg.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>

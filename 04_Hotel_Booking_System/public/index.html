@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام إدارة فندق هينو الأهرامات | HENU Pyramids PMS</title>
+  <link rel="stylesheet" href="css/pms_style.css">
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header class="pms-header">
+    <div class="brand-container">
+      <div class="brand-logo">🏛️</div>
+      <div class="brand-text">
+        <h1>فندق هينو الأهرامات (HENU Hotel Pyramids)</h1>
+        <p>نظام الإدارة الفندقية الموحد - 25 غرفة (الجيزة، مصر)</p>
+      </div>
+    </div>
+
+    <!-- Active User & RBAC Status Widget -->
+    <div class="header-actions">
+      <div id="userInfoWidget" style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.1); padding:6px 14px; border-radius:20px; font-size:0.85rem;">
+        <span id="userRoleBadge" style="background:var(--accent-gold); color:white; padding:3px 10px; border-radius:12px; font-weight:700;">
+          👑 مدير الفندق
+        </span>
+        <span id="userNameText" style="font-weight:600;">أ.د. كمال الدين</span>
+        <button onclick="handleLogout()" class="btn btn-outline btn-sm" style="color:white; border-color:rgba(255,255,255,0.4); margin-right:6px;">
+          🚪 خروج
+        </button>
+      </div>
+
+      <button id="headerCheckinBtn" class="btn btn-gold" onclick="openNewReservationModal()">
+        <span>➕ تسكين / حجز جديد</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- App Main Container -->
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation with RBAC Scoping -->
+    <nav class="sidebar" id="mainSidebar">
+      <a class="nav-item active" data-view="rackView" onclick="switchView('rackView')">
+        <span class="icon">🏨</span>
+        <span>حالة الغرف الحية (Rack)</span>
+        <span class="badge-count" id="rackCountBadge">25</span>
+      </a>
+      <a class="nav-item rbac-admin" data-view="roomsConfigView" onclick="switchView('roomsConfigView')">
+        <span class="icon">👑</span>
+        <span>تعديل وإدارة الغرف الـ 25</span>
+      </a>
+      <a class="nav-item rbac-reception" data-view="reservationsView" onclick="switchView('reservationsView')">
+        <span class="icon">📋</span>
+        <span>سجل الحجوزات والتسكين</span>
+      </a>
+      <a class="nav-item rbac-admin" data-view="financialsView" onclick="switchView('financialsView')">
+        <span class="icon">💳</span>
+        <span>المالية وتقفيل الخزينة</span>
+      </a>
+      <a class="nav-item rbac-hr" data-view="hrView" onclick="switchView('hrView')">
+        <span class="icon">📊</span>
+        <span>الرواتب والـ 30 موظفاً (KPIs)</span>
+      </a>
+      <a class="nav-item rbac-inventory" data-view="inventoryView" onclick="switchView('inventoryView')">
+        <span class="icon">📦</span>
+        <span>الجرد وتنبيهات المخازن</span>
+        <span class="badge-count" id="inventoryAlertBadge" style="background:#ef4444;">0</span>
+      </a>
+    </nav>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+
+      <!-- KPI Executive Summary Cards -->
+      <section class="kpi-grid">
+        <div class="kpi-card gold">
+          <div class="kpi-title">نسبة الإشغال اليومية</div>
+          <div class="kpi-value" id="kpiOccupancyRate">0%</div>
+          <div class="kpi-sub">
+            <span id="kpiOccupiedRooms">0</span> من 25 غرفة مشغولة
+          </div>
+        </div>
+
+        <div class="kpi-card green">
+          <div class="kpi-title">الغرف الجاهزة (Clean)</div>
+          <div class="kpi-value" id="kpiCleanRooms">0</div>
+          <div class="kpi-sub">🟢 غرف جاهزة لاستقبال النزلاء</div>
+        </div>
+
+        <div class="kpi-card red">
+          <div class="kpi-title">إجمالي إيراد اليوم</div>
+          <div class="kpi-value" id="kpiTodayRevenue">0 ج.م</div>
+          <div class="kpi-sub">كاش + فيزا (مقبوضات الوردية)</div>
+        </div>
+
+        <div class="kpi-card yellow">
+          <div class="kpi-title">تنبيهات نقص المخزن</div>
+          <div class="kpi-value" id="kpiInventoryAlerts">0</div>
+          <div class="kpi-sub">اصناف هبطت عن حد الأمان (Par Level)</div>
+        </div>
+      </section>
+
+      <!-- ================================================================ -->
+      <!-- VIEW 1: ROOM STATUS RACK (شاشة حالة الغرف الحية) -->
+      <!-- ================================================================ -->
+      <section id="rackView" class="view-section active">
+        <div class="section-header">
+          <div class="section-title">
+            <span>🏨 لوحة توزيع الغرف الـ 25 التفاعلية (Room Status Rack)</span>
+          </div>
+          <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterRack('all', this)">الكل (25)</button>
+            <button class="filter-btn" onclick="filterRack('clean', this)">🟢 شاغرة جاهزة</button>
+            <button class="filter-btn" onclick="filterRack('occupied', this)">🔴 مشغولة</button>
+            <button class="filter-btn" onclick="filterRack('cleaning', this)">🟡 تحت التنظيف</button>
+            <button class="filter-btn" onclick="filterRack('preparing', this)">🔵 تحت التجهيز</button>
+            <button class="filter-btn" onclick="filterRack('maintenance', this)">🟠 صيانة</button>
+          </div>
+        </div>
+
+        <!-- Dynamic Floors & Rooms Container -->
+        <div id="rackFloorsContainer">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- ================================================================ -->
+      <!-- VIEW 2: ROOMS MANAGEMENT & EDITING (إدارة وتعديل الغرف الـ 25) -->
+      <!-- ================================================================ -->
+      <section id="roomsConfigView" class="view-section">
+        <div class="section-header">
+          <div class="section-title">
+            <span>👑 شاشة إعدادات وتعديل بيانات الغرف الـ 25 بالكامل</span>
+          </div>
+          <button class="btn btn-primary" onclick="openRoomEditConfigModal()">
+            <span>➕ تعديل إعدادات غرفة</span>
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>رقم الغرفة</th>
+                <th>الطابق / الدور</th>
+                <th>نوع وتصنيف الغرفة</th>
+                <th>توزيع الأسرّة</th>
+                <th>السعر الأساسي / ليلة</th>
+                <th>حالة الغرفة الحالية</th>
+                <th>ملاحظات وتوجيهات الصيانة</th>
+                <th>إدارة الغرفة</th>
+              </tr>
+            </thead>
+            <tbody id="roomsConfigTableBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================================================ -->
+      <!-- VIEW 3: RESERVATIONS LEDGER (سجل الحجوزات والتسكين) -->
+      <!-- ================================================================ -->
+      <section id="reservationsView" class="view-section">
+        <div class="section-header">
+          <div class="section-title">
+            <span>📋 سجل الحجوزات وتصفية الحسابات</span>
+          </div>
+          <button class="btn btn-primary" onclick="openNewReservationModal()">
+            <span>➕ تسكين نزيل جديد</span>
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>رقم الحجز</th>
+                <th>اسم النزيل</th>
+                <th>رقم الغرفة</th>
+                <th>تاريخ الوصول</th>
+                <th>تاريخ المغادرة</th>
+                <th>السعر/ليلة</th>
+                <th>الإجمالي</th>
+                <th>المدفوع</th>
+                <th>المتبقي</th>
+                <th>الحالة</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="reservationsTableBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================================================ -->
+      <!-- VIEW 4: FINANCIALS & SHIFT CLEARANCE (المالية وتقفيل الخزينة) -->
+      <!-- ================================================================ -->
+      <section id="financialsView" class="view-section">
+        <div class="section-header">
+          <div class="section-title">
+            <span>💳 المالية وتقفيل الخزينة الوردية (Shift Clearance)</span>
+          </div>
+          <button class="btn btn-gold" onclick="openShiftCloseModal()">
+            <span>🔒 تقفيل الوردية ومطابقة النقدية</span>
+          </button>
+        </div>
+
+        <!-- Safe Status & Policy Banner -->
+        <div id="cashPolicyBanner" style="background:#dbeafe; border:1px solid #93c5fd; padding:1rem; border-radius:12px; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h4 style="color:#1e40af; font-size:1rem; margin-bottom:4px;">💰 موقف الخزينة وسياسة النقدية (Cash Safe Limit)</h4>
+            <p style="font-size:0.85rem; color:#1e3a8a;">الحد الأقصى المسموح به بالخزينة: <strong>15,000 ج.م</strong>. يتم توريد الفائض للبنك فور تجاوزه.</p>
+          </div>
+          <div id="safeCashDisplay" style="font-size:1.5rem; font-weight:800; color:#1e40af;">
+            0 ج.م
+          </div>
+        </div>
+
+        <!-- Transactions Ledger -->
+        <div class="table-container">
+          <div style="padding:1rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color);">
+            <h4 style="color:var(--primary-navy);">جدول المقبوضات والمصروفات اليومية</h4>
+            <button class="btn btn-outline btn-sm" onclick="openAddTransactionModal()">➕ إضافة حركة خزينة</button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>رقم الحركة</th>
+                <th>التوقيت</th>
+                <th>النوع</th>
+                <th>طريقة الدفع</th>
+                <th>المبلغ</th>
+                <th>التصنيف</th>
+                <th>البيان والتفاصيل</th>
+              </tr>
+            </thead>
+            <tbody id="financialsTableBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================================================ -->
+      <!-- VIEW 5: HR & DAILY KPIS 5-CRITERIA (الـ 30 موظفاً ونماذج التقييم) -->
+      <!-- ================================================================ -->
+      <section id="hrView" class="view-section">
+        <div class="section-header">
+          <div class="section-title">
+            <span>📊 شيت الرواتب ونموذج تقييم أداء الـ 30 موظفاً اليومي (KPIs)</span>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>الكود</th>
+                <th>اسم الموظف</th>
+                <th>القسم والوظيفة</th>
+                <th>الوردية</th>
+                <th>الراتب اليومي</th>
+                <th>درجة اليوم (من 5)</th>
+                <th>النسبة الشهرية (من 100%)</th>
+                <th>ملاحظات وتوجيهات الأداء</th>
+                <th>إجراءات التقييم</th>
+              </tr>
+            </thead>
+            <tbody id="hrTableBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================================================ -->
+      <!-- VIEW 6: INVENTORY & PAR LEVEL ALERTS (الجرد والمخازن) -->
+      <!-- ================================================================ -->
+      <section id="inventoryView" class="view-section">
+        <div class="section-header">
+          <div class="section-title">
+            <span>📦 جرد الغرف والمخزن وتنبيهات حد الأمان (Par Levels)</span>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>كود الصنف</th>
+                <th>اسم الصنف</th>
+                <th>الفئة</th>
+                <th>الرصيد الحالي</th>
+                <th>حد الأمان (Par Level)</th>
+                <th>الوحدة</th>
+                <th>حالة الرصيد</th>
+                <th>إدارة المخزون</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryTableBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- MODALS SECTION -->
+  <!-- ================================================================ -->
+
+  <!-- Modal 1: New Reservation / Check-in -->
+  <div id="reservationModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>📋 تسكين / إضافة حجز جديد</h3>
+        <button class="modal-close" onclick="closeModal('reservationModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="reservationForm" onsubmit="handleReservationSubmit(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>اسم النزيل الثلاثي *</label>
+              <input type="text" id="resGuestName" class="form-control" placeholder="مثال: أحمد محمود علي" required>
+            </div>
+            <div class="form-group">
+              <label>الرقم القومي / الباسبور *</label>
+              <input type="text" id="resNationalId" class="form-control" placeholder="2980101......" required>
+            </div>
+            <div class="form-group">
+              <label>رقم الهاتف *</label>
+              <input type="tel" id="resPhone" class="form-control" placeholder="01012345678" required>
+            </div>
+            <div class="form-group">
+              <label>اختر الغرفة *</label>
+              <select id="resRoomId" class="form-control" onchange="updateResPriceHint()" required>
+                <!-- Populated by JS -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label>تاريخ الوصول *</label>
+              <input type="date" id="resCheckin" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>تاريخ المغادرة *</label>
+              <input type="date" id="resCheckout" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>السعر اليومي (ج.م) *</label>
+              <input type="number" id="resDailyRate" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>المبلغ المدفوع مقدمأ (ج.م)</label>
+              <input type="number" id="resPaidAmount" class="form-control" value="0">
+            </div>
+            <div class="form-group">
+              <label>طريقة الدفع</label>
+              <select id="resPaymentMethod" class="form-control">
+                <option value="cash">نقداً (Cash)</option>
+                <option value="visa">فيزا / كارت (POS Visa)</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label>ملاحظات إضافية</label>
+              <input type="text" id="resNotes" class="form-control" placeholder="ملاحظات خاصة، سرير إضافي، طلبات النزيل">
+            </div>
+          </div>
+          <div style="margin-top:1.5rem; display:flex; justify-content:flex-end; gap:10px;">
+            <button type="button" class="btn btn-outline" onclick="closeModal('reservationModal')">إلغاء</button>
+            <button type="submit" class="btn btn-gold">حفظ والتسكين الفوري 🚀</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Checkout & Balance Settlement -->
+  <div id="checkoutModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header" style="background:var(--accent-gold);">
+        <h3>🧾 تسوية وتصفية حساب النزيل (Check-out)</h3>
+        <button class="modal-close" onclick="closeModal('checkoutModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)">
+          <input type="hidden" id="checkoutResId">
+          <div id="checkoutSummaryBox" style="background:#f8fafc; border:1px solid var(--border-color); padding:1rem; border-radius:12px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+            <!-- Populated dynamically by JS -->
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>خدمات ومصروفات إضافية (ج.م)</label>
+              <input type="number" id="checkoutExtras" class="form-control" value="0" oninput="recalcCheckoutBalance()">
+            </div>
+            <div class="form-group">
+              <label>المبلغ المسدد الآن للتصفية (ج.م)</label>
+              <input type="number" id="checkoutPayment" class="form-control" value="0">
+            </div>
+            <div class="form-group">
+              <label>وسيلة سداد المتبقي</label>
+              <select id="checkoutMethod" class="form-control">
+                <option value="cash">نقداً (Cash)</option>
+                <option value="visa">فيزا / كارت (POS Visa)</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-top:1.5rem; display:flex; justify-content:flex-end; gap:10px;">
+            <button type="button" class="btn btn-outline" onclick="closeModal('checkoutModal')">إلغاء</button>
+            <button type="submit" class="btn btn-success">إتمام المغادرة وتحرير الغرفة 🟢</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Complete Room Configuration & Editing -->
+  <div id="roomConfigModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>👑 تعديل وتكوين الغرفة <span id="cfgModalRoomNum"></span></h3>
+        <button class="modal-close" onclick="closeModal('roomConfigModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="roomConfigForm" onsubmit="handleRoomConfigSubmit(event)">
+          <input type="hidden" id="cfgRoomId">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>الطابق / الدور *</label>
+              <select id="cfgFloor" class="form-control" required>
+                <option value="الدور الأول">الدور الأول</option>
+                <option value="الدور الثاني">الدور الثاني</option>
+                <option value="الدور الثالث">الدور الثالث</option>
+                <option value="الدور الرابع (الروف)">الدور الرابع (الروف)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>نوع وتصنيف الغرفة *</label>
+              <input type="text" id="cfgType" class="form-control" required placeholder="مثال: سرير كينج - بلكونة أهرامات">
+            </div>
+            <div class="form-group">
+              <label>توزيع الأسرّة *</label>
+              <input type="text" id="cfgBeds" class="form-control" required placeholder="1 سرير كينج / 2 سرير دابل">
+            </div>
+            <div class="form-group">
+              <label>السعر الأساسي / ليلة (ج.م) *</label>
+              <input type="number" id="cfgPrice" class="form-control" required min="100">
+            </div>
+            <div class="form-group">
+              <label>حالة الغرفة الحالية *</label>
+              <select id="cfgStatus" class="form-control" required>
+                <option value="clean">🟢 شاغرة جاهزة (Clean)</option>
+                <option value="occupied">🔴 مشغولة (Occupied)</option>
+                <option value="cleaning">🟡 تحت التنظيف (Cleaning)</option>
+                <option value="preparing">🔵 تحت التجهيز (Preparing)</option>
+                <option value="maintenance">🟠 صيانة وأعطال (Maintenance)</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label>توجيهات وملاحظات الصيانة والخدمات</label>
+              <textarea id="cfgNotes" class="form-control" rows="3" placeholder="ملاحظات الصيانة، عطل التكييف، تجهيزات إضافية..."></textarea>
+            </div>
+          </div>
+          <div style="margin-top:1.5rem; display:flex; justify-content:flex-end; gap:10px;">
+            <button type="button" class="btn btn-outline" onclick="closeModal('roomConfigModal')">إلغاء</button>
+            <button type="submit" class="btn btn-primary">حفظ إعدادات الغرفة 💾</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: 5-Criteria Daily Employee Evaluation Form -->
+  <div id="hrEvalModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>📊 نموذج التقييم اليومي المعتمد للموظف (5 عناصر)</h3>
+        <button class="modal-close" onclick="closeModal('hrEvalModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="hrEvalForm" onsubmit="handleHrEvalSubmit(event)">
+          <input type="hidden" id="hrEmpId">
+          <div class="form-group">
+            <label>اسم الموظف / كود الموظف</label>
+            <input type="text" id="hrEmpName" class="form-control" readonly style="background:#f1f5f9; font-weight:700;">
+          </div>
+          
+          <h4 style="color:var(--primary-navy); margin:1rem 0 0.5rem; border-bottom:1px solid var(--border-color); padding-bottom:4px; font-size:0.95rem;">
+            📝 درجات العناصر الخمسة للتقييم اليومي (من 1 إلى 5):
+          </h4>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label>1. الحضور والانضباط (Attendance)</label>
+              <input type="number" id="evalAttendance" class="form-control" min="1" max="5" step="0.1" value="5" required>
+            </div>
+            <div class="form-group">
+              <label>2. النظافة الشخصية والهندام (Hygiene)</label>
+              <input type="number" id="evalHygiene" class="form-control" min="1" max="5" step="0.1" value="5" required>
+            </div>
+            <div class="form-group">
+              <label>3. الزي الرسمي (Uniform)</label>
+              <input type="number" id="evalUniform" class="form-control" min="1" max="5" step="0.1" value="5" required>
+            </div>
+            <div class="form-group">
+              <label>4. الابتسامة واللباقة (Soft Skills)</label>
+              <input type="number" id="evalSoftSkills" class="form-control" min="1" max="5" step="0.1" value="5" required>
+            </div>
+            <div class="form-group full-width">
+              <label>5. إتقان ودقة تنفيذ العمل (Execution)</label>
+              <input type="number" id="evalExecution" class="form-control" min="1" max="5" step="0.1" value="5" required>
+            </div>
+            <div class="form-group full-width">
+              <label>ملاحظات وتوصيات التقييم</label>
+              <textarea id="hrNotes" class="form-control" rows="2" placeholder="أي توجيهات أداء أو ملاحم تميز..."></textarea>
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem; display:flex; justify-content:flex-end; gap:10px;">
+            <button type="button" class="btn btn-outline" onclick="closeModal('hrEvalModal')">إلغاء</button>
+            <button type="submit" class="btn btn-gold">اعتماد وحساب النسبة الشهري ⭐</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Shift Close -->
+  <div id="shiftCloseModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header" style="background:#153755;">
+        <h3>🔒 تقفيل وردية الخزينة ومطابقة النقدية</h3>
+        <button class="modal-close" onclick="closeModal('shiftCloseModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="shiftCloseForm" onsubmit="handleShiftCloseSubmit(event)">
+          <div id="shiftAuditSummary" style="background:#f1f5f9; padding:1rem; border-radius:12px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;"></div>
+          <div class="form-group">
+            <label>اسم أمين الخزينة *</label>
+            <input type="text" id="shiftCashierName" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>النقدية المادية الفعلية بالخزينة *</label>
+            <input type="number" id="shiftPhysicalCash" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>ملاحظات التسليم والاستلام</label>
+            <textarea id="shiftNotes" class="form-control" rows="2"></textarea>
+          </div>
+          <div style="margin-top:1.5rem; display:flex; justify-content:flex-end; gap:10px;">
+            <button type="button" class="btn btn-outline" onclick="closeModal('shiftCloseModal')">إلغاء</button>
+            <button type="submit" class="btn btn-gold">اعتماد تقفيل الوردية 🔒</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6: Add Transaction -->
+  <div id="addTransactionModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>➕ إضافة حركة مالية بالخزينة</h3>
+        <button class="modal-close" onclick="closeModal('addTransactionModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="txnForm" onsubmit="handleAddTxnSubmit(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>نوع الحركة</label>
+              <select id="txnType" class="form-control">
+                <option value="revenue">إيراد (+)</option>
+                <option value="expense">مصروف (-)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>طريقة الدفع</label>
+              <select id="txnMethod" class="form-control">
+                <option value="cash">نقداً (Cash)</option>
+                <option value="visa">فيزا (POS Visa)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>المبلغ (ج.م) *</label>
+              <input type="number" id="txnAmount" class="form-control" required min="1">
+            </div>
+            <div class="form-group">
+              <label>التصنيف *</label>
+              <input type="text" id="txnCategory" class="form-control" required placeholder="تسكين، خدمات، نثرية">
+            </div>
+            <div class="form-group full-width">
+              <label>البيان / التفاصيل</label>
+              <input type="text" id="txnDesc" class="form-control">
+            </div>
+          </div>
+          <div style="margin-top:1.5rem; display:flex; justify-content:flex-end; gap:10px;">
+            <button type="button" class="btn btn-outline" onclick="closeModal('addTransactionModal')">إلغاء</button>
+            <button type="submit" class="btn btn-primary">حفظ الحركة 💾</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Application Logic JavaScript -->
+  <script src="js/pms_app.js"></script>
+</body>
+</html>
