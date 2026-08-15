@@ -1,4 +1,36 @@
-# عقد عمل مؤقت محدد المدة وإقرار وتعهد بالالتزام الوظيفي
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
+
+const legalDir = path.join(__dirname);
+
+// قراءة شعار الفندق
+const logoPath = path.join(legalDir, 'شعار_الفندق_عقود.jpg');
+let logoDataUrl = '';
+if (fs.existsSync(logoPath)) {
+  const logoBase64 = fs.readFileSync(logoPath).toString('base64');
+  logoDataUrl = `data:image/jpeg;base64,${logoBase64}`;
+}
+
+function convertHtmlToPdf(htmlPath, pdfPath) {
+  const edgePath = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
+  const edgeAlt = 'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe';
+  let exe = fs.existsSync(edgePath) ? edgePath : (fs.existsSync(edgeAlt) ? edgeAlt : 'msedge.exe');
+
+  const cmd = `powershell -Command "& \\"${exe}\\" --headless --disable-gpu --no-sandbox --print-to-pdf=\\"${pdfPath}\\" \\"${htmlPath}\\""`;
+  console.log(`Generating PDF: ${path.basename(pdfPath)}...`);
+  try {
+    execSync(cmd, { encoding: 'utf8' });
+    console.log(`✅ PDF Created: ${pdfPath}`);
+  } catch (err) {
+    console.error(`❌ PDF failed for ${pdfPath}:`, err.message);
+  }
+}
+
+// ----------------------------------------------------------------------
+// 1. عقد العمل المؤقت المباشر (تعديل بند الأجر 75% أساسي و 25% حافز KPI)
+// ----------------------------------------------------------------------
+const empContractMd = `# عقد عمل مؤقت محدد المدة وإقرار وتعهد بالالتزام الوظيفي
 
 إنه في يوم: **.......................** الموافق: **..... / ..... / 2026م**  
 تحرر هذا العقد بين كل من:
@@ -14,7 +46,7 @@
 
 ### **الطرف الثاني (الموظف / العامل):**
 - **الاسم الثلاثي:** ........................................................................................
-- **الرقم القومي:** `[  ][  ][  ][  ][  ][  ][  ][  ][  ][  ][  ][  ][  ][  ]`
+- **الرقم القومي:** \`[  ][  ][  ][  ][  ][  ][  ][  ][  ][  ][  ][  ][  ][  ]\`
 - **الجنسية:** ......................... **تاريخ الميلاد:** ..... / ..... / .........
 - **العنوان بالتفصيل:** ..................................................................................
 - **رقم الهاتف:** ........................................
@@ -105,4 +137,91 @@
 | **الاسم:** ...................................................... | **الاسم:** ...................................................... |
 | **الصفة:** .................................................... | **الرقم القومي:** ........................................... |
 | **التوقيع:** .................................................. | **التوقيع:** .................................................. |
-| **التاريخ:** ..... / ..... / 2026م | **البصمة (الإبهام الأيمن):** <br><br> `[              ]` |
+| **التاريخ:** ..... / ..... / 2026م | **البصمة (الإبهام الأيمن):** <br><br> \`[              ]\` |
+`;
+
+// HTML لمستند عقد العمل المؤقت المباشر
+const empContractHtml = `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>عقد عمل مؤقت محدد المدة — فندق هينو الأهرامات</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+    @page { size: A4; margin: 12mm 15mm; }
+    body { font-family: 'Tajawal', Arial, sans-serif; color: #1a202c; line-height: 1.5; margin: 0; padding: 5px; direction: rtl; }
+    .header { text-align: center; border-bottom: 2px double #b45309; padding-bottom: 8px; margin-bottom: 12px; }
+    .brand-logo { max-width: 90px; height: auto; border-radius: 4px; }
+    .hotel-name { font-size: 14pt; font-weight: 800; color: #78350f; }
+    .doc-title { font-size: 17pt; font-weight: 800; color: #1F4E78; margin-top: 3px; }
+    .section-title { font-size: 11pt; font-weight: 700; color: #1F4E78; background: #EDF2F7; padding: 4px 8px; border-right: 4px solid #b45309; margin-top: 10px; margin-bottom: 6px; }
+    p, li { font-size: 9.5pt; margin-bottom: 4px; }
+    table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 9pt; }
+    th, td { border: 1px solid #CBD5E0; padding: 6px; text-align: right; }
+    th { background: #1F4E78; color: white; text-align: center; }
+    .kpi-box { background: #FFFBEB; border: 1px solid #FCD34D; padding: 8px; border-radius: 4px; margin: 6px 0; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    ${logoDataUrl ? `<img src="${logoDataUrl}" alt="HENU Hotel Logo" class="brand-logo">` : ''}
+    <div class="hotel-name">H E N U  H O T E L  P Y R A M I D S — فندق هينو الأهرامات</div>
+    <div class="doc-title">عقد عمل مؤقت محدد المدة وتعهد فندقي</div>
+  </div>
+
+  <p>إنه في يوم: <strong>.......................</strong> الموافق: <strong>..... / ..... / 2026م</strong> تحرر هذا العقد بين كل من:</p>
+
+  <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 8px; border-radius: 4px;">
+    <strong>الطرف الأول (صاحب العمل):</strong> فندق هينو الأهرامات (H E N U  H O T E L  P Y R A M I D S) — نزلة السمان، الجيزة.<br>
+    <strong>الطرف الثاني (العامل):</strong> الاسم: ........................................................... الرقم القومي: ...........................................
+  </div>
+
+  <div class="section-title">المادة الأولى: موضوع العقد والمسمى الوظيفي</div>
+  <p>يعمل الطرف الثاني لدى الطرف الأول بوظيفة: ( .................................................... ) بقسم: ( ............................................ ).</p>
+
+  <div class="section-title">المادة الثانية: مدة العقد وفترة التجربة</div>
+  <p>مدة العقد سنة واحدة تبدأ من ..... / ..... / 2026م. وتعتبر أول 3 أشهر فترة تجربة يحق للطرف الأول فيها إنهاء العقد فوراً عند ثبوت عدم الكفاءة.</p>
+
+  <div class="section-title">المادة الثالثة: الأجر والمستحقات المالية ونظام التقييم الشهري (75% / 25%)</div>
+  <p>1. يتقاضى الطرف الثاني أجراً شهرياً شاملاً قدره: <strong>( .................................... جنيه مصري )</strong>.</p>
+  <div class="kpi-box">
+    <strong>تفصيل وهيكلة الأجر الشهري الشامل:</strong><br>
+    - <strong>أولاً: الراتب الأساسي الثابت (75%):</strong> وقدره <strong>( .................... جـ )</strong> أجر ثابت ومضمون مقابل ساعات العمل الرسمية.<br>
+    - <strong>ثانياً: حافز الأداء والـ KPIs المتغير (25%):</strong> وقدره الأقصى <strong>( .................... جـ )</strong> حافز أداء شهري يتوقف صرفه على نتيجة تقييم الأداء الشهري (من 100 درجة) وفقاً للشرائح التالية:<br>
+    &nbsp;&nbsp;• <strong>90% إلى 100% في التقييم:</strong> يُصرف <strong>100%</strong> من الحافز المتاح.<br>
+    &nbsp;&nbsp;• <strong>80% إلى 89% في التقييم:</strong> يُصرف <strong>75%</strong> من الحافز المتاح.<br>
+    &nbsp;&nbsp;• <strong>70% إلى 79% في التقييم:</strong> يُصرف <strong>50%</strong> من الحافز المتاح.<br>
+    &nbsp;&nbsp;• <strong>أقل من 70% في التقييم:</strong> يُصرف <strong>0%</strong> (حرمان من الحافز لهذه الفترة).
+  </div>
+
+  <div class="section-title">المادة الرابعة: ساعات العمل والانضباط</div>
+  <p>يلتزم الطرف الثاني بنظام المناوبات (الشفتات) وبحضور المواعيد المحسوبة والالتزام التام بالزي الرسمي (Uniform).</p>
+
+  <div class="section-title">المادة الخامسة والسادسة: العهدة والسرية والشرط الجزائي</div>
+  <p>يتعهد العامل بالحفاظ على عهدة الفندق، ومراعاة السرية المطلقة لبيانات النزلاء وحظر التصوير، وفي حال الترك الفجائي دون إخطار 30 يوماً يدفع شرطاً جزائياً يعادل أجر شهر كامل.</p>
+
+  <table style="margin-top: 15px;">
+    <tr>
+      <td style="width: 50%;"><strong>توقيع الطرف الأول (الفندق):</strong> ....................................</td>
+      <td style="width: 50%;"><strong>توقيع الطرف الثاني (العامل):</strong> ....................................</td>
+    </tr>
+  </table>
+
+</body>
+</html>`;
+
+// ----------------------------------------------------------------------
+// حفظ الملفات وتحويلها إلى PDF
+// ----------------------------------------------------------------------
+const mdPath = path.join(legalDir, 'عقد_عمل_مؤقت_وتعهد_فندقي.md');
+const htmlPath = path.join(legalDir, 'عقد_عمل_مؤقت_وتعهد_فندقي.html');
+const pdfPath = path.join(legalDir, 'عقد_عمل_مؤقت_وتعهد_فندقي.pdf');
+
+fs.writeFileSync(mdPath, empContractMd, 'utf8');
+fs.writeFileSync(htmlPath, empContractHtml, 'utf8');
+console.log(`Updated Contract MD & HTML: ${mdPath}`);
+
+convertHtmlToPdf(htmlPath, pdfPath);
+
+console.log('\n✨ CONTRACTS UPDATED WITH 75% BASE + 25% KPI CLAUSE SUCCESSFULLY!');
