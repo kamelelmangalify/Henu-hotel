@@ -11,7 +11,6 @@ async function createPayrollWorkbook() {
   // بيانات الموظفين الـ 30 وتقسيمهم حسب الأقسام
   // =========================================================
   const employees = [
-    // الاستقبال والمكاتب الأمامية (6 موظفين)
     { id: 'EMP-101', name: 'أحمد محمود علي', role: 'مشرف استقبال', salary: 7500, dept: 'reception', deptName: 'قسم الاستقبال والمكاتب الأمامية', absence: 0, penalty: 0, advance: 500 },
     { id: 'EMP-102', name: 'محمد حسن إبراهيم', role: 'موظف استقبال نهار', salary: 5800, dept: 'reception', deptName: 'قسم الاستقبال والمكاتب الأمامية', absence: 1, penalty: 0, advance: 0 },
     { id: 'EMP-103', name: 'عمر خالد فوزي', role: 'موظف استقبال ليل', salary: 5800, dept: 'reception', deptName: 'قسم الاستقبال والمكاتب الأمامية', absence: 0, penalty: 0, advance: 300 },
@@ -19,7 +18,6 @@ async function createPayrollWorkbook() {
     { id: 'EMP-105', name: 'مريم عادل القاضي', role: 'مأمور علاقات نزلاء', salary: 6000, dept: 'reception', deptName: 'قسم الاستقبال والمكاتب الأمامية', absence: 0, penalty: 0, advance: 200 },
     { id: 'EMP-106', name: 'مصطفى كمال الدين', role: 'مساعد استقبال', salary: 4800, dept: 'reception', deptName: 'قسم الاستقبال والمكاتب الأمامية', absence: 1, penalty: 0, advance: 150 },
 
-    // الإشراف الداخلي والنظافة (12 موظف)
     { id: 'EMP-107', name: 'أميرة عبد العزيز', role: 'مشرفة الإشراف الداخلي', salary: 6500, dept: 'housekeeping', deptName: 'قسم الإشراف الداخلي والغرف', absence: 0, penalty: 0, advance: 400 },
     { id: 'EMP-108', name: 'سيد مصطفى طه', role: 'عامل غرف أول', salary: 4600, dept: 'housekeeping', deptName: 'قسم الإشراف الداخلي والغرف', absence: 1, penalty: 0, advance: 200 },
     { id: 'EMP-109', name: 'حسين علي كمال', role: 'عامل تنظيف غرف', salary: 4400, dept: 'housekeeping', deptName: 'قسم الإشراف الداخلي والغرف', absence: 2, penalty: 1, advance: 0 },
@@ -33,7 +31,6 @@ async function createPayrollWorkbook() {
     { id: 'EMP-117', name: 'علي عبد السميع', role: 'مساعد إشراف داخلي', salary: 4300, dept: 'housekeeping', deptName: 'قسم الإشراف الداخلي والغرف', absence: 0, penalty: 0, advance: 150 },
     { id: 'EMP-118', name: 'فتحي رجب', role: 'عامل نظافة وأماكن عامة', salary: 4200, dept: 'housekeeping', deptName: 'قسم الإشراف الداخلي والغرف', absence: 0, penalty: 1, advance: 0 },
 
-    // المطعم والكافيه والخدمة (8 موظفين)
     { id: 'EMP-119', name: 'خالد رجب سلامة', role: 'مدير مطعم وكافيه', salary: 8500, dept: 'restaurant', deptName: 'قسم المطعم والكافيه والخدمة', absence: 0, penalty: 0, advance: 1000 },
     { id: 'EMP-120', name: 'طارق صلاح الدين', role: 'مشرف أغذية ومشروبات', salary: 6800, dept: 'restaurant', deptName: 'قسم المطعم والكافيه والخدمة', absence: 0, penalty: 0, advance: 300 },
     { id: 'EMP-121', name: 'إسلام يوسف أحمد', role: 'ويتر كافيه رئيسي', salary: 4900, dept: 'restaurant', deptName: 'قسم المطعم والكافيه والخدمة', absence: 0, penalty: 0, advance: 0 },
@@ -43,7 +40,6 @@ async function createPayrollWorkbook() {
     { id: 'EMP-125', name: 'سامح فاروق', role: 'مساعد ويتر تجهيز', salary: 4300, dept: 'restaurant', deptName: 'قسم المطعم والكافيه والخدمة', absence: 1, penalty: 0, advance: 0 },
     { id: 'EMP-126', name: 'أحمد بدوي', role: 'عامل غسيل أطباق وتجهيز', salary: 4200, dept: 'restaurant', deptName: 'قسم المطعم والكافيه والخدمة', absence: 0, penalty: 0, advance: 100 },
 
-    // الصيانة والإدارة والخدمات المعاونة (4 موظفين)
     { id: 'EMP-127', name: 'المهندس تامر فؤاد', role: 'مشرف صيانة الفندق', salary: 7200, dept: 'maintenance', deptName: 'قسم الصيانة والخدمات المعاونة', absence: 0, penalty: 0, advance: 600 },
     { id: 'EMP-128', name: 'جمال عبد المعطي', role: 'فني كهرباء وسباكة', salary: 5200, dept: 'maintenance', deptName: 'قسم الصيانة والخدمات المعاونة', absence: 0, penalty: 0, advance: 200 },
     { id: 'EMP-129', name: 'رفعت عبد الصمد', role: 'سائق ومسؤول خدمات', salary: 5000, dept: 'maintenance', deptName: 'قسم الصيانة والخدمات المعاونة', absence: 1, penalty: 0, advance: 150 },
@@ -58,7 +54,7 @@ async function createPayrollWorkbook() {
   };
 
   // =========================================================
-  // 1. إنشاء شيتات التقييم اليومية لكل قسم
+  // 1. شيتات التقييم اليومية لكل قسم
   // =========================================================
   const deptRowMapping = {};
 
@@ -157,7 +153,131 @@ async function createPayrollWorkbook() {
   }
 
   // =========================================================
-  // 2. الشيت المطبوع الميداني للـ KPIs (الجديد والمطلوب!)
+  // 2. كشف الحضور والانصراف المطبوع العرضي (Landscape A4 - 20 صفاً)
+  // =========================================================
+  const attSheet = workbook.addWorksheet('كشف حضور وانصراف شهري', {
+    views: [{ rightToLeft: true }],
+    pageSetup: {
+      paperSize: 9,
+      orientation: 'landscape', // 👈 طباعة عرضية!
+      fitToPage: true,
+      fitToWidth: 1,
+      fitToHeight: 1
+    }
+  });
+
+  attSheet.mergeCells('A1:AK1');
+  const attTitle = attSheet.getCell('A1');
+  attTitle.value = '🏨 فندق هينو الأهرامات — كشف الحضور والانصراف والدوام الشهري (قابل للطباعة العرضية)';
+  attTitle.font = { name: 'Arial', size: 14, bold: true, color: { argb: 'FFFFFFFF' } };
+  attTitle.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1F4E78' } };
+  attTitle.alignment = { horizontal: 'center', vertical: 'middle' };
+
+  attSheet.mergeCells('A2:D2');
+  attSheet.mergeCells('E2:Q2');
+  attSheet.mergeCells('R2:AD2');
+  attSheet.mergeCells('AE2:AK2');
+
+  const ac1 = attSheet.getCell('A2'); ac1.value = 'الشهر: ................. 2026م';
+  const ac2 = attSheet.getCell('E2'); ac2.value = 'القسم: ...........................................';
+  const ac3 = attSheet.getCell('R2'); ac3.value = 'الرموز: (ح: حضور | غ: غياب | ج: إجازة | خ: تأخير)';
+  const ac4 = attSheet.getCell('AE2'); ac4.value = 'اعتماد المدير: ..............................';
+
+  [ac1, ac2, ac3, ac4].forEach(cell => {
+    cell.font = { name: 'Arial', size: 9, bold: true, color: { argb: 'FF1F4E78' } };
+    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'F2F4F8' } };
+    cell.alignment = { horizontal: 'center', vertical: 'middle' };
+    cell.border = { top: { style: 'thin' }, bottom: { style: 'thin' }, left: { style: 'thin' }, right: { style: 'thin' } };
+  });
+
+  attSheet.getRow(2).height = 24;
+  attSheet.addRow([]);
+
+  const attHeaders = ['م', 'كود', 'اسم الموظف', 'القسم / الوظيفة'];
+  for (let day = 1; day <= 31; day++) attHeaders.push(`${day}`);
+  attHeaders.push('حضور', 'غياب', 'إجازة', 'تأخير', 'ملاحظات / التوقيع');
+
+  const attHRow = attSheet.addRow(attHeaders);
+  attHRow.height = 26;
+  attHRow.eachCell(cell => {
+    cell.font = { name: 'Arial', size: 8.5, bold: true, color: { argb: 'FFFFFFFF' } };
+    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF2F5597' } };
+    cell.alignment = { horizontal: 'center', vertical: 'middle' };
+    cell.border = {
+      top: { style: 'thin', color: { argb: 'CCCCCC' } },
+      bottom: { style: 'medium', color: { argb: '1F4E78' } },
+      left: { style: 'thin', color: { argb: 'CCCCCC' } },
+      right: { style: 'thin', color: { argb: 'CCCCCC' } }
+    };
+  });
+
+  // إضافة 20 صفاً متناسقة تماماً للطباعة العرضية
+  const attStartRowIndex = 5;
+  for (let i = 0; i < 20; i++) {
+    const emp = employees[i] || { id: '', name: '', role: '' };
+    const r = attStartRowIndex + i;
+
+    const rowValues = [i + 1, emp.id, emp.name, emp.role];
+
+    for (let day = 1; day <= 31; day++) {
+      let code = 'ح';
+      if (day % 7 === 0) code = 'ج';
+      else if (i % 5 === 2 && day === 15) code = 'غ';
+      else if (i % 4 === 1 && day === 22) code = 'خ';
+      rowValues.push(code);
+    }
+
+    rowValues.push({ formula: `COUNTIF(E${r}:AI${r}, "ح")` });
+    rowValues.push({ formula: `COUNTIF(E${r}:AI${r}, "غ")` });
+    rowValues.push({ formula: `COUNTIF(E${r}:AI${r}, "ج")` });
+    rowValues.push({ formula: `COUNTIF(E${r}:AI${r}, "خ")` });
+    rowValues.push('');
+
+    const row = attSheet.addRow(rowValues);
+    row.height = 20;
+    const bg = i % 2 === 0 ? 'F9FAFB' : 'FFFFFF';
+
+    row.eachCell((cell, colNum) => {
+      cell.font = { name: 'Arial', size: 8.5 };
+      cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: bg } };
+      cell.alignment = { horizontal: colNum <= 4 ? 'right' : 'center', vertical: 'middle' };
+      cell.border = {
+        top: { style: 'thin', color: { argb: 'E5E7EB' } },
+        bottom: { style: 'thin', color: { argb: 'E5E7EB' } },
+        left: { style: 'thin', color: { argb: 'E5E7EB' } },
+        right: { style: 'thin', color: { argb: 'E5E7EB' } }
+      };
+
+      if (colNum >= 5 && colNum <= 35) {
+        if (cell.value === 'ح') cell.font = { name: 'Arial', size: 8.5, bold: true, color: { argb: 'FF276749' } };
+        if (cell.value === 'غ') {
+          cell.font = { name: 'Arial', size: 8.5, bold: true, color: { argb: 'FFC53030' } };
+          cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF5F5' } };
+        }
+        if (cell.value === 'ج') cell.font = { name: 'Arial', size: 8.5, bold: true, color: { argb: 'FFD97706' } };
+        if (cell.value === 'خ') cell.font = { name: 'Arial', size: 8.5, bold: true, color: { argb: 'FFDD6B20' } };
+      }
+
+      if (colNum >= 36 && colNum <= 39) {
+        cell.font = { name: 'Arial', size: 9, bold: true, color: { argb: 'FF1F4E78' } };
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'EDF2F7' } };
+      }
+    });
+  }
+
+  attSheet.getColumn(1).width = 4.5;
+  attSheet.getColumn(2).width = 10;
+  attSheet.getColumn(3).width = 20;
+  attSheet.getColumn(4).width = 20;
+  for (let c = 5; c <= 35; c++) attSheet.getColumn(c).width = 4.2;
+  attSheet.getColumn(36).width = 7.5;
+  attSheet.getColumn(37).width = 7.5;
+  attSheet.getColumn(38).width = 7.5;
+  attSheet.getColumn(39).width = 7.5;
+  attSheet.getColumn(40).width = 16;
+
+  // =========================================================
+  // 3. الشيت المطبوع الميداني للـ KPIs
   // =========================================================
   const printSheet = workbook.addWorksheet('استمارة تقييم يومية مطبوعة', {
     views: [{ rightToLeft: true }],
@@ -171,7 +291,6 @@ async function createPayrollWorkbook() {
   pTitle.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1F4E78' } };
   pTitle.alignment = { horizontal: 'center', vertical: 'middle' };
 
-  // صف معلومات التاريخ والوردية والمشرف
   printSheet.mergeCells('A2:C2');
   printSheet.mergeCells('D2:G2');
   printSheet.mergeCells('H2:J2');
@@ -188,7 +307,7 @@ async function createPayrollWorkbook() {
   });
 
   printSheet.getRow(2).height = 25;
-  printSheet.addRow([]); // صف فارغ
+  printSheet.addRow([]);
 
   const printHeaders = [
     'كود الموظف',
@@ -220,7 +339,7 @@ async function createPayrollWorkbook() {
   let curDeptHeader = '';
   let curPrintRow = 5;
 
-  employees.forEach((emp, index) => {
+  employees.forEach((emp) => {
     if (emp.deptName !== curDeptHeader) {
       curDeptHeader = emp.deptName;
       curPrintRow++;
@@ -276,7 +395,7 @@ async function createPayrollWorkbook() {
   printSheet.getColumn(10).width = 20;
 
   // =========================================================
-  // 3. الشيت الرئيسي: كشف الرواتب والتقييم الشهري
+  // 4. الشيت الرئيسي: كشف الرواتب والتقييم الشهري
   // =========================================================
   const masterSheet = workbook.addWorksheet('كشف الرواتب والتقييم الشهري', {
     views: [{ rightToLeft: true }]
@@ -428,7 +547,7 @@ async function createPayrollWorkbook() {
   });
 
   // =========================================================
-  // 4. الشيت التعليمي: دليل وشروط حساب المرتبات والـ KPIs
+  // 5. الشيت التعليمي: دليل وشروط حساب المرتبات والـ KPIs
   // =========================================================
   const guideSheet = workbook.addWorksheet('دليل وشروط حساب المرتبات', {
     views: [{ rightToLeft: true }]
@@ -465,7 +584,7 @@ async function createPayrollWorkbook() {
   let outputPath = path.join(__dirname, 'جدول_رواتب_وتقييم_الموظفين_الشهري.xlsx');
   try {
     await workbook.xlsx.writeFile(outputPath);
-    console.log(`Master Payroll Workbook created at: ${outputPath}`);
+    console.log(`Master Payroll Workbook with Attendance created at: ${outputPath}`);
   } catch (err) {
     if (err.code === 'EBUSY') {
       outputPath = path.join(__dirname, 'جدول_رواتب_وتقييم_30_موظف_الشهري.xlsx');
