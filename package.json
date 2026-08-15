@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "axios": "^1.19.0",
+    "docx": "^9.7.1",
     "exceljs": "^4.4.0",
     "express": "^4.22.2",
     "pptxgenjs": "^4.0.1"
