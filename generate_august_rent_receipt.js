@@ -41,7 +41,7 @@ const receiptData = {
   lessorName: 'نصر دسوقي عبد الحميد عبد الصمد',
   lessorAddress: 'شارع جمال عبد الناصر، نزلة السمان، الهرم، الجيزة',
   lessorNationalId: NASR_ID,
-  lesseeCompany: 'شركة المطعم الأرجنتيني 2 لإدارة الفنادق والمطاعم',
+  lesseeCompany: 'شركة المطعم الأرجنتيني المتطور لإدارة الفنادق والمطاعم',
   lesseeRep: 'السيد / محمد ممدوح عبد الحميد مرسي',
   lesseeNationalId: MOHAMED_ID,
   propertyAddress: 'البنسيون الفندقي الكائن في 21 شارع جمال عبد الناصر، نزلة السمان، الهرم، الجيزة (27 غرفة)',
@@ -62,7 +62,7 @@ async function createReceiptWordDoc() {
           text: text,
           rightToLeft: true,
           font: fontName,
-          size: options.size || 26, // 13pt
+          size: options.size || 26,
           bold: options.bold || false,
           color: options.color || "000000"
         })
@@ -92,7 +92,7 @@ async function createReceiptWordDoc() {
         createRtlParagraph("وهذا إيصال مني بسداد كافة المستحقات الإيجارية عن هذا الشهر وبراءة ذمة المستأجر عنه.", { bold: true, size: 24, before: 80 }),
 
         createRtlParagraph("\nالمستلم (المؤجر)                                                        المسدد (المستأجر)", { bold: true, size: 26, color: "78350F", before: 180, alignment: AlignmentType.CENTER }),
-        createRtlParagraph("نصر دسوقي عبد الحميد عبد الصمد                                        شركة المطعم الأرجنتيني 2", { bold: true, size: 24, alignment: AlignmentType.CENTER }),
+        createRtlParagraph("نصر دسوقي عبد الحميد عبد الصمد                                        شركة المطعم الأرجنتيني المتطور لإدارة الفنادق والمطاعم", { bold: true, size: 22, alignment: AlignmentType.CENTER }),
         createRtlParagraph(`الرقم القومي: ${receiptData.lessorNationalId}                                                (عنها/ محمد ممدوح مرسي)`, { size: 24, alignment: AlignmentType.CENTER }),
         createRtlParagraph("التوقيع: .......................................                                        التوقيع: .......................................", { bold: true, alignment: AlignmentType.CENTER, before: 100 }),
         createRtlParagraph("البصمة: .......................................                                        الختم: .......................................", { bold: true, alignment: AlignmentType.CENTER, before: 60 })
@@ -103,7 +103,7 @@ async function createReceiptWordDoc() {
   const buffer = await Packer.toBuffer(doc);
   const docxPath = path.join(receiptsDir, 'إيصال_استلام_إيجار_شهر_أغسطس_2026_نصر_دسوقي.docx');
   fs.writeFileSync(docxPath, buffer);
-  console.log(`✅ Single-Page Word Created: إيصال_استلام_إيجار_شهر_أغسطس_2026_نصر_دسوقي.docx`);
+  console.log(`✅ Single-Page Word Updated: إيصال_استلام_إيجار_شهر_أغسطس_2026_نصر_دسوقي.docx`);
 }
 
 // 2. توليد مستند PDF في صفحة واحدة 100%
@@ -138,7 +138,7 @@ function createReceiptPdfDoc() {
     .notice-box { font-size: 10pt; color: #475569; font-style: italic; margin-top: 10px; background: #F1F5F9; padding: 8px 12px; border-radius: 6px; border-right: 4px solid #1F4E78; }
     
     .sig-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-    .sig-box { width: 48%; border: 1px solid #CBD5E1; border-radius: 6px; padding: 10px; text-align: center; background: #FAFAFA; vertical-align: top; font-size: 10.5pt; }
+    .sig-box { width: 48%; border: 1px solid #CBD5E1; border-radius: 6px; padding: 10px; text-align: center; background: #FAFAFA; vertical-align: top; font-size: 10pt; }
   </style>
 </head>
 <body>
@@ -185,7 +185,7 @@ function createReceiptPdfDoc() {
       <table class="sig-table">
         <tr>
           <td class="sig-box">
-            <strong style="color:#78350F; font-size:11.5pt;">المستلم (المؤجر)</strong><br><br>
+            <strong style="color:#78350F; font-size:11pt;">المستلم (المؤجر)</strong><br><br>
             نصر دسوقي عبد الحميد عبد الصمد<br>
             الرقم القومي: ${receiptData.lessorNationalId}<br><br>
             التوقيع: .......................................<br>
@@ -193,8 +193,8 @@ function createReceiptPdfDoc() {
           </td>
           <td style="width:4%;"></td>
           <td class="sig-box">
-            <strong style="color:#1F4E78; font-size:11.5pt;">المسدد (المستأجر)</strong><br><br>
-            شركة المطعم الأرجنتيني 2<br>
+            <strong style="color:#1F4E78; font-size:11pt;">المسدد (المستأجر)</strong><br><br>
+            شركة المطعم الأرجنتيني المتطور لإدارة الفنادق والمطاعم<br>
             (عنها/ محمد ممدوح مرسي)<br><br>
             التوقيع: .......................................<br>
             الختم: .......................................
@@ -214,7 +214,7 @@ function createReceiptPdfDoc() {
 async function main() {
   await createReceiptWordDoc();
   createReceiptPdfDoc();
-  console.log('\n✨ STRICTLY SINGLE-PAGE RENT RECEIPT GENERATED SUCCESSFULLY!');
+  console.log('\n✨ RECEIPT UPDATED WITH FULL COMPANY NAME SUCCESSFULLY!');
 }
 
 main().catch(err => console.error(err));
