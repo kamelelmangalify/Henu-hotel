@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Booking | HENU Hotel - Pyramids View</title>
+  <meta name="description" content="Book your stay at HENU Hotel in Giza, Egypt. Reserve directly for the best rates and payment at property.">
+  <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.jpg" alt="HENU Hotel" class="nav-logo-img">
+        <span class="logo-text">HENU</span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="accommodation.html" data-i18n="nav.accommodation">Accommodation</a></li>
+        <li><a href="experiences.html" data-i18n="nav.experiences">Experiences</a></li>
+        <li><a href="b2b.html" data-i18n="nav.b2b">B2B Services</a></li>
+        <li><a href="careers.html" data-i18n="nav.careers">Careers</a></li>
+        <li><a href="contact.html" data-i18n="nav.contact" class="active">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="lang-switcher">
+          <select id="langSelect" onchange="i18n.setLanguage(this.value)">
+            <option value="en">EN</option>
+            <option value="de">DE</option>
+            <option value="es">ES</option>
+            <option value="it">IT</option>
+          </select>
+        </div>
+        <a href="contact.html#booking" class="btn btn-gold" data-i18n="nav.book">Book Now</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header" style="background-image: url('images/hotel/pyramids-terrace-night.jpg'); background-size: cover; background-position: center; padding: 150px 0 100px; text-align: center; color: white; position: relative;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6);"></div>
+    <div class="container" style="position: relative; z-index: 1;">
+      <h1 style="font-family: 'Cinzel', serif; font-size: 3rem; margin-bottom: 10px;" data-i18n="contact.title">Contact & Booking</h1>
+      <p class="breadcrumb" style="font-size: 1.1rem;"><a href="index.html" style="color: white; text-decoration: none;" data-i18n="nav.home">Home</a> &gt; <span data-i18n="nav.contact">Contact</span></p>
+    </div>
+  </header>
+
+  <section class="section" style="background-color: var(--clr-ivory-dark);">
+    <div class="container reveal">
+      <div class="booking-layout">
+        <!-- Left Column: Booking Form -->
+        <div class="booking-column" id="booking">
+          <div class="booking-form">
+            <h3 style="font-family: 'Cinzel', serif; color: var(--clr-nile); font-size: 1.8rem; margin-bottom: 8px;" data-i18n="contact.bookingTitle">Book Your Stay</h3>
+            <p style="color: var(--clr-gray); margin-bottom: 24px;" data-i18n="contact.bookingDesc">Fill out the form below to secure your reservation at HENU Hotel.</p>
+            
+            <form id="bookingForm">
+              <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                  <label data-i18n="contact.labelCheckin">Check-in Date</label>
+                  <input type="date" id="checkin" required>
+                </div>
+                <div class="form-group">
+                  <label data-i18n="contact.labelCheckout">Check-out Date</label>
+                  <input type="date" id="checkout" required>
+                </div>
+              </div>
+              
+              <div class="form-row" style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+                <div class="form-group">
+                  <label data-i18n="contact.labelRoom">Room Type</label>
+                  <select id="roomType" required>
+                    <option value="" disabled selected data-i18n="contact.selectRoom">Choose a room type</option>
+                    <optgroup label="Single Rooms">
+                      <option value="single_std" data-i18n="contact.room.single_std">Single Room (Standard) - $12/night</option>
+                      <option value="single_win" data-i18n="contact.room.single_win">Single with Window - $15/night</option>
+                      <option value="single_balc" data-i18n="contact.room.single_balc">Single with Balcony - $20/night</option>
+                    </optgroup>
+                    <optgroup label="Double Rooms">
+                      <option value="double_std" data-i18n="contact.room.double_std">Double Room (Standard) - $18/night</option>
+                      <option value="double_win" data-i18n="contact.room.double_win">Double with Window - $22/night</option>
+                      <option value="double_balc" data-i18n="contact.room.double_balc">Double with Balcony - $25/night</option>
+                    </optgroup>
+                    <optgroup label="Triple / Family Rooms">
+                      <option value="triple_std" data-i18n="contact.room.triple_std">Triple Room (Standard) - $25/night</option>
+                      <option value="triple_win" data-i18n="contact.room.triple_win">Triple with Window - $30/night</option>
+                      <option value="triple_balc" data-i18n="contact.room.triple_balc">Triple with Balcony - $35/night</option>
+                    </optgroup>
+                    <optgroup label="Suites">
+                      <option value="suite" data-i18n="contact.room.suite">King Suite — Pyramids View - $45/night</option>
+                    </optgroup>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label data-i18n="contact.labelGuests">Guests</label>
+                  <select id="guestCount" required>
+                    <option value="1">1</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6+</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label data-i18n="contact.labelName">Full Name</label>
+                <input type="text" id="guestName" placeholder="Your full name" required>
+              </div>
+
+              <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                  <label data-i18n="contact.labelEmail">Email Address</label>
+                  <input type="email" id="guestEmail" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                  <label data-i18n="contact.labelPhone">Phone / WhatsApp</label>
+                  <input type="tel" id="guestPhone" placeholder="+1 234 567 8900">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label data-i18n="contact.labelAddons">Add-on Tours & Experiences</label>
+                <div class="tour-addons">
+                  <label class="tour-addon-label">
+                    <input type="checkbox" class="tour-addon" data-price="25" data-name="Horse & Camel Ride">
+                    <span data-i18n="contact.addon.camel">Horse & Camel Ride - $25</span>
+                  </label>
+                  <label class="tour-addon-label">
+                    <input type="checkbox" class="tour-addon" data-price="45" data-name="Day Trip (Museum, Saqqara)">
+                    <span data-i18n="contact.addon.daytrip">Day Trip (Museum, Saqqara) - $45</span>
+                  </label>
+                  <label class="tour-addon-label">
+                    <input type="checkbox" class="tour-addon" data-price="35" data-name="Cairo City Tour">
+                    <span data-i18n="contact.addon.cairo">Cairo City Tour - $35</span>
+                  </label>
+                  <label class="tour-addon-label">
+                    <input type="checkbox" class="tour-addon" data-price="20" data-name="Airport Transfer">
+                    <span data-i18n="contact.addon.airport">Airport Transfer - $20</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label data-i18n="contact.labelRequests">Special Requests</label>
+                <textarea id="specialRequests" rows="3" placeholder="Any dietary preferences, early arrival, etc."></textarea>
+              </div>
+
+              <div id="bookingSummary">
+                <!-- Calculated dynamically -->
+              </div>
+
+              <div id="bookingSuccess">
+                <h4 data-i18n="contact.successTitle">Booking Request Sent!</h4>
+                <p data-i18n="contact.successDesc">Thank you! We'll confirm your reservation within 24 hours via WhatsApp or email.</p>
+              </div>
+
+              <button type="submit" class="btn btn-gold" style="width: 100%; margin-top: 16px;" data-i18n="contact.formSubmit">Send Booking Request</button>
+            </form>
+
+            <div class="payment-policy" style="margin-top: 24px;">
+              <h4 data-i18n="contact.paymentTitle">💳 Payment Policy</h4>
+              <p data-i18n="contact.paymentDesc">We currently accept payment at the property upon arrival. No advance payment required.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Contact Information -->
+        <div class="contact-info-column">
+          <div class="contact-info-card">
+            <h3 style="font-family: 'Cinzel', serif; color: var(--clr-nile);" data-i18n="contact.infoTitle">Get in Touch</h3>
+            
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div>
+                <h4 data-i18n="contact.addressTitle">Address</h4>
+                <p data-i18n="contact.address">21 Gamal Abdel Nasser St., Nazlet El-Semman, Al Haram, Giza, Egypt</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div>
+                <h4 data-i18n="contact.phoneTitle">Phone</h4>
+                <p>+20 XXX XXX XXXX</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">📧</div>
+              <div>
+                <h4 data-i18n="contact.emailTitle">Email</h4>
+                <p>info@henuhotel.com</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">🕒</div>
+              <div>
+                <h4 data-i18n="contact.hoursTitle">Opening Hours</h4>
+                <p data-i18n="contact.hoursDesc">Reception open 24/7</p>
+              </div>
+            </div>
+
+            <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px;">
+              <a href="https://wa.me/20XXXXXXXXXX" target="_blank" class="btn btn-outline" style="width: 100%; justify-content: center;">
+                💬 <span data-i18n="contact.whatsapp">Chat on WhatsApp</span>
+              </a>
+              <a href="https://maps.app.goo.gl/XMCE6e85VGvx7cBK9" target="_blank" class="btn btn-nile" style="width: 100%; justify-content: center;">
+                🗺️ <span>Open in Google Maps</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Google Maps Embed -->
+          <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.634674681655!2d31.1378125!3d29.9749167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDU4JzI5LjciTiAzMcKwMDgnMTYuMSJF!5e0!3m2!1sen!2seg!4v1700000000000" width="100%" height="280" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <span class="footer-logo"><img src="images/logo.jpg" alt="HENU Hotel" class="footer-logo-img"> HENU</span>
+        <p data-i18n="footer.tagline">Where Ancient Wonders Meet Modern Comfort</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><path d="M17.5 6.5h.01"></path><path d="M21 9v6a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V9a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5z"></path></svg></a>
+          <a href="#" aria-label="TripAdvisor"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M12 6c-3.309 0-6 2.691-6 6s2.691 6 6 6 6-2.691 6-6-2.691-6-6-6zm0 10c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z"></path></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.quickLinks">Quick Links</h4>
+        <ul>
+          <li><a href="accommodation.html" data-i18n="nav.accommodation">Accommodation</a></li>
+          <li><a href="experiences.html" data-i18n="nav.experiences">Experiences</a></li>
+          <li><a href="b2b.html" data-i18n="nav.b2b">B2B Services</a></li>
+          <li><a href="careers.html" data-i18n="nav.careers">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <p>📍 21 Gamal Abdel Nasser St., Nazlet El-Semman, Giza, Egypt</p>
+        <p>📞 +20 XXX XXX XXXX</p>
+        <p>📧 info@henuhotel.com</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.newsletter">Newsletter</h4>
+        <p data-i18n="footer.newsletterDesc">Subscribe for special offers</p>
+        <form class="footer-newsletter">
+          <input type="email" data-i18n-placeholder="footer.emailPlaceholder" placeholder="Your email">
+          <button type="submit" class="btn btn-gold-sm" data-i18n="footer.subscribe">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 HENU Hotel. <span data-i18n="footer.rights">All rights reserved.</span></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>

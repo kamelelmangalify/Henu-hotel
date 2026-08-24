@@ -1,0 +1,391 @@
+{
+  "nav": {
+    "home": "Home",
+    "accommodation": "Alloggi",
+    "experiences": "Esperienze e Tour",
+    "b2b": "Servizi B2B",
+    "careers": "Carriere",
+    "contact": "Contatti e Prenotazioni",
+    "book": "Prenota Ora"
+  },
+  "hero": {
+    "badge": "HOTEL CON VISTA SULLE PIRAMIDI",
+    "title": "Dove le Meraviglie Antiche Incontrano il Comfort Moderno",
+    "subtitle": "Vivi la magia delle Grandi Piramidi dalla nostra terrazza panoramica. HENU Hotel — la tua porta d'accesso a 5.000 anni di storia.",
+    "cta": "Prenota il Tuo Soggiorno",
+    "explore": "Esplora le Camere",
+    "bookBtn": "Prenoti il Suo soggiorno",
+    "exploreBtn": "Esplorare le camere"
+  },
+  "about": {
+    "title": "Benvenuti all'HENU",
+    "subtitle": "Un Boutique Hotel nel Cuore della Storia",
+    "p1": "Situato nello storico villaggio di Nazlet El-Semman, a pochi passi dalle Grandi Piramidi di Giza e dalla Sfinge, l'HENU Hotel offre un'esperienza senza pari dove l'antico Egitto prende vita.",
+    "p2": "Le nostre 25 camere, splendidamente arredate, presentano decorazioni di ispirazione faraonica, bagni in marmo e comfort moderni. Svegliati con viste mozzafiato sulle Piramidi dalla nostra terrazza panoramica — uno spettacolo che ha affascinato i viaggiatori per millenni.",
+    "stat1Label": "Camere",
+    "stat2Label": "Viste sulle Piramidi",
+    "stat3Label": "Ospiti Felici",
+    "stat4Label": "Anni di Storia",
+    "stat1": "Camere",
+    "stat2": "Viste panoramiche sulle Piramidi",
+    "stat2Value": "100%",
+    "stat3": "Ospiti felici",
+    "stat4": "Anni di patrimonio"
+  },
+  "rooms": {
+    "title": "Le Nostre Sistemazioni",
+    "subtitle": "Scegli la tua camera perfetta e svegliati davanti alle meraviglie dell'antico Egitto",
+    "single": {
+      "name": "Camera Singola",
+      "desc": "Un accogliente rifugio per chi viaggia da solo, dotato di un comodo letto singolo, bagno in marmo ed elegante arredamento faraonico.",
+      "capacity": "1 Ospite",
+      "size": "20 m²",
+      "from": "Da 12 $ / notte",
+      "price": "12 $",
+      "perNight": "/notte"
+    },
+    "double": {
+      "name": "Camera Matrimoniale",
+      "desc": "Spaziosa camera con letto matrimoniale, area salotto, bagno in marmo e vista sul rigoglioso giardino o sul villaggio storico.",
+      "capacity": "2 Ospiti",
+      "size": "28 m²",
+      "from": "Da 18 $ / notte",
+      "price": "18 $",
+      "perNight": "/notte"
+    },
+    "triple": {
+      "name": "Camera Tripla / Familiare",
+      "desc": "Perfetta per famiglie o gruppi, dotata di tre letti singoli, disposizione spaziosa, bagno in marmo e vista sul giardino.",
+      "capacity": "3 Ospiti",
+      "size": "35 m²",
+      "from": "Da 25 $ / notte",
+      "price": "25 $",
+      "perNight": "/notte"
+    },
+    "suite": {
+      "name": "Suite King — Vista Piramidi",
+      "desc": "La nostra camera principale con letto king-size, decorazioni parietali faraoniche, bagno in marmo e balcone privato con vista diretta sulle Grandi Piramidi e sulla Sfinge.",
+      "capacity": "2-4 Ospiti",
+      "size": "45 m²",
+      "from": "45 $ / notte",
+      "price": "45 $",
+      "perNight": "/notte"
+    },
+    "amenities": "Servizi in Camera",
+    "amenity1": "Wi-Fi Gratuito",
+    "amenity2": "Aria Condizionata",
+    "amenity3": "TV a Schermo Piatto",
+    "amenity4": "Bagno in Marmo",
+    "amenity5": "Pulizia Giornaliera",
+    "amenity6": "Reception 24/7",
+    "amenity7": "Servizio in Camera",
+    "amenity8": "Cassaforte",
+    "viewDetails": "Vedi Dettagli",
+    "bookThis": "Prenota Questa Camera",
+    "bookRoom": "Prenota questa camera",
+    "premium": "PREMIUM"
+  },
+  "experiences": {
+    "title": "Esperienze e Tour",
+    "subtitle": "Scopri la magia dell'Egitto con le nostre esperienze curate",
+    "horse": {
+      "title": "Passeggiate a Cavallo e Cammello",
+      "desc": "Esplora l'altopiano delle Piramidi a cavallo o a dorso di cammello all'alba o al tramonto — un'avventura indimenticabile attraverso 5.000 anni di storia.",
+      "duration": "1-2 ore",
+      "price": "Da $25"
+    },
+    "dayTrips": {
+      "title": "Gite di un Giorno",
+      "desc": "Visita il Grande Museo Egizio, la Piramide a gradoni di Saqqara e l'antica città di Menfi — tutto in un'incredibile gita di un giorno.",
+      "duration": "Intera giornata",
+      "price": "Da $45"
+    },
+    "cairoTours": {
+      "title": "Tour della Città di Il Cairo",
+      "desc": "Scopri le vivaci strade del Cairo — dal bazar di Khan El-Khalili alla Cittadella di Saladino e alle splendide moschee del Cairo Islamico.",
+      "duration": "4-8 ore",
+      "price": "Da $35"
+    },
+    "transfers": {
+      "title": "Trasferimenti e Logistica",
+      "desc": "Trasferimenti aeroportuali, trasporti interurbani e prenotazioni alberghiere in tutto l'Egitto. Lasciaci gestire la logistica mentre ti godi il viaggio.",
+      "duration": "Flessibile",
+      "price": "Da $20"
+    },
+    "bookTour": "Prenota Questo Tour",
+    "addToBooking": "Aggiungi alla Prenotazione"
+  },
+  "b2b": {
+    "title": "B2B e Gestione Alberghiera",
+    "subtitle": "Servizi di ospitalità professionali per hotel e partner",
+    "training": {
+      "title": "Formazione e Tirocini",
+      "desc": "Offriamo programmi completi di formazione nel settore dell'ospitalità e rotazioni di tirocini per aspiranti professionisti alberghieri. I nostri programmi coprono le operazioni di reception, la gestione delle pulizie, le relazioni con gli ospiti e il servizio di ristorazione."
+    },
+    "management": {
+      "title": "Gestione Alberghiera",
+      "desc": "Servizi di gestione completi per piccoli hotel e boutique hotel. Dal personale e dalla formazione alle operazioni e all'assicurazione della qualità — portiamo la nostra esperienza nella tua struttura."
+    },
+    "staffing": {
+      "title": "Personale Professionale",
+      "desc": "Accedi al nostro database curato di professionisti dell'ospitalità formati. Forniamo personale verificato e qualificato per hotel in tutto l'Egitto — dalla reception alle pulizie al personale di cucina."
+    },
+    "partnerships": {
+      "title": "Partnership Strategiche",
+      "desc": "Collabora con HENU per una crescita reciproca. Collaboriamo con tour operator, agenzie di viaggio e marchi dell'ospitalità per creare esperienze eccezionali per gli ospiti."
+    },
+    "cta": "Contatta il Nostro Team B2B",
+    "contactTitle": "Contatti il nostro team B2B",
+    "form": {
+      "company": "Nome dell'azienda",
+      "contactPerson": "Persona di contatto",
+      "email": "Indirizzo e-mail",
+      "interest": "Servizio di interesse",
+      "message": "Il Suo messaggio",
+      "phone": "Numero di telefono",
+      "selectInterest": "Selezioni un servizio"
+    },
+    "introDesc": "L'HENU Hotel estende la sua competenza nell'ospitalità oltre le nostre mura. Offriamo soluzioni complete per hotel e partner.",
+    "introTitle": "I Nostri Servizi Professionali",
+    "stat": {
+      "experience": "Anni di esperienza",
+      "rooms": "Camere gestite",
+      "staff": "Personale qualificato"
+    },
+    "whyTitle": "Perché scegliere HENU?"
+  },
+  "careers": {
+    "title": "Unisciti al Nostro Team",
+    "subtitle": "Costruisci la tua carriera nell'ospitalità con HENU Hotel",
+    "intro": "Allo HENU, crediamo che il nostro team sia la nostra più grande risorsa. Siamo sempre alla ricerca di persone appassionate che condividano il nostro impegno per un'ospitalità eccezionale.",
+    "whyTitle": "Perché Lavorare con Noi?",
+    "benefit1": "Sviluppo Professionale",
+    "benefit1Desc": "Formazione continua e opportunità di crescita nel settore dell'ospitalità.",
+    "benefit2": "Posizione Unica",
+    "benefit2Desc": "Lavora in uno dei luoghi più iconici del mondo — le Piramidi di Giza.",
+    "benefit3": "Esposizione Internazionale",
+    "benefit3Desc": "Interagisci con ospiti da tutto il mondo e sviluppa le tue competenze linguistiche.",
+    "benefit4": "Cultura del Team",
+    "benefit4Desc": "Unisciti a un team solidale e familiare che valorizza ogni membro.",
+    "applyTitle": "Candidati Ora",
+    "applyDesc": "Invia il tuo CV e ti contatteremo quando si aprirà una posizione adatta.",
+    "staffingTitle": "Database del Personale per l'Ospitalità",
+    "staffingDesc": "Cerchi lavoro in hotel in Egitto? Registrati nel nostro database del personale. Mettiamo in contatto professionisti qualificati con hotel in tutto il paese.",
+    "formName": "Nome e Cognome",
+    "formEmail": "Indirizzo Email",
+    "formPhone": "Numero di Telefono",
+    "formPosition": "Posizione Desiderata",
+    "formExperience": "Anni di Esperienza",
+    "formCV": "Carica CV (PDF)",
+    "formMessage": "Lettera di Presentazione / Note",
+    "submit": "Invia Candidatura",
+    "benefitsTitle": "Perché lavorare con noi?",
+    "introTitle": "Unisciti alla famiglia HENU",
+    "joinDb": "Registrati nel database",
+    "labelCv": "Carica CV (PDF)",
+    "labelEmail": "Indirizzo e-mail",
+    "labelExperience": "Anni di esperienza",
+    "labelName": "Nome completo",
+    "labelNotes": "Lettera di presentazione / Note",
+    "labelPhone": "Numero di telefono",
+    "labelPosition": "Posizione desiderata",
+    "pos": {
+      "housekeeping": "Pulizie",
+      "kitchen": "Personale di cucina",
+      "maintenance": "Manutenzione",
+      "management": "Gestione",
+      "other": "Altro",
+      "reception": "Reception",
+      "tourguide": "Guida turistica"
+    },
+    "selectPosition": "Selezioni una posizione"
+  },
+  "contact": {
+    "title": "Contatti e Prenotazioni",
+    "subtitle": "Prenota il tuo soggiorno all'HENU Hotel o contattaci per qualsiasi domanda",
+    "bookingTitle": "Prenota il Tuo Soggiorno",
+    "bookingDesc": "Compila il modulo sottostante e confermeremo la tua prenotazione tramite WhatsApp o email.",
+    "infoTitle": "Mettiti in Contatto",
+    "address": "Via Gamal Abdel Nasser 21, Nazlet El-Semman, Al Haram, Giza, Egitto",
+    "phone": "+20 XXX XXX XXXX",
+    "email": "info@henuhotel.com",
+    "whatsapp": "Chat su WhatsApp",
+    "mapTitle": "Trovaci",
+    "paymentTitle": "Politica di Pagamento",
+    "paymentDesc": "Attualmente accettiamo il pagamento in struttura all'arrivo. Nessun pagamento anticipato richiesto.",
+    "formCheckin": "Data di Check-in",
+    "formCheckout": "Data di Check-out",
+    "formRoomType": "Tipo di Camera",
+    "formGuests": "Numero di Ospiti",
+    "formName": "Nome e Cognome",
+    "formEmail": "Indirizzo Email",
+    "formPhone": "Numero di Telefono",
+    "formRequests": "Richieste Speciali",
+    "formTours": "Tour ed Esperienze Aggiuntive",
+    "formSubmit": "Invia Richiesta di Prenotazione",
+    "successTitle": "Richiesta di Prenotazione Inviata!",
+    "successDesc": "Grazie! Confermeremo la tua prenotazione entro 24 ore tramite WhatsApp o email.",
+    "addon": {
+      "airport": "Trasferimento aeroportuale — $20",
+      "cairo": "Tour della città del Cairo — $35",
+      "camel": "Giro a cavallo e in cammello — $25",
+      "daytrip": "Gita di un giorno (Museo, Saqqara) — $45"
+    },
+    "addressTitle": "Indirizzo",
+    "emailTitle": "E-mail",
+    "hoursDesc": "Reception aperta 24/7",
+    "hoursTitle": "Orari di apertura",
+    "labelAddons": "Tour ed esperienze aggiuntive",
+    "labelCheckin": "Data di check-in",
+    "labelCheckout": "Data di check-out",
+    "labelEmail": "Indirizzo e-mail",
+    "labelGuests": "Numero di ospiti",
+    "labelName": "Nome completo",
+    "labelPhone": "Numero di telefono",
+    "labelRequests": "Richieste speciali",
+    "labelRoom": "Tipo di camera",
+    "phoneTitle": "Telefono",
+    "room": {
+      "single_std": "Camera Singola (Standard) — 12 $/notte",
+      "single_win": "Singola con Finestra — 15 $/notte",
+      "single_balc": "Singola con Balcone — 20 $/notte",
+      "double_std": "Camera Doppia (Standard) — 18 $/notte",
+      "double_win": "Doppia con Finestra — 22 $/notte",
+      "double_balc": "Doppia con Balcone — 25 $/notte",
+      "triple_std": "Camera Tripla (Standard) — 25 $/notte",
+      "triple_win": "Tripla con Finestra — 30 $/notte",
+      "triple_balc": "Tripla con Balcone — 35 $/notte",
+      "suite": "Suite King — Vista Piramidi — 45 $/notte",
+      "single": "Camera Singola — Da 12 $/notte",
+      "double": "Camera Doppia — Da 18 $/notte",
+      "triple": "Camera Tripla — Da 25 $/notte",
+      "king": "Suite King — Vista Piramidi — 45 $/notte"
+    },
+    "selectRoom": "Scegli un tipo di camera"
+  },
+  "testimonials": {
+    "title": "Cosa Dicono i Nostri Ospiti",
+    "subtitle": "Recensioni reali di viaggiatori che hanno soggiornato da noi",
+    "t1": {
+      "text": "La vista delle Piramidi dalla terrazza panoramica al tramonto è assolutamente mozzafiato. Le camere sono splendidamente decorate con arte egizia. Il personale ha fatto di tutto per rendere il nostro soggiorno memorabile.",
+      "author": "Sarah M.",
+      "country": "Regno Unito"
+    },
+    "t2": {
+      "text": "Posizione perfetta — letteralmente a due passi dalle Piramidi! Le camere a tema faraonico sono stupende e i bagni in marmo sono lussuosi. Ottimo rapporto qualità-prezzo.",
+      "author": "Marco R.",
+      "country": "Italia"
+    },
+    "t3": {
+      "text": "Abbiamo prenotato una passeggiata in cammello tramite l'hotel ed è stato il momento clou del nostro viaggio. L'hotel ha organizzato tutto perfettamente. Non vedo l'ora di tornare!",
+      "author": "Anna K.",
+      "country": "Germania"
+    }
+  },
+  "footer": {
+    "tagline": "Dove le Meraviglie Antiche Incontrano il Comfort Moderno",
+    "quickLinks": "Link Rapidi",
+    "contact": "Contatti",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Iscriviti per offerte speciali e consigli di viaggio",
+    "emailPlaceholder": "Il tuo indirizzo email",
+    "subscribe": "Iscriviti",
+    "rights": "Tutti i diritti riservati."
+  },
+  "common": {
+    "learnMore": "Scopri di Più",
+    "viewAll": "Vedi Tutto",
+    "readMore": "Leggi di Più",
+    "backToTop": "Torna Su",
+    "loading": "Caricamento...",
+    "close": "Chiudi"
+  },
+  "accom": {
+    "title": "Le Nostre Sistemazioni"
+  },
+  "amenities": {
+    "title": "Servizi in camera"
+  },
+  "amenity": {
+    "ac": "Aria condizionata",
+    "balcony": "Balcone privato",
+    "breakfast": "Colazione disponibile",
+    "coffee": "Caffè e tè",
+    "housekeeping": "Pulizia giornaliera",
+    "marble": "Bagno in marmo",
+    "minibar": "Minibar",
+    "reception": "Reception 24/7",
+    "roomservice": "Servizio in camera",
+    "safe": "Cassaforte in camera",
+    "seating": "Area salotto",
+    "tv": "TV a schermo piatto",
+    "view": "Vista panoramica",
+    "wifi": "Wi-Fi gratuito"
+  },
+  "cta": {
+    "btn": "Prenota ora",
+    "contactBtn": "Contatta il team B2B",
+    "expSubtitle": "Lasci che creiamo la perfetta avventura egiziana per Lei.",
+    "expTitle": "Pronto per un'avventura?",
+    "roomTitle": "Prenoti la Sua camera perfetta",
+    "subtitle": "La Sua vacanza da sogno in Egitto è a un solo clic.",
+    "title": "Pronto per un'esperienza indimenticabile?"
+  },
+  "exp": {
+    "book": "Prenota tour",
+    "bookTour": "Prenota questo tour",
+    "cairo": {
+      "desc": "Scopra il Cairo islamico, il bazar di Khan el-Khalili e la Cittadella di Saladino.",
+      "price": "Da $35",
+      "title": "Tour della città del Cairo"
+    },
+    "dayTrips": {
+      "desc": "Visiti il Grande Museo Egizio, la piramide a gradoni di Saqqara e l'antica Menfi.",
+      "price": "Da $45",
+      "title": "Gite di un giorno"
+    },
+    "horse": {
+      "desc": "Esplori l'altopiano delle Piramidi a cavallo o in cammello all'alba o al tramonto.",
+      "price": "Da $25",
+      "title": "Giri a cavallo e in cammello"
+    },
+    "how": {
+      "step1Desc": "Navighi nella nostra selezione curata di tour ed esperienze.",
+      "step1Title": "Scegliere",
+      "step2Desc": "Aggiunga le esperienze scelte alla Sua richiesta di prenotazione.",
+      "step2Title": "Prenotare",
+      "step3Desc": "Si sieda e lasci che le nostre guide esperte La portino in un viaggio indimenticabile.",
+      "step3Title": "Divertirsi",
+      "title": "Come funziona"
+    },
+    "introText": "Scopra la magia dell'antico Egitto con la nostra selezione curata di tour ed esperienze.",
+    "introTitle": "Esperienze Egiziane Indimenticabili",
+    "pageTitle": "Esperienze e Tour",
+    "title": "Esperienze Curate"
+  },
+  "gallery": {
+    "title": "Galleria"
+  },
+  "parallax": {
+    "bookTable": "Prenoti un tavolo",
+    "quote": "\"Ceni sotto le stelle, con le Piramidi come sfondo\""
+  },
+  "testi": {
+    "1": {
+      "country": "Regno Unito",
+      "name": "- Sarah J.",
+      "quote": "\"La vista dalla terrazza panoramica è semplicemente incredibile. Il personale ci ha trattato come dei re. La migliore esperienza in hotel in Egitto!\""
+    },
+    "2": {
+      "country": "Italia",
+      "name": "- Marco R.",
+      "quote": "\"Posizione perfetta, camere incredibili con arte faraonica. I bagni in marmo sono splendidi. Altamente raccomandato!\""
+    },
+    "3": {
+      "country": "Germania",
+      "name": "- Anna K.",
+      "quote": "\"Abbiamo prenotato un giro in cammello tramite l'hotel — il momento clou del nostro viaggio! Incredibile colazione sul tetto con vista sulle piramidi.\""
+    },
+    "title": "Cosa dicono i nostri ospiti"
+  }
+}

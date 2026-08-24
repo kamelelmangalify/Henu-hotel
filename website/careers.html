@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers | HENU Hotel - Pyramids View</title>
+  <meta name="description" content="Build your career in hospitality with HENU Hotel in Giza. Explore open positions and staffing opportunities.">
+  <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.jpg" alt="HENU Hotel" class="nav-logo-img">
+        <span class="logo-text">HENU</span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="accommodation.html" data-i18n="nav.accommodation">Accommodation</a></li>
+        <li><a href="experiences.html" data-i18n="nav.experiences">Experiences</a></li>
+        <li><a href="b2b.html" data-i18n="nav.b2b">B2B Services</a></li>
+        <li><a href="careers.html" data-i18n="nav.careers" class="active">Careers</a></li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="lang-switcher">
+          <select id="langSelect" onchange="i18n.setLanguage(this.value)">
+            <option value="en">EN</option>
+            <option value="de">DE</option>
+            <option value="es">ES</option>
+            <option value="it">IT</option>
+          </select>
+        </div>
+        <a href="contact.html#booking" class="btn btn-gold" data-i18n="nav.book">Book Now</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header" style="background-image: url('images/hotel/corridor-pharaoh.jpg'); background-size: cover; background-position: center; padding: 150px 0 100px; text-align: center; color: white; position: relative;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6);"></div>
+    <div class="container" style="position: relative; z-index: 1;">
+      <h1 style="font-family: 'Cinzel', serif; font-size: 3rem; margin-bottom: 10px;" data-i18n="careers.title">Join Our Team</h1>
+      <p class="breadcrumb" style="font-size: 1.1rem;"><a href="index.html" style="color: white; text-decoration: none;" data-i18n="nav.home">Home</a> &gt; <span data-i18n="nav.careers">Careers</span></p>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="section" style="padding-bottom: 20px;">
+    <div class="container text-center reveal">
+      <h2 class="section-title" data-i18n="careers.introTitle">Join the HENU Family</h2>
+      <p style="max-width: 800px; margin: 0 auto; color: var(--clr-gray); font-size: 1.1rem;" data-i18n="careers.intro">At HENU, we believe our team is our greatest asset. We're always looking for passionate individuals who share our commitment to exceptional hospitality and authentic Egyptian warmth.</p>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="section" style="background-color: var(--clr-ivory-dark);">
+    <div class="container reveal">
+      <h2 class="section-title text-center" data-i18n="careers.benefitsTitle">Why Work With Us?</h2>
+      <div class="benefits-grid stagger" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 30px;">
+        
+        <!-- Benefit 1 -->
+        <div class="card benefit-card">
+          <div class="benefit-icon">📈</div>
+          <h3 data-i18n="careers.benefit1">Professional Development</h3>
+          <p data-i18n="careers.benefit1Desc">Continuous training and growth opportunities in the hospitality industry.</p>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="card benefit-card">
+          <div class="benefit-icon">🏛️</div>
+          <h3 data-i18n="careers.benefit2">Unique Location</h3>
+          <p data-i18n="careers.benefit2Desc">Work at one of the most iconic locations in the world — the Pyramids of Giza.</p>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="card benefit-card">
+          <div class="benefit-icon">🌍</div>
+          <h3 data-i18n="careers.benefit3">International Exposure</h3>
+          <p data-i18n="careers.benefit3Desc">Interact with guests from around the world and develop your language skills.</p>
+        </div>
+
+        <!-- Benefit 4 -->
+        <div class="card benefit-card">
+          <div class="benefit-icon">🤝</div>
+          <h3 data-i18n="careers.benefit4">Team Culture</h3>
+          <p data-i18n="careers.benefit4Desc">Join a supportive, family-like team that values every member.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section class="section">
+    <div class="container reveal" style="max-width: 800px;">
+      <h2 class="section-title text-center" data-i18n="careers.applyTitle">Apply Now</h2>
+      <p style="text-align: center; color: var(--clr-gray); margin-bottom: 30px;" data-i18n="careers.applyDesc">Submit your CV and we'll contact you when a suitable position opens.</p>
+      
+      <form class="card application-form">
+        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div class="form-group">
+            <label data-i18n="careers.labelName">Full Name</label>
+            <input type="text" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label data-i18n="careers.labelEmail">Email Address</label>
+            <input type="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+
+        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div class="form-group">
+            <label data-i18n="careers.labelPhone">Phone Number</label>
+            <input type="tel" placeholder="+20 123 456 7890" required>
+          </div>
+          <div class="form-group">
+            <label data-i18n="careers.labelPosition">Desired Position</label>
+            <select required>
+              <option value="" disabled selected data-i18n="careers.selectPosition">Select a position</option>
+              <option value="reception" data-i18n="careers.pos.reception">Reception</option>
+              <option value="housekeeping" data-i18n="careers.pos.housekeeping">Housekeeping</option>
+              <option value="kitchen" data-i18n="careers.pos.kitchen">Kitchen Staff</option>
+              <option value="maintenance" data-i18n="careers.pos.maintenance">Maintenance</option>
+              <option value="tourguide" data-i18n="careers.pos.tourguide">Tour Guide</option>
+              <option value="management" data-i18n="careers.pos.management">Management</option>
+              <option value="other" data-i18n="careers.pos.other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div class="form-group">
+            <label data-i18n="careers.labelExperience">Years of Experience</label>
+            <select required>
+              <option value="0-1">0-1 Years</option>
+              <option value="1-3">1-3 Years</option>
+              <option value="3-5">3-5 Years</option>
+              <option value="5+">5+ Years</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-i18n="careers.labelCv">Upload CV (.pdf, .doc, .docx)</label>
+            <input type="file" accept=".pdf,.doc,.docx" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="careers.labelNotes">Cover Letter / Notes</label>
+          <textarea rows="4" placeholder="Tell us why you want to work at HENU Hotel..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-nile" style="width: 100%; justify-content: center;" data-i18n="careers.submit">Submit Application</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- STAFFING DATABASE SECTION -->
+  <section class="section" style="background-color: var(--clr-sand-light); text-align: center;">
+    <div class="container reveal">
+      <h2 style="font-family: 'Cinzel', serif; color: var(--clr-nile); margin-bottom: 15px;" data-i18n="careers.staffingTitle">Hospitality Staff Database</h2>
+      <p style="max-width: 750px; margin: 0 auto 25px; color: var(--clr-dark); font-size: 1.05rem;" data-i18n="careers.staffingDesc">Looking for hotel work in Egypt? Register in our staffing database. We connect trained professionals with hotels and partner resorts across the country.</p>
+      <a href="#apply" class="btn btn-gold" data-i18n="careers.joinDb">Register in Database</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <span class="footer-logo"><img src="images/logo.jpg" alt="HENU Hotel" class="footer-logo-img"> HENU</span>
+        <p data-i18n="footer.tagline">Where Ancient Wonders Meet Modern Comfort</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><path d="M17.5 6.5h.01"></path><path d="M21 9v6a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V9a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5z"></path></svg></a>
+          <a href="#" aria-label="TripAdvisor"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M12 6c-3.309 0-6 2.691-6 6s2.691 6 6 6 6-2.691 6-6-2.691-6-6-6zm0 10c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z"></path></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.quickLinks">Quick Links</h4>
+        <ul>
+          <li><a href="accommodation.html" data-i18n="nav.accommodation">Accommodation</a></li>
+          <li><a href="experiences.html" data-i18n="nav.experiences">Experiences</a></li>
+          <li><a href="b2b.html" data-i18n="nav.b2b">B2B Services</a></li>
+          <li><a href="careers.html" data-i18n="nav.careers">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <p>📍 21 Gamal Abdel Nasser St., Nazlet El-Semman, Giza, Egypt</p>
+        <p>📞 +20 XXX XXX XXXX</p>
+        <p>📧 info@henuhotel.com</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.newsletter">Newsletter</h4>
+        <p data-i18n="footer.newsletterDesc">Subscribe for special offers</p>
+        <form class="footer-newsletter">
+          <input type="email" data-i18n-placeholder="footer.emailPlaceholder" placeholder="Your email">
+          <button type="submit" class="btn btn-gold-sm" data-i18n="footer.subscribe">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 HENU Hotel. <span data-i18n="footer.rights">All rights reserved.</span></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>

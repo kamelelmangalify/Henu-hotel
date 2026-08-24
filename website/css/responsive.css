@@ -1,0 +1,154 @@
+/* responsive.css */
+
+/* Tablet (max-width: 1024px) */
+@media screen and (max-width: 1024px) {
+  .grid-4, .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .stats-row {
+    flex-wrap: wrap;
+  }
+  
+  .stats-row .stat-item {
+    width: calc(50% - 24px);
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section {
+    padding: 70px 0;
+  }
+}
+
+/* Mobile Landscape (max-width: 768px) */
+@media screen and (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--clr-nile);
+    flex-direction: column;
+    padding-top: 80px;
+    gap: 0;
+    z-index: 999;
+    transition: transform 0.3s ease, right 0.3s ease;
+  }
+  
+  .nav-menu.active {
+    right: 0;
+    transform: translateX(0);
+  }
+  
+  .nav-menu a {
+    color: white;
+    padding: 16px 32px;
+    display: block;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .navbar.scrolled .nav-menu a {
+    color: white;
+  }
+  
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 1000;
+  }
+  
+  .nav-toggle span {
+    width: 24px;
+    height: 2px;
+    background: white;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar.scrolled .nav-toggle span {
+    background: var(--clr-dark);
+  }
+
+  .nav-toggle.active span {
+    background: white; /* Keep white when menu is open on mobile */
+  }
+  
+  .nav-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  
+  .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .nav-toggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .stats-row {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .stats-row .stat-item {
+    width: 100%;
+  }
+  
+  .page-header {
+    height: 40vh;
+  }
+  
+  .page-header h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media screen and (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .btn {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+  
+  .card-img {
+    height: 200px;
+  }
+  
+  .nav-container {
+    padding: 0 16px;
+  }
+  
+  .section {
+    padding: 50px 0;
+  }
+}

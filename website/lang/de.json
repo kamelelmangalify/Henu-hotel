@@ -1,0 +1,391 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "accommodation": "Unterkünfte",
+    "experiences": "Erlebnisse & Touren",
+    "b2b": "B2B-Services",
+    "careers": "Karriere",
+    "contact": "Kontakt & Buchung",
+    "book": "Jetzt buchen"
+  },
+  "hero": {
+    "badge": "HOTEL MIT PYRAMIDENBLICK",
+    "title": "Wo antike Wunder auf modernen Komfort treffen",
+    "subtitle": "Erleben Sie die Magie der Großen Pyramiden von unserer Dachterrasse aus. HENU Hotel — Ihr Tor zu 5.000 Jahren Geschichte.",
+    "cta": "Buchen Sie Ihren Aufenthalt",
+    "explore": "Zimmer entdecken",
+    "bookBtn": "Buchen Sie Ihren Aufenthalt",
+    "exploreBtn": "Zimmer erkunden"
+  },
+  "about": {
+    "title": "Willkommen im HENU",
+    "subtitle": "Ein Boutique-Hotel im Herzen der Geschichte",
+    "p1": "Eingebettet in das historische Dorf Nazlet El-Semman, nur wenige Schritte von den Großen Pyramiden von Gizeh und der Sphinx entfernt, bietet das HENU Hotel ein unvergleichliches Erlebnis, bei dem das alte Ägypten lebendig wird.",
+    "p2": "Unsere 25 wunderschön ausgestatteten Zimmer verfügen über ein pharaonisch inspiriertes Dekor, Marmorbäder und moderne Annehmlichkeiten. Wachen Sie auf unserer Dachterrasse mit einem atemberaubenden Blick auf die Pyramiden auf — ein Anblick, der Reisende seit Jahrtausenden fasziniert.",
+    "stat1Label": "Zimmer",
+    "stat2Label": "Pyramidenblick",
+    "stat3Label": "Zufriedene Gäste",
+    "stat4Label": "Jahre Geschichte",
+    "stat1": "Zimmer",
+    "stat2": "Panoramablick auf die Pyramiden",
+    "stat2Value": "100%",
+    "stat3": "Glückliche Gäste",
+    "stat4": "Jahre des Erbes"
+  },
+  "rooms": {
+    "title": "Unsere Unterkünfte",
+    "subtitle": "Wählen Sie Ihr perfektes Zimmer und wachen Sie mit den Wundern des alten Ägyptens auf",
+    "single": {
+      "name": "Einzelzimmer",
+      "desc": "Ein gemütlicher Rückzugsort für Alleinreisende, ausgestattet mit einem komfortablen Einzelbett, Marmorbad und elegantem pharaonischen Dekor.",
+      "capacity": "1 Gast",
+      "size": "20 m²",
+      "from": "Ab 12 $ / Nacht",
+      "price": "12 $",
+      "perNight": "/Nacht"
+    },
+    "double": {
+      "name": "Doppelzimmer",
+      "desc": "Geräumiges Zimmer mit Doppelbett, Sitzbereich, Marmorbad und Blick auf den üppigen Garten oder das historische Dorf.",
+      "capacity": "2 Gäste",
+      "size": "28 m²",
+      "from": "Ab 18 $ / Nacht",
+      "price": "18 $",
+      "perNight": "/Nacht"
+    },
+    "triple": {
+      "name": "Dreibett- / Familienzimmer",
+      "desc": "Perfekt für Familien oder Gruppen, mit drei Einzelbetten, geräumigem Grundriss, Marmorbad und Gartenblick.",
+      "capacity": "3 Gäste",
+      "size": "35 m²",
+      "from": "Ab 25 $ / Nacht",
+      "price": "25 $",
+      "perNight": "/Nacht"
+    },
+    "suite": {
+      "name": "King-Suite — Pyramidenblick",
+      "desc": "Unser Premium-Zimmer mit Kingsize-Bett, pharaonischer Wandkunst, Marmorbad und eigenem Balkon mit direktem Blick auf die Großen Pyramiden und die Sphinx.",
+      "capacity": "2-4 Gäste",
+      "size": "45 m²",
+      "from": "45 $ / Nacht",
+      "price": "45 $",
+      "perNight": "/Nacht"
+    },
+    "amenities": "Zimmerausstattung",
+    "amenity1": "Kostenloses WLAN",
+    "amenity2": "Klimaanlage",
+    "amenity3": "Flachbildfernseher",
+    "amenity4": "Marmorbad",
+    "amenity5": "Tägliche Reinigung",
+    "amenity6": "24/7-Rezeption",
+    "amenity7": "Zimmerservice",
+    "amenity8": "Zimmersafe",
+    "viewDetails": "Details anzeigen",
+    "bookThis": "Dieses Zimmer buchen",
+    "bookRoom": "Dieses Zimmer buchen",
+    "premium": "PREMIUM"
+  },
+  "experiences": {
+    "title": "Erlebnisse & Touren",
+    "subtitle": "Entdecken Sie die Magie Ägyptens mit unseren ausgewählten Erlebnissen",
+    "horse": {
+      "title": "Pferde- & Kamelritte",
+      "desc": "Erkunden Sie das Pyramidenplateau bei Sonnenaufgang oder Sonnenuntergang auf dem Rücken eines Pferdes oder Kamels — ein unvergessliches Abenteuer durch 5.000 Jahre Geschichte.",
+      "duration": "1-2 Stunden",
+      "price": "Ab $25"
+    },
+    "dayTrips": {
+      "title": "Tagesausflüge",
+      "desc": "Besuchen Sie das Große Ägyptische Museum, die Stufenpyramide von Sakkara und die antike Stadt Memphis — alles in einem fantastischen Tagesausflug.",
+      "duration": "Ganztägig",
+      "price": "Ab $45"
+    },
+    "cairoTours": {
+      "title": "Kairo-Stadtrundfahrten",
+      "desc": "Entdecken Sie die lebendigen Straßen von Kairo — vom Khan El-Khalili-Basar über die Saladin-Zitadelle bis hin zu den atemberaubenden Moscheen des islamischen Kairos.",
+      "duration": "4-8 Stunden",
+      "price": "Ab $35"
+    },
+    "transfers": {
+      "title": "Transfers & Logistik",
+      "desc": "Flughafentransfers, Intercity-Transport und Hotelbuchungen in ganz Ägypten. Überlassen Sie uns die Logistik, während Sie Ihre Reise genießen.",
+      "duration": "Flexibel",
+      "price": "Ab $20"
+    },
+    "bookTour": "Diese Tour buchen",
+    "addToBooking": "Zur Buchung hinzufügen"
+  },
+  "b2b": {
+    "title": "B2B & Hotelmanagement",
+    "subtitle": "Professionelle Hoteldienstleistungen für Hotels und Partner",
+    "training": {
+      "title": "Ausbildung & Praktika",
+      "desc": "Wir bieten umfassende Ausbildungsprogramme im Gastgewerbe und Praktikumsrotationen für angehende Hotelfachleute. Unsere Programme umfassen Rezeption, Housekeeping-Management, Gästebetreuung sowie Speisen- & Getränkeservice."
+    },
+    "management": {
+      "title": "Hotelmanagement",
+      "desc": "End-to-End-Managementdienstleistungen für kleine und Boutique-Hotels. Von Personalbeschaffung und Schulung bis hin zu Betrieb und Qualitätssicherung — wir bringen unser Fachwissen in Ihre Einrichtung ein."
+    },
+    "staffing": {
+      "title": "Professionelle Personalbeschaffung",
+      "desc": "Greifen Sie auf unsere kuratierte Datenbank ausgebildeter Fachleute im Gastgewerbe zu. Wir vermitteln geprüftes, geschultes Personal für Hotels in ganz Ägypten — von der Rezeption über das Housekeeping bis hin zum Küchenpersonal."
+    },
+    "partnerships": {
+      "title": "Strategische Partnerschaften",
+      "desc": "Arbeiten Sie mit HENU für gemeinsames Wachstum zusammen. Wir kooperieren mit Reiseveranstaltern, Reisebüros und Hotelmarken, um außergewöhnliche Gästeerlebnisse zu schaffen."
+    },
+    "cta": "Kontaktieren Sie unser B2B-Team",
+    "contactTitle": "Kontaktieren Sie unser B2B-Team",
+    "form": {
+      "company": "Name des Unternehmens",
+      "contactPerson": "Ansprechpartner",
+      "email": "E-Mail-Adresse",
+      "interest": "Service-Interesse",
+      "message": "Ihre Nachricht",
+      "phone": "Telefonnummer",
+      "selectInterest": "Wählen Sie einen Service"
+    },
+    "introDesc": "Das HENU Hotel erweitert seine Gastgewerbe-Expertise über unsere eigenen Mauern hinaus. Wir bieten umfassende Lösungen für Hotels und Partner.",
+    "introTitle": "Unsere professionellen Dienstleistungen",
+    "stat": {
+      "experience": "Jahre Erfahrung",
+      "rooms": "Verwaltete Zimmer",
+      "staff": "Geschultes Personal"
+    },
+    "whyTitle": "Warum HENU wählen?"
+  },
+  "careers": {
+    "title": "Werden Sie Teil unseres Teams",
+    "subtitle": "Bauen Sie Ihre Karriere im Gastgewerbe mit dem HENU Hotel auf",
+    "intro": "Bei HENU glauben wir, dass unser Team unser größtes Kapital ist. Wir sind immer auf der Suche nach leidenschaftlichen Personen, die unser Engagement für außergewöhnliche Gastfreundschaft teilen.",
+    "whyTitle": "Warum bei uns arbeiten?",
+    "benefit1": "Berufliche Entwicklung",
+    "benefit1Desc": "Kontinuierliche Schulung und Wachstumsmöglichkeiten im Gastgewerbe.",
+    "benefit2": "Einzigartiger Standort",
+    "benefit2Desc": "Arbeiten Sie an einem der ikonischsten Orte der Welt — den Pyramiden von Gizeh.",
+    "benefit3": "Internationale Erfahrung",
+    "benefit3Desc": "Interagieren Sie mit Gästen aus aller Welt und verbessern Sie Ihre Sprachkenntnisse.",
+    "benefit4": "Teamkultur",
+    "benefit4Desc": "Werden Sie Teil eines unterstützenden, familiären Teams, das jedes Mitglied schätzt.",
+    "applyTitle": "Jetzt bewerben",
+    "applyDesc": "Senden Sie uns Ihren Lebenslauf und wir kontaktieren Sie, wenn eine passende Position frei wird.",
+    "staffingTitle": "Datenbank für Hotelpersonal",
+    "staffingDesc": "Suchen Sie Arbeit im Gastgewerbe in Ägypten? Registrieren Sie sich in unserer Personaldatenbank. Wir vermitteln geschulte Fachkräfte an Hotels im ganzen Land.",
+    "formName": "Vollständiger Name",
+    "formEmail": "E-Mail-Adresse",
+    "formPhone": "Telefonnummer",
+    "formPosition": "Gewünschte Position",
+    "formExperience": "Jahre Berufserfahrung",
+    "formCV": "Lebenslauf hochladen (PDF)",
+    "formMessage": "Anschreiben / Notizen",
+    "submit": "Bewerbung absenden",
+    "benefitsTitle": "Warum mit uns arbeiten?",
+    "introTitle": "Treten Sie der HENU-Familie bei",
+    "joinDb": "In Datenbank registrieren",
+    "labelCv": "Lebenslauf hochladen (PDF)",
+    "labelEmail": "E-Mail-Adresse",
+    "labelExperience": "Jahre an Erfahrung",
+    "labelName": "Vollständiger Name",
+    "labelNotes": "Anschreiben / Notizen",
+    "labelPhone": "Telefonnummer",
+    "labelPosition": "Gewünschte Position",
+    "pos": {
+      "housekeeping": "Zimmerreinigung",
+      "kitchen": "Küchenpersonal",
+      "maintenance": "Instandhaltung",
+      "management": "Management",
+      "other": "Andere",
+      "reception": "Rezeption",
+      "tourguide": "Reiseleiter"
+    },
+    "selectPosition": "Wählen Sie eine Position"
+  },
+  "contact": {
+    "title": "Kontakt & Buchung",
+    "subtitle": "Reservieren Sie Ihren Aufenthalt im HENU Hotel oder kontaktieren Sie uns bei Fragen",
+    "bookingTitle": "Buchen Sie Ihren Aufenthalt",
+    "bookingDesc": "Füllen Sie das untenstehende Formular aus und wir bestätigen Ihre Reservierung per WhatsApp oder E-Mail.",
+    "infoTitle": "Nehmen Sie Kontakt auf",
+    "address": "21 Gamal Abdel Nasser Str., Nazlet El-Semman, Al Haram, Gizeh, Ägypten",
+    "phone": "+20 XXX XXX XXXX",
+    "email": "info@henuhotel.com",
+    "whatsapp": "Chat auf WhatsApp",
+    "mapTitle": "Finden Sie uns",
+    "paymentTitle": "Zahlungsrichtlinien",
+    "paymentDesc": "Wir akzeptieren derzeit die Zahlung in der Unterkunft bei der Ankunft. Keine Vorauszahlung erforderlich.",
+    "formCheckin": "Check-in-Datum",
+    "formCheckout": "Check-out-Datum",
+    "formRoomType": "Zimmertyp",
+    "formGuests": "Anzahl der Gäste",
+    "formName": "Vollständiger Name",
+    "formEmail": "E-Mail-Adresse",
+    "formPhone": "Telefonnummer",
+    "formRequests": "Sonderwünsche",
+    "formTours": "Zusätzliche Touren & Erlebnisse",
+    "formSubmit": "Buchungsanfrage senden",
+    "successTitle": "Buchungsanfrage gesendet!",
+    "successDesc": "Vielen Dank! Wir bestätigen Ihre Reservierung innerhalb von 24 Stunden per WhatsApp oder E-Mail.",
+    "addon": {
+      "airport": "Flughafentransfer — $20",
+      "cairo": "Kairo Stadtrundfahrt — $35",
+      "camel": "Pferde- & Kamelritt — $25",
+      "daytrip": "Tagesausflug (Museum, Sakkara) — $45"
+    },
+    "addressTitle": "Adresse",
+    "emailTitle": "E-Mail",
+    "hoursDesc": "Rezeption 24/7 geöffnet",
+    "hoursTitle": "Öffnungszeiten",
+    "labelAddons": "Zusätzliche Touren & Erlebnisse",
+    "labelCheckin": "Check-in Datum",
+    "labelCheckout": "Check-out Datum",
+    "labelEmail": "E-Mail-Adresse",
+    "labelGuests": "Anzahl der Gäste",
+    "labelName": "Vollständiger Name",
+    "labelPhone": "Telefonnummer",
+    "labelRequests": "Sonderwünsche",
+    "labelRoom": "Zimmertyp",
+    "phoneTitle": "Telefon",
+    "room": {
+      "single_std": "Einzelzimmer (Standard) — 12 $/Nacht",
+      "single_win": "Einzelzimmer mit Fenster — 15 $/Nacht",
+      "single_balc": "Einzelzimmer mit Balkon — 20 $/Nacht",
+      "double_std": "Doppelzimmer (Standard) — 18 $/Nacht",
+      "double_win": "Doppelzimmer mit Fenster — 22 $/Nacht",
+      "double_balc": "Doppelzimmer mit Balkon — 25 $/Nacht",
+      "triple_std": "Dreibettzimmer (Standard) — 25 $/Nacht",
+      "triple_win": "Dreibettzimmer mit Fenster — 30 $/Nacht",
+      "triple_balc": "Dreibettzimmer mit Balkon — 35 $/Nacht",
+      "suite": "King Suite — Pyramidenblick — 45 $/Nacht",
+      "single": "Einzelzimmer — Ab 12 $/Nacht",
+      "double": "Doppelzimmer — Ab 18 $/Nacht",
+      "triple": "Dreibettzimmer — Ab 25 $/Nacht",
+      "king": "King Suite — Pyramidenblick — 45 $/Nacht"
+    },
+    "selectRoom": "Wählen Sie einen Zimmertyp"
+  },
+  "testimonials": {
+    "title": "Was unsere Gäste sagen",
+    "subtitle": "Echte Bewertungen von Reisenden, die bei uns übernachtet haben",
+    "t1": {
+      "text": "Der Blick auf die Pyramiden von der Dachterrasse bei Sonnenuntergang ist absolut atemberaubend. Die Zimmer sind wunderschön mit ägyptischer Kunst dekoriert. Das Personal hat alles getan, um unseren Aufenthalt unvergesslich zu machen.",
+      "author": "Sarah M.",
+      "country": "Vereinigtes Königreich"
+    },
+    "t2": {
+      "text": "Perfekte Lage — buchstäblich nur wenige Schritte von den Pyramiden entfernt! Die im pharaonischen Stil gestalteten Zimmer sind wunderschön und die Marmorbäder sind luxuriös. Tolles Preis-Leistungs-Verhältnis.",
+      "author": "Marco R.",
+      "country": "Italien"
+    },
+    "t3": {
+      "text": "Wir haben über das Hotel einen Kamelritt gebucht und es war das Highlight unserer Reise. Das Hotel hat alles perfekt organisiert. Ich kann es kaum erwarten, wiederzukommen!",
+      "author": "Anna K.",
+      "country": "Deutschland"
+    }
+  },
+  "footer": {
+    "tagline": "Wo antike Wunder auf modernen Komfort treffen",
+    "quickLinks": "Schnellzugriffe",
+    "contact": "Kontakt",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Abonnieren Sie für Sonderangebote und Reisetipps",
+    "emailPlaceholder": "Ihre E-Mail-Adresse",
+    "subscribe": "Abonnieren",
+    "rights": "Alle Rechte vorbehalten."
+  },
+  "common": {
+    "learnMore": "Mehr erfahren",
+    "viewAll": "Alle ansehen",
+    "readMore": "Weiterlesen",
+    "backToTop": "Zurück nach oben",
+    "loading": "Wird geladen...",
+    "close": "Schließen"
+  },
+  "accom": {
+    "title": "Unsere Unterkünfte"
+  },
+  "amenities": {
+    "title": "Zimmerausstattung"
+  },
+  "amenity": {
+    "ac": "Klimaanlage",
+    "balcony": "Privater Balkon",
+    "breakfast": "Frühstück verfügbar",
+    "coffee": "Kaffee & Tee",
+    "housekeeping": "Tägliche Zimmerreinigung",
+    "marble": "Marmorbadezimmer",
+    "minibar": "Minibar",
+    "reception": "24/7 Rezeption",
+    "roomservice": "Zimmerservice",
+    "safe": "Zimmersafe",
+    "seating": "Sitzbereich",
+    "tv": "Flachbildfernseher",
+    "view": "Malerische Aussicht",
+    "wifi": "Kostenloses WLAN"
+  },
+  "cta": {
+    "btn": "Jetzt buchen",
+    "contactBtn": "B2B-Team kontaktieren",
+    "expSubtitle": "Lassen Sie uns das perfekte ägyptische Abenteuer für Sie kreieren.",
+    "expTitle": "Bereit für ein Abenteuer?",
+    "roomTitle": "Buchen Sie Ihr perfektes Zimmer",
+    "subtitle": "Ihr ägyptischer Traumurlaub ist nur einen Klick entfernt.",
+    "title": "Bereit für ein unvergessliches Erlebnis?"
+  },
+  "exp": {
+    "book": "Tour buchen",
+    "bookTour": "Diese Tour buchen",
+    "cairo": {
+      "desc": "Entdecken Sie das islamische Kairo, den Khan el-Khalili Basar und die Zitadelle von Saladin.",
+      "price": "Ab $35",
+      "title": "Kairo Stadtrundfahrten"
+    },
+    "dayTrips": {
+      "desc": "Besuchen Sie das Große Ägyptische Museum, die Stufenpyramide von Sakkara und das antike Memphis.",
+      "price": "Ab $45",
+      "title": "Tagesausflüge"
+    },
+    "horse": {
+      "desc": "Erkunden Sie das Pyramidenplateau zu Pferd oder auf einem Kamel bei Sonnenaufgang oder Sonnenuntergang.",
+      "price": "Ab $25",
+      "title": "Pferde- & Kamelritte"
+    },
+    "how": {
+      "step1Desc": "Durchsuchen Sie unsere kuratierte Auswahl an Touren und Erlebnissen.",
+      "step1Title": "Wählen",
+      "step2Desc": "Fügen Sie Ihre ausgewählten Erlebnisse Ihrer Buchungsanfrage hinzu.",
+      "step2Title": "Buchen",
+      "step3Desc": "Lehnen Sie sich zurück und lassen Sie sich von unseren fachkundigen Reiseleitern auf eine unvergessliche Reise mitnehmen.",
+      "step3Title": "Genießen",
+      "title": "Wie es funktioniert"
+    },
+    "introText": "Entdecken Sie die Magie des alten Ägyptens mit unserer kuratierten Auswahl an Touren und Erlebnissen.",
+    "introTitle": "Unvergessliche ägyptische Erlebnisse",
+    "pageTitle": "Erlebnisse & Touren",
+    "title": "Kuratierte Erlebnisse"
+  },
+  "gallery": {
+    "title": "Galerie"
+  },
+  "parallax": {
+    "bookTable": "Einen Tisch reservieren",
+    "quote": "\"Speisen Sie unter den Sternen, mit den Pyramiden als Kulisse\""
+  },
+  "testi": {
+    "1": {
+      "country": "Vereinigtes Königreich",
+      "name": "- Sarah J.",
+      "quote": "\"Die Aussicht von der Dachterrasse ist einfach unglaublich. Das Personal behandelte uns wie Könige. Bestes Hotelerlebnis in Ägypten!\""
+    },
+    "2": {
+      "country": "Italien",
+      "name": "- Marco R.",
+      "quote": "\"Perfekte Lage, unglaubliche Zimmer mit pharaonischer Kunst. Die Marmorbadezimmer sind wunderschön. Sehr empfehlenswert!\""
+    },
+    "3": {
+      "country": "Deutschland",
+      "name": "- Anna K.",
+      "quote": "\"Wir haben einen Kamelritt durch das Hotel gebucht — das Highlight unserer Reise! Erstaunliches Frühstück auf dem Dach mit Blick auf die Pyramiden.\""
+    },
+    "title": "Was unsere Gäste sagen"
+  }
+}

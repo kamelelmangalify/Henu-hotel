@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B2B & Hotel Management | HENU Hotel</title>
+  <meta name="description" content="Professional hotel management, hospitality training programs, internship rotations, and staffing solutions by HENU.">
+  <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.jpg" alt="HENU Hotel" class="nav-logo-img">
+        <span class="logo-text">HENU</span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="accommodation.html" data-i18n="nav.accommodation">Accommodation</a></li>
+        <li><a href="experiences.html" data-i18n="nav.experiences">Experiences</a></li>
+        <li><a href="b2b.html" data-i18n="nav.b2b" class="active">B2B Services</a></li>
+        <li><a href="careers.html" data-i18n="nav.careers">Careers</a></li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="lang-switcher">
+          <select id="langSelect" onchange="i18n.setLanguage(this.value)">
+            <option value="en">EN</option>
+            <option value="de">DE</option>
+            <option value="es">ES</option>
+            <option value="it">IT</option>
+          </select>
+        </div>
+        <a href="contact.html#booking" class="btn btn-gold" data-i18n="nav.book">Book Now</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header" style="background-image: url('images/hotel/lobby-mosaic.jpg'); background-size: cover; background-position: center; padding: 150px 0 100px; text-align: center; color: white; position: relative;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6);"></div>
+    <div class="container" style="position: relative; z-index: 1;">
+      <h1 style="font-family: 'Cinzel', serif; font-size: 3rem; margin-bottom: 10px;" data-i18n="b2b.title">B2B & Hotel Management</h1>
+      <p class="breadcrumb" style="font-size: 1.1rem;"><a href="index.html" style="color: white; text-decoration: none;" data-i18n="nav.home">Home</a> &gt; <span data-i18n="nav.b2b">B2B Services</span></p>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="section" style="padding-bottom: 30px;">
+    <div class="container text-center reveal">
+      <h2 class="section-title" data-i18n="b2b.introTitle">Our Professional Services</h2>
+      <p style="max-width: 800px; margin: 0 auto; color: var(--clr-gray); font-size: 1.1rem;" data-i18n="b2b.introDesc">HENU Hotel extends its hospitality expertise beyond our own walls. We provide comprehensive solutions for hotels, hospitality investors, and travel partners across Egypt.</p>
+    </div>
+  </section>
+
+  <!-- SERVICES GRID -->
+  <section class="section" style="padding-top: 10px;">
+    <div class="container reveal">
+      <div class="service-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
+        
+        <!-- Service 1: Training -->
+        <div class="card service-card">
+          <div class="service-icon">🎓</div>
+          <h3 data-i18n="b2b.training.title">Training & Internships</h3>
+          <p data-i18n="b2b.training.desc">We offer comprehensive hospitality training programs and internship rotations for aspiring hotel professionals. Our programs cover front desk operations, housekeeping management, guest relations, and food & beverage service.</p>
+        </div>
+
+        <!-- Service 2: Management -->
+        <div class="card service-card">
+          <div class="service-icon">🏨</div>
+          <h3 data-i18n="b2b.management.title">Hotel Management</h3>
+          <p data-i18n="b2b.management.desc">End-to-end management services for small and boutique hotels. From staffing and training to operations and quality assurance — we bring our expertise to your property.</p>
+        </div>
+
+        <!-- Service 3: Staffing -->
+        <div class="card service-card">
+          <div class="service-icon">👥</div>
+          <h3 data-i18n="b2b.staffing.title">Professional Staffing</h3>
+          <p data-i18n="b2b.staffing.desc">Access our curated database of trained hospitality professionals. We provide vetted, trained staff for hotels across Egypt — from reception to housekeeping to kitchen staff.</p>
+        </div>
+
+        <!-- Service 4: Partnerships -->
+        <div class="card service-card">
+          <div class="service-icon">🤝</div>
+          <h3 data-i18n="b2b.partnerships.title">Strategic Partnerships</h3>
+          <p data-i18n="b2b.partnerships.desc">Collaborate with HENU for mutual growth. We partner with tour operators, travel agencies, and hospitality brands to create exceptional guest experiences.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE HENU METRICS -->
+  <section class="section bg-ivory-dark" style="background-color: var(--clr-ivory-dark);">
+    <div class="container reveal">
+      <h2 class="section-title text-center" data-i18n="b2b.whyTitle">Why Choose HENU?</h2>
+      <div class="stats-row stagger" style="display: flex; justify-content: center; gap: 60px; margin-top: 30px; text-align: center; flex-wrap: wrap;">
+        <div class="stat-item">
+          <h3 style="color: var(--clr-gold); font-size: 2.8rem; font-family: 'Cinzel', serif;">25+</h3>
+          <p data-i18n="b2b.stat.rooms">Rooms Managed</p>
+        </div>
+        <div class="stat-item">
+          <h3 style="color: var(--clr-gold); font-size: 2.8rem; font-family: 'Cinzel', serif;">30+</h3>
+          <p data-i18n="b2b.stat.staff">Trained Staff</p>
+        </div>
+        <div class="stat-item">
+          <h3 style="color: var(--clr-gold); font-size: 2.8rem; font-family: 'Cinzel', serif;">5+</h3>
+          <p data-i18n="b2b.stat.experience">Years Experience</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- B2B CONTACT FORM -->
+  <section class="section">
+    <div class="container reveal" style="max-width: 800px;">
+      <h2 class="section-title text-center" data-i18n="b2b.contactTitle">Contact Our B2B Team</h2>
+      <p style="text-align: center; color: var(--clr-gray); margin-bottom: 30px;">Partner with us to transform your hospitality operations or enroll in our training programs.</p>
+      
+      <form class="card b2b-form">
+        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div class="form-group">
+            <label data-i18n="b2b.form.company">Company Name</label>
+            <input type="text" placeholder="Your Hotel / Company" required>
+          </div>
+          <div class="form-group">
+            <label data-i18n="b2b.form.contactPerson">Contact Person</label>
+            <input type="text" placeholder="Full Name" required>
+          </div>
+        </div>
+
+        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div class="form-group">
+            <label data-i18n="b2b.form.email">Email Address</label>
+            <input type="email" placeholder="corporate@company.com" required>
+          </div>
+          <div class="form-group">
+            <label data-i18n="b2b.form.phone">Phone Number</label>
+            <input type="tel" placeholder="+20 123 456 7890">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="b2b.form.interest">Service Interest</label>
+          <select required>
+            <option value="" disabled selected data-i18n="b2b.form.selectInterest">Select a service</option>
+            <option value="training">Training & Internships</option>
+            <option value="management">Boutique Hotel Management</option>
+            <option value="staffing">Professional Hospitality Staffing</option>
+            <option value="partnership">Strategic Partnership</option>
+            <option value="other">Other Inquiry</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="b2b.form.message">Your Message</label>
+          <textarea rows="4" placeholder="Tell us about your property, goals, or training needs..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center;" data-i18n="b2b.cta">Contact Our B2B Team</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <span class="footer-logo"><img src="images/logo.jpg" alt="HENU Hotel" class="footer-logo-img"> HENU</span>
+        <p data-i18n="footer.tagline">Where Ancient Wonders Meet Modern Comfort</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><path d="M17.5 6.5h.01"></path><path d="M21 9v6a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V9a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5z"></path></svg></a>
+          <a href="#" aria-label="TripAdvisor"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M12 6c-3.309 0-6 2.691-6 6s2.691 6 6 6 6-2.691 6-6-2.691-6-6-6zm0 10c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z"></path></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.quickLinks">Quick Links</h4>
+        <ul>
+          <li><a href="accommodation.html" data-i18n="nav.accommodation">Accommodation</a></li>
+          <li><a href="experiences.html" data-i18n="nav.experiences">Experiences</a></li>
+          <li><a href="b2b.html" data-i18n="nav.b2b">B2B Services</a></li>
+          <li><a href="careers.html" data-i18n="nav.careers">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <p>📍 21 Gamal Abdel Nasser St., Nazlet El-Semman, Giza, Egypt</p>
+        <p>📞 +20 XXX XXX XXXX</p>
+        <p>📧 info@henuhotel.com</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.newsletter">Newsletter</h4>
+        <p data-i18n="footer.newsletterDesc">Subscribe for special offers</p>
+        <form class="footer-newsletter">
+          <input type="email" data-i18n-placeholder="footer.emailPlaceholder" placeholder="Your email">
+          <button type="submit" class="btn btn-gold-sm" data-i18n="footer.subscribe">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 HENU Hotel. <span data-i18n="footer.rights">All rights reserved.</span></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>

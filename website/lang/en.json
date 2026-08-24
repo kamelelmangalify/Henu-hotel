@@ -1,0 +1,391 @@
+{
+  "nav": {
+    "home": "Home",
+    "accommodation": "Accommodation",
+    "experiences": "Experiences & Tours",
+    "b2b": "B2B Services",
+    "careers": "Careers",
+    "contact": "Contact & Booking",
+    "book": "Book Now"
+  },
+  "hero": {
+    "badge": "PYRAMIDS VIEW HOTEL",
+    "title": "Where Ancient Wonders Meet Modern Comfort",
+    "subtitle": "Experience the magic of the Great Pyramids from our rooftop terrace. HENU Hotel — your gateway to 5,000 years of history.",
+    "cta": "Book Your Stay",
+    "explore": "Explore Rooms",
+    "bookBtn": "Book Your Stay",
+    "exploreBtn": "Explore Rooms"
+  },
+  "about": {
+    "title": "Welcome to HENU",
+    "subtitle": "A Boutique Hotel in the Heart of History",
+    "p1": "Nestled in the historic village of Nazlet El-Semman, just steps from the Great Pyramids of Giza and the Sphinx, HENU Hotel offers an unparalleled experience where ancient Egypt comes alive.",
+    "p2": "Our 25 beautifully appointed rooms feature Pharaonic-inspired décor, marble bathrooms, and modern amenities. Wake up to breathtaking views of the Pyramids from our rooftop terrace — a sight that has captivated travelers for millennia.",
+    "stat1Label": "Rooms",
+    "stat2Label": "Pyramids Views",
+    "stat3Label": "Happy Guests",
+    "stat4Label": "Years of Heritage",
+    "stat1": "Rooms",
+    "stat2": "Panoramic Pyramids Views",
+    "stat2Value": "100%",
+    "stat3": "Happy Guests",
+    "stat4": "Years of Heritage"
+  },
+  "rooms": {
+    "title": "Our Accommodation",
+    "subtitle": "Choose your perfect room and wake up to the wonders of ancient Egypt",
+    "single": {
+      "name": "Single Room",
+      "desc": "A cozy retreat for solo travelers, featuring a comfortable single bed, marble bathroom, and elegant Pharaonic décor.",
+      "capacity": "1 Guest",
+      "size": "20 m²",
+      "from": "From  / night",
+      "price": "",
+      "perNight": "/night"
+    },
+    "double": {
+      "name": "Double Room",
+      "desc": "Spacious room with a double bed, sitting area, marble bathroom, and views of the lush garden or historic village.",
+      "capacity": "2 Guests",
+      "size": "28 m²",
+      "from": "From  / night",
+      "price": "",
+      "perNight": "/night"
+    },
+    "triple": {
+      "name": "Triple / Family Room",
+      "desc": "Perfect for families or groups, featuring three single beds, a spacious layout, marble bathroom, and garden views.",
+      "capacity": "3 Guests",
+      "size": "35 m²",
+      "from": "From  / night",
+      "price": "",
+      "perNight": "/night"
+    },
+    "suite": {
+      "name": "King Suite — Pyramids View",
+      "desc": "Our premier room featuring a king-size bed, Pharaonic wall art, marble bathroom, and a private balcony with direct views of the Great Pyramids and Sphinx.",
+      "capacity": "2-4 Guests",
+      "size": "45 m²",
+      "from": " / night",
+      "price": "",
+      "perNight": "/night"
+    },
+    "amenities": "Room Amenities",
+    "amenity1": "Free Wi-Fi",
+    "amenity2": "Air Conditioning",
+    "amenity3": "Flat Screen TV",
+    "amenity4": "Marble Bathroom",
+    "amenity5": "Daily Housekeeping",
+    "amenity6": "24/7 Reception",
+    "amenity7": "Room Service",
+    "amenity8": "Safe Box",
+    "viewDetails": "View Details",
+    "bookThis": "Book This Room",
+    "bookRoom": "Book This Room",
+    "premium": "PREMIUM"
+  },
+  "experiences": {
+    "title": "Experiences & Tours",
+    "subtitle": "Discover the magic of Egypt with our curated experiences",
+    "horse": {
+      "title": "Horse & Camel Rides",
+      "desc": "Explore the Pyramids plateau on horseback or camelback at sunrise or sunset — an unforgettable adventure through 5,000 years of history.",
+      "duration": "1-2 hours",
+      "price": "From $25"
+    },
+    "dayTrips": {
+      "title": "Day Trips",
+      "desc": "Visit the Grand Egyptian Museum, Saqqara Step Pyramid, and the ancient city of Memphis — all in one amazing day trip.",
+      "duration": "Full day",
+      "price": "From $45"
+    },
+    "cairoTours": {
+      "title": "Cairo City Tours",
+      "desc": "Discover the vibrant streets of Cairo — from Khan El-Khalili bazaar to the Citadel of Saladin and Islamic Cairo's stunning mosques.",
+      "duration": "4-8 hours",
+      "price": "From $35"
+    },
+    "transfers": {
+      "title": "Transfers & Logistics",
+      "desc": "Airport transfers, inter-city transport, and hotel bookings across Egypt. Let us handle the logistics while you enjoy the journey.",
+      "duration": "Flexible",
+      "price": "From $20"
+    },
+    "bookTour": "Book This Tour",
+    "addToBooking": "Add to Booking"
+  },
+  "b2b": {
+    "title": "B2B & Hotel Management",
+    "subtitle": "Professional hospitality services for hotels and partners",
+    "training": {
+      "title": "Training & Internships",
+      "desc": "We offer comprehensive hospitality training programs and internship rotations for aspiring hotel professionals. Our programs cover front desk operations, housekeeping management, guest relations, and food & beverage service."
+    },
+    "management": {
+      "title": "Hotel Management",
+      "desc": "End-to-end management services for small and boutique hotels. From staffing and training to operations and quality assurance — we bring our expertise to your property."
+    },
+    "staffing": {
+      "title": "Professional Staffing",
+      "desc": "Access our curated database of trained hospitality professionals. We provide vetted, trained staff for hotels across Egypt — from reception to housekeeping to kitchen staff."
+    },
+    "partnerships": {
+      "title": "Strategic Partnerships",
+      "desc": "Collaborate with HENU for mutual growth. We partner with tour operators, travel agencies, and hospitality brands to create exceptional guest experiences."
+    },
+    "cta": "Contact Our B2B Team",
+    "contactTitle": "Contact Our B2B Team",
+    "form": {
+      "company": "Company Name",
+      "contactPerson": "Contact Person",
+      "email": "Email Address",
+      "interest": "Service Interest",
+      "message": "Your Message",
+      "phone": "Phone Number",
+      "selectInterest": "Select a service"
+    },
+    "introDesc": "HENU Hotel extends its hospitality expertise beyond our own walls. We provide comprehensive solutions for hotels and partners.",
+    "introTitle": "Our Professional Services",
+    "stat": {
+      "experience": "Years Experience",
+      "rooms": "Rooms Managed",
+      "staff": "Trained Staff"
+    },
+    "whyTitle": "Why Choose HENU?"
+  },
+  "careers": {
+    "title": "Join Our Team",
+    "subtitle": "Build your career in hospitality with HENU Hotel",
+    "intro": "At HENU, we believe our team is our greatest asset. We're always looking for passionate individuals who share our commitment to exceptional hospitality.",
+    "whyTitle": "Why Work With Us?",
+    "benefit1": "Professional Development",
+    "benefit1Desc": "Continuous training and growth opportunities in the hospitality industry.",
+    "benefit2": "Unique Location",
+    "benefit2Desc": "Work at one of the most iconic locations in the world — the Pyramids of Giza.",
+    "benefit3": "International Exposure",
+    "benefit3Desc": "Interact with guests from around the world and develop your language skills.",
+    "benefit4": "Team Culture",
+    "benefit4Desc": "Join a supportive, family-like team that values every member.",
+    "applyTitle": "Apply Now",
+    "applyDesc": "Submit your CV and we'll contact you when a suitable position opens.",
+    "staffingTitle": "Hospitality Staff Database",
+    "staffingDesc": "Looking for hotel work in Egypt? Register in our staffing database. We connect trained professionals with hotels across the country.",
+    "formName": "Full Name",
+    "formEmail": "Email Address",
+    "formPhone": "Phone Number",
+    "formPosition": "Desired Position",
+    "formExperience": "Years of Experience",
+    "formCV": "Upload CV (PDF)",
+    "formMessage": "Cover Letter / Notes",
+    "submit": "Submit Application",
+    "benefitsTitle": "Why Work With Us?",
+    "introTitle": "Join the HENU Family",
+    "joinDb": "Register in Database",
+    "labelCv": "Upload CV (PDF)",
+    "labelEmail": "Email Address",
+    "labelExperience": "Years of Experience",
+    "labelName": "Full Name",
+    "labelNotes": "Cover Letter / Notes",
+    "labelPhone": "Phone Number",
+    "labelPosition": "Desired Position",
+    "pos": {
+      "housekeeping": "Housekeeping",
+      "kitchen": "Kitchen Staff",
+      "maintenance": "Maintenance",
+      "management": "Management",
+      "other": "Other",
+      "reception": "Reception",
+      "tourguide": "Tour Guide"
+    },
+    "selectPosition": "Select a position"
+  },
+  "contact": {
+    "title": "Contact & Booking",
+    "subtitle": "Reserve your stay at HENU Hotel or reach out with any questions",
+    "bookingTitle": "Book Your Stay",
+    "bookingDesc": "Fill out the form below and we'll confirm your reservation via WhatsApp or email.",
+    "infoTitle": "Get in Touch",
+    "address": "21 Gamal Abdel Nasser St., Nazlet El-Semman, Al Haram, Giza, Egypt",
+    "phone": "+20 XXX XXX XXXX",
+    "email": "info@henuhotel.com",
+    "whatsapp": "Chat on WhatsApp",
+    "mapTitle": "Find Us",
+    "paymentTitle": "Payment Policy",
+    "paymentDesc": "We currently accept payment at the property upon arrival. No advance payment required.",
+    "formCheckin": "Check-in Date",
+    "formCheckout": "Check-out Date",
+    "formRoomType": "Room Type",
+    "formGuests": "Number of Guests",
+    "formName": "Full Name",
+    "formEmail": "Email Address",
+    "formPhone": "Phone Number",
+    "formRequests": "Special Requests",
+    "formTours": "Add-on Tours & Experiences",
+    "formSubmit": "Send Booking Request",
+    "successTitle": "Booking Request Sent!",
+    "successDesc": "Thank you! We'll confirm your reservation within 24 hours via WhatsApp or email.",
+    "addon": {
+      "airport": "Airport Transfer — $20",
+      "cairo": "Cairo City Tour — $35",
+      "camel": "Horse & Camel Ride — $25",
+      "daytrip": "Day Trip (Museum, Saqqara) — $45"
+    },
+    "addressTitle": "Address",
+    "emailTitle": "Email",
+    "hoursDesc": "Reception open 24/7",
+    "hoursTitle": "Opening Hours",
+    "labelAddons": "Add-on Tours & Experiences",
+    "labelCheckin": "Check-in Date",
+    "labelCheckout": "Check-out Date",
+    "labelEmail": "Email Address",
+    "labelGuests": "Number of Guests",
+    "labelName": "Full Name",
+    "labelPhone": "Phone Number",
+    "labelRequests": "Special Requests",
+    "labelRoom": "Room Type",
+    "phoneTitle": "Phone",
+    "room": {
+      "single_std": "Single Room (Standard) — /night",
+      "single_win": "Single with Window — /night",
+      "single_balc": "Single with Balcony — /night",
+      "double_std": "Double Room (Standard) — /night",
+      "double_win": "Double with Window — /night",
+      "double_balc": "Double with Balcony — /night",
+      "triple_std": "Triple Room (Standard) — /night",
+      "triple_win": "Triple with Window — /night",
+      "triple_balc": "Triple with Balcony — /night",
+      "suite": "King Suite — Pyramids View — /night",
+      "single": "Single Room — From /night",
+      "double": "Double Room — From /night",
+      "triple": "Triple / Family Room — From /night",
+      "king": "King Suite — Pyramids View — /night"
+    },
+    "selectRoom": "Choose a room type"
+  },
+  "testimonials": {
+    "title": "What Our Guests Say",
+    "subtitle": "Real reviews from travelers who stayed with us",
+    "t1": {
+      "text": "The rooftop view of the Pyramids at sunset is absolutely breathtaking. The rooms are beautifully decorated with Egyptian art. The staff went above and beyond to make our stay memorable.",
+      "author": "Sarah M.",
+      "country": "United Kingdom"
+    },
+    "t2": {
+      "text": "Perfect location — literally steps from the Pyramids! The Pharaonic-themed rooms are gorgeous and the marble bathrooms are luxurious. Great value for money.",
+      "author": "Marco R.",
+      "country": "Italy"
+    },
+    "t3": {
+      "text": "We booked a camel ride through the hotel and it was the highlight of our trip. The hotel arranged everything perfectly. Can't wait to come back!",
+      "author": "Anna K.",
+      "country": "Germany"
+    }
+  },
+  "footer": {
+    "tagline": "Where Ancient Wonders Meet Modern Comfort",
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Subscribe for special offers and travel tips",
+    "emailPlaceholder": "Your email address",
+    "subscribe": "Subscribe",
+    "rights": "All rights reserved."
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "readMore": "Read More",
+    "backToTop": "Back to Top",
+    "loading": "Loading...",
+    "close": "Close"
+  },
+  "accom": {
+    "title": "Our Accommodation"
+  },
+  "amenities": {
+    "title": "Room Amenities"
+  },
+  "amenity": {
+    "ac": "Air Conditioning",
+    "balcony": "Private Balcony",
+    "breakfast": "Breakfast Available",
+    "coffee": "Coffee & Tea",
+    "housekeeping": "Daily Housekeeping",
+    "marble": "Marble Bathroom",
+    "minibar": "Mini Bar",
+    "reception": "24/7 Reception",
+    "roomservice": "Room Service",
+    "safe": "In-Room Safe",
+    "seating": "Seating Area",
+    "tv": "Flat Screen TV",
+    "view": "Scenic View",
+    "wifi": "Free Wi-Fi"
+  },
+  "cta": {
+    "btn": "Book Now",
+    "contactBtn": "Contact B2B Team",
+    "expSubtitle": "Let us create the perfect Egyptian adventure for you.",
+    "expTitle": "Ready for an Adventure?",
+    "roomTitle": "Book Your Perfect Room",
+    "subtitle": "Your dream Egyptian getaway is just one click away.",
+    "title": "Ready for an Unforgettable Experience?"
+  },
+  "exp": {
+    "book": "Book Tour",
+    "bookTour": "Book This Tour",
+    "cairo": {
+      "desc": "Discover Islamic Cairo, Khan el-Khalili bazaar, and the Citadel of Saladin.",
+      "price": "From $35",
+      "title": "Cairo City Tours"
+    },
+    "dayTrips": {
+      "desc": "Visit the Grand Egyptian Museum, Saqqara step pyramid, and ancient Memphis.",
+      "price": "From $45",
+      "title": "Day Trips"
+    },
+    "horse": {
+      "desc": "Explore the Pyramids plateau on horseback or camel during sunrise or sunset.",
+      "price": "From $25",
+      "title": "Horse & Camel Rides"
+    },
+    "how": {
+      "step1Desc": "Browse our curated selection of tours and experiences.",
+      "step1Title": "Choose",
+      "step2Desc": "Add your chosen experiences to your booking request.",
+      "step2Title": "Book",
+      "step3Desc": "Sit back and let our expert guides take you on an unforgettable journey.",
+      "step3Title": "Enjoy",
+      "title": "How It Works"
+    },
+    "introText": "Discover the magic of ancient Egypt with our curated selection of tours and experiences.",
+    "introTitle": "Unforgettable Egyptian Experiences",
+    "pageTitle": "Experiences & Tours",
+    "title": "Curated Experiences"
+  },
+  "gallery": {
+    "title": "Gallery"
+  },
+  "parallax": {
+    "bookTable": "Book a Table",
+    "quote": "\"Dine beneath the stars, with the Pyramids as your backdrop\""
+  },
+  "testi": {
+    "1": {
+      "country": "United Kingdom",
+      "name": "- Sarah J.",
+      "quote": "\"The view from the rooftop terrace is simply unbelievable. The staff treated us like royalty. Best hotel experience in Egypt!\""
+    },
+    "2": {
+      "country": "Italy",
+      "name": "- Marco R.",
+      "quote": "\"Perfect location, incredible rooms with Pharaonic art. The marble bathrooms are gorgeous. Highly recommended!\""
+    },
+    "3": {
+      "country": "Germany",
+      "name": "- Anna K.",
+      "quote": "\"We booked a camel ride through the hotel — the highlight of our trip! Amazing breakfast on the rooftop with Pyramid views.\""
+    },
+    "title": "What Our Guests Say"
+  }
+}

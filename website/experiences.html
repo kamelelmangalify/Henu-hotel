@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiences & Tours | HENU Hotel - Pyramids View</title>
+  <meta name="description" content="Discover curated Egyptian tours, desert camel rides, and Cairo day trips organized by HENU Hotel.">
+  <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.jpg" alt="HENU Hotel" class="nav-logo-img">
+        <span class="logo-text">HENU</span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="accommodation.html" data-i18n="nav.accommodation">Accommodation</a></li>
+        <li><a href="experiences.html" data-i18n="nav.experiences" class="active">Experiences</a></li>
+        <li><a href="b2b.html" data-i18n="nav.b2b">B2B Services</a></li>
+        <li><a href="careers.html" data-i18n="nav.careers">Careers</a></li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="lang-switcher">
+          <select id="langSelect" onchange="i18n.setLanguage(this.value)">
+            <option value="en">EN</option>
+            <option value="de">DE</option>
+            <option value="es">ES</option>
+            <option value="it">IT</option>
+          </select>
+        </div>
+        <a href="contact.html#booking" class="btn btn-gold" data-i18n="nav.book">Book Now</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header" style="background-image: url('images/hotel/hero-pyramids-sunset.jpg'); background-size: cover; background-position: center; padding: 150px 0 100px; text-align: center; color: white; position: relative;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6);"></div>
+    <div class="container" style="position: relative; z-index: 1;">
+      <h1 style="font-family: 'Cinzel', serif; font-size: 3rem; margin-bottom: 10px;" data-i18n="exp.pageTitle">Experiences & Tours</h1>
+      <p class="breadcrumb" style="font-size: 1.1rem;"><a href="index.html" style="color: white; text-decoration: none;" data-i18n="nav.home">Home</a> &gt; <span data-i18n="nav.experiences">Experiences</span></p>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="section" style="padding-bottom: 20px;">
+    <div class="container text-center reveal">
+      <h2 class="section-title" data-i18n="exp.introTitle">Unforgettable Egyptian Experiences</h2>
+      <p style="max-width: 800px; margin: 0 auto; color: var(--clr-gray); font-size: 1.1rem;" data-i18n="exp.introText">Discover the magic of ancient Egypt with our curated selection of tours and experiences. We organize everything with verified licensed local guides so you can immerse yourself in history worry-free.</p>
+    </div>
+  </section>
+
+  <!-- TOUR DETAILS -->
+  <section class="section">
+    <div class="container">
+      
+      <!-- Tour 1: Horse & Camel -->
+      <div class="tour-detail-row reveal" style="display: flex; gap: 40px; margin-bottom: 60px; align-items: center; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px;">
+          <img src="images/hotel/hero-pyramids-sunset.jpg" alt="Horse and Camel Rides" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        </div>
+        <div style="flex: 1; min-width: 300px;">
+          <span style="color: var(--clr-gold); font-size: 2rem;">🐫</span>
+          <h2 style="color: var(--clr-nile); font-family: 'Cinzel', serif; margin: 10px 0;" data-i18n="exp.horse.title">Horse & Camel Rides</h2>
+          <p style="color: var(--clr-gray); line-height: 1.8;" data-i18n="exp.horse.desc">Explore the Pyramids plateau on horseback or camelback at sunrise or sunset — an unforgettable adventure through 5,000 years of history with panoramic photo stops.</p>
+          <div style="margin: 20px 0; font-size: 1rem; color: var(--clr-nile);">
+            <p><strong>Duration:</strong> 1-2 hours | <strong>Best time:</strong> Sunrise / Sunset</p>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <p style="font-size: 1.4rem; color: var(--clr-gold); font-weight: bold;" data-i18n="exp.horse.price">From $25</p>
+            <a href="contact.html#booking" class="btn btn-nile" data-i18n="exp.bookTour">Book This Tour</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tour 2: Day Trips -->
+      <div class="tour-detail-row reveal" style="display: flex; flex-direction: row-reverse; gap: 40px; margin-bottom: 60px; align-items: center; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px;">
+          <img src="images/hotel/corridor-vases.jpg" alt="Day Trips" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        </div>
+        <div style="flex: 1; min-width: 300px;">
+          <span style="color: var(--clr-gold); font-size: 2rem;">🏛️</span>
+          <h2 style="color: var(--clr-nile); font-family: 'Cinzel', serif; margin: 10px 0;" data-i18n="exp.dayTrips.title">Day Trips</h2>
+          <p style="color: var(--clr-gray); line-height: 1.8;" data-i18n="exp.dayTrips.desc">Visit the Grand Egyptian Museum, Saqqara Step Pyramid, and the ancient capital of Memphis — all in one comprehensive private day tour with private air-conditioned transport.</p>
+          <div style="margin: 20px 0; font-size: 1rem; color: var(--clr-nile);">
+            <p><strong>Duration:</strong> Full day (7-8 hours) | <strong>Includes:</strong> Private vehicle & guide</p>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <p style="font-size: 1.4rem; color: var(--clr-gold); font-weight: bold;" data-i18n="exp.dayTrips.price">From $45</p>
+            <a href="contact.html#booking" class="btn btn-nile" data-i18n="exp.bookTour">Book This Tour</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tour 3: Cairo City Tours -->
+      <div class="tour-detail-row reveal" style="display: flex; gap: 40px; margin-bottom: 60px; align-items: center; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px;">
+          <img src="images/hotel/lobby-mosaic.jpg" alt="Cairo City Tours" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        </div>
+        <div style="flex: 1; min-width: 300px;">
+          <span style="color: var(--clr-gold); font-size: 2rem;">🌆</span>
+          <h2 style="color: var(--clr-nile); font-family: 'Cinzel', serif; margin: 10px 0;" data-i18n="exp.cairo.title">Cairo City Tours</h2>
+          <p style="color: var(--clr-gray); line-height: 1.8;" data-i18n="exp.cairo.desc">Discover the vibrant streets of Historic Cairo — from the 14th-century Khan El-Khalili bazaar to the Citadel of Saladin, the Mosque of Muhammad Ali, and the Hanging Church.</p>
+          <div style="margin: 20px 0; font-size: 1rem; color: var(--clr-nile);">
+            <p><strong>Duration:</strong> 4-8 hours | <strong>Highlights:</strong> Old Cairo & Bazaar</p>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <p style="font-size: 1.4rem; color: var(--clr-gold); font-weight: bold;" data-i18n="exp.cairo.price">From $35</p>
+            <a href="contact.html#booking" class="btn btn-nile" data-i18n="exp.bookTour">Book This Tour</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tour 4: Transfers -->
+      <div class="tour-detail-row reveal" style="display: flex; flex-direction: row-reverse; gap: 40px; margin-bottom: 40px; align-items: center; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px;">
+          <img src="images/hotel/pyramids-terrace-night.jpg" alt="Transfers & Logistics" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        </div>
+        <div style="flex: 1; min-width: 300px;">
+          <span style="color: var(--clr-gold); font-size: 2rem;">🚗</span>
+          <h2 style="color: var(--clr-nile); font-family: 'Cinzel', serif; margin: 10px 0;" data-i18n="experiences.transfers.title">Transfers & Logistics</h2>
+          <p style="color: var(--clr-gray); line-height: 1.8;" data-i18n="experiences.transfers.desc">Cairo International Airport pickups, inter-city transport to Alexandria or Luxor, and partner hotel reservations across Egypt. Reliable, comfortable, and always on time.</p>
+          <div style="margin: 20px 0; font-size: 1rem; color: var(--clr-nile);">
+            <p><strong>Service:</strong> 24/7 Airport Meet & Greet | <strong>Fleet:</strong> Modern A/C Vehicles</p>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <p style="font-size: 1.4rem; color: var(--clr-gold); font-weight: bold;" data-i18n="experiences.transfers.price">From $20</p>
+            <a href="contact.html#booking" class="btn btn-nile" data-i18n="exp.bookTour">Book Transfer</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" style="background-color: var(--clr-ivory-dark);">
+    <div class="container reveal">
+      <h2 class="section-title text-center" data-i18n="exp.how.title">How It Works</h2>
+      <div class="how-grid stagger" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px;">
+        <div class="card how-step" style="text-align: center; padding: 30px;">
+          <div class="step-number" style="width: 50px; height: 50px; background: var(--clr-gold); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold; font-size: 1.3rem;">1</div>
+          <h3 data-i18n="exp.how.step1Title">Choose</h3>
+          <p data-i18n="exp.how.step1Desc">Browse our curated selection of tours and experiences.</p>
+        </div>
+        <div class="card how-step" style="text-align: center; padding: 30px;">
+          <div class="step-number" style="width: 50px; height: 50px; background: var(--clr-gold); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold; font-size: 1.3rem;">2</div>
+          <h3 data-i18n="exp.how.step2Title">Book</h3>
+          <p data-i18n="exp.how.step2Desc">Add your chosen experiences to your booking request or ask at reception.</p>
+        </div>
+        <div class="card how-step" style="text-align: center; padding: 30px;">
+          <div class="step-number" style="width: 50px; height: 50px; background: var(--clr-gold); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold; font-size: 1.3rem;">3</div>
+          <h3 data-i18n="exp.how.step3Title">Enjoy</h3>
+          <p data-i18n="exp.how.step3Desc">Sit back and let our expert guides take you on an unforgettable journey.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta" style="background-color: var(--clr-nile); color: white; text-align: center;">
+    <div class="container reveal">
+      <h2 style="font-family: 'Cinzel', serif; margin-bottom: 20px;" data-i18n="cta.expTitle">Ready for an Adventure?</h2>
+      <p style="margin-bottom: 30px;" data-i18n="cta.expSubtitle">Let us create the perfect Egyptian adventure for you.</p>
+      <a href="contact.html#booking" class="btn btn-gold" data-i18n="cta.btn">Book Now</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <span class="footer-logo"><img src="images/logo.jpg" alt="HENU Hotel" class="footer-logo-img"> HENU</span>
+        <p data-i18n="footer.tagline">Where Ancient Wonders Meet Modern Comfort</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><path d="M17.5 6.5h.01"></path><path d="M21 9v6a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V9a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5z"></path></svg></a>
+          <a href="#" aria-label="TripAdvisor"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M12 6c-3.309 0-6 2.691-6 6s2.691 6 6 6 6-2.691 6-6-2.691-6-6-6zm0 10c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z"></path></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.quickLinks">Quick Links</h4>
+        <ul>
+          <li><a href="accommodation.html" data-i18n="nav.accommodation">Accommodation</a></li>
+          <li><a href="experiences.html" data-i18n="nav.experiences">Experiences</a></li>
+          <li><a href="b2b.html" data-i18n="nav.b2b">B2B Services</a></li>
+          <li><a href="careers.html" data-i18n="nav.careers">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <p>📍 21 Gamal Abdel Nasser St., Nazlet El-Semman, Giza, Egypt</p>
+        <p>📞 +20 XXX XXX XXXX</p>
+        <p>📧 info@henuhotel.com</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.newsletter">Newsletter</h4>
+        <p data-i18n="footer.newsletterDesc">Subscribe for special offers</p>
+        <form class="footer-newsletter">
+          <input type="email" data-i18n-placeholder="footer.emailPlaceholder" placeholder="Your email">
+          <button type="submit" class="btn btn-gold-sm" data-i18n="footer.subscribe">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 HENU Hotel. <span data-i18n="footer.rights">All rights reserved.</span></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>

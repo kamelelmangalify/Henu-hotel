@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | HENU Hotel - Pyramids View</title>
+  <meta name="description" content="Welcome to HENU Hotel in Giza, Egypt. Where Ancient Wonders Meet Modern Comfort.">
+  <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.jpg" alt="HENU Hotel" class="nav-logo-img">
+        <span class="logo-text">HENU</span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" data-i18n="nav.home" class="active">Home</a></li>
+        <li><a href="accommodation.html" data-i18n="nav.accommodation">Accommodation</a></li>
+        <li><a href="experiences.html" data-i18n="nav.experiences">Experiences</a></li>
+        <li><a href="b2b.html" data-i18n="nav.b2b">B2B Services</a></li>
+        <li><a href="careers.html" data-i18n="nav.careers">Careers</a></li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="lang-switcher">
+          <select id="langSelect" onchange="i18n.setLanguage(this.value)">
+            <option value="en">EN</option>
+            <option value="de">DE</option>
+            <option value="es">ES</option>
+            <option value="it">IT</option>
+          </select>
+        </div>
+        <a href="contact.html#booking" class="btn btn-gold" data-i18n="nav.book">Book Now</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="hero" style="background-image: url('images/hotel/hero-pyramids-night.jpg');">
+    <div class="hero-overlay"></div>
+    <div class="hero-content container reveal">
+      <span class="badge" data-i18n="hero.badge">PYRAMIDS VIEW HOTEL</span>
+      <h1 data-i18n="hero.title">Where Ancient Wonders Meet Modern Comfort</h1>
+      <p data-i18n="hero.subtitle">Experience the magic of Giza with stunning, unobstructed views of the Great Pyramids from your room and our rooftop terrace.</p>
+      <div class="hero-buttons">
+        <a href="contact.html#booking" class="btn btn-gold" data-i18n="hero.bookBtn">Book Your Stay</a>
+        <a href="accommodation.html" class="btn btn-outline" data-i18n="hero.exploreBtn">Explore Rooms</a>
+      </div>
+    </div>
+    <div class="scroll-down">
+      <span></span>
+    </div>
+  </header>
+
+  <!-- ABOUT SECTION -->
+  <section class="section about-section">
+    <div class="container">
+      <h2 class="section-title reveal" data-i18n="about.title">Welcome to HENU</h2>
+      <div class="about-grid reveal">
+        <div class="about-image">
+          <img src="images/hotel/corridor-vases.jpg" alt="HENU Hotel Interior">
+        </div>
+        <div class="about-text">
+          <p data-i18n="about.p1">Nestled in the historic Nazlet El-Semman district of Giza, HENU Hotel offers a unique blend of modern luxury and timeless Egyptian heritage. Wake up to the awe-inspiring sight of the Great Pyramids right outside your window.</p>
+          <p data-i18n="about.p2">Our boutique property features pharaonic-themed decor, comfortable accommodations, and exceptional service to ensure your stay in Egypt is truly unforgettable. Whether you are here for adventure or relaxation, HENU is your perfect home base.</p>
+        </div>
+      </div>
+      <div class="stats-row reveal stagger">
+        <div class="stat-item">
+          <h3>25</h3>
+          <p data-i18n="about.stat1">Rooms</p>
+        </div>
+        <div class="stat-item">
+          <h3 data-i18n="about.stat2Value">100%</h3>
+          <p data-i18n="about.stat2">Panoramic Pyramids Views</p>
+        </div>
+        <div class="stat-item">
+          <h3>2000+</h3>
+          <p data-i18n="about.stat3">Happy Guests</p>
+        </div>
+        <div class="stat-item">
+          <h3>5000+</h3>
+          <p data-i18n="about.stat4">Years of Heritage</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROOMS PREVIEW SECTION -->
+  <section class="section rooms-preview" style="background-color: var(--clr-ivory-dark);">
+    <div class="container">
+      <h2 class="section-title reveal" data-i18n="rooms.title">Our Accommodation</h2>
+      <div class="room-grid reveal stagger">
+        <!-- Single -->
+        <div class="card room-card">
+          <img src="images/hotel/room-single.jpg" alt="Single Room">
+          <div class="room-info">
+            <h3 data-i18n="rooms.single.name">Single Room</h3>
+            <p class="room-meta"><span data-i18n="rooms.single.capacity">1 Guest</span> • <span data-i18n="rooms.single.size">20 m²</span></p>
+            <p class="room-price" data-i18n="rooms.single.price">From $12 / night</p>
+            <a href="accommodation.html" class="btn btn-outline" data-i18n="rooms.viewDetails">View Details</a>
+          </div>
+        </div>
+        <!-- Double -->
+        <div class="card room-card">
+          <img src="images/hotel/room-double.jpg" alt="Double Room">
+          <div class="room-info">
+            <h3 data-i18n="rooms.double.name">Double Room</h3>
+            <p class="room-meta"><span data-i18n="rooms.double.capacity">2 Guests</span> • <span data-i18n="rooms.double.size">28 m²</span></p>
+            <p class="room-price" data-i18n="rooms.double.price">From $18 / night</p>
+            <a href="accommodation.html" class="btn btn-outline" data-i18n="rooms.viewDetails">View Details</a>
+          </div>
+        </div>
+        <!-- Triple -->
+        <div class="card room-card">
+          <img src="images/hotel/room-triple.jpg" alt="Triple Room">
+          <div class="room-info">
+            <h3 data-i18n="rooms.triple.name">Triple / Family Room</h3>
+            <p class="room-meta"><span data-i18n="rooms.triple.capacity">3 Guests</span> • <span data-i18n="rooms.triple.size">35 m²</span></p>
+            <p class="room-price" data-i18n="rooms.triple.price">From $25 / night</p>
+            <a href="accommodation.html" class="btn btn-outline" data-i18n="rooms.viewDetails">View Details</a>
+          </div>
+        </div>
+        <!-- Suite -->
+        <div class="card room-card featured-room">
+          <img src="images/hotel/room-suite.jpg" alt="King Suite">
+          <div class="room-info">
+            <h3 data-i18n="rooms.suite.name">King Suite — Pyramids View</h3>
+            <p class="room-meta"><span data-i18n="rooms.suite.capacity">2-4 Guests</span> • <span data-i18n="rooms.suite.size">45 m²</span></p>
+            <p class="room-price" data-i18n="rooms.suite.price">From $45 / night</p>
+            <a href="accommodation.html" class="btn btn-gold" data-i18n="rooms.viewDetails">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHARAONIC DIVIDER -->
+  <div class="pharaonic-divider"></div>
+
+  <!-- EXPERIENCES PREVIEW SECTION -->
+  <section class="section experiences-preview">
+    <div class="container">
+      <h2 class="section-title reveal" data-i18n="exp.title">Curated Experiences</h2>
+      <div class="exp-grid reveal stagger">
+        <div class="card exp-card">
+          <div class="exp-icon">🐫</div>
+          <h3 data-i18n="exp.horse.title">Horse & Camel Rides</h3>
+          <p data-i18n="exp.horse.desc">Explore the Pyramids plateau on horseback or camel during sunrise or sunset.</p>
+          <p class="exp-price" data-i18n="exp.horse.price">From $25</p>
+          <a href="experiences.html" class="btn btn-outline" data-i18n="exp.book">Book Tour</a>
+        </div>
+        <div class="card exp-card">
+          <div class="exp-icon">🏛️</div>
+          <h3 data-i18n="exp.dayTrips.title">Day Trips</h3>
+          <p data-i18n="exp.dayTrips.desc">Visit the Grand Egyptian Museum, Saqqara step pyramid, and ancient Memphis.</p>
+          <p class="exp-price" data-i18n="exp.dayTrips.price">From $45</p>
+          <a href="experiences.html" class="btn btn-outline" data-i18n="exp.book">Book Tour</a>
+        </div>
+        <div class="card exp-card">
+          <div class="exp-icon">🌆</div>
+          <h3 data-i18n="exp.cairo.title">Cairo City Tours</h3>
+          <p data-i18n="exp.cairo.desc">Discover Islamic Cairo, Khan el-Khalili bazaar, and the Citadel of Saladin.</p>
+          <p class="exp-price" data-i18n="exp.cairo.price">From $35</p>
+          <a href="experiences.html" class="btn btn-outline" data-i18n="exp.book">Book Tour</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARALLAX BREAK SECTION -->
+  <section class="parallax-break" style="background-image: url('images/hotel/hero-pyramids-sunset.jpg'); background-attachment: fixed; background-size: cover; background-position: center; padding: 100px 0; text-align: center; position: relative;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);"></div>
+    <div class="container" style="position: relative; z-index: 1;">
+      <h2 style="color: var(--clr-ivory); font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 30px;" data-i18n="parallax.quote">"Dine beneath the stars, with the Pyramids as your backdrop"</h2>
+      <a href="contact.html#booking" class="btn btn-gold" data-i18n="parallax.bookTable">Book Your Stay</a>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="section testimonials" style="background-color: var(--clr-ivory-dark);">
+    <div class="container">
+      <h2 class="section-title reveal" data-i18n="testi.title">What Our Guests Say</h2>
+      <div class="testi-grid reveal stagger">
+        <div class="card testi-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote" data-i18n="testi.1.quote">"The view from the rooftop terrace is simply unbelievable. The staff treated us like royalty. Best hotel experience in Egypt!"</p>
+          <h4 data-i18n="testi.1.name">- Sarah J.</h4>
+          <span data-i18n="testi.1.country">United Kingdom</span>
+        </div>
+        <div class="card testi-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote" data-i18n="testi.2.quote">"Clean, comfortable rooms with beautiful pharaonic touches. Waking up to the Sphinx right outside was a dream come true."</p>
+          <h4 data-i18n="testi.2.name">- Markus T.</h4>
+          <span data-i18n="testi.2.country">Germany</span>
+        </div>
+        <div class="card testi-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote" data-i18n="testi.3.quote">"Great value for money. They organized all our tours flawlessly. Highly recommend the sunset camel ride they arranged."</p>
+          <h4 data-i18n="testi.3.name">- Elena G.</h4>
+          <span data-i18n="testi.3.country">Spain</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY SECTION -->
+  <section class="section gallery">
+    <div class="container">
+      <h2 class="section-title reveal" data-i18n="gallery.title">Gallery</h2>
+      <div class="gallery-grid reveal stagger">
+        <div class="gallery-item">
+          <img src="images/hotel/hero-pyramids-night.jpg" alt="Pyramids at night from rooftop terrace">
+          <div class="gallery-overlay">🔍</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/hotel/room-suite.jpg" alt="HENU Pharaonic Suite">
+          <div class="gallery-overlay">🔍</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/hotel/lobby-mosaic.jpg" alt="Lobby Mosaic Art">
+          <div class="gallery-overlay">🔍</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/hotel/room-double.jpg" alt="Double Room">
+          <div class="gallery-overlay">🔍</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/hotel/hero-pyramids-sunset.jpg" alt="Pyramids at Twilight from Rooftop">
+          <div class="gallery-overlay">🔍</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/hotel/bathroom-marble.jpg" alt="Marble Bathroom">
+          <div class="gallery-overlay">🔍</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/hotel/pyramids-terrace-night.jpg" alt="Pyramids Lights View">
+          <div class="gallery-overlay">🔍</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/hotel/corridor-vases.jpg" alt="Pharaonic Artwork Corridor">
+          <div class="gallery-overlay">🔍</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="section cta" style="background-color: var(--clr-nile); color: white; text-align: center;">
+    <div class="container reveal">
+      <h2 style="font-family: 'Cinzel', serif; margin-bottom: 20px;" data-i18n="cta.title">Ready for an Unforgettable Experience?</h2>
+      <p style="margin-bottom: 30px;" data-i18n="cta.subtitle">Book directly through our website for the best rates and complimentary breakfast.</p>
+      <a href="contact.html#booking" class="btn btn-gold" data-i18n="cta.btn">Book Now</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <span class="footer-logo"><img src="images/logo.jpg" alt="HENU Hotel" class="footer-logo-img"> HENU</span>
+        <p data-i18n="footer.tagline">Where Ancient Wonders Meet Modern Comfort</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><path d="M17.5 6.5h.01"></path><path d="M21 9v6a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V9a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5z"></path></svg></a>
+          <a href="#" aria-label="TripAdvisor"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M12 6c-3.309 0-6 2.691-6 6s2.691 6 6 6 6-2.691 6-6-2.691-6-6-6zm0 10c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z"></path></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.quickLinks">Quick Links</h4>
+        <ul>
+          <li><a href="accommodation.html" data-i18n="nav.accommodation">Accommodation</a></li>
+          <li><a href="experiences.html" data-i18n="nav.experiences">Experiences</a></li>
+          <li><a href="b2b.html" data-i18n="nav.b2b">B2B Services</a></li>
+          <li><a href="careers.html" data-i18n="nav.careers">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <p>📍 21 Gamal Abdel Nasser St., Nazlet El-Semman, Giza, Egypt</p>
+        <p>📞 +20 XXX XXX XXXX</p>
+        <p>📧 info@henuhotel.com</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.newsletter">Newsletter</h4>
+        <p data-i18n="footer.newsletterDesc">Subscribe for special offers</p>
+        <form class="footer-newsletter">
+          <input type="email" data-i18n-placeholder="footer.emailPlaceholder" placeholder="Your email">
+          <button type="submit" class="btn btn-gold-sm" data-i18n="footer.subscribe">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 HENU Hotel. <span data-i18n="footer.rights">All rights reserved.</span></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>
