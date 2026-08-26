@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام حجز غرف الفندق البسيط (25 غرفة) | تصدير إكسيل فوري</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts Cairo -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- SheetJS (XLSX) for instant Excel Export -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+    }
+    .room-card {
+      transition: all 0.25s ease-in-out;
+    }
+    .room-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.15);
+    }
+    @media print {
+      .no-print { display: none !important; }
+      .print-only { display: block !important; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+  <!-- TOP HEADER -->
+  <header class="bg-slate-900 text-white sticky top-0 z-40 shadow-lg border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-slate-900 text-xl font-black shadow-md">
+          <i class="fa-solid fa-hotel"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-black tracking-tight text-white flex items-center gap-2">
+            برنامج حجز الفندق السريع
+            <span class="text-xs bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded-full border border-amber-400/30">25 غرفة</span>
+          </h1>
+          <p class="text-xs text-slate-400">إدارة التسكين، الحجوزات، والتصدير المباشر لملفات الإكسيل</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center flex-wrap gap-2.5">
+        <!-- Direct Excel Export Button -->
+        <button onclick="exportToExcel()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm px-4 py-2 rounded-xl flex items-center gap-2 shadow-md hover:shadow-emerald-600/30 transition">
+          <i class="fa-solid fa-file-excel text-lg"></i>
+          <span>تصدير كل الداتا إكسيل (Excel)</span>
+        </button>
+
+        <!-- New Booking Button -->
+        <button onclick="openNewBookingModal()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm px-4 py-2 rounded-xl flex items-center gap-2 shadow-md hover:shadow-amber-500/30 transition">
+          <i class="fa-solid fa-plus-circle text-lg"></i>
+          <span>حجز / تسكين جديد</span>
+        </button>
+
+        <!-- Reset / Reset Demo -->
+        <button onclick="resetToDefaultData()" title="استعادة الداتا الافتراضية" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm p-2.5 rounded-xl border border-slate-700 transition">
+          <i class="fa-solid fa-arrows-rotate"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+    <!-- KPI STATS CARDS -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+      <!-- Total Rooms -->
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between text-slate-500 text-xs font-bold mb-1">
+          <span>إجمالي الغرف</span>
+          <i class="fa-solid fa-door-open text-slate-400"></i>
+        </div>
+        <div class="text-2xl font-black text-slate-900" id="stat-total-rooms">25</div>
+        <div class="text-[11px] text-slate-400 mt-1 font-medium">4 طوابق معتمدة</div>
+      </div>
+
+      <!-- Occupied -->
+      <div class="bg-rose-50 p-4 rounded-2xl border border-rose-100 shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between text-rose-600 text-xs font-bold mb-1">
+          <span>الغرف المشغولة</span>
+          <i class="fa-solid fa-user-check text-rose-400"></i>
+        </div>
+        <div class="text-2xl font-black text-rose-600" id="stat-occupied-rooms">0</div>
+        <div class="text-[11px] text-rose-400 mt-1 font-medium">نزلاء حاليين</div>
+      </div>
+
+      <!-- Available -->
+      <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-100 shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between text-emerald-700 text-xs font-bold mb-1">
+          <span>الغرف المتاحة</span>
+          <i class="fa-solid fa-circle-check text-emerald-500"></i>
+        </div>
+        <div class="text-2xl font-black text-emerald-600" id="stat-available-rooms">0</div>
+        <div class="text-[11px] text-emerald-500 mt-1 font-medium">جاهزة للتسكين الفوري</div>
+      </div>
+
+      <!-- Cleaning / Maint -->
+      <div class="bg-amber-50 p-4 rounded-2xl border border-amber-100 shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between text-amber-700 text-xs font-bold mb-1">
+          <span>نظافة / صيانة</span>
+          <i class="fa-solid fa-broom text-amber-500"></i>
+        </div>
+        <div class="text-2xl font-black text-amber-600" id="stat-maintenance-rooms">0</div>
+        <div class="text-[11px] text-amber-600 mt-1 font-medium">تحت الخدمة</div>
+      </div>
+
+      <!-- Occupancy Rate -->
+      <div class="bg-indigo-50 p-4 rounded-2xl border border-indigo-100 shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between text-indigo-700 text-xs font-bold mb-1">
+          <span>نسبة الإشغال</span>
+          <i class="fa-solid fa-chart-pie text-indigo-400"></i>
+        </div>
+        <div class="text-2xl font-black text-indigo-600" id="stat-occupancy-rate">0%</div>
+        <div class="text-[11px] text-indigo-400 mt-1 font-medium">معدل التشغيل</div>
+      </div>
+
+      <!-- Total Collected Revenue -->
+      <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100 shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between text-blue-700 text-xs font-bold mb-1">
+          <span>المبالغ المحصلة</span>
+          <i class="fa-solid fa-sack-dollar text-blue-400"></i>
+        </div>
+        <div class="text-xl font-black text-blue-700 truncate" id="stat-total-revenue">0 ج.م</div>
+        <div class="text-[11px] text-blue-500 mt-1 font-medium">إجمالي الإيرادات</div>
+      </div>
+    </div>
+
+    <!-- FILTER & SEARCH BAR -->
+    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+      <!-- Search Input -->
+      <div class="relative flex-1 min-w-[240px]">
+        <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3.5 text-slate-400 text-sm"></i>
+        <input type="text" id="searchInput" oninput="renderRooms()" placeholder="بحث برقم الغرفة (مثل 102)، اسم النزيل، أو الهاتف..." class="w-full pr-10 pl-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="flex items-center flex-wrap gap-1.5 bg-slate-100 p-1 rounded-xl text-xs font-bold">
+        <button onclick="setFilter('all')" id="filter-all" class="filter-btn px-3 py-1.5 rounded-lg bg-white shadow-sm text-slate-900 transition">الكل (25)</button>
+        <button onclick="setFilter('متاحة')" id="filter-متاحة" class="filter-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">متاحة</button>
+        <button onclick="setFilter('مشغولة')" id="filter-مشغولة" class="filter-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">مشغولة</button>
+        <button onclick="setFilter('تحت التنظيف')" id="filter-تحت التنظيف" class="filter-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">تحت التنظيف</button>
+        <button onclick="setFilter('صيانة')" id="filter-صيانة" class="filter-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">صيانة</button>
+      </div>
+
+      <!-- Floor Filter -->
+      <select id="floorFilter" onchange="renderRooms()" class="bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 py-2 px-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <option value="all">🏢 جميع الأدوار (الأول - الرابع)</option>
+        <option value="الدور الأول">الدور الأول (4 غرف)</option>
+        <option value="الدور الثاني">الدور الثاني (7 غرف)</option>
+        <option value="الدور الثالث">الدور الثالث (7 غرف)</option>
+        <option value="الدور الرابع">الدور الرابع (7 غرف)</option>
+      </select>
+    </div>
+
+    <!-- TABS: ROOMS GRID vs. BOOKINGS TABLE -->
+    <div class="flex items-center gap-2 border-b border-slate-200 pb-2">
+      <button onclick="switchView('grid')" id="tab-grid" class="view-tab flex items-center gap-2 px-4 py-2 font-black text-sm rounded-xl bg-slate-900 text-white shadow transition">
+        <i class="fa-solid fa-table-cells-large"></i>
+        <span>شبكة الغرف المباشرة</span>
+      </button>
+      <button onclick="switchView('table')" id="tab-table" class="view-tab flex items-center gap-2 px-4 py-2 font-bold text-sm rounded-xl text-slate-600 hover:bg-slate-200 transition">
+        <i class="fa-solid fa-list-check"></i>
+        <span>سجل وجدول الحجوزات التفصيلي</span>
+      </button>
+    </div>
+
+    <!-- VIEW 1: ROOMS GRID (BY FLOORS) -->
+    <div id="view-grid" class="space-y-8">
+      <!-- Generated Dynamically by JS -->
+    </div>
+
+    <!-- VIEW 2: BOOKINGS TABLE -->
+    <div id="view-table" class="hidden bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <div class="p-4 bg-slate-900 text-white flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-clipboard-list text-amber-400"></i>
+          <h3 class="font-bold text-base">سجل النزلاء والحجوزات المسجلة</h3>
+        </div>
+        <button onclick="exportToExcel()" class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-file-excel"></i>
+          <span>تحميل شيت إكسيل كامل</span>
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-right text-xs">
+          <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+            <tr>
+              <th class="p-3">رقم الحجز</th>
+              <th class="p-3">الغرفة</th>
+              <th class="p-3">الدور والنوع</th>
+              <th class="p-3">اسم النزيل</th>
+              <th class="p-3">الهاتف</th>
+              <th class="p-3">تاريخ الوصول</th>
+              <th class="p-3">تاريخ المغادرة</th>
+              <th class="p-3">الليالي</th>
+              <th class="p-3">سعر الليلة</th>
+              <th class="p-3">الإجمالي</th>
+              <th class="p-3">المدفوع</th>
+              <th class="p-3">المتبقي</th>
+              <th class="p-3">الحالة</th>
+              <th class="p-3 text-center">إجراءات</th>
+            </tr>
+          </thead>
+          <tbody id="bookingsTableBody" class="divide-y divide-slate-100">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL: BOOKING / CHECK-IN -->
+  <div id="bookingModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+      <div class="bg-slate-900 text-white p-5 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-slate-950 text-lg font-black">
+            <i class="fa-solid fa-key"></i>
+          </div>
+          <div>
+            <h3 class="font-black text-lg text-white" id="modalTitle">حجز وتسكين غرفة</h3>
+            <p class="text-xs text-slate-400" id="modalRoomSubtitle">غرفة رقم 101 - الدور الأول</p>
+          </div>
+        </div>
+        <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="p-6 space-y-4 text-sm">
+        <input type="hidden" id="formRoomId">
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">رقم الغرفة</label>
+            <input type="text" id="formRoomDisplay" readonly class="w-full bg-slate-100 border border-slate-200 rounded-xl p-2.5 font-bold text-slate-700">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">سعر الليلة (ج.م)</label>
+            <input type="number" id="formPrice" oninput="calculateTotal()" required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 font-bold text-slate-800 focus:ring-2 focus:ring-amber-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">اسم النزيل الكامل *</label>
+          <input type="text" id="formGuestName" required placeholder="مثال: أحمد محمد علي" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:ring-2 focus:ring-amber-500">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">رقم الهاتف / واتساب *</label>
+            <input type="text" id="formPhone" required placeholder="010xxxxxxxx" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:ring-2 focus:ring-amber-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">الرقم القومي / جواز السفر</label>
+            <input type="text" id="formNationalId" placeholder="اختياري" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:ring-2 focus:ring-amber-500">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">تاريخ الوصول (Check-in) *</label>
+            <input type="date" id="formCheckin" onchange="calculateTotal()" required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:ring-2 focus:ring-amber-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">تاريخ المغادرة (Check-out) *</label>
+            <input type="date" id="formCheckout" onchange="calculateTotal()" required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:ring-2 focus:ring-amber-500">
+          </div>
+        </div>
+
+        <!-- Price Breakdown Box -->
+        <div class="bg-amber-50/70 border border-amber-200/70 rounded-2xl p-3.5 space-y-2">
+          <div class="flex justify-between text-xs font-bold text-amber-900">
+            <span>عدد الليالي:</span>
+            <span id="calcNights">0 ليلة</span>
+          </div>
+          <div class="flex justify-between text-xs font-bold text-amber-900">
+            <span>إجمالي الإقامة المطلوب:</span>
+            <span id="calcTotal">0 ج.م</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">المبلغ المسدد / العربون (ج.م) *</label>
+            <input type="number" id="formPaid" oninput="calculateTotal()" required value="0" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 font-bold text-emerald-700 focus:ring-2 focus:ring-amber-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">المتبقي عند المغادرة</label>
+            <input type="text" id="calcRemaining" readonly class="w-full bg-slate-100 border border-slate-200 rounded-xl p-2.5 font-bold text-rose-600">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">طريقة الدفع وملاحظات</label>
+          <input type="text" id="formNotes" placeholder="مثال: نقدي، فيزا، تحويل بنكي، طلب سرير إضافي..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:ring-2 focus:ring-amber-500">
+        </div>
+
+        <div class="pt-2 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeModal()" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-bold hover:bg-slate-100">إلغاء</button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-md transition">تأكيد التسكين والحفظ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // 25 Rooms Distribution Exactly as Requested
+    const defaultRooms = [
+      // الدور الأول (4 غرف)
+      { id: '101', floor: 'الدور الأول', type: 'دابل شبك', beds: '1 سرير دابل', price: 1200, status: 'متاحة', guest: null, notes: 'شباك شبك' },
+      { id: '102', floor: 'الدور الأول', type: 'سرير كينج', beds: '1 سرير كينج', price: 1400, status: 'مشغولة', guest: { name: 'أحمد محمود العبد', phone: '01012345678', idNumber: '29001010101010', checkin: '2026-08-20', checkout: '2026-08-25', nights: 5, total: 7000, paid: 7000, remaining: 0, notes: 'فيزا - مدفوع كامل' }, notes: 'سرير كينج شبك' },
+      { id: '103', floor: 'الدور الأول', type: 'سويت', beds: '1 سرير كينج + صالة', price: 2500, status: 'مشغولة', guest: { name: 'د. طارق علي السيد', phone: '01122334455', idNumber: '28505050505050', checkin: '2026-08-22', checkout: '2026-08-27', nights: 5, total: 12500, paid: 12500, remaining: 0, notes: 'تحويل بنكي - مدفوع كامل' }, notes: 'سويت فندقي فاخر' },
+      { id: '104', floor: 'الدور الأول', type: 'كينج شبك', beds: '1 سرير كينج', price: 1500, status: 'متاحة', guest: null, notes: 'كينج شبك' },
+
+      // الدور الثاني (7 غرف)
+      { id: '201', floor: 'الدور الثاني', type: 'سنجل بلكونة', beds: '1 سرير سنجل', price: 900, status: 'متاحة', guest: null, notes: 'بلكونة خارجية' },
+      { id: '202', floor: 'الدور الثاني', type: 'دابل بلكونة', beds: '1 سرير دابل', price: 1300, status: 'مشغولة', guest: { name: 'جون سميث (John Smith)', phone: '+447911123456', idNumber: 'P88765432', checkin: '2026-08-21', checkout: '2026-08-26', nights: 5, total: 6500, paid: 6500, remaining: 0, notes: 'بطاقة ائتمان دولية' }, notes: 'بلكونة إطلالة' },
+      { id: '203', floor: 'الدور الثاني', type: 'دابل', beds: '1 سرير دابل', price: 1200, status: 'تحت التنظيف', guest: null, notes: 'تجهيز مفروشات' },
+      { id: '204', floor: 'الدور الثاني', type: 'سرير كينج', beds: '1 سرير كينج', price: 1500, status: 'مشغولة', guest: { name: 'سارة إبراهيم الشريف', phone: '01299887766', idNumber: '29512121212121', checkin: '2026-08-23', checkout: '2026-08-28', nights: 5, total: 7500, paid: 4500, remaining: 3000, notes: 'نقدي (عربونا متبقي 3000)' }, notes: 'سرير كينج' },
+      { id: '205', floor: 'الدور الثاني', type: 'دابل', beds: '1 سرير دابل', price: 1200, status: 'صيانة', guest: null, notes: 'فحص التكييف' },
+      { id: '206', floor: 'الدور الثاني', type: 'ترابل شبك جانبي', beds: '3 سراير سنجل', price: 1800, status: 'متاحة', guest: null, notes: 'عائلية 3 سراير' },
+      { id: '207', floor: 'الدور الثاني', type: 'دابل شبك جانبي', beds: '1 سرير دابل', price: 1250, status: 'متاحة', guest: null, notes: 'شبك جانبي' },
+
+      // الدور الثالث (7 غرف)
+      { id: '301', floor: 'الدور الثالث', type: 'سنجل بلكونة', beds: '1 سرير سنجل', price: 950, status: 'متاحة', guest: null, notes: 'بلكونة دور ثالث' },
+      { id: '302', floor: 'الدور الثالث', type: 'دابل بلكونة', beds: '1 سرير دابل', price: 1350, status: 'مشغولة', guest: { name: 'م. خالد عبد الرحمن', phone: '01005544332', idNumber: '28804040404040', checkin: '2026-08-20', checkout: '2026-08-26', nights: 6, total: 8100, paid: 8100, remaining: 0, notes: 'فودافون كاش - مدفوع' }, notes: 'بلكونة دور ثالث' },
+      { id: '303', floor: 'الدور الثالث', type: 'سرير كينج', beds: '1 سرير كينج', price: 1550, status: 'متاحة', guest: null, notes: 'جاهزة للتسكين' },
+      { id: '304', floor: 'الدور الثالث', type: 'سرير كينج', beds: '1 سرير كينج', price: 1550, status: 'مشغولة', guest: { name: 'أليكسيس دوفال (Alexis)', phone: '+33612345678', idNumber: 'FR998877', checkin: '2026-08-22', checkout: '2026-08-29', nights: 7, total: 10850, paid: 10850, remaining: 0, notes: 'Booking.com Online' }, notes: 'سياحة فرنسية' },
+      { id: '305', floor: 'الدور الثالث', type: 'سرير كينج', beds: '1 سرير كينج', price: 1550, status: 'متاحة', guest: null, notes: 'كينج واسعة' },
+      { id: '306', floor: 'الدور الثالث', type: 'كنيج بلكونة جانبي', beds: '1 سرير كينج', price: 1650, status: 'تحت التنظيف', guest: null, notes: 'بلكونة جانبية' },
+      { id: '307', floor: 'الدور الثالث', type: 'دبل شبك جانبي', beds: '1 سرير دابل', price: 1300, status: 'متاحة', guest: null, notes: 'شبك جانبي' },
+
+      // الدور الرابع (7 غرف)
+      { id: '401', floor: 'الدور الرابع', type: 'سنجل بلكونة', beds: '1 سرير سنجل', price: 1000, status: 'متاحة', guest: null, notes: 'إطلالة علوية' },
+      { id: '402', floor: 'الدور الرابع', type: 'دابل بلكونة', beds: '1 سرير دابل', price: 1400, status: 'متاحة', guest: null, notes: 'بلكونة روف' },
+      { id: '403', floor: 'الدور الرابع', type: 'سرير كينج', beds: '1 سرير كينج', price: 1900, status: 'مشغولة', guest: { name: 'عمر الفاروق الباز', phone: '01111223344', idNumber: '29202020202020', checkin: '2026-08-19', checkout: '2026-08-25', nights: 6, total: 11400, paid: 11400, remaining: 0, notes: 'نقدي - مسدد كامل' }, notes: 'إطلالة روف مميزة' },
+      { id: '404', floor: 'الدور الرابع', type: 'سرير كينج', beds: '1 سرير كينج', price: 1900, status: 'مشغولة', guest: { name: 'ماريا كوستاس (Maria)', phone: '+30691234567', idNumber: 'GR554433', checkin: '2026-08-21', checkout: '2026-08-27', nights: 6, total: 11400, paid: 11400, remaining: 0, notes: 'Expedia Online' }, notes: 'سائحة يونانية' },
+      { id: '405', floor: 'الدور الرابع', type: 'دابل', beds: '1 سرير دابل', price: 1350, status: 'متاحة', guest: null, notes: 'دابل روف' },
+      { id: '406', floor: 'الدور الرابع', type: 'ترابل شبك جانبي', beds: '3 سراير سنجل', price: 1900, status: 'صيانة', guest: null, notes: 'صيانة سباكة' },
+      { id: '407', floor: 'الدور الرابع', type: 'دابل شبك جانبي', beds: '1 سرير دابل', price: 1350, status: 'متاحة', guest: null, notes: 'شبك جانبي' }
+    ];
+
+    let rooms = [];
+    let currentFilter = 'all';
+
+    // Initialize App
+    function init() {
+      const stored = localStorage.getItem('henu_hotel_25_rooms');
+      if (stored) {
+        try {
+          rooms = JSON.parse(stored);
+        } catch (e) {
+          rooms = [...defaultRooms];
+        }
+      } else {
+        rooms = [...defaultRooms];
+        saveData();
+      }
+      renderRooms();
+      updateKPIs();
+    }
+
+    function saveData() {
+      localStorage.setItem('henu_hotel_25_rooms', JSON.stringify(rooms));
+    }
+
+    function resetToDefaultData() {
+      Swal.fire({
+        title: 'استعادة البيانات الافتراضية؟',
+        text: 'سيتم إعادة ضبط الـ 25 غرفة بالحجوزات التجريبية الافتراضية.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'نعم، إعادة الضبط',
+        cancelButtonText: 'إلغاء',
+        confirmButtonColor: '#d97706'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          rooms = JSON.parse(JSON.stringify(defaultRooms));
+          saveData();
+          renderRooms();
+          updateKPIs();
+          Swal.fire('تم!', 'تمت إعادة ضبط البيانات بنجاح.', 'success');
+        }
+      });
+    }
+
+    function updateKPIs() {
+      const total = rooms.length;
+      const occupied = rooms.filter(r => r.status === 'مشغولة').length;
+      const available = rooms.filter(r => r.status === 'متاحة').length;
+      const maint = rooms.filter(r => r.status === 'تحت التنظيف' || r.status === 'صيانة').length;
+      const occRate = Math.round((occupied / total) * 100);
+      const totalRev = rooms.reduce((sum, r) => sum + (r.guest ? (Number(r.guest.paid) || 0) : 0), 0);
+
+      document.getElementById('stat-total-rooms').innerText = total;
+      document.getElementById('stat-occupied-rooms').innerText = occupied;
+      document.getElementById('stat-available-rooms').innerText = available;
+      document.getElementById('stat-maintenance-rooms').innerText = maint;
+      document.getElementById('stat-occupancy-rate').innerText = `${occRate}%`;
+      document.getElementById('stat-total-revenue').innerText = `${totalRev.toLocaleString('ar-EG')} ج.م`;
+    }
+
+    function setFilter(status) {
+      currentFilter = status;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('bg-white', 'shadow-sm', 'text-slate-900');
+        btn.classList.add('text-slate-600');
+      });
+      const activeBtn = document.getElementById(`filter-${status}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-white', 'shadow-sm', 'text-slate-900');
+        activeBtn.classList.remove('text-slate-600');
+      }
+      renderRooms();
+    }
+
+    function switchView(view) {
+      const grid = document.getElementById('view-grid');
+      const table = document.getElementById('view-table');
+      const tabGrid = document.getElementById('tab-grid');
+      const tabTable = document.getElementById('tab-table');
+
+      if (view === 'grid') {
+        grid.classList.remove('hidden');
+        table.classList.add('hidden');
+        tabGrid.className = 'view-tab flex items-center gap-2 px-4 py-2 font-black text-sm rounded-xl bg-slate-900 text-white shadow transition';
+        tabTable.className = 'view-tab flex items-center gap-2 px-4 py-2 font-bold text-sm rounded-xl text-slate-600 hover:bg-slate-200 transition';
+      } else {
+        grid.classList.add('hidden');
+        table.classList.remove('hidden');
+        tabTable.className = 'view-tab flex items-center gap-2 px-4 py-2 font-black text-sm rounded-xl bg-slate-900 text-white shadow transition';
+        tabGrid.className = 'view-tab flex items-center gap-2 px-4 py-2 font-bold text-sm rounded-xl text-slate-600 hover:bg-slate-200 transition';
+        renderBookingsTable();
+      }
+    }
+
+    function renderRooms() {
+      const container = document.getElementById('view-grid');
+      const searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+      const floorFilterVal = document.getElementById('floorFilter').value;
+
+      const floors = ['الدور الأول', 'الدور الثاني', 'الدور الثالث', 'الدور الرابع'];
+      
+      let html = '';
+
+      floors.forEach(floorName => {
+        if (floorFilterVal !== 'all' && floorFilterVal !== floorName) return;
+
+        const floorRooms = rooms.filter(r => {
+          if (r.floor !== floorName) return false;
+          if (currentFilter !== 'all' && r.status !== currentFilter) return false;
+          if (searchQuery) {
+            const matchId = r.id.toLowerCase().includes(searchQuery);
+            const matchType = r.type.toLowerCase().includes(searchQuery);
+            const matchGuest = r.guest && r.guest.name.toLowerCase().includes(searchQuery);
+            const matchPhone = r.guest && r.guest.phone.toLowerCase().includes(searchQuery);
+            if (!matchId && !matchType && !matchGuest && !matchPhone) return false;
+          }
+          return true;
+        });
+
+        if (floorRooms.length === 0 && (searchQuery || currentFilter !== 'all')) return;
+
+        html += `
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-r-4 border-amber-500 pr-3">
+              <div>
+                <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
+                  <span>🏢 ${floorName}</span>
+                  <span class="text-xs bg-slate-200 text-slate-700 font-bold px-2 py-0.5 rounded-full">${floorRooms.length} غرف</span>
+                </h2>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              ${floorRooms.map(room => getRoomCardHTML(room)).join('')}
+            </div>
+          </div>
+        `;
+      });
+
+      if (!html) {
+        html = `
+          <div class="bg-white rounded-2xl p-12 text-center border border-slate-200 shadow-sm">
+            <div class="w-16 h-16 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto text-2xl mb-4">
+              <i class="fa-solid fa-hotel"></i>
+            </div>
+            <h3 class="text-base font-bold text-slate-800">لا توجد غرف مطابقة لمعايير البحث</h3>
+            <p class="text-xs text-slate-400 mt-1">جرّب مسح مربع البحث أو اختيار كل الحالات.</p>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+      updateKPIs();
+    }
+
+    function getRoomCardHTML(room) {
+      let statusBadge = '';
+      let borderStyle = '';
+      let bgStyle = 'bg-white';
+
+      if (room.status === 'متاحة') {
+        statusBadge = `<span class="bg-emerald-100 text-emerald-800 text-[11px] font-black px-2.5 py-1 rounded-lg flex items-center gap-1"><i class="fa-solid fa-circle-check text-[9px]"></i> متاحة</span>`;
+        borderStyle = 'border-emerald-200';
+      } else if (room.status === 'مشغولة') {
+        statusBadge = `<span class="bg-rose-100 text-rose-800 text-[11px] font-black px-2.5 py-1 rounded-lg flex items-center gap-1"><i class="fa-solid fa-user-lock text-[9px]"></i> مشغولة</span>`;
+        borderStyle = 'border-rose-200';
+      } else if (room.status === 'تحت التنظيف') {
+        statusBadge = `<span class="bg-amber-100 text-amber-800 text-[11px] font-black px-2.5 py-1 rounded-lg flex items-center gap-1"><i class="fa-solid fa-broom text-[9px]"></i> تحت التنظيف</span>`;
+        borderStyle = 'border-amber-200';
+      } else {
+        statusBadge = `<span class="bg-slate-200 text-slate-800 text-[11px] font-black px-2.5 py-1 rounded-lg flex items-center gap-1"><i class="fa-solid fa-wrench text-[9px]"></i> صيانة</span>`;
+        borderStyle = 'border-slate-300';
+      }
+
+      return `
+        <div class="room-card ${bgStyle} rounded-2xl border ${borderStyle} shadow-sm overflow-hidden flex flex-col justify-between p-4 relative">
+          <!-- Room Header -->
+          <div class="flex items-start justify-between gap-2 mb-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-2xl font-black text-slate-900">#${room.id}</span>
+                <span class="text-xs bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded-md">${room.type}</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-medium mt-0.5">${room.beds} • ${room.notes || ''}</p>
+            </div>
+            <div>${statusBadge}</div>
+          </div>
+
+          <!-- Room Content / Guest Info -->
+          <div class="my-2 py-2 border-y border-slate-100 text-xs">
+            ${room.guest ? `
+              <div class="space-y-1.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200/60">
+                <div class="font-bold text-slate-800 flex items-center gap-1.5 truncate">
+                  <i class="fa-solid fa-user text-amber-500"></i>
+                  <span>${room.guest.name}</span>
+                </div>
+                <div class="text-[11px] text-slate-500 flex items-center gap-1.5">
+                  <i class="fa-solid fa-phone text-slate-400"></i>
+                  <span>${room.guest.phone}</span>
+                </div>
+                <div class="text-[11px] text-slate-500 flex items-center justify-between pt-1 border-t border-slate-200/50 font-semibold">
+                  <span>${room.guest.checkin} ⬅ ${room.guest.checkout}</span>
+                  <span class="text-rose-600 font-black">${room.guest.total.toLocaleString()} ج.م</span>
+                </div>
+              </div>
+            ` : `
+              <div class="flex items-center justify-between text-slate-600 py-1 font-bold">
+                <span>سعر الليلة:</span>
+                <span class="text-amber-600 font-black text-sm">${room.price.toLocaleString()} ج.م</span>
+              </div>
+            `}
+          </div>
+
+          <!-- Room Action Buttons -->
+          <div class="mt-2 flex items-center gap-1.5 pt-1">
+            ${room.status === 'مشغولة' ? `
+              <button onclick="checkoutRoom('${room.id}')" class="flex-1 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs py-2 rounded-xl flex items-center justify-center gap-1 shadow-sm transition">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>مغادرة (Check-out)</span>
+              </button>
+            ` : `
+              <button onclick="openBookingForRoom('${room.id}')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs py-2 rounded-xl flex items-center justify-center gap-1 shadow-sm transition">
+                <i class="fa-solid fa-key"></i>
+                <span>تسكين / حجز</span>
+              </button>
+            `}
+
+            <!-- Quick Status Change Dropdown -->
+            <div class="relative group">
+              <button class="bg-slate-100 hover:bg-slate-200 text-slate-700 p-2 rounded-xl text-xs transition" title="تغيير الحالة">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+              <div class="absolute left-0 bottom-full mb-2 hidden group-hover:block w-36 bg-white border border-slate-200 rounded-xl shadow-xl z-20 py-1 text-xs">
+                <button onclick="updateRoomStatus('${room.id}', 'متاحة')" class="w-full text-right px-3 py-1.5 hover:bg-emerald-50 text-emerald-700 font-bold flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span> متاح
+                </button>
+                <button onclick="updateRoomStatus('${room.id}', 'تحت التنظيف')" class="w-full text-right px-3 py-1.5 hover:bg-amber-50 text-amber-700 font-bold flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-amber-500"></span> تحت التنظيف
+                </button>
+                <button onclick="updateRoomStatus('${room.id}', 'صيانة')" class="w-full text-right px-3 py-1.5 hover:bg-slate-100 text-slate-700 font-bold flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-slate-500"></span> صيانة
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderBookingsTable() {
+      const tbody = document.getElementById('bookingsTableBody');
+      const occupied = rooms.filter(r => r.guest);
+
+      if (occupied.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="14" class="text-center p-8 text-slate-400 font-bold text-sm">
+              لا توجد حجوزات نشطة حالياً. يمكنك إضافة حجز جديد بالضغط على زر "حجز / تسكين جديد".
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = occupied.map((r, idx) => `
+        <tr class="hover:bg-slate-50 transition font-medium">
+          <td class="p-3 font-mono font-bold text-slate-700">BK-${r.id}-2026</td>
+          <td class="p-3 font-black text-slate-900">#${r.id}</td>
+          <td class="p-3 text-slate-600">${r.floor} - ${r.type}</td>
+          <td class="p-3 font-bold text-slate-900">${r.guest.name}</td>
+          <td class="p-3 text-slate-600 font-mono">${r.guest.phone}</td>
+          <td class="p-3 text-slate-600">${r.guest.checkin}</td>
+          <td class="p-3 text-slate-600">${r.guest.checkout}</td>
+          <td class="p-3 font-bold text-center">${r.guest.nights || 1}</td>
+          <td class="p-3 font-bold">${r.price.toLocaleString()} ج.م</td>
+          <td class="p-3 font-black text-slate-900">${r.guest.total.toLocaleString()} ج.م</td>
+          <td class="p-3 font-bold text-emerald-600">${(r.guest.paid || 0).toLocaleString()} ج.م</td>
+          <td class="p-3 font-bold ${(r.guest.remaining || 0) > 0 ? 'text-rose-600' : 'text-slate-400'}">${(r.guest.remaining || 0).toLocaleString()} ج.م</td>
+          <td class="p-3">
+            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">مؤكد</span>
+          </td>
+          <td class="p-3 text-center">
+            <button onclick="checkoutRoom('${r.id}')" class="bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-2.5 py-1 rounded-lg text-xs transition">
+              مغادرة
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Modal Booking Functions
+    function openNewBookingModal() {
+      const availableRoom = rooms.find(r => r.status === 'متاحة') || rooms[0];
+      openBookingForRoom(availableRoom.id);
+    }
+
+    function openBookingForRoom(roomId) {
+      const room = rooms.find(r => r.id === roomId);
+      if (!room) return;
+
+      document.getElementById('formRoomId').value = room.id;
+      document.getElementById('formRoomDisplay').value = `غرفة #${room.id} (${room.floor} - ${room.type})`;
+      document.getElementById('formPrice').value = room.price;
+      document.getElementById('modalRoomSubtitle').innerText = `${room.floor} • ${room.type} • ${room.beds}`;
+
+      // Default dates: today and tomorrow
+      const today = new Date().toISOString().split('T')[0];
+      const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+      document.getElementById('formCheckin').value = today;
+      document.getElementById('formCheckout').value = tomorrow;
+
+      document.getElementById('formGuestName').value = '';
+      document.getElementById('formPhone').value = '';
+      document.getElementById('formNationalId').value = '';
+      document.getElementById('formNotes').value = '';
+      document.getElementById('formPaid').value = room.price;
+
+      calculateTotal();
+      document.getElementById('bookingModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('bookingModal').classList.add('hidden');
+    }
+
+    function calculateTotal() {
+      const price = Number(document.getElementById('formPrice').value) || 0;
+      const checkin = new Date(document.getElementById('formCheckin').value);
+      const checkout = new Date(document.getElementById('formCheckout').value);
+      
+      let nights = 1;
+      if (checkin && checkout && checkout > checkin) {
+        const diffTime = Math.abs(checkout - checkin);
+        nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) || 1;
+      }
+
+      const total = price * nights;
+      const paid = Number(document.getElementById('formPaid').value) || 0;
+      const remaining = Math.max(0, total - paid);
+
+      document.getElementById('calcNights').innerText = `${nights} ليلة`;
+      document.getElementById('calcTotal').innerText = `${total.toLocaleString()} ج.م`;
+      document.getElementById('calcRemaining').value = `${remaining.toLocaleString()} ج.م`;
+    }
+
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      const roomId = document.getElementById('formRoomId').value;
+      const price = Number(document.getElementById('formPrice').value);
+      const guestName = document.getElementById('formGuestName').value.trim();
+      const phone = document.getElementById('formPhone').value.trim();
+      const idNumber = document.getElementById('formNationalId').value.trim();
+      const checkin = document.getElementById('formCheckin').value;
+      const checkout = document.getElementById('formCheckout').value;
+      const paid = Number(document.getElementById('formPaid').value);
+      const notes = document.getElementById('formNotes').value.trim();
+
+      const checkinDate = new Date(checkin);
+      const checkoutDate = new Date(checkout);
+      let nights = 1;
+      if (checkoutDate > checkinDate) {
+        nights = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24)) || 1;
+      }
+      const total = price * nights;
+      const remaining = Math.max(0, total - paid);
+
+      const roomIndex = rooms.findIndex(r => r.id === roomId);
+      if (roomIndex !== -1) {
+        rooms[roomIndex].status = 'مشغولة';
+        rooms[roomIndex].price = price;
+        rooms[roomIndex].guest = {
+          name: guestName,
+          phone: phone,
+          idNumber: idNumber,
+          checkin: checkin,
+          checkout: checkout,
+          nights: nights,
+          total: total,
+          paid: paid,
+          remaining: remaining,
+          notes: notes
+        };
+        saveData();
+        closeModal();
+        renderRooms();
+        renderBookingsTable();
+        updateKPIs();
+
+        Swal.fire({
+          icon: 'success',
+          title: 'تم التسكين بنجاح!',
+          text: `تم حجز وتسكين الغرفة #${roomId} للنزيل ${guestName}.`,
+          confirmButtonColor: '#d97706'
+        });
+      }
+    }
+
+    function checkoutRoom(roomId) {
+      const room = rooms.find(r => r.id === roomId);
+      if (!room || !room.guest) return;
+
+      Swal.fire({
+        title: `تأكيد مغادرة الغرفة #${roomId}`,
+        html: `
+          <div class="text-right text-sm space-y-2 p-2">
+            <p><strong>اسم النزيل:</strong> ${room.guest.name}</p>
+            <p><strong>الإجمالي:</strong> ${room.guest.total.toLocaleString()} ج.م</p>
+            <p><strong>المسدد:</strong> ${room.guest.paid.toLocaleString()} ج.م</p>
+            <p class="text-rose-600"><strong>المتبقي:</strong> ${room.guest.remaining.toLocaleString()} ج.م</p>
+          </div>
+        `,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'تأكيد المغادرة وتحويلها للتنظيف',
+        cancelButtonText: 'إلغاء',
+        confirmButtonColor: '#e11d48'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          room.status = 'تحت التنظيف';
+          room.guest = null;
+          saveData();
+          renderRooms();
+          renderBookingsTable();
+          updateKPIs();
+          Swal.fire('تمت المغادرة!', `الغرفة #${roomId} أصبحت تحت التنظيف والتطهير.`, 'success');
+        }
+      });
+    }
+
+    function updateRoomStatus(roomId, newStatus) {
+      const room = rooms.find(r => r.id === roomId);
+      if (!room) return;
+      room.status = newStatus;
+      if (newStatus !== 'مشغولة') {
+        room.guest = null;
+      }
+      saveData();
+      renderRooms();
+      renderBookingsTable();
+      updateKPIs();
+      Swal.fire({
+        icon: 'success',
+        title: 'تم تحديث الحالة',
+        text: `تم تغيير حالة الغرفة #${roomId} إلى: ${newStatus}`,
+        timer: 1500,
+        showConfirmButton: false
+      });
+    }
+
+    // -------------------------------------------------------------
+    // EXPORT DIRECTLY TO EXCEL (.XLSX) WITH MULTIPLE SHEETS
+    // -------------------------------------------------------------
+    function exportToExcel() {
+      try {
+        const wb = XLSX.utils.book_new();
+
+        // 1. Sheet 1: حالة الـ 25 غرفة الحالية
+        const statusData = [
+          ['🏨 نظام حجز فندق هينو - تقرير حالة الـ 25 غرفة'],
+          ['تاريخ التصدير:', new Date().toLocaleString('ar-EG')],
+          [],
+          ['م', 'رقم الغرفة', 'الدور / الطابق', 'نوع وتوصيف الغرفة', 'الأسرّة', 'حالة الغرفة', 'سعر الليلة (ج.م)', 'اسم النزيل الحالي', 'رقم الهاتف', 'تاريخ الوصول', 'تاريخ المغادرة', 'المسدد (ج.م)', 'المتبقي (ج.م)', 'ملاحظات']
+        ];
+
+        rooms.forEach((r, idx) => {
+          statusData.push([
+            idx + 1,
+            r.id,
+            r.floor,
+            r.type,
+            r.beds,
+            r.status,
+            r.price,
+            r.guest ? r.guest.name : '-',
+            r.guest ? r.guest.phone : '-',
+            r.guest ? r.guest.checkin : '-',
+            r.guest ? r.guest.checkout : '-',
+            r.guest ? r.guest.paid : 0,
+            r.guest ? r.guest.remaining : 0,
+            r.notes || (r.guest ? r.guest.notes : '')
+          ]);
+        });
+
+        const ws1 = XLSX.utils.aoa_to_sheet(statusData);
+        XLSX.utils.book_append_sheet(wb, ws1, 'حالة الغرف الحالية');
+
+        // 2. Sheet 2: سجل الحجوزات والنزلاء
+        const bookingData = [
+          ['📋 سجل الحجوزات والنزلاء التفصيلي'],
+          ['رقم الحجز', 'رقم الغرفة', 'الدور', 'نوع الغرفة', 'اسم النزيل', 'الهاتف', 'تاريخ الوصول', 'تاريخ المغادرة', 'عدد الليالي', 'سعر الليلة', 'الإجمالي المطلوب', 'المبلغ المسدد', 'المتبقي', 'طريقة الدفع']
+        ];
+
+        const activeGuests = rooms.filter(r => r.guest);
+        activeGuests.forEach(r => {
+          bookingData.push([
+            `BK-${r.id}-2026`,
+            r.id,
+            r.floor,
+            r.type,
+            r.guest.name,
+            r.guest.phone,
+            r.guest.checkin,
+            r.guest.checkout,
+            r.guest.nights || 1,
+            r.price,
+            r.guest.total,
+            r.guest.paid,
+            r.guest.remaining,
+            r.guest.notes || 'مسدد'
+          ]);
+        });
+
+        const ws2 = XLSX.utils.aoa_to_sheet(bookingData);
+        XLSX.utils.book_append_sheet(wb, ws2, 'سجل الحجوزات');
+
+        // 3. Sheet 3: الدليل المعتمد لتوزيع الـ 25 غرفة
+        const masterData = [
+          ['🏨 التوزيع الرسمي المعتمد للـ 25 غرفة'],
+          ['م', 'رقم الغرفة', 'الدور', 'نوع وتوصيف الغرفة', 'مواصفات الأسرّة', 'السعر الافتراضي', 'موقع وإطلالة الغرفة']
+        ];
+
+        defaultRooms.forEach((r, idx) => {
+          masterData.push([
+            idx + 1,
+            r.id,
+            r.floor,
+            r.type,
+            r.beds,
+            r.price,
+            r.notes
+          ]);
+        });
+
+        const ws3 = XLSX.utils.aoa_to_sheet(masterData);
+        XLSX.utils.book_append_sheet(wb, ws3, 'توزيع الـ 25 غرفة');
+
+        // Download Excel File
+        const fileName = `تقرير_حجوزات_الفندق_25_غرفة_${new Date().toISOString().split('T')[0]}.xlsx`;
+        XLSX.writeFile(wb, fileName);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'تم تصدير ملف الإكسيل!',
+          text: `تم تنزيل ملف الإكسيل (${fileName}) بنجاح بكل البيانات والحجوزات.`,
+          confirmButtonColor: '#059669'
+        });
+      } catch (err) {
+        console.error(err);
+        Swal.fire('خطأ', 'حدث خطأ أثناء تصدير الإكسيل', 'error');
+      }
+    }
+
+    // Run on load
+    window.onload = init;
+  </script>
+</body>
+</html>
