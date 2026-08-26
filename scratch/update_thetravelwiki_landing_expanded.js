@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+const { Client } = require('ssh2');
+
+const rootDir = path.join('d:', 'Henu');
+const landingDir = path.join(rootDir, 'website_landing_thetravelwiki');
+
+if (!fs.existsSync(landingDir)) {
+  fs.mkdirSync(landingDir, { recursive: true });
+}
+
+const landingHtmlContent = `<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -281,4 +292,58 @@
     </footer>
 
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync(path.join(landingDir, 'index.html'), landingHtmlContent, 'utf8');
+console.log('✅ Expanded Landing Page created at:', path.join(landingDir, 'index.html'));
+
+// 2. نشر الصفحة المحدثة فوراً على هوستنجر والدومينين
+console.log('🔌 Connecting to Hostinger via SSH to deploy expanded landing page...');
+
+const conn = new Client();
+
+conn.on('ready', () => {
+  console.log('⚡ Connected to Hostinger!');
+  
+  conn.sftp((err, sftp) => {
+    if (err) throw err;
+
+    const localFile = path.join(landingDir, 'index.html');
+
+    // رفع لـ thetravelwiki.blog
+    sftp.fastPut(localFile, '/home/u732967645/domains/thetravelwiki.blog/public_html/index.html', (err) => {
+      if (err) console.error('Error Blog:', err);
+      else console.log('✅ Uploaded to thetravelwiki.blog');
+
+      // رفع لـ thetravelwiki.space
+      sftp.fastPut(localFile, '/home/u732967645/domains/thetravelwiki.space/public_html/index.html', (err) => {
+        if (err) console.error('Error Space:', err);
+        else console.log('✅ Uploaded to thetravelwiki.space');
+
+        const fixCmd = `
+          chmod 644 ~/domains/thetravelwiki.blog/public_html/index.html
+          chmod 644 ~/domains/thetravelwiki.space/public_html/index.html
+          echo "=== Verified Deployment for both domains ==="
+          ls -la ~/domains/thetravelwiki.blog/public_html/index.html
+          ls -la ~/domains/thetravelwiki.space/public_html/index.html
+        `;
+
+        conn.exec(fixCmd, (err, stream) => {
+          if (err) throw err;
+          let out = '';
+          stream.on('data', d => out += d);
+          stream.on('close', () => {
+            console.log(out);
+            console.log('🎉 EXPANDED LANDING PAGE DEPLOYED TO HOSTINGER SUCCESSFULLY!');
+            conn.end();
+          });
+        });
+      });
+    });
+  });
+}).connect({
+  host: '195.35.39.71',
+  port: 65002,
+  username: 'u732967645',
+  password: 'Koky@2027_1972'
+});
