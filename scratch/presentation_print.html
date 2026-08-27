@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>عرض دراسة الجدوى والخطة التسويقية — فندق هينو الأهرامات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: 1920px 1080px;
+      margin: 0;
+    }
+    
+    :root {
+      --clr-nile-dark: #0B1B2B;
+      --clr-nile: #1B3A5C;
+      --clr-nile-light: #2A5580;
+      --clr-gold: #C9873A;
+      --clr-gold-light: #DAA856;
+      --clr-sand-light: #F7F2E8;
+      --clr-ivory: #FDFBF7;
+      --clr-ivory-dark: #EFE9DE;
+      --clr-dark: #1E293B;
+      --clr-gray: #64748B;
+      --clr-green: #10B981;
+      --clr-green-bg: #E6F7F0;
+      --clr-red: #E11D48;
+      --clr-red-bg: #FEE2E2;
+      --font-ar: 'Cairo', sans-serif;
+      --font-en: 'Cinzel', serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: var(--font-ar);
+      background: #E5E7EB;
+      color: var(--clr-dark);
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide-page {
+      width: 1920px;
+      height: 1080px;
+      page-break-after: always;
+      background: var(--clr-ivory);
+      padding: 60px 80px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Slide Header */
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--clr-ivory-dark);
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+
+    .tag-badge {
+      background: var(--clr-nile);
+      color: var(--clr-gold-light);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 1rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .slide-heading {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--clr-nile-dark);
+      line-height: 1.25;
+    }
+
+    .slide-heading span { color: var(--clr-gold); }
+
+    .slide-subheading {
+      font-size: 1.2rem;
+      color: var(--clr-gray);
+      margin-top: 6px;
+    }
+
+    .logo-badge {
+      font-family: var(--font-en);
+      font-weight: 700;
+      color: var(--clr-gold);
+      font-size: 1.3rem;
+      letter-spacing: 1.5px;
+      border: 2px solid var(--clr-gold);
+      padding: 8px 18px;
+      border-radius: 8px;
+    }
+
+    /* Slide Footer */
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--clr-ivory-dark);
+      padding-top: 16px;
+      font-size: 0.95rem;
+      color: var(--clr-gray);
+    }
+
+    .footer-bar .brand-name {
+      font-weight: 700;
+      color: var(--clr-nile);
+    }
+
+    .footer-bar .slide-num {
+      font-weight: 800;
+      color: var(--clr-gold);
+    }
+
+    /* Content Area */
+    .content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Cards & Grids */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px 28px;
+      border: 1px solid var(--clr-ivory-dark);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card.gold { border-top: 6px solid var(--clr-gold); }
+    .card.nile { border-top: 6px solid var(--clr-nile); }
+    .card.green { border-top: 6px solid var(--clr-green); }
+    .card.red { border-top: 6px solid var(--clr-red); }
+
+    .card-icon { font-size: 2.8rem; margin-bottom: 14px; }
+    .card-title { font-size: 1.5rem; font-weight: 800; color: var(--clr-nile-dark); margin-bottom: 12px; }
+    .card-text { font-size: 1.15rem; color: var(--clr-gray); line-height: 1.7; }
+
+    /* Tables */
+    .table-box {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--clr-ivory-dark);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+    }
+
+    th {
+      background: var(--clr-nile);
+      color: white;
+      padding: 18px 24px;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    td {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--clr-ivory-dark);
+      font-size: 1.15rem;
+      color: var(--clr-dark);
+    }
+
+    tr:nth-child(even) td { background: #FAFAF8; }
+
+    .badge-gain {
+      background: var(--clr-green-bg);
+      color: var(--clr-green);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 800;
+      display: inline-block;
+    }
+
+    .badge-loss {
+      background: var(--clr-red-bg);
+      color: var(--clr-red);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .alert-box {
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+
+    .alert-gold {
+      background: var(--clr-sand-light);
+      border-right: 5px solid var(--clr-gold);
+      color: var(--clr-nile-dark);
+    }
+
+    .alert-green {
+      background: var(--clr-green-bg);
+      border-right: 5px solid var(--clr-green);
+      color: #065F46;
+    }
+
+    /* Cover Page */
+    .cover-slide {
+      background: linear-gradient(135deg, #0B1B2B 0%, #1B3A5C 100%);
+      color: white;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border: 4px solid var(--clr-gold);
+      padding: 80px;
+    }
+
+    .cover-tag {
+      background: var(--clr-gold);
+      color: white;
+      padding: 10px 32px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+
+    .cover-title {
+      font-size: 3.6rem;
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+
+    .cover-title span { color: var(--clr-gold-light); }
+
+    .cover-subtitle {
+      font-size: 1.5rem;
+      color: var(--clr-sand-light);
+      max-width: 1200px;
+      margin: 0 auto 50px;
+      line-height: 1.6;
+    }
+
+    .cover-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      width: 100%;
+      max-width: 1400px;
+    }
+
+    .cover-kpi-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1.5px solid rgba(212, 169, 106, 0.4);
+      padding: 28px 20px;
+      border-radius: 16px;
+    }
+
+    .cover-kpi-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--clr-gold-light);
+      margin-bottom: 8px;
+    }
+
+    .cover-kpi-label {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.4;
+    }
+
+    /* Funnel items */
+    .funnel-item {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      background: var(--clr-ivory);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      border-right: 5px solid var(--clr-nile);
+    }
+
+    .funnel-item.win {
+      background: var(--clr-green-bg);
+      border-right-color: var(--clr-green);
+      color: #065F46;
+    }
+
+    .funnel-item.win-solid {
+      background: var(--clr-green);
+      color: white;
+      font-weight: 800;
+      border-right-color: #065F46;
+    }
+
+    .funnel-item.lose {
+      background: var(--clr-red-bg);
+      border-right-color: var(--clr-red);
+      color: #991B1B;
+    }
+
+    .step-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== SLIDE 1: COVER ==================== -->
+  <section class="slide-page cover-slide">
+    <div>
+      <div class="cover-tag">فندق هينو الأهرامات — HENU HOTEL PYRAMIDS</div>
+      <h1 class="cover-title">دراسة الجدوى الاقتصادية<br><span>والخطة التسويقية الإستراتيجية</span></h1>
+      <p class="cover-subtitle">نموذج الحجز المباشر vs عمولات OTAs وتحليل مقارن بالأرقام بين Google Maps Ads ومنصات Meta</p>
+      
+      <div class="cover-kpi-grid">
+        <div class="cover-kpi-box">
+          <div class="cover-kpi-num">$15 - $25</div>
+          <div class="cover-kpi-label">متوسط سعر الليلة (ADR)<br>(750 جـ - 1,250 جـ)</div>
+        </div>
+        <div class="cover-kpi-box">
+          <div class="cover-kpi-num">+225,963 جـ</div>
+          <div class="cover-kpi-label">أقصى وفر شهري متوقع<br>في ذروة الموسم المرتفع</div>
+        </div>
+        <div class="cover-kpi-box">
+          <div class="cover-kpi-num">&lt; 4 أيام</div>
+          <div class="cover-kpi-label">فترة استرداد تكلفة الموقع<br>(استثمار 25,000 جـ)</div>
+        </div>
+        <div class="cover-kpi-box">
+          <div class="cover-kpi-num">35%</div>
+          <div class="cover-kpi-label">عمولات OTAs المهدرة<br>تستنزف ثلث الإيرادات</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 2: EXECUTIVE SUMMARY ==================== -->
+  <section class="slide-page">
+    <div class="header-bar">
+      <div>
+        <div class="tag-badge">نظرة عامة</div>
+        <h2 class="slide-heading">الملخص التنفيذي: <span>أهداف الدراسة والفرصة الاستثمارية</span></h2>
+        <p class="slide-subheading">تحويل فندق هينو الأهرامات من الاعتماد الكلي على الوسطاء إلى نموذج الحجز المباشر عالي الربحية</p>
+      </div>
+      <div class="logo-badge">HENU PYRAMIDS</div>
+    </div>
+
+    <div class="content-area">
+      <div class="grid-3">
+        <div class="card red">
+          <div class="card-icon">📉</div>
+          <h3 class="card-title">تحدي العمولات المرتفعة</h3>
+          <p class="card-text">منصات Booking و Agoda تقتطع عمولات تصل إلى 35% من قيمة كل حجز، مما يقلص الأرباح التشغيلية بشكل حاد ويحرم الفندق من بناء قاعدة نزلاء مباشرة ومستدامة.</p>
+        </div>
+        <div class="card gold">
+          <div class="card-icon">🌐</div>
+          <h3 class="card-title">حل الحجز المباشر</h3>
+          <p class="card-text">امتلاك محرك حجز مباشر وموقع متعدد اللغات والعملات يتيح للنزيل الحجز فوراً بدون وسيط، مما يوفر حتى 225,963 جـ شهرياً من العمولات المهدرة سابقاً.</p>
+        </div>
+        <div class="card green">
+          <div class="card-icon">📍</div>
+          <h3 class="card-title">التسويق الذكي عبر خرائط جوجل</h3>
+          <p class="card-text">تركيز الإنفاق الإعلاني على Google Maps Local Ads لاستهداف السياح المتواجدين بالفعل عند الأهرامات، لتحقيق عائد إعلاني استثنائي يصل إلى 1 : 60.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="brand-name">فندق هينو الأهرامات — دراسة الجدوى والخطة التسويقية</div>
+      <div class="slide-num">02 / 12</div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 3: THE PROBLEM ==================== -->
+  <section class="slide-page">
+    <div class="header-bar">
+      <div>
+        <div class="tag-badge">تحليل التحدي</div>
+        <h2 class="slide-heading">أين تذهب أموال الفندق؟ <span>تحليل نزيف عمولات الـ OTAs</span></h2>
+        <p class="slide-subheading">كيف تلتهم منصات الحجز الخارجية ثلث الإيراد الكلي لفندق هينو</p>
+      </div>
+      <div class="logo-badge">HENU PYRAMIDS</div>
+    </div>
+
+    <div class="content-area">
+      <div class="grid-2">
+        <div class="card red">
+          <h3 class="card-title" style="color: var(--clr-red); margin-bottom: 20px;">⚠️ التكلفة الخفية للوسطاء (OTAs)</h3>
+          <div style="display: flex; flex-direction: column; gap: 16px; font-size: 1.2rem; line-height: 1.7; color: var(--clr-dark);">
+            <p>• <strong>عمولة تصل إلى 35%</strong> تقتطع فورياً من كل غرفة يتم حجزها عبر المنصة.</p>
+            <p>• في ذروة الموسم، يخسر الفندق أكثر من <strong>278,000 جـ شهرياً</strong> كعمولات مهدرة.</p>
+            <p>• <strong>حجب بيانات النزلاء الحقيقية</strong> وعدم إمكانية التواصل المباشر أو إعادة استهدافهم.</p>
+            <p>• <strong>التحكم في الأسعار:</strong> فرض سياسات إلغاء وشروط تسعير غير مرنة على الفندق.</p>
+          </div>
+        </div>
+
+        <div class="card nile">
+          <h3 class="card-title" style="color: var(--clr-nile); margin-bottom: 20px;">📊 توزيع الإيراد التقليدي عبر OTAs</h3>
+          <div style="background: var(--clr-red-bg); border: 2px solid var(--clr-red); padding: 24px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
+            <strong style="color: var(--clr-red); font-size: 1.6rem; display: block; margin-bottom: 6px;">35% عمولات مهدرة للمنصات</strong>
+            <p style="font-size: 1.15rem; color: var(--clr-dark);">تصل إلى 278,906 جـ شهرياً تخرج بالكامل خارج حسابات الفندق</p>
+          </div>
+          <div style="background: var(--clr-sand-light); border: 2px solid var(--clr-gold); padding: 24px; border-radius: 12px; text-align: center;">
+            <strong style="color: var(--clr-nile); font-size: 1.4rem; display: block; margin-bottom: 6px;">65% المتبقي لتغطية المصاريف والأرباح</strong>
+            <p style="font-size: 1.15rem; color: var(--clr-gray);">يتحمل منها الفندق: التشغيل، الصيانة، الرواتب، النظافة، والكهرباء</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="brand-name">فندق هينو الأهرامات — دراسة الجدوى والخطة التسويقية</div>
+      <div class="slide-num">03 / 12</div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 4: CAPACITY & PRICING ==================== -->
+  <section class="slide-page">
+    <div class="header-bar">
+      <div>
+        <div class="tag-badge">البيانات الأساسية</div>
+        <h2 class="slide-heading">السعة التشغيلية <span>وهيكل أسعار الغرف المعتمد</span></h2>
+        <p class="slide-subheading">حساب الطاقة الاستيعابية الشهرية وتصنيفات الغرف المعتمدة للدراسة المالية</p>
+      </div>
+      <div class="logo-badge">HENU PYRAMIDS</div>
+    </div>
+
+    <div class="content-area">
+      <div class="grid-3" style="margin-bottom: 24px;">
+        <div class="card gold" style="text-align: center; padding: 20px;">
+          <div style="font-size: 2.2rem; font-weight: 900; color: var(--clr-nile);">25 غرفة</div>
+          <div style="font-size: 1.15rem; font-weight: 700; color: var(--clr-dark); margin-top: 4px;">طاقة الفندق الاستيعابية</div>
+          <div style="font-size: 0.95rem; color: var(--clr-gray);">4 أدوار + روف بإطلالة الأهرامات</div>
+        </div>
+        <div class="card gold" style="text-align: center; padding: 20px;">
+          <div style="font-size: 2.2rem; font-weight: 900; color: var(--clr-nile);">750 ليلة</div>
+          <div style="font-size: 1.15rem; font-weight: 700; color: var(--clr-dark); margin-top: 4px;">السعة المتاحة شهرياً</div>
+          <div style="font-size: 0.95rem; color: var(--clr-gray);">25 غرفة × 30 يوم تشغيلي</div>
+        </div>
+        <div class="card gold" style="text-align: center; padding: 20px;">
+          <div style="font-size: 2.2rem; font-weight: 900; color: var(--clr-nile);">$15 - $25</div>
+          <div style="font-size: 1.15rem; font-weight: 700; color: var(--clr-dark); margin-top: 4px;">متوسط سعر الليلة (ADR)</div>
+          <div style="font-size: 0.95rem; color: var(--clr-gray);">750 جـ (منخفض) / 1,250 جـ (مرتفع)</div>
+        </div>
+      </div>
+
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr>
+              <th>فئة الغرفة</th>
+              <th>Standard (عادية)</th>
+              <th>With Window (بنافذة)</th>
+              <th>With Balcony (ببلكونة)</th>
+              <th>King Suite (سويت أهرامات)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Single Room (مفردة)</strong></td>
+              <td>$12 (600 جـ)</td>
+              <td>$15 (750 جـ)</td>
+              <td>$20 (1,000 جـ)</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>Double Room (مزدوجة)</strong></td>
+              <td>$18 (900 جـ)</td>
+              <td>$22 (1,100 جـ)</td>
+              <td>$25 (1,250 جـ)</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>Triple / Family (ثلاثية)</strong></td>
+              <td>$25 (1,250 جـ)</td>
+              <td>$30 (1,500 جـ)</td>
+              <td>$35 (1,750 جـ)</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>Suite Pyramids View</strong></td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td><strong style="color: var(--clr-gold); font-size: 1.3rem;">$45 (2,250 جـ)</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="brand-name">فندق هينو الأهرامات — دراسة الجدوى والخطة التسويقية</div>
+      <div class="slide-num">04 / 12</div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 5: LOW SEASON ==================== -->
+  <section class="slide-page">
+    <div class="header-bar">
+      <div>
+        <div class="tag-badge">الجدوى المالية (1/2)</div>
+        <h2 class="slide-heading">الموسم المنخفض (Low Season): <span>تحليل الإيرادات والوفر</span></h2>
+        <p class="slide-subheading">متوسط سعر الليلة ADR = 15$ (750 جـ) — مقارنة سيناريو إشغال 50% وإشغال 70%</p>
+      </div>
+      <div class="logo-badge">HENU PYRAMIDS</div>
+    </div>
+
+    <div class="content-area">
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr>
+              <th>المؤشر المالي</th>
+              <th>سيناريو إشغال 50% (375 ليلة شهرياً)</th>
+              <th>سيناريو إشغال 70% (525 ليلة شهرياً)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>إجمالي الإيراد الشهري الكلي</strong></td>
+              <td>281,250 جنيه</td>
+              <td>393,750 جنيه</td>
+            </tr>
+            <tr>
+              <td><strong>عمولات OTAs المهدرة سابقاً (35%)</strong></td>
+              <td><span class="badge-loss">98,437 جنيه</span></td>
+              <td><span class="badge-loss">137,812 جنيه</span></td>
+            </tr>
+            <tr>
+              <td><strong>تكلفة إعلانات جوجل + موقع الحجز المباشر</strong></td>
+              <td>17,083 جنيه</td>
+              <td>17,083 جنيه</td>
+            </tr>
+            <tr>
+              <td><strong>عمولة القنوات المساندة Agoda (30%)</strong></td>
+              <td>12,656 جنيه</td>
+              <td>17,718 جنيه</td>
+            </tr>
+            <tr>
+              <td><strong>صافي الوفر الشهري المحقق للفندق</strong></td>
+              <td><span class="badge-gain" style="font-size: 1.4rem;">+ 68,698 جنيه / شهرياً</span></td>
+              <td><span class="badge-gain" style="font-size: 1.4rem;">+ 103,010 جنيه / شهرياً</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert-box alert-gold">
+        💡 <strong>استنتاج مالي:</strong> حتى في فترات الركود (إشغال 50%)، يوفر نموذج الحجز المباشر أكثر من <strong>68,000 جـ شهرياً</strong> كأرباح صافية مستردة في حساب الفندق!
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="brand-name">فندق هينو الأهرامات — دراسة الجدوى والخطة التسويقية</div>
+      <div class="slide-num">05 / 12</div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 6: HIGH SEASON ==================== -->
+  <section class="slide-page">
+    <div class="header-bar">
+      <div>
+        <div class="tag-badge">الجدوى المالية (2/2)</div>
+        <h2 class="slide-heading">الموسم المرتفع (High Season): <span>أقصى عائد مالي وربحية</span></h2>
+        <p class="slide-subheading">متوسط سعر الليلة ADR = 25$ (1,250 جـ) — مقارنة سيناريو إشغال 70% وذروة الإشغال 85%</p>
+      </div>
+      <div class="logo-badge">HENU PYRAMIDS</div>
+    </div>
+
+    <div class="content-area">
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr>
+              <th>المؤشر المالي</th>
+              <th>سيناريو إشغال 70% (525 ليلة شهرياً)</th>
+              <th>ذروة الموسم 85% (637 ليلة شهرياً)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>إجمالي الإيراد الشهري الكلي</strong></td>
+              <td>656,250 جنيه</td>
+              <td>796,875 جنيه</td>
+            </tr>
+            <tr>
+              <td><strong>عمولات OTAs المهدرة سابقاً (35%)</strong></td>
+              <td><span class="badge-loss">229,687 جنيه</span></td>
+              <td><span class="badge-loss">278,906 جنيه</span></td>
+            </tr>
+            <tr>
+              <td><strong>تكلفة إعلانات جوجل + موقع الحجز المباشر</strong></td>
+              <td>17,083 جنيه</td>
+              <td>17,083 جنيه</td>
+            </tr>
+            <tr>
+              <td><strong>عمولة القنوات المساندة Agoda (30%)</strong></td>
+              <td>29,531 جنيه</td>
+              <td>35,859 جنيه</td>
+            </tr>
+            <tr>
+              <td><strong>صافي الوفر الشهري المحقق للفندق</strong></td>
+              <td><span class="badge-gain" style="font-size: 1.4rem;">+ 183,073 جنيه / شهرياً</span></td>
+              <td><span class="badge-gain" style="font-size: 1.5rem;">+ 225,963 جنيه / شهرياً</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert-box alert-green">
+        🚀 <strong>في ذروة الموسم السياحي (إشغال 85%):</strong> يسترد الفندق أكثر من <strong>225,000 جـ شهرياً</strong> كانت تذهب بالكامل لوسطاء الحجز الخارجيين!
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="brand-name">فندق هينو الأهرامات — دراسة الجدوى والخطة التسويقية</div>
+      <div class="slide-num">06 / 12</div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 7: CAPEX PAYBACK ==================== -->
+  <section class="slide-page">
+    <div class="header-bar">
+      <div>
+        <div class="tag-badge">استرداد الاستثمار</div>
+        <h2 class="slide-heading">تحليل فترة استرداد تكلفة الموقع <span>(CapEx Payback)</span></h2>
+        <p class="slide-subheading">كيف يسترد الفندق تكلفة تطوير النظام البالغة 25,000 جنيه في أيام معدودة</p>
+      </div>
+      <div class="logo-badge">HENU PYRAMIDS</div>
+    </div>
+
+    <div class="content-area">
+      <div class="grid-3">
+        <div class="card nile" style="text-align: center;">
+          <div style="background: var(--clr-nile); color: white; padding: 8px 20px; border-radius: 20px; font-weight: 700; font-size: 1.1rem; display: inline-block; margin-bottom: 16px;">اليوم 1 - 3</div>
+          <h3 class="card-title">إطلاق وتشغيل الموقع</h3>
+          <div style="font-size: 2.4rem; font-weight: 900; color: var(--clr-gold); margin: 12px 0;">25,000 جـ</div>
+          <p class="card-text">تكلفة استثمارية رأسمالية تدفع لمرة واحدة لإنشاء وتدشين الموقع متعدد اللغات ومحرك الحجز المباشر.</p>
+        </div>
+
+        <div class="card gold" style="text-align: center;">
+          <div style="background: var(--clr-gold); color: white; padding: 8px 20px; border-radius: 20px; font-weight: 700; font-size: 1.1rem; display: inline-block; margin-bottom: 16px;">اليوم 4</div>
+          <h3 class="card-title">نقطة التعادل (Break-even)</h3>
+          <div style="font-size: 2.4rem; font-weight: 900; color: var(--clr-green); margin: 12px 0;">100% استرداد</div>
+          <p class="card-text">من خلال حجز أول 15-20 ليلة مباشرة عبر الموقع وتوفير عمولة الـ 35%، يتم استرداد كامل تكلفة الموقع في أقل من 4 أيام.</p>
+        </div>
+
+        <div class="card green" style="text-align: center;">
+          <div style="background: var(--clr-green); color: white; padding: 8px 20px; border-radius: 20px; font-weight: 700; font-size: 1.1rem; display: inline-block; margin-bottom: 16px;">ما بعد اليوم 4</div>
+          <h3 class="card-title">أرباح صافية مستمرة</h3>
+          <div style="font-size: 2.2rem; font-weight: 900; color: var(--clr-green); margin: 12px 0;">+68k إلى +225k</div>
+          <p class="card-text">كل ليلة إضافية يتم حجزها تمثل وفراً مالياً وأرباحاً صافية تتدفق مباشرة لخزينة الفندق شهرياً.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="brand-name">فندق هينو الأهرامات — دراسة الجدوى والخطة التسويقية</div>
+      <div class="slide-num">07 / 12</div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 8: INTENT & CVR ==================== -->
+  <section class="slide-page">
+    <div class="header-bar">
+      <div>
+        <div class="tag-badge">المقارنة التسويقية (1/2)</div>
+        <h2 class="slide-heading">نية الحجز ومعدل التحويل: <span>Google Maps vs Meta</span></h2>
+        <p class="slide-subheading">لماذا تتفوق خرائط جوجل باكتساح على فيسبوك وإنستجرام كقناة حجز فندقي</p>
+      </div>
+      <div class="logo-badge">HENU PYRAMIDS</div>
+    </div>
+
+    <div class="content-area">
+      <div class="grid-2">
+        <!-- Google -->
+        <div class="card green">
+          <h3 class="card-title" style="color: var(--clr-green); margin-bottom: 16px;">📍 إعلانات خرائط جوجل (Google Maps Ads)</h3>
+          <div style="background: var(--clr-green-bg); padding: 20px; border-radius: 12px; margin-bottom: 16px;">
+            <strong style="color: var(--clr-green); font-size: 1.4rem; display: block; margin-bottom: 6px;">95% نية حجز فورية (Active Search)</strong>
+            <p style="font-size: 1.15rem; color: var(--clr-dark);">السائح يقف بالفعل عند الأهرامات ويبحث في هاتفه عن غرفة للمبيت الليلة.</p>
+          </div>
+          <div style="background: var(--clr-green-bg); padding: 20px; border-radius: 12px;">
+            <strong style="color: var(--clr-green); font-size: 1.4rem; display: block; margin-bottom: 6px;">12.5% معدل تحويل النقرة لحجز (CVR)</strong>
+            <p style="font-size: 1.15rem; color: var(--clr-dark);">كل 100 نقرة إعلانية تترجم إلى 12 حجز مؤكد ومباشر — أعلى بـ 31 ضعفاً من Meta!</p>
+          </div>
+        </div>
+
+        <!-- Meta -->
+        <div class="card red">
+          <h3 class="card-title" style="color: var(--clr-red); margin-bottom: 16px;">📱 فيسبوك وإنستجرام (Meta Platforms)</h3>
+          <div style="background: var(--clr-red-bg); padding: 20px; border-radius: 12px; margin-bottom: 16px;">
+            <strong style="color: var(--clr-red); font-size: 1.4rem; display: block; margin-bottom: 6px;">10% نية حجز ضعيفة (Passive Browsing)</strong>
+            <p style="font-size: 1.15rem; color: var(--clr-dark);">مستخدم يتصفح للتسلية وتضييع الوقت بدون أي نية سفر أو حجز حقيقي.</p>
+          </div>
+          <div style="background: var(--clr-red-bg); padding: 20px; border-radius: 12px;">
+            <strong style="color: var(--clr-red); font-size: 1.4rem; display: block; margin-bottom: 6px;">0.4% معدل تحويل ضعيف جداً (CVR)</strong>
+            <p style="font-size: 1.15rem; color: var(--clr-dark);">تحتاج إلى 1000 نقرة إعلانية لتحصل على 4 حجوزات فقط بسبب كثرة الرسائل غير الجادة.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="brand-name">فندق هينو الأهرامات — دراسة الجدوى والخطة التسويقية</div>
+      <div class="slide-num">08 / 12</div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 9: CAC & ROAS ==================== -->
+  <section class="slide-page">
+    <div class="header-bar">
+      <div>
+        <div class="tag-badge">المقارنة التسويقية (2/2)</div>
+        <h2 class="slide-heading">تكلفة الاستحواذ والعائد الإعلاني: <span>CAC & ROAS</span></h2>
+        <p class="slide-subheading">المقارنة المالية الدقيقة بين كفاءة إنفاق إعلانات جوجل مقابل السوشيال ميديا</p>
+      </div>
+      <div class="logo-badge">HENU PYRAMIDS</div>
+    </div>
+
+    <div class="content-area">
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr>
+              <th>معيار الكفاءة الإعلانية</th>
+              <th>إعلانات خرائط جوجل (Google Maps)</th>
+              <th>فيسبوك وإنستجرام (Meta Platforms)</th>
+              <th>الفارق الإستراتيجي</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>تكلفة الاستحواذ على النزيل (CAC)</strong></td>
+              <td><span class="badge-gain">~45 جنيه مصري</span><br><small style="font-size:0.95rem;">دفع مقابل نقرة السائح الفعلي فقط</small></td>
+              <td><span class="badge-loss">~380 جنيه مصري</span><br><small style="font-size:0.95rem;">هدر على غير المهتمين بالسفر</small></td>
+              <td><strong>توفير 88% من تكلفة اجتذاب النزيل 💰</strong></td>
+            </tr>
+            <tr>
+              <td><strong>ميزانية إنتاج المحتوى والفيديوهات</strong></td>
+              <td><span class="badge-gain">0 جنيه (مجاناً)</span><br><small style="font-size:0.95rem;">صور الفندق وتقييمات النزلاء الحقيقية</small></td>
+              <td><span class="badge-loss">~15,000 جنيه / شهرياً</span><br><small style="font-size:0.95rem;">مصورين، ريلز، وتعديل فيديوهات</small></td>
+              <td><strong>توفير 15 ألف جنيه شهرياً بالكامل ✨</strong></td>
+            </tr>
+            <tr>
+              <td><strong>نسبة الرسائل غير الجادة ("بكام؟")</strong></td>
+              <td><span class="badge-gain">أقل من 5%</span><br><small style="font-size:0.95rem;">دخول مباشر لمحرك الحجز والدفع</small></td>
+              <td><span class="badge-loss">أكثر من 85%</span><br><small style="font-size:0.95rem;">استنزاف وقت الاستقبال بلا جدوى</small></td>
+              <td><strong>توجيه فوري للدفع الإلكتروني ⚡</strong></td>
+            </tr>
+            <tr>
+              <td><strong>العائد على الإنفاق الإعلاني (ROAS)</strong></td>
+              <td><span class="badge-gain" style="font-size:1.3rem;">1 : 60</span><br><small style="font-size:0.95rem;">كل 1k تنفق تحقق 60k إيراد</small></td>
+              <td><span class="badge-loss">1 : 3</span><br><small style="font-size:0.95rem;">كل 1k تحقق 3k فقط</small></td>
+              <td><strong>كفاءة استثمارية أعلى بـ 20 ضعفاً 🚀</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="brand-name">فندق هينو الأهرامات — دراسة الجدوى والخطة التسويقية</div>
+      <div class="slide-num">09 / 12</div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 10: CONVERSION FUNNEL ==================== -->
+  <section class="slide-page">
+    <div class="header-bar">
+      <div>
+        <div class="tag-badge">مسار العميل</div>
+        <h2 class="slide-heading">إنفوجراف قمع التحويل: <span>مقارنة رحلة النزيل (Funnel)</span></h2>
+        <p class="slide-subheading">كيف يتحول السائح من مجرد باحث إلى حجز مؤكد ومسدد بالكامل</p>
+      </div>
+      <div class="logo-badge">HENU PYRAMIDS</div>
+    </div>
+
+    <div class="content-area">
+      <div class="grid-2">
+        <!-- Google Funnel -->
+        <div class="card green">
+          <h3 class="card-title" style="color: var(--clr-green); margin-bottom: 18px;">📍 قمع جوجل ماب (Google Maps Funnel)</h3>
+          
+          <div class="funnel-item win">
+            <span class="step-circle" style="color: var(--clr-green);">1</span>
+            <div><strong>بحث مباشر:</strong> سائح يبحث في هاتفه عن "Pyramids View Hotel"</div>
+          </div>
+          <div class="funnel-item win">
+            <span class="step-circle" style="color: var(--clr-green);">2</span>
+            <div><strong>ظهور الفندق:</strong> ظهور إعلان الفندق أعلى خريطة الهرم بالتقييمات</div>
+          </div>
+          <div class="funnel-item win">
+            <span class="step-circle" style="color: var(--clr-green);">3</span>
+            <div><strong>النقرة والموقع:</strong> التوجيه المباشر لمحرك حجز فندق هينو</div>
+          </div>
+          <div class="funnel-item win-solid">
+            <span class="step-circle" style="color: var(--clr-green);">4</span>
+            <div><strong>النتيجة النهائية:</strong> حجز ودفع إلكتروني مباشر (0% عمولة) 🎉</div>
+          </div>
+        </div>
+
+        <!-- Meta Funnel -->
+        <div class="card red">
+          <h3 class="card-title" style="color: var(--clr-red); margin-bottom: 18px;">📱 قمع السوشيال ميديا (Meta Funnel)</h3>
+          
+          <div class="funnel-item">
+            <span class="step-circle">1</span>
+            <div><strong>مشاهدة عابرة:</strong> مستخدم يشاهد فيديو Reel أثناء التصفح الترفيهي</div>
+          </div>
+          <div class="funnel-item">
+            <span class="step-circle">2</span>
+            <div><strong>إرسال رسالة:</strong> إرسال سؤال تقليدي على الماسنجر "بكام الليلة؟"</div>
+          </div>
+          <div class="funnel-item">
+            <span class="step-circle">3</span>
+            <div><strong>المتابعة:</strong> انتظار رد موظف الاستقبال وضياع الوقت في المحادثات</div>
+          </div>
+          <div class="funnel-item lose">
+            <span class="step-circle" style="color: var(--clr-red);">4</span>
+            <div><strong>النتيجة النهائية:</strong> تجاهل أو حجز غير مؤكد (تسرب النزلاء) ⚠️</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="brand-name">فندق هينو الأهرامات — دراسة الجدوى والخطة التسويقية</div>
+      <div class="slide-num">10 / 12</div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 11: BUDGET & CHANNEL MIX ==================== -->
+  <section class="slide-page">
+    <div class="header-bar">
+      <div>
+        <div class="tag-badge">الخطة التسويقية</div>
+        <h2 class="slide-heading">توزيع الميزانية الإعلانية <span>ومزيج القنوات المستهدف</span></h2>
+        <p class="slide-subheading">التوزيع الأمثل لميزانية التسويق وقنوات البيع لتحقيق أعلى ربحية تشغيلية</p>
+      </div>
+      <div class="logo-badge">HENU PYRAMIDS</div>
+    </div>
+
+    <div class="content-area">
+      <div class="grid-2">
+        <!-- Budget -->
+        <div class="card gold">
+          <h3 class="card-title" style="color: var(--clr-nile); margin-bottom: 18px;">🎯 تخصيص الميزانية الإعلانية (15,000 جـ/شهر)</h3>
+          <div style="background: var(--clr-green-bg); padding: 20px; border-radius: 12px; margin-bottom: 16px;">
+            <strong style="color: var(--clr-green); font-size: 1.35rem; display: block; margin-bottom: 6px;">100% إعلانات Google Maps Local Search Ads</strong>
+            <p style="font-size: 1.15rem; color: var(--clr-dark);">الميزانية: 15,000 جـ شهرياً (500 جـ / يومياً) لاستهداف السياح في منطقة الهرم فورياً.</p>
+          </div>
+          <div style="background: var(--clr-red-bg); padding: 20px; border-radius: 12px;">
+            <strong style="color: var(--clr-red); font-size: 1.35rem; display: block; margin-bottom: 6px;">0% إعلانات فيسبوك وإنستجرام (Meta)</strong>
+            <p style="font-size: 1.15rem; color: var(--clr-dark);">استبعاد تام لتوفير تكلفة الإعلانات ومصاريف إنتاج المحتوى البالغة 15k شهرياً.</p>
+          </div>
+        </div>
+
+        <!-- Channel Mix -->
+        <div class="card nile">
+          <h3 class="card-title" style="color: var(--clr-nile); margin-bottom: 18px;">🔄 المزيج البيعي المستهدف (Channel Mix)</h3>
+          <div style="background: var(--clr-sand-light); padding: 20px; border-radius: 12px; margin-bottom: 16px;">
+            <strong style="color: var(--clr-gold); font-size: 1.35rem; display: block; margin-bottom: 6px;">70% حجز مباشر عبر موقع الفندق وجوجل ماب</strong>
+            <p style="font-size: 1.15rem; color: var(--clr-dark);">القناة الرئيسية الأكثر ربحية — عمولة 0% وتواصل مباشر لبيع الجولات السياحية.</p>
+          </div>
+          <div style="background: #F1F5F9; padding: 20px; border-radius: 12px;">
+            <strong style="color: var(--clr-nile); font-size: 1.35rem; display: block; margin-bottom: 6px;">30% قنوات مكملة مساندة (Agoda & Airbnb)</strong>
+            <p style="font-size: 1.15rem; color: var(--clr-dark);">الحفاظ على التواجد لسد فجوات الإشغال في منتصف الأسبوع وبناء تقييمات دولية.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="brand-name">فندق هينو الأهرامات — دراسة الجدوى والخطة التسويقية</div>
+      <div class="slide-num">11 / 12</div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 12: RECOMMENDATIONS ==================== -->
+  <section class="slide-page">
+    <div class="header-bar">
+      <div>
+        <div class="tag-badge">الخاتمة والقرارات</div>
+        <h2 class="slide-heading">التوصيات النهائية <span>وخريطة الطريق التنفيذية</span></h2>
+        <p class="slide-subheading">القرارات الإستراتيجية الثلاثة لتحقيق أقصى ربحية تشغيلية لفندق هينو الأهرامات</p>
+      </div>
+      <div class="logo-badge">HENU PYRAMIDS</div>
+    </div>
+
+    <div class="content-area">
+      <div class="grid-3">
+        <div class="card gold">
+          <div class="card-icon">🚀</div>
+          <h3 class="card-title">1. موقع الحجز المباشر</h3>
+          <p class="card-text">الاعتماد على موقع الفندق الإلكتروني كبوابة الحجز الأساسية مع دعم اللغات، العملات، والحجز السريع والدفع عند الوصول.</p>
+          <div style="background: var(--clr-sand-light); padding: 14px; border-radius: 10px; font-weight: 700; font-size: 1.1rem; color: var(--clr-nile); margin-top: 18px; text-align: center;">
+            استثمار 25k — استرداد كامل في أقل من 4 أيام
+          </div>
+        </div>
+
+        <div class="card nile">
+          <div class="card-icon">🎯</div>
+          <h3 class="card-title">2. تركيز إعلانات جوجل</h3>
+          <p class="card-text">تخصيص 100% من الميزانية الإعلانية (15,000 جـ/شهرياً) لحملات Google Maps Local Search Ads لجذب السياح الفعليين.</p>
+          <div style="background: var(--clr-sand-light); padding: 14px; border-radius: 10px; font-weight: 700; font-size: 1.1rem; color: var(--clr-nile); margin-top: 18px; text-align: center;">
+            عائد إعلاني (ROAS) يصل لـ 1 : 60
+          </div>
+        </div>
+
+        <div class="card green">
+          <div class="card-icon">🔄</div>
+          <h3 class="card-title">3. تحسين مزيج القنوات</h3>
+          <p class="card-text">الإبقاء على Agoda و Airbnb كقنوات مكملة مساندة (30%) واستبعاد فيسبوك وإنستجرام تماماً لمنع الهدر المالي.</p>
+          <div style="background: var(--clr-sand-light); padding: 14px; border-radius: 10px; font-weight: 700; font-size: 1.1rem; color: var(--clr-nile); margin-top: 18px; text-align: center;">
+            وفر إجمالي يصل إلى +225k جـ شهرياً
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="brand-name">فندق هينو الأهرامات — دراسة الجدوى والخطة التسويقية</div>
+      <div class="slide-num">12 / 12</div>
+    </div>
+  </section>
+
+</body>
+</html>
