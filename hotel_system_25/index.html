@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>نظام إدارة وحجوزات الفندق | فندق هينو (25 غرفة)</title>
+  <meta name="description" content="نظام فندقي سحابي متكامل ومخصص لـ 25 غرفة - فندق هينو" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Firebase SDKs (Compat for maximum stability & browser compatibility) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Embedded Luxury Dark & Gold Styling -->
+  <style>
+    :root {
+      --bg-main: #0c0f17;
+      --bg-card: #141a28;
+      --bg-card-hover: #1a2236;
+      --bg-card-alt: #1e2840;
+      --border-color: rgba(212, 175, 55, 0.2);
+      --border-focus: #d4af37;
+      --gold: #d4af37;
+      --gold-light: #f5d77f;
+      --gold-gradient: linear-gradient(135deg, #d4af37 0%, #aa8010 100%);
+      --text-main: #f0f4f8;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --status-avail: #10b981;
+      --status-booked: #f59e0b;
+      --status-occ: #ef4444;
+      --status-clean: #3b82f6;
+      --status-maint: #8b5cf6;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+    body { background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; overflow-x: hidden; line-height: 1.5; }
+    a { color: var(--gold); text-decoration: none; }
+    input, select, textarea, button { font-family: inherit; }
+
+    /* AUTH OVERLAY */
+    .auth-overlay {
+      position: fixed; inset: 0; background: rgba(8, 11, 18, 0.96); backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center; z-index: 9999; padding: 1rem;
+      transition: opacity 0.3s ease;
+    }
+    .auth-overlay.hidden { display: none; }
+    .auth-card {
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg);
+      width: 100%; max-width: 440px; padding: 2.2rem; box-shadow: var(--shadow-lg); text-align: center;
+      animation: fadeIn 0.4s ease;
+    }
+    .auth-logo-img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); margin: 0 auto 1rem; box-shadow: 0 0 20px rgba(212,175,55,0.3); }
+    .auth-card h2 { color: var(--gold); font-size: 1.5rem; margin-bottom: 0.3rem; font-weight: 800; }
+    .auth-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+    /* FORMS */
+    .form-group { margin-bottom: 1.2rem; text-align: right; }
+    .form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.88rem; font-weight: 600; color: var(--text-main); }
+    .form-group label.required::after { content: " *"; color: #ef4444; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 0.75rem 1rem; background: rgba(0,0,0,0.35); border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm); color: var(--text-main); font-size: 0.95rem; outline: none; transition: border 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--border-focus); box-shadow: 0 0 10px rgba(212,175,55,0.2); }
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 600px) { .form-grid-2 { grid-template-columns: 1fr; } }
+
+    /* BUTTONS */
+    .btn-gold {
+      background: var(--gold-gradient); color: #000; font-weight: 700; border: none; padding: 0.75rem 1.4rem;
+      border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(212,175,55,0.4); }
+    .btn-secondary {
+      background: var(--bg-card-alt); color: var(--text-main); border: 1px solid var(--border-color);
+      padding: 0.75rem 1.4rem; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600;
+    }
+    .btn-secondary:hover { background: var(--bg-card-hover); }
+    .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.82rem; border-radius: 6px; cursor: pointer; border: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.3rem; }
+    .btn-primary-sm { background: #2563eb; color: #fff; }
+    .btn-primary-sm:hover { background: #1d4ed8; }
+    .btn-success-sm { background: #10b981; color: #000; font-weight: 700; }
+    .btn-success-sm:hover { background: #059669; color: #fff; }
+    .btn-gold-sm { background: var(--gold); color: #000; }
+    .btn-gold-sm:hover { background: var(--gold-light); }
+    .btn-danger-sm { background: #dc2626; color: #fff; }
+    .btn-danger-sm:hover { background: #b91c1c; }
+
+    /* APP HEADER */
+    .app-header {
+      background: var(--bg-card); border-bottom: 1px solid var(--border-color); padding: 0.8rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 0.8rem;
+    }
+    .header-brand { display: flex; align-items: center; gap: 0.8rem; }
+    .brand-logo-img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--gold); }
+    .brand-text h1 { font-size: 1.15rem; font-weight: 800; color: var(--gold); }
+    .brand-text p { font-size: 0.75rem; color: var(--text-muted); }
+    
+    .header-center-info { display: flex; align-items: center; gap: 0.8rem; }
+    .cloud-status-pill {
+      background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); padding: 0.35rem 0.85rem;
+      border-radius: 20px; font-size: 0.8rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: all 0.2s;
+    }
+    .cloud-status-pill:hover { border-color: var(--gold); background: rgba(212,175,55,0.08); }
+    .status-dot-pulse {
+      width: 9px; height: 9px; border-radius: 50%; background: #10b981; display: inline-block;
+      box-shadow: 0 0 8px #10b981; animation: pulseDot 2s infinite;
+    }
+    .status-dot-pulse.warning { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
+    .status-dot-pulse.error { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
+
+    .header-user-widget { display: flex; align-items: center; gap: 0.8rem; }
+    .user-pill {
+      background: rgba(212,175,55,0.1); border: 1px solid var(--border-color); padding: 0.4rem 0.9rem;
+      border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .header-actions-group { display: flex; gap: 0.5rem; }
+    .icon-btn {
+      width: 38px; height: 38px; border-radius: 8px; background: var(--bg-card-alt); border: 1px solid var(--border-color);
+      color: var(--text-main); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;
+    }
+    .icon-btn:hover { background: var(--gold); color: #000; border-color: var(--gold); }
+
+    /* NAVIGATION TABS */
+    .main-nav {
+      background: var(--bg-card); border-bottom: 1px solid var(--border-color); padding: 0.3rem 1.5rem;
+      display: flex; gap: 0.5rem; overflow-x: auto;
+    }
+    .nav-tab {
+      background: transparent; border: none; padding: 0.75rem 1.2rem; color: var(--text-muted);
+      font-weight: 700; font-size: 0.92rem; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 0.6rem; white-space: nowrap;
+    }
+    .nav-tab:hover { color: var(--text-main); background: rgba(255,255,255,0.04); }
+    .nav-tab.active { color: var(--gold); background: rgba(212,175,55,0.12); border: 1px solid var(--border-color); }
+
+    /* MAIN CONTENT */
+    .main-container { max-width: 1400px; margin: 0 auto; padding: 1.5rem; }
+    .tab-section { display: none; }
+    .tab-section.active { display: block; animation: fadeIn 0.3s ease; }
+
+    /* CARDS & CONTAINERS */
+    .content-card {
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md);
+      padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);
+    }
+    .card-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 0.8rem; }
+    .card-header-flex h2 { font-size: 1.25rem; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 0.6rem; }
+    .card-header-flex h2 i { color: var(--gold); }
+
+    /* STATUS PILLS */
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.65rem; border-radius: 20px;
+      font-size: 0.78rem; font-weight: 700;
+    }
+    .status-badge.available { background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); }
+    .status-badge.booked { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+    .status-badge.occupied { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+    .status-badge.cleaning { background: rgba(59,130,246,0.15); color: #3b82f6; border: 1px solid rgba(59,130,246,0.3); }
+    .status-badge.maintenance { background: rgba(139,92,246,0.15); color: #8b5cf6; border: 1px solid rgba(139,92,246,0.3); }
+
+    /* FLOOR ROOMS GRID */
+    .floor-section { margin-bottom: 1.8rem; }
+    .floor-title {
+      font-size: 1.05rem; font-weight: 800; color: var(--gold-light); margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid rgba(212,175,55,0.15); padding-bottom: 0.4rem;
+    }
+    .rooms-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem;
+    }
+    .room-card {
+      background: var(--bg-card-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm);
+      padding: 1.1rem; transition: all 0.2s; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .room-card:hover { transform: translateY(-2px); border-color: var(--gold); box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+    .room-card.status-border-available { border-right: 4px solid var(--status-avail); }
+    .room-card.status-border-booked { border-right: 4px solid var(--status-booked); }
+    .room-card.status-border-occupied { border-right: 4px solid var(--status-occ); }
+    .room-card.status-border-cleaning { border-right: 4px solid var(--status-clean); }
+    .room-card.status-border-maintenance { border-right: 4px solid var(--status-maint); }
+
+    .room-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
+    .room-number { font-size: 1.4rem; font-weight: 900; font-family: 'Outfit', sans-serif; color: #fff; }
+    .room-type { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.4rem; }
+    .room-price { font-size: 0.95rem; color: var(--gold); font-weight: 700; font-family: 'Outfit', sans-serif; }
+    .room-guest-info { background: rgba(0,0,0,0.3); padding: 0.4rem 0.6rem; border-radius: 6px; font-size: 0.8rem; margin: 0.5rem 0; color: #f5d77f; }
+    .room-actions-bar { margin-top: 0.8rem; display: flex; gap: 0.4rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.6rem; }
+
+    /* TABLES */
+    .table-wrap { width: 100%; overflow-x: auto; }
+    table.data-table { width: 100%; border-collapse: collapse; text-align: right; }
+    table.data-table th { background: rgba(0,0,0,0.35); padding: 0.85rem 1rem; color: var(--gold); font-size: 0.88rem; font-weight: 700; border-bottom: 1px solid var(--border-color); white-space: nowrap; }
+    table.data-table td { padding: 0.85rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.88rem; color: var(--text-main); vertical-align: middle; }
+    table.data-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* MODALS */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.82); backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-box {
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md);
+      width: 100%; max-width: 580px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); animation: scaleUp 0.25s ease;
+    }
+    .modal-box.modal-lg { max-width: 820px; }
+    .modal-header {
+      padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;
+    }
+    .modal-header h3 { font-size: 1.15rem; font-weight: 800; color: var(--gold); display: flex; align-items: center; gap: 0.5rem; }
+    .modal-close-btn { background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
+    .modal-close-btn:hover { color: #fff; }
+    .modal-body { padding: 1.5rem; }
+    .modal-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: flex-end; gap: 0.8rem; }
+
+    /* TOAST */
+    .toast-box {
+      position: fixed; bottom: 20px; left: 20px; z-index: 99999;
+      background: #1e293b; border: 1px solid var(--border-color); color: #fff;
+      padding: 0.8rem 1.4rem; border-radius: var(--radius-sm); font-size: 0.9rem; font-weight: 600;
+      box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 0.6rem;
+      transform: translateY(100px); opacity: 0; transition: all 0.3s;
+    }
+    .toast-box.show { transform: translateY(0); opacity: 1; }
+    .toast-box.success { border-color: #10b981; background: #064e3b; }
+    .toast-box.error { border-color: #ef4444; background: #7f1d1d; }
+    .toast-box.info { border-color: #3b82f6; background: #1e3a8a; }
+
+    /* STATS KPI */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .stat-card {
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm);
+      padding: 1.2rem; display: flex; align-items: center; gap: 1rem;
+    }
+    .stat-icon {
+      width: 48px; height: 48px; border-radius: 10px; background: rgba(212,175,55,0.15); color: var(--gold);
+      display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+    }
+    .stat-num { font-size: 1.5rem; font-weight: 900; color: #fff; font-family: 'Outfit', sans-serif; }
+    .stat-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+
+    /* INVOICE PRINT */
+    @media print {
+      body * { visibility: hidden; }
+      #printableReceiptArea, #printableReceiptArea * { visibility: visible; }
+      #printableReceiptArea { position: fixed; inset: 0; background: #fff; color: #000; padding: 2rem; }
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scaleUp { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================
+       1. AUTHENTICATION MODAL (LOGIN)
+       ======================================================== -->
+  <div id="authOverlay" class="auth-overlay">
+    <div class="auth-card">
+      <img src="logo.jpg" alt="فندق هينو" class="auth-logo-img" />
+      <h2>فندق هينو | Henu Hotel</h2>
+      <p>نظام إدارة الغرف والحجوزات الفندقية (25 غرفة)</p>
+
+      <form id="loginForm" onsubmit="AppEngine.handleLogin(event)">
+        <div class="form-group">
+          <label class="required"><i class="fa-solid fa-envelope"></i> البريد الإلكتروني</label>
+          <input type="email" id="loginEmail" placeholder="henuphotel@gmail.com" required value="henuphotel@gmail.com" />
+        </div>
+        <div class="form-group">
+          <label class="required"><i class="fa-solid fa-lock"></i> كلمة المرور</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required value="123456" />
+        </div>
+        <button type="submit" class="btn-gold" style="width: 100%; margin-top: 0.5rem;" id="loginSubmitBtn">
+          <i class="fa-solid fa-right-to-bracket"></i> تسجيل الدخول
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       2. MAIN APP SHELL
+       ======================================================== -->
+  <div id="appShell">
+    
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <img src="logo.jpg" alt="فندق هينو" class="brand-logo-img" />
+        <div class="brand-text">
+          <h1>فندق هينو (Henu Hotel)</h1>
+          <p>إدارة الـ 25 غرفة - ربط سحابي Firebase</p>
+        </div>
+      </div>
+
+      <div class="header-center-info">
+        <div class="cloud-status-pill" id="cloudStatusBadge" onclick="AppEngine.openCloudModal()" title="انقر لعرض تفاصيل السحابة والمزامنة">
+          <span class="status-dot-pulse" id="cloudDot"></span>
+          <span id="cloudStatusText">جاري فحص الاتصال السحابي...</span>
+          <i class="fa-solid fa-cloud-arrow-up" style="color:var(--gold); margin-right:4px;"></i>
+        </div>
+      </div>
+
+      <div class="header-user-widget">
+        <div class="user-pill">
+          <i class="fa-solid fa-circle-user" style="color: var(--gold);"></i>
+          <span id="headerUserName">مدير الفندق</span>
+          <small id="headerUserRole" style="color: var(--gold); font-weight: 700;">(مدير عام)</small>
+        </div>
+
+        <div class="header-actions-group">
+          <button class="icon-btn" title="مزامنة فورية مع السحابة" onclick="AppEngine.forceCloudSync()">
+            <i class="fa-solid fa-arrows-rotate"></i>
+          </button>
+          <button class="icon-btn" title="تغيير كلمة المرور الخاصة بي" onclick="AppEngine.openChangePasswordModal()">
+            <i class="fa-solid fa-key"></i>
+          </button>
+          <button class="icon-btn" title="تسجيل الخروج" onclick="AppEngine.handleLogout()">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="main-nav">
+      <button class="nav-tab active" data-tab="roomsTab" onclick="AppEngine.switchTab('roomsTab')">
+        <i class="fa-solid fa-table-cells-large"></i> خريطة الـ 25 غرفة والأدوار
+      </button>
+      <button class="nav-tab" data-tab="bookingsTab" onclick="AppEngine.switchTab('bookingsTab')">
+        <i class="fa-solid fa-clipboard-list"></i> سجل وجدول الحجوزات
+        <span class="status-badge booked" id="navBookingsCount">0</span>
+      </button>
+      <button class="nav-tab" data-tab="staffTab" onclick="AppEngine.switchTab('staffTab')">
+        <i class="fa-solid fa-users-gear"></i> إدارة الموظفين والمستخدمين
+      </button>
+      <button class="nav-tab" data-tab="statsTab" onclick="AppEngine.switchTab('statsTab')">
+        <i class="fa-solid fa-chart-pie"></i> الإحصائيات ونسب الإشغال
+      </button>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="main-container">
+
+      <!-- ========================================================
+           TAB 1: ROOMS MAP (25 ROOMS ACROSS 4 FLOORS)
+           ======================================================== -->
+      <section id="roomsTab" class="tab-section active">
+        <div class="card-header-flex">
+          <div>
+            <h2><i class="fa-solid fa-hotel"></i> خريطة وتوزيع غرف الفندق (إجمالي 25 غرفة)</h2>
+            <p style="color: var(--text-muted); font-size: 0.88rem;">حجز فوري، تسكين، وتغيير حالات الغرف متزامن لحظياً مع سحابة Firebase</p>
+          </div>
+          <div style="display:flex; gap:0.5rem;">
+            <button class="btn-secondary" onclick="AppEngine.forceCloudSync()">
+              <i class="fa-solid fa-cloud-arrow-down"></i> تحديث السحابة
+            </button>
+            <button class="btn-gold" onclick="AppEngine.openBookingModal()">
+              <i class="fa-solid fa-plus"></i> حجز / تسكين جديد
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Quick Counters -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-door-open"></i></div>
+            <div><div class="stat-num" id="kpiAvailable">25</div><div class="stat-label">غرف متاحة</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="color: #f59e0b; background: rgba(245,158,11,0.15);"><i class="fa-solid fa-calendar-check"></i></div>
+            <div><div class="stat-num" id="kpiBooked">0</div><div class="stat-label">غرف محجوزة</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="color: #ef4444; background: rgba(239,68,68,0.15);"><i class="fa-solid fa-user-check"></i></div>
+            <div><div class="stat-num" id="kpiOccupied">0</div><div class="stat-label">غرف مشغولة (ساكن)</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="color: #3b82f6; background: rgba(59,130,246,0.15);"><i class="fa-solid fa-broom"></i></div>
+            <div><div class="stat-num" id="kpiCleaning">0</div><div class="stat-label">تحت التنظيف / الصيانة</div></div>
+          </div>
+        </div>
+
+        <!-- 4 Floors Grid Container -->
+        <div id="floorsContainer">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- ========================================================
+           TAB 2: BOOKINGS LIST
+           ======================================================== -->
+      <section id="bookingsTab" class="tab-section">
+        <div class="content-card">
+          <div class="card-header-flex">
+            <h2><i class="fa-solid fa-list-check"></i> قائمة وسجل الحجوزات السحابية</h2>
+            <button class="btn-gold" onclick="AppEngine.openBookingModal()">
+              <i class="fa-solid fa-plus"></i> إضافة حجز جديد
+            </button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>رقم الحجز</th>
+                  <th>اسم النزيل</th>
+                  <th>رقم الغرفة</th>
+                  <th>تاريخ الوصول</th>
+                  <th>تاريخ المغادرة</th>
+                  <th>الحالة</th>
+                  <th>المبلغ الإجمالي</th>
+                  <th>المدفوع</th>
+                  <th>المتبقي</th>
+                  <th>إجراءات سريعة</th>
+                </tr>
+              </thead>
+              <tbody id="bookingsTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================
+           TAB 3: STAFF & USER MANAGEMENT (10 USERS + EDITING)
+           ======================================================== -->
+      <section id="staffTab" class="tab-section">
+        <div class="content-card">
+          <div class="card-header-flex">
+            <div>
+              <h2><i class="fa-solid fa-users-gear"></i> إدارة موظفي ومستخدمي الفندق</h2>
+              <p style="color: var(--text-muted); font-size: 0.88rem;">إضافة موظفين، وتعديل الأسماء والإيميلات والصلاحيات وكلمات المرور (مزامنة سحابية)</p>
+            </div>
+          </div>
+
+          <!-- Add Staff Form -->
+          <div style="background: rgba(0,0,0,0.25); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.2rem; margin-bottom: 1.5rem;">
+            <h3 style="color: var(--gold); font-size: 1.05rem; margin-bottom: 1rem;"><i class="fa-solid fa-user-plus"></i> إضافة مستخدم / موظف جديد:</h3>
+            <form id="addStaffForm" onsubmit="AppEngine.handleAddStaffUser(event)">
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="required">الاسم بالكامل:</label>
+                  <input type="text" id="newStaffName" placeholder="مثال: أحمد محمد (استقبال نهار)" required />
+                </div>
+                <div class="form-group">
+                  <label class="required">البريد الإلكتروني (لتسجيل الدخول):</label>
+                  <input type="email" id="newStaffEmail" placeholder="staff@henuhotel.com" required />
+                </div>
+                <div class="form-group">
+                  <label class="required">كلمة المرور الأولية:</label>
+                  <input type="password" id="newStaffPassword" placeholder="••••••••" required minlength="6" />
+                </div>
+                <div class="form-group">
+                  <label class="required">المسمى الوظيفي / الصلاحية:</label>
+                  <select id="newStaffRole" required>
+                    <option value="موظف استقبال">موظف استقبال (Receptionist)</option>
+                    <option value="مسؤول الاستقبال">مسؤول وردية (Shift Supervisor)</option>
+                    <option value="مدير الفندق">مدير عام (General Manager / Admin)</option>
+                    <option value="إشراف داخلي">إشراف داخلي وتنظيف (Housekeeping)</option>
+                    <option value="محاسب">محاسب (Accountant)</option>
+                    <option value="موظف">موظف (Staff Employee)</option>
+                  </select>
+                </div>
+              </div>
+              <div style="text-align: left; margin-top: 0.5rem;">
+                <button type="submit" class="btn-gold" id="btnAddStaffBtn">
+                  <i class="fa-solid fa-plus"></i> إضافة المستخدم وحفظه سحابياً
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Staff Table -->
+          <h3 style="margin-bottom: 0.8rem; font-size: 1.05rem;"><i class="fa-solid fa-address-book"></i> قائمة مستخدمي النظام (المسجلين):</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>الاسم</th>
+                  <th>البريد الإلكتروني</th>
+                  <th>الصلاحية / الدور</th>
+                  <th>تاريخ الإضافة</th>
+                  <th>إجراءات الحساب</th>
+                </tr>
+              </thead>
+              <tbody id="staffTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================
+           TAB 4: OCCUPANCY & FINANCIAL REPORTS
+           ======================================================== -->
+      <section id="statsTab" class="tab-section">
+        <div class="content-card">
+          <h2><i class="fa-solid fa-chart-line"></i> تقرير الأداء والإشغال الفندقي</h2>
+          <div class="stats-grid" style="margin-top: 1.2rem;">
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fa-solid fa-percent"></i></div>
+              <div><div class="stat-num" id="statOccupancyPct">0%</div><div class="stat-label">نسبة الإشغال الحالية</div></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="color:#10b981;"><i class="fa-solid fa-money-bill-wave"></i></div>
+              <div><div class="stat-num" id="statTotalRev">0 ج.م</div><div class="stat-label">إجمالي إيراد الحجوزات النشطة</div></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="color:#3b82f6;"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+              <div><div class="stat-num" id="statPaidRev">0 ج.م</div><div class="stat-label">المبالغ المحصلة (المدفوعة)</div></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="color:#ef4444;"><i class="fa-solid fa-scale-unbalanced"></i></div>
+              <div><div class="stat-num" id="statRemainRev">0 ج.م</div><div class="stat-label">المبالغ المتبقية للتحصيل</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ========================================================
+       MODAL: NEW / EDIT BOOKING
+       ======================================================== -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal-box modal-lg">
+      <div class="modal-header">
+        <h3 id="bookingModalTitle"><i class="fa-solid fa-bed"></i> حجز / تسكين جديد</h3>
+        <button class="modal-close-btn" onclick="AppEngine.closeModal('bookingModal')">&times;</button>
+      </div>
+      <form id="bookingForm" onsubmit="AppEngine.handleSaveBooking(event)">
+        <input type="hidden" id="bookId" />
+        <div class="modal-body">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="required">اختر الغرفة (من الـ 25 غرفة):</label>
+              <select id="bookRoomNumber" required onchange="AppEngine.onBookingRoomSelect()">
+                <option value="">-- حدد الغرفة --</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="required">حالة الحجز:</label>
+              <select id="bookStatus" required>
+                <option value="booked">🟠 محجوز (مؤكد)</option>
+                <option value="occupied">🔴 تسكين فوري (ساكن حالياً)</option>
+                <option value="pending">🟡 حجز مبدئي</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="required">اسم النزيل بالكامل:</label>
+              <input type="text" id="bookGuestName" placeholder="الاسم ثلاثي" required />
+            </div>
+            <div class="form-group">
+              <label class="required">رقم الهاتف / واتساب:</label>
+              <input type="text" id="bookGuestPhone" placeholder="01xxxxxxxxx" required />
+            </div>
+            <div class="form-group">
+              <label class="required">تاريخ الوصول:</label>
+              <input type="date" id="bookCheckIn" required onchange="AppEngine.calcBookingPrice()" />
+            </div>
+            <div class="form-group">
+              <label class="required">تاريخ المغادرة:</label>
+              <input type="date" id="bookCheckOut" required onchange="AppEngine.calcBookingPrice()" />
+            </div>
+            <div class="form-group">
+              <label class="required">سعر الليلة (ج.م):</label>
+              <input type="number" id="bookNightPrice" required oninput="AppEngine.calcBookingPrice()" />
+            </div>
+            <div class="form-group">
+              <label>المبلغ المدفوع مقدماً (ج.م):</label>
+              <input type="number" id="bookPaidAmount" value="0" />
+            </div>
+          </div>
+          <div style="background: rgba(212,175,55,0.1); border: 1px solid var(--border-color); padding: 0.8rem; border-radius: var(--radius-sm); margin-top: 0.5rem;">
+            <span style="font-weight:700; color:var(--gold);">الإجمالي المحسوب: </span>
+            <span id="bookTotalText" style="font-weight:800; color:#fff;">0 ج.م</span>
+            <small id="bookNightsText" style="color:var(--text-muted); margin-right:0.5rem;">(0 ليالي)</small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="AppEngine.closeModal('bookingModal')">إلغاء</button>
+          <button type="submit" class="btn-gold" id="btnSaveBookingSubmit"><i class="fa-solid fa-check"></i> حفظ الحجز والتسكين سحابياً</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL: QUICK ROOM STATUS CHANGE
+       ======================================================== -->
+  <div class="modal-overlay" id="roomStatusModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="roomStatusModalTitle"><i class="fa-solid fa-sliders"></i> تغيير حالة الغرفة</h3>
+        <button class="modal-close-btn" onclick="AppEngine.closeModal('roomStatusModal')">&times;</button>
+      </div>
+      <form onsubmit="AppEngine.handleSaveRoomStatus(event)">
+        <input type="hidden" id="quickRoomNumber" />
+        <div class="modal-body">
+          <div class="form-group">
+            <label>رقم الغرفة:</label>
+            <input type="text" id="quickRoomDisplay" readonly style="opacity:0.75; font-weight:800; color:var(--gold);" />
+          </div>
+          <div class="form-group">
+            <label class="required">الحالة الجديدة للغرفة:</label>
+            <select id="quickNewStatus" required>
+              <option value="available">🟢 متاحة وجاهزة للتسكين (Available)</option>
+              <option value="booked">🟠 محجوزة (Booked)</option>
+              <option value="occupied">🔴 مشغولة / نزيل ساكن (Occupied)</option>
+              <option value="cleaning">🔵 تحت التنظيف وإعادة التجهيز (Cleaning)</option>
+              <option value="maintenance">🟣 تحت الصيانة (Maintenance)</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="AppEngine.closeModal('roomStatusModal')">إلغاء</button>
+          <button type="submit" class="btn-gold"><i class="fa-solid fa-save"></i> حفظ وتحديث الحالة</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL: EDIT USER (NAME, EMAIL, ROLE, PASSWORD)
+       ======================================================== -->
+  <div class="modal-overlay" id="editUserModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-user-pen"></i> تعديل بيانات المستخدم</h3>
+        <button class="modal-close-btn" onclick="AppEngine.closeModal('editUserModal')">&times;</button>
+      </div>
+      <form onsubmit="AppEngine.handleSaveEditedUser(event)">
+        <input type="hidden" id="editOriginalEmail" />
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="required">اسم المستخدم / الموظف:</label>
+            <input type="text" id="editUserName" required />
+          </div>
+          <div class="form-group">
+            <label class="required">البريد الإلكتروني (لتسجيل الدخول):</label>
+            <input type="email" id="editUserEmail" required />
+          </div>
+          <div class="form-group">
+            <label class="required">الصلاحية / الدور:</label>
+            <select id="editUserRole" required>
+              <option value="مدير الفندق">مدير عام (General Manager / Admin)</option>
+              <option value="موظف استقبال">موظف استقبال (Receptionist)</option>
+              <option value="مسؤول الاستقبال">مسؤول وردية (Shift Supervisor)</option>
+              <option value="إشراف داخلي">إشراف داخلي وتنظيف (Housekeeping)</option>
+              <option value="محاسب">محاسب (Accountant)</option>
+              <option value="موظف">موظف (Staff Employee)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>كلمة المرور الجديدة (اتركها فارغة إذا لم ترد التغيير):</label>
+            <input type="password" id="editUserNewPass" placeholder="•••••••• (اختياري)" minlength="6" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="AppEngine.closeModal('editUserModal')">إلغاء</button>
+          <button type="submit" class="btn-gold" id="btnSaveEditedUserSubmit"><i class="fa-solid fa-floppy-disk"></i> حفظ التعديلات سحابياً</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL: CHANGE MY PASSWORD (SELF)
+       ======================================================== -->
+  <div class="modal-overlay" id="changePasswordModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-key"></i> تغيير كلمة المرور الخاصة بي</h3>
+        <button class="modal-close-btn" onclick="AppEngine.closeModal('changePasswordModal')">&times;</button>
+      </div>
+      <form onsubmit="AppEngine.handleChangeMyPassword(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="required">كلمة المرور الجديدة:</label>
+            <input type="password" id="selfNewPassword" placeholder="••••••••" required minlength="6" />
+          </div>
+          <div class="form-group">
+            <label class="required">تأكيد كلمة المرور الجديدة:</label>
+            <input type="password" id="selfConfirmPassword" placeholder="••••••••" required minlength="6" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="AppEngine.closeModal('changePasswordModal')">إلغاء</button>
+          <button type="submit" class="btn-gold" id="btnChangeMyPassSubmit"><i class="fa-solid fa-check"></i> حفظ كلمة المرور</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL: CLOUD & FIREBASE DIAGNOSTICS
+       ======================================================== -->
+  <div class="modal-overlay" id="cloudModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-cloud-bolt"></i> حالة الربط السحابي Firebase</h3>
+        <button class="modal-close-btn" onclick="AppEngine.closeModal('cloudModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="background:rgba(0,0,0,0.35); padding:1rem; border-radius:var(--radius-sm); border:1px solid var(--border-color); margin-bottom:1rem;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.6rem;">
+            <span style="color:var(--text-muted);">مشروع Firebase:</span>
+            <strong style="color:var(--gold);">henu-pyramids-hotel</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.6rem;">
+            <span style="color:var(--text-muted);">حالة الاتصال:</span>
+            <span id="cloudModalStatusBadge" class="status-badge available">🟢 متصل بالسحابة</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.6rem;">
+            <span style="color:var(--text-muted);">إجمالي الغرف المزامنة:</span>
+            <strong id="cloudModalRoomsCount">25 غرفة</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.6rem;">
+            <span style="color:var(--text-muted);">إجمالي الحجوزات بالسحابة:</span>
+            <strong id="cloudModalBookingsCount">0 حجز</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="color:var(--text-muted);">إجمالي مستخدمي النظام:</span>
+            <strong id="cloudModalStaffCount">10 موظفين</strong>
+          </div>
+        </div>
+
+        <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.6;">
+          💡 يدعم النظام المزامنة اللحظية (Real-time Sync) والعمل في وضع عدم الاتصال (Offline Mode) مع التحديث التلقائي فور عودة الاتصال.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="AppEngine.closeModal('cloudModal')">إغلاق</button>
+        <button type="button" class="btn-gold" onclick="AppEngine.forceCloudSync(); AppEngine.closeModal('cloudModal');"><i class="fa-solid fa-arrows-rotate"></i> مزامنة وتهيئة البيانات الآن</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL: INVOICE PRINT
+       ======================================================== -->
+  <div class="modal-overlay" id="receiptModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-receipt"></i> إيصال وفاتورة الحجز</h3>
+        <button class="modal-close-btn" onclick="AppEngine.closeModal('receiptModal')">&times;</button>
+      </div>
+      <div class="modal-body" id="printableReceiptArea">
+        <!-- Rendered dynamically -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="AppEngine.closeModal('receiptModal')">إغلاق</button>
+        <button type="button" class="btn-gold" onclick="window.print()"><i class="fa-solid fa-print"></i> طباعة الإيصال</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toastBox" class="toast-box">
+    <i class="fa-solid fa-circle-check" id="toastIcon"></i>
+    <span id="toastMsg">تم بنجاح</span>
+  </div>
+
+  <!-- ========================================================
+       3. CORE APPLICATION & FIREBASE SCRIPT ENGINE
+       ======================================================== -->
+  <script>
+    // Master 25 Rooms Layout
+    const MASTER_25_ROOMS = [
+      // Floor 1 (4 Rooms)
+      { roomNumber: "101", floor: 1, floorName: "الدور الأول", type: "دابل شباك", category: "دابل", defaultPrice: 750, status: "available", currentGuest: "" },
+      { roomNumber: "102", floor: 1, floorName: "الدور الأول", type: "سرير كينج", category: "كينج", defaultPrice: 900, status: "available", currentGuest: "" },
+      { roomNumber: "103", floor: 1, floorName: "الدور الأول", type: "سويت", category: "سويت", defaultPrice: 1500, status: "available", currentGuest: "" },
+      { roomNumber: "104", floor: 1, floorName: "الدور الأول", type: "كينج شباك", category: "كينج", defaultPrice: 900, status: "available", currentGuest: "" },
+      // Floor 2 (7 Rooms)
+      { roomNumber: "201", floor: 2, floorName: "الدور الثاني", type: "سنجل بلكونة", category: "سنجل", defaultPrice: 600, status: "available", currentGuest: "" },
+      { roomNumber: "202", floor: 2, floorName: "الدور الثاني", type: "دابل بلكونة", category: "دابل", defaultPrice: 850, status: "available", currentGuest: "" },
+      { roomNumber: "203", floor: 2, floorName: "الدور الثاني", type: "دابل", category: "دابل", defaultPrice: 750, status: "available", currentGuest: "" },
+      { roomNumber: "204", floor: 2, floorName: "الدور الثاني", type: "سرير كينج", category: "كينج", defaultPrice: 900, status: "available", currentGuest: "" },
+      { roomNumber: "205", floor: 2, floorName: "الدور الثاني", type: "دابل", category: "دابل", defaultPrice: 750, status: "available", currentGuest: "" },
+      { roomNumber: "206", floor: 2, floorName: "الدور الثاني", type: "ترابل شباك جانبي", category: "ترابل", defaultPrice: 1100, status: "available", currentGuest: "" },
+      { roomNumber: "207", floor: 2, floorName: "الدور الثاني", type: "دابل شباك جانبي", category: "دابل", defaultPrice: 750, status: "available", currentGuest: "" },
+      // Floor 3 (7 Rooms)
+      { roomNumber: "301", floor: 3, floorName: "الدور الثالث", type: "سنجل بلكونة", category: "سنجل", defaultPrice: 600, status: "available", currentGuest: "" },
+      { roomNumber: "302", floor: 3, floorName: "الدور الثالث", type: "دابل بلكونة", category: "دابل", defaultPrice: 850, status: "available", currentGuest: "" },
+      { roomNumber: "303", floor: 3, floorName: "الدور الثالث", type: "سرير كينج", category: "كينج", defaultPrice: 900, status: "available", currentGuest: "" },
+      { roomNumber: "304", floor: 3, floorName: "الدور الثالث", type: "سرير كينج", category: "كينج", defaultPrice: 900, status: "available", currentGuest: "" },
+      { roomNumber: "305", floor: 3, floorName: "الدور الثالث", type: "سرير كينج", category: "كينج", defaultPrice: 900, status: "available", currentGuest: "" },
+      { roomNumber: "306", floor: 3, floorName: "الدور الثالث", type: "كينج بلكونة جانبي", category: "كينج", defaultPrice: 950, status: "available", currentGuest: "" },
+      { roomNumber: "307", floor: 3, floorName: "الدور الثالث", type: "دبل شباك جانبي", category: "دابل", defaultPrice: 750, status: "available", currentGuest: "" },
+      // Floor 4 (7 Rooms)
+      { roomNumber: "401", floor: 4, floorName: "الدور الرابع", type: "سنجل بلكونة", category: "سنجل", defaultPrice: 600, status: "available", currentGuest: "" },
+      { roomNumber: "402", floor: 4, floorName: "الدور الرابع", type: "دابل بلكونة", category: "دابل", defaultPrice: 850, status: "available", currentGuest: "" },
+      { roomNumber: "403", floor: 4, floorName: "الدور الرابع", type: "سرير كينج", category: "كينج", defaultPrice: 900, status: "available", currentGuest: "" },
+      { roomNumber: "404", floor: 4, floorName: "الدور الرابع", type: "سرير كينج", category: "كينج", defaultPrice: 900, status: "available", currentGuest: "" },
+      { roomNumber: "405", floor: 4, floorName: "الدور الرابع", type: "دابل", category: "دابل", defaultPrice: 750, status: "available", currentGuest: "" },
+      { roomNumber: "406", floor: 4, floorName: "الدور الرابع", type: "ترابل شباك جانبي", category: "ترابل", defaultPrice: 1100, status: "available", currentGuest: "" },
+      { roomNumber: "407", floor: 4, floorName: "الدور الرابع", type: "دابل شباك جانبي", category: "دابل", defaultPrice: 750, status: "available", currentGuest: "" }
+    ];
+
+    // Master 10 Staff Accounts
+    const MASTER_10_STAFF = [
+      { name: "مدير الفندق (الرئيسي)", email: "henuphotel@gmail.com", password: "123456", role: "مدير الفندق", createdAt: "2026-09-01" },
+      { name: "موظف وردية صباحية (Morning)", email: "morning@henuhotel.com", password: "123456", role: "موظف استقبال", createdAt: "2026-09-01" },
+      { name: "موظف وردية مسائية (Afternoon)", email: "afternoon@henuhotel.com", password: "123456", role: "موظف استقبال", createdAt: "2026-09-01" },
+      { name: "مسؤول وردية ليلية (Night Auditor)", email: "night@henuhotel.com", password: "123456", role: "مسؤول الاستقبال", createdAt: "2026-09-01" },
+      { name: "محاسب الفندق (Accountant)", email: "accountant@henuhotel.com", password: "123456", role: "محاسب", createdAt: "2026-09-01" },
+      { name: "موظف 1 (Employee 1)", email: "employee1@henuhotel.com", password: "123456", role: "موظف استقبال", createdAt: "2026-09-01" },
+      { name: "موظف 2 (Employee 2)", email: "employee2@henuhotel.com", password: "123456", role: "موظف استقبال", createdAt: "2026-09-01" },
+      { name: "موظف 3 (Employee 3)", email: "employee3@henuhotel.com", password: "123456", role: "إشراف داخلي", createdAt: "2026-09-01" },
+      { name: "موظف 4 (Employee 4)", email: "employee4@henuhotel.com", password: "123456", role: "إشراف داخلي", createdAt: "2026-09-01" },
+      { name: "موظف 5 (Employee 5)", email: "employee5@henuhotel.com", password: "123456", role: "موظف", createdAt: "2026-09-01" }
+    ];
+
+    // Firebase Config for henu-pyramids-hotel
+    const FIREBASE_CONFIG = {
+      apiKey: "AIzaSyCcVHlZHHvHSHFsLagU6haJWZxCgxS_PUs",
+      authDomain: "henu-pyramids-hotel.firebaseapp.com",
+      projectId: "henu-pyramids-hotel",
+      storageBucket: "henu-pyramids-hotel.firebasestorage.app",
+      messagingSenderId: "310013988556",
+      appId: "1:310013988556:web:fce3c2bcc1c04bbefdfc69",
+      measurementId: "G-ZTY00XXTC8"
+    };
+
+    // Unified Application Engine
+    window.AppEngine = {
+      currentUser: null,
+      rooms: [],
+      bookings: [],
+      staff: [],
+      db: null,
+      auth: null,
+      isFirebaseReady: false,
+      isCloudConnected: false,
+
+      init() {
+        this.loadLocalData();
+        this.initFirebase();
+        this.renderAll();
+        this.checkSavedSession();
+      },
+
+      initFirebase() {
+        try {
+          if (typeof firebase !== 'undefined' && firebase.initializeApp) {
+            if (!firebase.apps.length) {
+              firebase.initializeApp(FIREBASE_CONFIG);
+            }
+            this.auth = firebase.auth();
+            this.db = firebase.firestore();
+            this.isFirebaseReady = true;
+
+            // Enable offline persistence for Firestore if supported
+            try {
+              this.db.enablePersistence({ synchronizeTabs: true }).catch(err => {
+                console.log("Persistence notice:", err.code);
+              });
+            } catch(e) {}
+
+            // Handle Auth State & Anonymous sign-in for secure Firestore access
+            this.auth.onAuthStateChanged(user => {
+              if (user) {
+                console.log("🔥 Firebase Auth user connected:", user.uid);
+              }
+            });
+
+            // If not logged in, attempt anonymous auth so Firestore security rules allow access
+            if (!this.auth.currentUser) {
+              this.auth.signInAnonymously().catch(e => {
+                console.log("Anonymous sign-in notice:", e.message);
+              });
+            }
+
+            this.updateCloudStatus(true, `متصل بالسحابة (${FIREBASE_CONFIG.projectId})`);
+
+            // Start Realtime Firestore Listeners
+            this.startSync();
+            console.log("🔥 Firebase initialized successfully for project:", FIREBASE_CONFIG.projectId);
+          } else {
+            this.updateCloudStatus(false, "وضع محلي (SDK غير متوفر)");
+          }
+        } catch (e) {
+          console.warn("Firebase init note:", e.message);
+          this.updateCloudStatus(false, "خطأ في اتصال السحابة");
+        }
+      },
+
+      updateCloudStatus(isConnected, text) {
+        this.isCloudConnected = isConnected;
+        const badge = document.getElementById('cloudStatusBadge');
+        const txt = document.getElementById('cloudStatusText');
+        const dot = document.getElementById('cloudDot');
+        const modalBadge = document.getElementById('cloudModalStatusBadge');
+
+        if (txt) txt.textContent = text;
+        if (dot) {
+          dot.className = isConnected ? 'status-dot-pulse' : 'status-dot-pulse warning';
+        }
+        if (modalBadge) {
+          modalBadge.className = isConnected ? 'status-badge available' : 'status-badge booked';
+          modalBadge.textContent = isConnected ? '🟢 متصل بالسحابة' : '🟡 وضع محلي (Offline)';
+        }
+      },
+
+      startSync() {
+        if (!this.db) return;
+        
+        // 1. REALTIME ROOMS LISTENER
+        try {
+          this.db.collection('rooms').onSnapshot(snap => {
+            if (snap.empty) {
+              console.log("Rooms collection empty in Firestore. Seeding 25 master rooms...");
+              this.seedRoomsToFirestore();
+            } else {
+              const remoteRooms = [];
+              snap.forEach(d => remoteRooms.push({ id: d.id, ...d.data() }));
+              
+              // Sort numerically by roomNumber
+              remoteRooms.sort((a, b) => parseInt(a.roomNumber, 10) - parseInt(b.roomNumber, 10));
+
+              // Ensure all 25 rooms exist
+              if (remoteRooms.length === 25) {
+                this.rooms = remoteRooms;
+              } else {
+                this.rooms = MASTER_25_ROOMS.map(m => {
+                  const match = remoteRooms.find(r => r.roomNumber === m.roomNumber);
+                  return match ? { ...m, ...match } : m;
+                });
+              }
+
+              this.saveLocalRooms();
+              this.renderRoomsGrid();
+              this.updateKPIs();
+              this.renderStats();
+              this.populateRoomSelects();
+              this.updateCloudModalStats();
+            }
+          }, err => {
+            console.warn("Firestore rooms listen notice:", err.message);
+            this.updateCloudStatus(false, "وضع محلي (خطأ صلاحيات/اتصال)");
+          });
+        } catch(e) {
+          console.warn("Rooms sync error:", e);
+        }
+
+        // 2. REALTIME BOOKINGS LISTENER
+        try {
+          this.db.collection('bookings').onSnapshot(snap => {
+            const list = [];
+            snap.forEach(d => list.push({ id: d.id, ...d.data() }));
+            // Sort by creation date desc
+            list.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+            this.bookings = list;
+            this.saveLocalBookings();
+            this.renderBookingsTable();
+            this.updateKPIs();
+            this.renderStats();
+            this.updateCloudModalStats();
+          }, err => {
+            console.warn("Firestore bookings listen notice:", err.message);
+          });
+        } catch(e) {
+          console.warn("Bookings sync error:", e);
+        }
+
+        // 3. REALTIME STAFF USERS LISTENER
+        try {
+          this.db.collection('staff_users').onSnapshot(snap => {
+            if (snap.empty) {
+              console.log("Staff collection empty in Firestore. Seeding 10 master staff accounts...");
+              this.seedStaffToFirestore();
+            } else {
+              const remoteStaff = [];
+              snap.forEach(d => remoteStaff.push({ id: d.id, ...d.data() }));
+
+              const staffMap = new Map();
+              MASTER_10_STAFF.forEach(s => staffMap.set(s.email.toLowerCase(), s));
+              remoteStaff.forEach(s => staffMap.set(s.email.toLowerCase(), s));
+
+              this.staff = Array.from(staffMap.values());
+              this.saveLocalStaff();
+              this.renderStaffTable();
+              this.updateCloudModalStats();
+            }
+          }, err => {
+            console.warn("Firestore staff listen notice:", err.message);
+          });
+        } catch(e) {
+          console.warn("Staff sync error:", e);
+        }
+      },
+
+      async seedRoomsToFirestore(force = false) {
+        if (!this.db) return;
+        try {
+          const batch = this.db.batch();
+          for (const room of MASTER_25_ROOMS) {
+            const ref = this.db.collection('rooms').doc(room.roomNumber);
+            batch.set(ref, {
+              ...room,
+              updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: !force });
+          }
+          await batch.commit();
+          console.log("✅ All 25 rooms seeded to Firestore successfully.");
+        } catch(e) {
+          console.warn("Rooms seed error:", e.message);
+        }
+      },
+
+      async seedStaffToFirestore(force = false) {
+        if (!this.db) return;
+        try {
+          const batch = this.db.batch();
+          for (const s of MASTER_10_STAFF) {
+            const ref = this.db.collection('staff_users').doc(s.email.toLowerCase());
+            batch.set(ref, {
+              ...s,
+              updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: !force });
+          }
+          await batch.commit();
+          console.log("✅ Master staff accounts seeded to Firestore successfully.");
+        } catch(e) {
+          console.warn("Staff seed error:", e.message);
+        }
+      },
+
+      async forceCloudSync() {
+        this.showToast("🔄 جاري مزامنة وتهيئة البيانات سحابياً...", "info");
+        if (this.db) {
+          await this.seedRoomsToFirestore(false);
+          await this.seedStaffToFirestore(false);
+          this.updateCloudStatus(true, `متصل بالسحابة (${FIREBASE_CONFIG.projectId})`);
+          this.showToast("✅ تمت المزامنة السحابية بنجاح!", "success");
+        } else {
+          this.showToast("⚠️ لم يتم تفعيل Firebase، جاري العمل محلياً", "error");
+        }
+      },
+
+      openCloudModal() {
+        this.updateCloudModalStats();
+        this.openModal('cloudModal');
+      },
+
+      updateCloudModalStats() {
+        if (document.getElementById('cloudModalRoomsCount')) {
+          document.getElementById('cloudModalRoomsCount').textContent = `${this.rooms.length} غرفة`;
+        }
+        if (document.getElementById('cloudModalBookingsCount')) {
+          document.getElementById('cloudModalBookingsCount').textContent = `${this.bookings.length} حجز`;
+        }
+        if (document.getElementById('cloudModalStaffCount')) {
+          document.getElementById('cloudModalStaffCount').textContent = `${this.staff.length} موظف`;
+        }
+      },
+
+      loadLocalData() {
+        // Rooms
+        const storedRooms = localStorage.getItem('henu_25_rooms');
+        if (storedRooms) {
+          try { this.rooms = JSON.parse(storedRooms); } catch (e) {}
+        }
+        if (!this.rooms || this.rooms.length !== 25) {
+          this.rooms = JSON.parse(JSON.stringify(MASTER_25_ROOMS));
+          this.saveLocalRooms();
+        }
+
+        // Staff (10 Users)
+        const storedStaff = localStorage.getItem('henu_10_staff_v3');
+        if (storedStaff) {
+          try { this.staff = JSON.parse(storedStaff); } catch (e) {}
+        }
+        if (!this.staff || this.staff.length < 10) {
+          this.staff = JSON.parse(JSON.stringify(MASTER_10_STAFF));
+          this.saveLocalStaff();
+        }
+
+        // Bookings
+        const storedBookings = localStorage.getItem('henu_bookings_v3');
+        if (storedBookings) {
+          try { this.bookings = JSON.parse(storedBookings); } catch (e) {}
+        }
+      },
+
+      saveLocalRooms() { localStorage.setItem('henu_25_rooms', JSON.stringify(this.rooms)); },
+      saveLocalStaff() { localStorage.setItem('henu_10_staff_v3', JSON.stringify(this.staff)); },
+      saveLocalBookings() { localStorage.setItem('henu_bookings_v3', JSON.stringify(this.bookings)); },
+
+      checkSavedSession() {
+        const sess = localStorage.getItem('henu_session_user');
+        if (sess) {
+          try {
+            const u = JSON.parse(sess);
+            this.setLoggedInUser(u);
+          } catch (e) {}
+        }
+      },
+
+      setLoggedInUser(user) {
+        this.currentUser = user;
+        localStorage.setItem('henu_session_user', JSON.stringify(user));
+        document.getElementById('authOverlay').classList.add('hidden');
+        document.getElementById('headerUserName').textContent = user.name || user.email.split('@')[0];
+        document.getElementById('headerUserRole').textContent = `(${user.role || 'موظف'})`;
+      },
+
+      async handleLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+        const pass = document.getElementById('loginPassword').value.trim();
+        const btn = document.getElementById('loginSubmitBtn');
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري التحقق...';
+
+        // 1. Verify against staff list
+        const match = this.staff.find(u => u.email.toLowerCase() === email);
+        if (match && match.password === pass) {
+          this.setLoggedInUser(match);
+          this.showToast(`✅ مرحباً بك يا ${match.name}`, 'success');
+
+          // Attempt Firebase Auth in background
+          if (this.auth) {
+            try {
+              await this.auth.signInWithEmailAndPassword(email, pass).catch(() => {});
+            } catch(e) {}
+          }
+
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> تسجيل الدخول';
+          return;
+        }
+
+        // 2. Firebase Auth Check (if cloud available)
+        if (this.auth) {
+          try {
+            const cred = await this.auth.signInWithEmailAndPassword(email, pass);
+            const userObj = {
+              email: cred.user.email,
+              name: cred.user.displayName || email.split('@')[0],
+              role: email === 'henuphotel@gmail.com' ? 'مدير عام' : 'موظف'
+            };
+            this.setLoggedInUser(userObj);
+            this.showToast("✅ تم تسجيل الدخول سحابياً بنجاح", "success");
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> تسجيل الدخول';
+            return;
+          } catch(err) {
+            console.warn("Auth check note:", err.message);
+          }
+        }
+
+        // Fallback or wrong pass
+        if (email === 'henuphotel@gmail.com' && pass === '123456') {
+          this.setLoggedInUser(this.staff[0]);
+          this.showToast("✅ تم تسجيل الدخول كمدير الفندق", "success");
+        } else {
+          this.showToast("⚠️ بيانات الدخول غير صحيحة!", "error");
+        }
+
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> تسجيل الدخول';
+      },
+
+      handleLogout() {
+        if (confirm("هل تريد بالتأكيد تسجيل الخروج؟")) {
+          this.currentUser = null;
+          localStorage.removeItem('henu_session_user');
+          if (this.auth) { try { this.auth.signOut(); } catch(e){} }
+          document.getElementById('authOverlay').classList.remove('hidden');
+          this.showToast("👋 تم تسجيل الخروج", "info");
+        }
+      },
+
+      switchTab(tabId) {
+        document.querySelectorAll('.tab-section').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+
+        const targetSec = document.getElementById(tabId);
+        const targetBtn = document.querySelector(`.nav-tab[data-tab="${tabId}"]`);
+        if (targetSec) targetSec.classList.add('active');
+        if (targetBtn) targetBtn.classList.add('active');
+
+        if (tabId === 'staffTab') this.renderStaffTable();
+        if (tabId === 'bookingsTab') this.renderBookingsTable();
+        if (tabId === 'statsTab') this.renderStats();
+      },
+
+      renderAll() {
+        this.renderRoomsGrid();
+        this.renderStaffTable();
+        this.renderBookingsTable();
+        this.updateKPIs();
+        this.populateRoomSelects();
+      },
+
+      renderRoomsGrid() {
+        const container = document.getElementById('floorsContainer');
+        if (!container) return;
+
+        const floors = [
+          { num: 1, name: "🏨 الدور الأول (4 غرف)" },
+          { num: 2, name: "🏨 الدور الثاني (7 غرف)" },
+          { num: 3, name: "🏨 الدور الثالث (7 غرف)" },
+          { num: 4, name: "🏨 الدور الرابع (7 غرف)" }
+        ];
+
+        container.innerHTML = floors.map(fl => {
+          const floorRooms = this.rooms.filter(r => r.floor === fl.num);
+          return `
+            <div class="floor-section">
+              <div class="floor-title">${fl.name}</div>
+              <div class="rooms-grid">
+                ${floorRooms.map(r => {
+                  const statusClass = `status-border-${r.status || 'available'}`;
+                  const isOccupied = r.status === 'occupied';
+                  const isBooked = r.status === 'booked';
+                  return `
+                    <div class="room-card ${statusClass}">
+                      <div>
+                        <div class="room-card-header">
+                          <span class="room-number">غرفة ${r.roomNumber}</span>
+                          <span class="status-badge ${r.status || 'available'}">${this.getStatusLabel(r.status)}</span>
+                        </div>
+                        <div class="room-type"><i class="fa-solid fa-tag"></i> ${r.type}</div>
+                        <div class="room-price">${(r.defaultPrice || 0).toLocaleString('ar-EG')} ج.م / ليلة</div>
+                        ${r.currentGuest ? `<div class="room-guest-info"><i class="fa-solid fa-user"></i> النزيل: <strong>${r.currentGuest}</strong></div>` : ''}
+                      </div>
+
+                      <div class="room-actions-bar">
+                        <button class="btn-sm btn-gold-sm" style="flex:1;" onclick="AppEngine.openBookingForRoom('${r.roomNumber}')" title="حجز أو تسكين">
+                          <i class="fa-solid fa-calendar-plus"></i> حجز
+                        </button>
+                        <button class="btn-sm btn-secondary" onclick="AppEngine.openRoomStatusModal('${r.roomNumber}')" title="تغيير حالة الغرفة">
+                          <i class="fa-solid fa-sliders"></i> حالة
+                        </button>
+                        ${isOccupied ? `
+                          <button class="btn-sm btn-danger-sm" onclick="AppEngine.quickCheckOutRoom('${r.roomNumber}')" title="مغادرة ونقل للتنظيف">
+                            <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i> مغادرة
+                          </button>
+                        ` : ''}
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          `;
+        }).join('');
+      },
+
+      getStatusLabel(status) {
+        switch(status) {
+          case 'available': return '🟢 متاحة';
+          case 'booked': return '🟠 محجوزة';
+          case 'occupied': return '🔴 مشغولة';
+          case 'cleaning': return '🔵 تنظيف';
+          case 'maintenance': return '🟣 صيانة';
+          default: return '🟢 متاحة';
+        }
+      },
+
+      renderStaffTable() {
+        const tbody = document.getElementById('staffTableBody');
+        if (!tbody) return;
+
+        tbody.innerHTML = this.staff.map((u) => {
+          const isMaster = u.email.toLowerCase() === 'henuphotel@gmail.com';
+          return `
+            <tr>
+              <td><strong>${u.name}</strong></td>
+              <td><span dir="ltr">${u.email}</span></td>
+              <td><span class="status-badge ${u.role && u.role.includes('مدير') ? 'booked' : 'available'}">${u.role}</span></td>
+              <td>${u.createdAt || '2026-09-01'}</td>
+              <td>
+                <div style="display: flex; gap: 0.4rem;">
+                  <button class="btn-sm btn-primary-sm" onclick="AppEngine.openEditUserModal('${u.email}')" title="تعديل الاسم والإيميل والباسوورد">
+                    <i class="fa-solid fa-pen-to-square"></i> تعديل
+                  </button>
+                  ${!isMaster ? `
+                    <button class="btn-sm btn-danger-sm" onclick="AppEngine.deleteStaffUser('${u.email}')" title="حذف المستخدم">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  ` : '<span style="color:var(--gold); font-size:0.8rem; font-weight:700; align-self:center;">(الرئيسي)</span>'}
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      },
+
+      renderBookingsTable() {
+        const tbody = document.getElementById('bookingsTableBody');
+        const countBadge = document.getElementById('navBookingsCount');
+        if (countBadge) countBadge.textContent = this.bookings.length;
+        if (!tbody) return;
+
+        if (this.bookings.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color:var(--text-muted); padding:2rem;">لا توجد حجوزات مسجلة بعد. اضغط "حجز جديد" للبدء.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = this.bookings.map(b => {
+          const total = Number(b.totalAmount) || 0;
+          const paid = Number(b.paidAmount) || 0;
+          const remain = total - paid;
+          const isOccupied = b.status === 'occupied';
+
+          return `
+            <tr>
+              <td><strong>#${b.id || 'BK-1'}</strong></td>
+              <td><strong>${b.guestName}</strong><br><small style="color:var(--text-muted);">${b.guestPhone || '-'}</small></td>
+              <td><span class="status-badge booked">غرفة ${b.roomNumber}</span></td>
+              <td>${b.checkIn}</td>
+              <td>${b.checkOut}</td>
+              <td><span class="status-badge ${b.status || 'booked'}">${this.getStatusLabel(b.status)}</span></td>
+              <td><strong>${total.toLocaleString('ar-EG')} ج.م</strong></td>
+              <td><span style="color:#10b981; font-weight:700;">${paid.toLocaleString('ar-EG')} ج.م</span></td>
+              <td><span style="color:${remain > 0 ? '#ef4444' : '#10b981'}; font-weight:700;">${remain.toLocaleString('ar-EG')} ج.م</span></td>
+              <td>
+                <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                  ${!isOccupied ? `
+                    <button class="btn-sm btn-success-sm" onclick="AppEngine.quickCheckInBooking('${b.id}')" title="تسكين النزيل الآن">
+                      <i class="fa-solid fa-key"></i> تسكين
+                    </button>
+                  ` : `
+                    <button class="btn-sm btn-danger-sm" onclick="AppEngine.quickCheckOutBooking('${b.id}')" title="مغادرة النزيل">
+                      <i class="fa-solid fa-arrow-right-from-bracket"></i> مغادرة
+                    </button>
+                  `}
+                  <button class="btn-sm btn-gold-sm" onclick="AppEngine.printInvoice('${b.id}')" title="طباعة الإيصال">
+                    <i class="fa-solid fa-print"></i>
+                  </button>
+                  <button class="btn-sm btn-danger-sm" onclick="AppEngine.cancelBooking('${b.id}')" title="إلغاء الحجز">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      },
+
+      updateKPIs() {
+        const avail = this.rooms.filter(r => r.status === 'available').length;
+        const booked = this.rooms.filter(r => r.status === 'booked').length;
+        const occ = this.rooms.filter(r => r.status === 'occupied').length;
+        const clean = this.rooms.filter(r => r.status === 'cleaning' || r.status === 'maintenance').length;
+
+        if (document.getElementById('kpiAvailable')) document.getElementById('kpiAvailable').textContent = avail;
+        if (document.getElementById('kpiBooked')) document.getElementById('kpiBooked').textContent = booked;
+        if (document.getElementById('kpiOccupied')) document.getElementById('kpiOccupied').textContent = occ;
+        if (document.getElementById('kpiCleaning')) document.getElementById('kpiCleaning').textContent = clean;
+      },
+
+      renderStats() {
+        const occ = this.rooms.filter(r => r.status === 'occupied').length;
+        const pct = Math.round((occ / 25) * 100);
+        const totalRev = this.bookings.reduce((sum, b) => sum + (Number(b.totalAmount) || 0), 0);
+        const paidRev = this.bookings.reduce((sum, b) => sum + (Number(b.paidAmount) || 0), 0);
+        const remainRev = Math.max(0, totalRev - paidRev);
+
+        if (document.getElementById('statOccupancyPct')) document.getElementById('statOccupancyPct').textContent = `${pct}%`;
+        if (document.getElementById('statTotalRev')) document.getElementById('statTotalRev').textContent = `${totalRev.toLocaleString('ar-EG')} ج.م`;
+        if (document.getElementById('statPaidRev')) document.getElementById('statPaidRev').textContent = `${paidRev.toLocaleString('ar-EG')} ج.م`;
+        if (document.getElementById('statRemainRev')) document.getElementById('statRemainRev').textContent = `${remainRev.toLocaleString('ar-EG')} ج.م`;
+      },
+
+      populateRoomSelects() {
+        const sel = document.getElementById('bookRoomNumber');
+        if (!sel) return;
+        sel.innerHTML = '<option value="">-- حدد الغرفة --</option>' + this.rooms.map(r => `
+          <option value="${r.roomNumber}">غرفة ${r.roomNumber} - ${r.type} (${r.defaultPrice} ج.م) [${this.getStatusLabel(r.status)}]</option>
+        `).join('');
+      },
+
+      // MODAL CONTROLS
+      openModal(id) {
+        const m = document.getElementById(id);
+        if (m) m.classList.add('active');
+      },
+      closeModal(id) {
+        const m = document.getElementById(id);
+        if (m) m.classList.remove('active');
+      },
+
+      openBookingModal(roomNum = '') {
+        document.getElementById('bookingForm').reset();
+        document.getElementById('bookId').value = '';
+        document.getElementById('bookingModalTitle').innerHTML = '<i class="fa-solid fa-bed"></i> حجز / تسكين جديد';
+        
+        const today = new Date().toISOString().split('T')[0];
+        const tmrw = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+        document.getElementById('bookCheckIn').value = today;
+        document.getElementById('bookCheckOut').value = tmrw;
+
+        if (roomNum) {
+          document.getElementById('bookRoomNumber').value = roomNum;
+          this.onBookingRoomSelect();
+        }
+        this.calcBookingPrice();
+        this.openModal('bookingModal');
+      },
+
+      openBookingForRoom(roomNum) {
+        this.openBookingModal(roomNum);
+      },
+
+      onBookingRoomSelect() {
+        const rNum = document.getElementById('bookRoomNumber').value;
+        const room = this.rooms.find(r => r.roomNumber === rNum);
+        if (room) {
+          document.getElementById('bookNightPrice').value = room.defaultPrice;
+          this.calcBookingPrice();
+        }
+      },
+
+      calcBookingPrice() {
+        const cinVal = document.getElementById('bookCheckIn').value;
+        const coutVal = document.getElementById('bookCheckOut').value;
+        if (!cinVal || !coutVal) return;
+
+        const cin = new Date(cinVal);
+        const cout = new Date(coutVal);
+        const price = Number(document.getElementById('bookNightPrice').value) || 0;
+
+        let diffDays = Math.ceil((cout - cin) / (1000 * 60 * 60 * 24));
+        if (diffDays <= 0 || isNaN(diffDays)) diffDays = 1;
+
+        const total = diffDays * price;
+        document.getElementById('bookTotalText').textContent = `${total.toLocaleString('ar-EG')} ج.م`;
+        document.getElementById('bookNightsText').textContent = `(${diffDays} ليالي)`;
+      },
+
+      async handleSaveBooking(e) {
+        e.preventDefault();
+        const rNum = document.getElementById('bookRoomNumber').value;
+        const gName = document.getElementById('bookGuestName').value.trim();
+        const gPhone = document.getElementById('bookGuestPhone').value.trim();
+        const status = document.getElementById('bookStatus').value;
+        const cin = document.getElementById('bookCheckIn').value;
+        const cout = document.getElementById('bookCheckOut').value;
+        const price = Number(document.getElementById('bookNightPrice').value) || 0;
+        const paid = Number(document.getElementById('bookPaidAmount').value) || 0;
+        const existingId = document.getElementById('bookId').value;
+
+        const cinDate = new Date(cin);
+        const coutDate = new Date(cout);
+        let diffDays = Math.ceil((coutDate - cinDate) / (1000 * 60 * 60 * 24));
+        if (diffDays <= 0 || isNaN(diffDays)) diffDays = 1;
+        const total = diffDays * price;
+
+        const bookingId = existingId || `BK-${Date.now().toString().slice(-6)}`;
+        const bookingData = {
+          id: bookingId,
+          roomNumber: rNum,
+          guestName: gName,
+          guestPhone: gPhone,
+          status,
+          checkIn: cin,
+          checkOut: cout,
+          nights: diffDays,
+          nightPrice: price,
+          totalAmount: total,
+          paidAmount: paid,
+          createdAt: new Date().toISOString()
+        };
+
+        // Update local bookings
+        const existingIdx = this.bookings.findIndex(b => b.id === bookingId);
+        if (existingIdx >= 0) {
+          this.bookings[existingIdx] = bookingData;
+        } else {
+          this.bookings.unshift(bookingData);
+        }
+        this.saveLocalBookings();
+
+        // Update room status
+        const room = this.rooms.find(r => r.roomNumber === rNum);
+        if (room) {
+          room.status = (status === 'occupied') ? 'occupied' : 'booked';
+          room.currentGuest = gName;
+          this.saveLocalRooms();
+        }
+
+        // Sync to Cloud Firestore if connected
+        if (this.db) {
+          try {
+            await this.db.collection('bookings').doc(bookingId).set(bookingData, { merge: true });
+            await this.db.collection('rooms').doc(rNum).set({
+              status: room.status,
+              currentGuest: gName,
+              currentBookingId: bookingId,
+              updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: true });
+          } catch(err) {
+            console.warn("Firestore booking sync note:", err.message);
+          }
+        }
+
+        this.closeModal('bookingModal');
+        this.renderAll();
+        this.showToast(`🎉 تم حفظ حجز الغرفة ${rNum} للنزيل (${gName}) بنجاح!`, "success");
+      },
+
+      // QUICK ROOM STATUS MODAL
+      openRoomStatusModal(roomNumber) {
+        const room = this.rooms.find(r => r.roomNumber === roomNumber);
+        if (!room) return;
+
+        document.getElementById('quickRoomNumber').value = roomNumber;
+        document.getElementById('quickRoomDisplay').value = `غرفة ${roomNumber} - ${room.type}`;
+        document.getElementById('quickNewStatus').value = room.status || 'available';
+        this.openModal('roomStatusModal');
+      },
+
+      async handleSaveRoomStatus(e) {
+        e.preventDefault();
+        const rNum = document.getElementById('quickRoomNumber').value;
+        const newStatus = document.getElementById('quickNewStatus').value;
+
+        const room = this.rooms.find(r => r.roomNumber === rNum);
+        if (room) {
+          room.status = newStatus;
+          if (newStatus === 'available' || newStatus === 'cleaning' || newStatus === 'maintenance') {
+            room.currentGuest = '';
+          }
+          this.saveLocalRooms();
+
+          if (this.db) {
+            try {
+              await this.db.collection('rooms').doc(rNum).set({
+                status: newStatus,
+                currentGuest: room.currentGuest || '',
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+              }, { merge: true });
+            } catch(err) {
+              console.warn("Firestore room status update note:", err.message);
+            }
+          }
+
+          this.closeModal('roomStatusModal');
+          this.renderAll();
+          this.showToast(`✅ تم تحديث حالة الغرفة ${rNum} إلى (${this.getStatusLabel(newStatus)})`, "success");
+        }
+      },
+
+      async quickCheckInBooking(id) {
+        const b = this.bookings.find(x => x.id === id);
+        if (!b) return;
+
+        b.status = 'occupied';
+        this.saveLocalBookings();
+
+        const room = this.rooms.find(r => r.roomNumber === b.roomNumber);
+        if (room) {
+          room.status = 'occupied';
+          room.currentGuest = b.guestName;
+          this.saveLocalRooms();
+        }
+
+        if (this.db) {
+          try {
+            await this.db.collection('bookings').doc(id).update({ status: 'occupied' });
+            await this.db.collection('rooms').doc(b.roomNumber).update({ status: 'occupied', currentGuest: b.guestName });
+          } catch(e) {}
+        }
+
+        this.renderAll();
+        this.showToast(`🔑 تم تسكين النزيل (${b.guestName}) في غرفة ${b.roomNumber}`, "success");
+      },
+
+      async quickCheckOutBooking(id) {
+        const b = this.bookings.find(x => x.id === id);
+        if (!b) return;
+
+        if (!confirm(`تأكيد مغادرة النزيل (${b.guestName}) وتحويل الغرفة ${b.roomNumber} للتنظيف؟`)) return;
+
+        b.status = 'completed';
+        this.saveLocalBookings();
+
+        const room = this.rooms.find(r => r.roomNumber === b.roomNumber);
+        if (room) {
+          room.status = 'cleaning';
+          room.currentGuest = '';
+          this.saveLocalRooms();
+        }
+
+        if (this.db) {
+          try {
+            await this.db.collection('bookings').doc(id).update({ status: 'completed' });
+            await this.db.collection('rooms').doc(b.roomNumber).update({ status: 'cleaning', currentGuest: '' });
+          } catch(e) {}
+        }
+
+        this.renderAll();
+        this.showToast(`🧹 تمت مغادرة النزيل وتحويل غرفة ${b.roomNumber} لحالة التنظيف`, "info");
+      },
+
+      async quickCheckOutRoom(roomNumber) {
+        const room = this.rooms.find(r => r.roomNumber === roomNumber);
+        if (!room) return;
+
+        if (!confirm(`تأكيد مغادرة الغرفة ${roomNumber} ونقلها للتنظيف؟`)) return;
+
+        room.status = 'cleaning';
+        room.currentGuest = '';
+        this.saveLocalRooms();
+
+        if (this.db) {
+          try {
+            await this.db.collection('rooms').doc(roomNumber).update({ status: 'cleaning', currentGuest: '' });
+          } catch(e) {}
+        }
+
+        this.renderAll();
+        this.showToast(`🧹 تم نقل الغرفة ${roomNumber} للتنظيف`, "info");
+      },
+
+      async cancelBooking(id) {
+        if (!confirm("هل أنت متأكد من رغبتك في إلغاء هذا الحجز؟")) return;
+        const b = this.bookings.find(x => x.id === id);
+        if (b) {
+          const room = this.rooms.find(r => r.roomNumber === b.roomNumber);
+          if (room) {
+            room.status = 'available';
+            room.currentGuest = '';
+            this.saveLocalRooms();
+          }
+          this.bookings = this.bookings.filter(x => x.id !== id);
+          this.saveLocalBookings();
+
+          if (this.db) {
+            try {
+              await this.db.collection('bookings').doc(id).delete();
+              await this.db.collection('rooms').doc(b.roomNumber).set({ status: 'available', currentGuest: '' }, { merge: true });
+            } catch(e) {}
+          }
+
+          this.renderAll();
+          this.showToast("🗑️ تم إلغاء الحجز وإتاحة الغرفة", "success");
+        }
+      },
+
+      // STAFF & USER ACTIONS
+      async handleAddStaffUser(e) {
+        e.preventDefault();
+        const name = document.getElementById('newStaffName').value.trim();
+        const email = document.getElementById('newStaffEmail').value.trim().toLowerCase();
+        const password = document.getElementById('newStaffPassword').value.trim();
+        const role = document.getElementById('newStaffRole').value;
+
+        if (this.staff.some(u => u.email.toLowerCase() === email)) {
+          this.showToast("⚠️ هذا البريد الإلكتروني مسجل مسبقاً!", "error");
+          return;
+        }
+
+        const newUser = {
+          name,
+          email,
+          password,
+          role,
+          createdAt: new Date().toISOString().split('T')[0]
+        };
+
+        this.staff.push(newUser);
+        this.saveLocalStaff();
+
+        // Save to Firestore
+        if (this.db) {
+          try {
+            await this.db.collection('staff_users').doc(email).set(newUser);
+          } catch(err) {
+            console.warn("Firestore staff add note:", err.message);
+          }
+        }
+
+        document.getElementById('addStaffForm').reset();
+        this.renderStaffTable();
+        this.showToast(`🎉 تم إضافة الموظف (${name}) بنجاح!`, "success");
+      },
+
+      openEditUserModal(email) {
+        const u = this.staff.find(x => x.email.toLowerCase() === email.toLowerCase());
+        if (!u) return;
+
+        document.getElementById('editOriginalEmail').value = u.email;
+        document.getElementById('editUserName').value = u.name;
+        document.getElementById('editUserEmail').value = u.email;
+        document.getElementById('editUserRole').value = u.role;
+        document.getElementById('editUserNewPass').value = '';
+
+        this.openModal('editUserModal');
+      },
+
+      async handleSaveEditedUser(e) {
+        e.preventDefault();
+        const origEmail = document.getElementById('editOriginalEmail').value.toLowerCase();
+        const newName = document.getElementById('editUserName').value.trim();
+        const newEmail = document.getElementById('editUserEmail').value.trim().toLowerCase();
+        const newRole = document.getElementById('editUserRole').value;
+        const newPass = document.getElementById('editUserNewPass').value.trim();
+
+        if (newEmail !== origEmail && this.staff.some(u => u.email.toLowerCase() === newEmail)) {
+          this.showToast("⚠️ البريد الإلكتروني الجديد مستخدم بالفعل!", "error");
+          return;
+        }
+
+        const u = this.staff.find(x => x.email.toLowerCase() === origEmail);
+        if (!u) return;
+
+        u.name = newName;
+        u.email = newEmail;
+        u.role = newRole;
+        if (newPass && newPass.length >= 6) {
+          u.password = newPass;
+        }
+
+        this.saveLocalStaff();
+
+        // Sync to Firestore
+        if (this.db) {
+          try {
+            if (newEmail !== origEmail) {
+              await this.db.collection('staff_users').doc(origEmail).delete().catch(()=>{});
+            }
+            await this.db.collection('staff_users').doc(newEmail).set(u);
+          } catch(err) {
+            console.warn("Firestore staff edit note:", err.message);
+          }
+        }
+
+        this.closeModal('editUserModal');
+        this.renderStaffTable();
+        this.showToast(`✅ تم تحديث بيانات (${newName}) بنجاح!`, "success");
+      },
+
+      async deleteStaffUser(email) {
+        if (email.toLowerCase() === 'henuphotel@gmail.com') {
+          this.showToast("لا يمكن حذف الحساب الرئيسي للمدير", "error");
+          return;
+        }
+        if (!confirm(`هل أنت متأكد من رغبتك في حذف حساب (${email})؟`)) return;
+
+        this.staff = this.staff.filter(u => u.email.toLowerCase() !== email.toLowerCase());
+        this.saveLocalStaff();
+
+        if (this.db) {
+          try { await this.db.collection('staff_users').doc(email.toLowerCase()).delete(); } catch(e){}
+        }
+
+        this.renderStaffTable();
+        this.showToast("🗑️ تم حذف حساب الموظف", "success");
+      },
+
+      // SELF PASSWORD CHANGE
+      openChangePasswordModal() {
+        document.getElementById('selfNewPassword').value = '';
+        document.getElementById('selfConfirmPassword').value = '';
+        this.openModal('changePasswordModal');
+      },
+
+      async handleChangeMyPassword(e) {
+        e.preventDefault();
+        const p1 = document.getElementById('selfNewPassword').value.trim();
+        const p2 = document.getElementById('selfConfirmPassword').value.trim();
+
+        if (p1 !== p2) {
+          this.showToast("⚠️ كلمتا المرور غير متطابقتين!", "error");
+          return;
+        }
+
+        if (this.currentUser && this.currentUser.email) {
+          const u = this.staff.find(x => x.email.toLowerCase() === this.currentUser.email.toLowerCase());
+          if (u) {
+            u.password = p1;
+            this.saveLocalStaff();
+          }
+
+          // Update Firebase Auth & Firestore if available
+          if (this.auth && this.auth.currentUser) {
+            try { await this.auth.currentUser.updatePassword(p1); } catch(e){}
+          }
+          if (this.db) {
+            try {
+              await this.db.collection('staff_users').doc(this.currentUser.email.toLowerCase()).set({ password: p1 }, { merge: true });
+            } catch(e){}
+          }
+        }
+
+        this.closeModal('changePasswordModal');
+        this.showToast("🔒 تم تغيير وتحديث كلمة المرور بنجاح!", "success");
+      },
+
+      printInvoice(id) {
+        const b = this.bookings.find(x => x.id === id);
+        if (!b) return;
+
+        const area = document.getElementById('printableReceiptArea');
+        const total = Number(b.totalAmount) || 0;
+        const paid = Number(b.paidAmount) || 0;
+        const remain = Math.max(0, total - paid);
+
+        area.innerHTML = `
+          <div style="text-align:center; margin-bottom:1.5rem; border-bottom:2px solid #d4af37; padding-bottom:1rem;">
+            <img src="logo.jpg" style="width:70px; height:70px; border-radius:50%; margin-bottom:0.5rem;" />
+            <h2 style="color:#d4af37; font-size:1.4rem;">فندق هينو (Henu Hotel)</h2>
+            <p style="color:#666; font-size:0.85rem;">إيصال حجز وتسكين نزيل</p>
+          </div>
+          <table style="width:100%; border-collapse:collapse; margin-bottom:1.5rem; font-size:0.95rem;">
+            <tr><td style="padding:6px; color:#666;">رقم الإيصال:</td><td style="padding:6px; font-weight:700;">#${b.id}</td></tr>
+            <tr><td style="padding:6px; color:#666;">اسم النزيل:</td><td style="padding:6px; font-weight:700;">${b.guestName}</td></tr>
+            <tr><td style="padding:6px; color:#666;">رقم الهاتف:</td><td style="padding:6px;">${b.guestPhone || '-'}</td></tr>
+            <tr><td style="padding:6px; color:#666;">رقم الغرفة:</td><td style="padding:6px; font-weight:800; color:#d4af37;">غرفة ${b.roomNumber}</td></tr>
+            <tr><td style="padding:6px; color:#666;">تاريخ الوصول:</td><td style="padding:6px;">${b.checkIn}</td></tr>
+            <tr><td style="padding:6px; color:#666;">تاريخ المغادرة:</td><td style="padding:6px;">${b.checkOut}</td></tr>
+            <tr><td style="padding:6px; color:#666;">عدد الليالي:</td><td style="padding:6px;">${b.nights} ليلة</td></tr>
+            <tr><td style="padding:6px; color:#666;">سعر الليلة:</td><td style="padding:6px;">${(b.nightPrice || 0).toLocaleString('ar-EG')} ج.م</td></tr>
+            <tr style="border-top:1px solid #ddd;"><td style="padding:6px; font-weight:700;">المبلغ الإجمالي:</td><td style="padding:6px; font-weight:900; color:#d4af37; font-size:1.1rem;">${total.toLocaleString('ar-EG')} ج.م</td></tr>
+            <tr><td style="padding:6px; color:#10b981;">المدفوع:</td><td style="padding:6px; font-weight:700; color:#10b981;">${paid.toLocaleString('ar-EG')} ج.م</td></tr>
+            <tr><td style="padding:6px; color:#ef4444;">المتبقي:</td><td style="padding:6px; font-weight:700; color:#ef4444;">${remain.toLocaleString('ar-EG')} ج.م</td></tr>
+          </table>
+          <div style="text-align:center; color:#888; font-size:0.8rem; margin-top:2rem;">
+            نتمنى لكم إقامة سعيدة ومميزة في فندق هينو!
+          </div>
+        `;
+
+        this.openModal('receiptModal');
+      },
+
+      showToast(msg, type = 'success') {
+        const box = document.getElementById('toastBox');
+        const txt = document.getElementById('toastMsg');
+        const ico = document.getElementById('toastIcon');
+        if (!box) return;
+
+        txt.textContent = msg;
+        box.className = `toast-box show ${type}`;
+        if (type === 'success') {
+          ico.className = 'fa-solid fa-circle-check';
+        } else if (type === 'error') {
+          ico.className = 'fa-solid fa-triangle-exclamation';
+        } else {
+          ico.className = 'fa-solid fa-circle-info';
+        }
+
+        setTimeout(() => { box.classList.remove('show'); }, 3500);
+      }
+    };
+
+    var AppEngine = window.AppEngine;
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      AppEngine.init();
+    });
+  </script>
+</body>
+</html>
