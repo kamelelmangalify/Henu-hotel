@@ -307,8 +307,8 @@
       <div class="header-brand">
         <img src="logo.jpg" alt="فندق هينو" class="brand-logo-img" />
         <div class="brand-text">
-          <h1>فندق هينو (Henu Hotel)</h1>
-          <p>إدارة الـ 25 غرفة - ربط سحابي Firebase</p>
+          <h1>فندق هينو (Henu Hotel) <span style="font-size:0.75rem; background:rgba(212,175,55,0.18); border:1px solid var(--border-color); padding:2px 8px; border-radius:10px; color:var(--gold-light); margin-right:6px;">v2.5 أحدث نسخة</span></h1>
+          <p>إدارة الـ 25 غرفة - ربط سحابي Firebase Firestore</p>
         </div>
       </div>
 
@@ -748,13 +748,17 @@
           </div>
         </div>
 
-        <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.6;">
-          💡 يدعم النظام المزامنة اللحظية (Real-time Sync) والعمل في وضع عدم الاتصال (Offline Mode) مع التحديث التلقائي فور عودة الاتصال.
-        </p>
+        <div id="cloudAlertBox" style="background:rgba(245,158,11,0.15); border:1px solid #f59e0b; border-radius:8px; padding:0.9rem; margin-top:1rem; font-size:0.88rem; color:#f8fafc; line-height:1.6;">
+          <strong style="color:var(--gold); display:flex; align-items:center; gap:0.4rem;"><i class="fa-solid fa-circle-info"></i> تفعيل المزامنة السحابية (Firestore):</strong>
+          <p style="margin:0.4rem 0;">مشروع Firebase مربوط بنجاح. إذا كان يظهر الوضع المحلي، تأكد من الدخول لكونسول Firebase وتفعيل قاعدة البيانات (Create database) مع اختيار Start in test mode:</p>
+          <a href="https://console.firebase.google.com/project/henu-pyramids-hotel/firestore" target="_blank" class="btn-sm btn-gold-sm" style="margin-top:0.5rem; text-decoration:none; padding:0.5rem 1rem;">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> فتح كونسول Firebase لتفعيل Firestore
+          </a>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn-secondary" onclick="AppEngine.closeModal('cloudModal')">إغلاق</button>
-        <button type="button" class="btn-gold" onclick="AppEngine.forceCloudSync(); AppEngine.closeModal('cloudModal');"><i class="fa-solid fa-arrows-rotate"></i> مزامنة وتهيئة البيانات الآن</button>
+        <button type="button" class="btn-gold" onclick="AppEngine.forceCloudSync(); AppEngine.closeModal('cloudModal');"><i class="fa-solid fa-arrows-rotate"></i> إعادة فحص ومزامنة البيانات الآن</button>
       </div>
     </div>
   </div>
@@ -961,7 +965,7 @@
             }
           }, err => {
             console.warn("Firestore rooms listen notice:", err.message);
-            this.updateCloudStatus(false, "وضع محلي (خطأ صلاحيات/اتصال)");
+            this.updateCloudStatus(false, "وضع محلي (تفعيل Firestore مطلوب في Firebase Console)");
           });
         } catch(e) {
           console.warn("Rooms sync error:", e);
