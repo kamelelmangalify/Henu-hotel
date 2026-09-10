@@ -1,0 +1,400 @@
+<!-- wp:html -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --clr-nile-dark: #071320;
+  --clr-nile: #0B1B2B;
+  --clr-gold: #C9873A;
+  --clr-gold-light: #DFAB5C;
+  --clr-gold-bright: #F3C377;
+  --clr-sand: #F7F2E8;
+  --clr-sand-dark: #EADDCF;
+  --clr-ivory: #FCFAF7;
+  --clr-dark: #1A1A1A;
+  --clr-gray: #555555;
+  --font-cinzel: 'Cinzel', serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-cairo: 'Cairo', sans-serif;
+  --radius: 14px;
+  --shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+* { box-sizing: border-box; }
+
+.henu-section {
+  padding: 80px 20px;
+  font-family: var(--font-montserrat);
+  width: 100%;
+}
+.henu-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+}
+.henu-badge {
+  background: var(--clr-gold);
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 5px 16px;
+  border-radius: 30px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+.henu-title {
+  font-family: var(--font-cinzel);
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: var(--clr-nile);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+.henu-title span { color: var(--clr-gold); }
+.henu-title.light { color: #FFFFFF; }
+.henu-title.light span { color: var(--clr-gold-light); }
+.henu-subtitle {
+  font-size: 1.05rem;
+  color: var(--clr-gray);
+  max-width: 700px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+.henu-subtitle.center { margin-left: auto; margin-right: auto; text-align: center; }
+.henu-subtitle.light { color: rgba(255,255,255,0.95); }
+
+.btn-henu-gold {
+  background: var(--clr-gold);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(201,135,58,0.35);
+}
+.btn-henu-gold:hover {
+  background: var(--clr-gold-light);
+  transform: translateY(-2px);
+}
+.btn-henu-outline {
+  background: rgba(7, 19, 32, 0.7);
+  backdrop-filter: blur(4px);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  padding: 13px 26px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  border: 1.5px solid #FFFFFF;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-henu-outline:hover {
+  background: var(--clr-gold);
+  border-color: var(--clr-gold);
+}
+
+/* GRIDS */
+.henu-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+}
+.henu-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+/* CARDS */
+.henu-card {
+  background: #FFFFFF;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--clr-sand-dark);
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.henu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+}
+.henu-card-img {
+  height: 230px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #071320;
+}
+.henu-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.henu-card:hover .henu-card-img img { transform: scale(1.08); }
+.henu-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+.henu-card-price {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--clr-nile);
+  color: var(--clr-gold-light);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 0.88rem;
+  font-family: var(--font-cinzel);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.henu-feature-img {
+  width: 100%;
+  height: 380px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 2px solid var(--clr-gold);
+  box-shadow: var(--shadow);
+  background: #071320;
+}
+.henu-feature-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ========================================================
+   MOBILE RESPONSIVE RULES (PHONES & TABLETS)
+   ======================================================== */
+@media (max-width: 992px) {
+  .henu-grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+  .henu-feature-img {
+    height: 300px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .henu-section {
+    padding: 40px 16px !important;
+  }
+  .henu-grid-3 {
+    grid-template-columns: 1fr !important;
+    gap: 22px !important;
+  }
+  .henu-card-img {
+    height: 200px !important;
+  }
+  .henu-feature-img {
+    height: 240px !important;
+  }
+  .henu-hero-wrap {
+    min-height: auto !important;
+    padding: 45px 16px !important;
+  }
+  .henu-hero-card {
+    padding: 24px 16px !important;
+    border-radius: 12px !important;
+  }
+  .henu-title {
+    font-size: 1.7rem !important;
+    line-height: 1.22 !important;
+  }
+  .henu-subtitle {
+    font-size: 0.95rem !important;
+    margin-bottom: 24px !important;
+  }
+  .btn-henu-gold, .btn-henu-outline {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 14px 20px !important;
+    font-size: 0.95rem !important;
+  }
+  .henu-quick-booking {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 16px !important;
+  }
+}
+</style>
+
+<!-- HERO SECTION -->
+<div class="henu-hero-wrap" style="background-image: url('/wp-content/uploads/hotel/hero-pyramids-sunset.jpg'); background-size: cover; background-position: center center; background-repeat: no-repeat; min-height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #FFFFFF; padding: 70px 20px; position: relative;">
+  <div class="henu-hero-card" style="max-width: 900px; width: 100%; background: rgba(7, 19, 32, 0.45); padding: 36px 28px; border-radius: 16px; backdrop-filter: blur(6px); border: 1px solid rgba(201, 135, 58, 0.4); box-shadow: 0 12px 40px rgba(0,0,0,0.4);">
+    <span class="henu-badge" style="background: var(--clr-gold); color: #FFFFFF; font-size: 0.85rem; padding: 6px 20px;">★ Pyramids View Boutique Hotel · Giza</span>
+    <h1 style="font-family: var(--font-cinzel); font-size: clamp(2.1rem, 5vw, 3.8rem); font-weight: 900; line-height: 1.2; margin: 16px 0; color: #FFFFFF; text-shadow: 0 3px 15px rgba(0,0,0,0.8);">
+      Where Ancient Wonders Meet <span style="color: var(--clr-gold-bright);">Modern Comfort</span>
+    </h1>
+    <p style="font-size: 1.18rem; font-weight: 500; color: #FFFFFF; max-width: 720px; margin: 0 auto 28px; line-height: 1.6; text-shadow: 0 2px 10px rgba(0,0,0,0.85);">
+      Experience uninterrupted, front-row views of the Great Pyramids and Sphinx from our boutique rooms and rooftop lounge in the heart of historic Nazlet El-Semman.
+    </p>
+    <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+      <a href="/contact#booking" class="btn-henu-gold" style="font-size: 1rem; padding: 14px 30px;">📅 Instant WhatsApp Booking</a>
+      <a href="/accommodation" class="btn-henu-outline" style="font-size: 1rem; padding: 14px 26px;">🛏️ View Rooms from $12</a>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK BOOKING BAR -->
+<div style="background: var(--clr-nile); padding: 22px 20px; border-top: 3px solid var(--clr-gold);">
+  <div class="henu-container henu-quick-booking" style="display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+    <div style="color: #FFFFFF;">
+      <div style="font-size: 0.78rem; color: var(--clr-gold-light); font-weight: 700; text-transform: uppercase;">Direct Booking WhatsApp Only</div>
+      <div style="font-size: 1.35rem; font-weight: 800; font-family: var(--font-cinzel);">+20 100 092 5827</div>
+    </div>
+    <div style="color: #FFFFFF;">
+      <div style="font-size: 0.78rem; color: var(--clr-sand); font-weight: 700; text-transform: uppercase;">Customer Service & Calls</div>
+      <div style="font-size: 1.15rem; font-weight: 800; font-family: var(--font-cinzel);">+20 112 345 6777</div>
+    </div>
+    <a href="https://wa.me/201000925827?text=Hello%20HENU%20Hotel,%20I%20would%20like%20to%20inquire%20about%20room%20availability%20and%20rates." target="_blank" class="btn-henu-gold">
+      💬 Chat on WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- WELCOME & LOCATION -->
+<div class="henu-section" style="background: var(--clr-ivory);">
+  <div class="henu-container">
+    <div class="henu-grid-2">
+      <div>
+        <span class="henu-badge">Prime Location</span>
+        <h2 class="henu-title">A Sanctuary at <span>21 Gamal Abdel Nasser St.</span></h2>
+        <p class="henu-subtitle" style="margin-bottom: 20px;">
+          Located at <strong>21 Gamal Abdel Nasser St., Nazlet El-Semman</strong>, just 2 minutes' walk from the Great Sphinx and Pyramids entrance. HENU Pyramids Hotel offers an authentic blend of traditional Pharaonic hospitality and modern comfort.
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 26px;">
+          <div style="background: #FFFFFF; padding: 16px; border-radius: 8px; border: 1px solid var(--clr-sand-dark); box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+            <div style="font-size: 1.45rem; color: var(--clr-gold); font-weight: 800; font-family: var(--font-cinzel);">2 Min</div>
+            <div style="font-size: 0.82rem; color: var(--clr-gray); font-weight: 600;">Walk to Sphinx Gate</div>
+          </div>
+          <div style="background: #FFFFFF; padding: 16px; border-radius: 8px; border: 1px solid var(--clr-sand-dark); box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+            <div style="font-size: 1.45rem; color: var(--clr-gold); font-weight: 800; font-family: var(--font-cinzel);">$12+</div>
+            <div style="font-size: 0.82rem; color: var(--clr-gray); font-weight: 600;">Best Direct Room Rates</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="/accommodation" class="btn-henu-gold">Explore Rooms →</a>
+          <a href="https://maps.app.goo.gl/N5mhKZM6KQVVA9z26" target="_blank" class="btn-henu-outline" style="background: var(--clr-nile); color: #FFFFFF !important; border-color: var(--clr-gold);">📍 Google Maps Location</a>
+        </div>
+      </div>
+      
+      <!-- Responsive Image Container -->
+      <div class="henu-feature-img">
+        <img src="/wp-content/uploads/hotel/pyramids-terrace-night.jpg" alt="HENU Pyramids View">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED ROOMS CARDS -->
+<div class="henu-section" style="background: var(--clr-sand);">
+  <div class="henu-container" style="text-align: center;">
+    <span class="henu-badge">Accommodation</span>
+    <h2 class="henu-title">Featured <span>Rooms & Suites</span></h2>
+    <p class="henu-subtitle center">From cozy single rooms to royal panoramic suites with private pyramid balconies.</p>
+    
+    <div class="henu-grid-3" style="text-align: left;">
+      <!-- Single Room -->
+      <div class="henu-card">
+        <div class="henu-card-img">
+          <img src="/wp-content/uploads/hotel/room-single.jpg" alt="Single Cozy Room">
+          <div class="henu-card-price">From $12 / Night</div>
+        </div>
+        <div class="henu-card-body">
+          <div>
+            <h3 style="font-family: var(--font-cinzel); font-size: 1.25rem; color: var(--clr-nile); margin-bottom: 6px;">Single Cozy Room</h3>
+            <p style="font-size: 0.88rem; color: var(--clr-gray); line-height: 1.5; margin-bottom: 16px;">Standard ($12) · Window ($15) · Balcony ($20). Perfect for solo travelers with private bath & Wi-Fi.</p>
+          </div>
+          <a href="https://wa.me/201000925827?text=Hello%20HENU,%20I%20want%20to%20book%20a%20Single%20Room." target="_blank" class="btn-henu-gold" style="width: 100%; justify-content: center;">Book via WhatsApp ($12)</a>
+        </div>
+      </div>
+      
+      <!-- Double Room -->
+      <div class="henu-card">
+        <div class="henu-card-img">
+          <img src="/wp-content/uploads/hotel/room-double-balcony.jpg" alt="Double Room Balcony">
+          <div class="henu-card-price">From $18 / Night</div>
+        </div>
+        <div class="henu-card-body">
+          <div>
+            <h3 style="font-family: var(--font-cinzel); font-size: 1.25rem; color: var(--clr-nile); margin-bottom: 6px;">Double / Twin Room</h3>
+            <p style="font-size: 0.88rem; color: var(--clr-gray); line-height: 1.5; margin-bottom: 16px;">Standard ($18) · Window ($22) · Balcony ($25). Direct pyramid panorama with balcony seating.</p>
+          </div>
+          <a href="https://wa.me/201000925827?text=Hello%20HENU,%20I%20want%20to%20book%20a%20Double%20Room." target="_blank" class="btn-henu-gold" style="width: 100%; justify-content: center;">Book via WhatsApp ($18)</a>
+        </div>
+      </div>
+
+      <!-- King Suite -->
+      <div class="henu-card" style="border: 2px solid var(--clr-gold);">
+        <div class="henu-card-img">
+          <img src="/wp-content/uploads/hotel/room-suite.jpg" alt="King Suite Pyramids View">
+          <div class="henu-card-price" style="background: var(--clr-gold); color: #FFFFFF;">Special $45 / Night</div>
+        </div>
+        <div class="henu-card-body">
+          <div>
+            <h3 style="font-family: var(--font-cinzel); font-size: 1.25rem; color: var(--clr-nile); margin-bottom: 6px;">King Suite Pyramids View</h3>
+            <p style="font-size: 0.88rem; color: var(--clr-gray); line-height: 1.5; margin-bottom: 16px;">Spacious luxury suite with king bed, marble bath & direct panoramic terrace view.</p>
+          </div>
+          <a href="https://wa.me/201000925827?text=Hello%20HENU,%20I%20want%20to%20book%20the%20King%20Suite." target="_blank" class="btn-henu-gold" style="width: 100%; justify-content: center;">Book via WhatsApp ($45)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AISHA ROOF LOUNGE SHOWCASE -->
+<div class="henu-section" style="background: linear-gradient(135deg, #071320 0%, #0F2338 100%); color: #FFFFFF;">
+  <div class="henu-container">
+    <div class="henu-grid-2">
+      <div>
+        <span class="henu-badge" style="background: var(--clr-gold-light); color: var(--clr-nile-dark);">Rooftop Experience</span>
+        <h2 class="henu-title light">Aisha Roof <span>Lounge & Cafe</span></h2>
+        <p class="henu-subtitle light">
+          Dine under the stars with front-row seats to the nightly Pyramids Sound & Light Show. Enjoy traditional Egyptian gourmet breakfast, authentic grills, handcrafted mocktails, and fresh shisha.
+        </p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; font-size: 0.95rem; padding: 0;">
+          <li>🍳 Fresh Egyptian & Continental Breakfast with morning pyramid sunrise.</li>
+          <li>🍽️ Authentic Oriental Grills, Fresh Mezze & International Dishes.</li>
+          <li>🍹 Specialty Mocktails, Fresh Juices & Egyptian Mint Tea.</li>
+          <li>💨 Premium Shisha Lounge with panoramic sunset chill-out.</li>
+        </ul>
+        <a href="https://wa.me/201000925827?text=Hello,%20I%20would%20like%20to%20reserve%20a%20table%20at%20Aisha%20Roof%20Lounge." target="_blank" class="btn-henu-gold">Reserve a Rooftop Table →</a>
+      </div>
+      
+      <!-- Responsive Image Container -->
+      <div class="henu-feature-img">
+        <img src="/wp-content/uploads/hotel/hero-pyramids-sunset.jpg" alt="Aisha Roof Sunset View">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /wp:html -->

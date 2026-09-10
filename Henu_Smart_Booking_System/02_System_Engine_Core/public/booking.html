@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direct Booking & Live Availability | HENU Hotel</title>
+  <meta name="description" content="Book directly with HENU Hotel in Giza for guaranteed best rates, exclusive 10% savings over Booking.com, and instant confirmation.">
+  <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    :root {
+      --clr-sand: #D4A96A;
+      --clr-nile: #1B3A5C;
+      --clr-gold: #C9873A;
+      --clr-gold-light: #DAA856;
+      --clr-ivory: #FAF7F2;
+      --clr-dark: #1A1A1A;
+      --clr-green: #10B981;
+    }
+
+    body {
+      background-color: #F8F9FA;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--clr-dark);
+    }
+
+    /* Booking Header */
+    .booking-hero {
+      background: linear-gradient(135deg, rgba(27, 58, 92, 0.95), rgba(15, 30, 48, 0.97)), url('images/hotel/hero-pyramids-night.jpg') center/cover;
+      color: #fff;
+      padding: 130px 0 60px;
+      text-align: center;
+    }
+
+    .booking-hero h1 {
+      font-family: 'Cinzel', serif;
+      color: #fff;
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .booking-badge-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(201, 135, 58, 0.2);
+      border: 1px solid var(--clr-gold);
+      padding: 8px 20px;
+      border-radius: 30px;
+      color: #FDE68A;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    /* Floating Search Bar */
+    .booking-filter-wrapper {
+      max-width: 1100px;
+      margin: -40px auto 40px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 20;
+    }
+
+    .booking-filter-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px 30px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+      border: 1px solid rgba(212, 169, 106, 0.3);
+      display: grid;
+      grid-template-columns: 1.2fr 1.2fr 1fr 1fr auto;
+      gap: 16px;
+      align-items: flex-end;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .filter-group label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--clr-nile);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .filter-group input, .filter-group select {
+      padding: 12px 14px;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--clr-dark);
+      background: #F8FAFC;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .filter-group input:focus, .filter-group select:focus {
+      border-color: var(--clr-gold);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(201, 135, 58, 0.15);
+    }
+
+    .btn-search {
+      background: linear-gradient(135deg, var(--clr-gold) 0%, #B87326 100%);
+      color: #fff;
+      border: none;
+      padding: 13px 28px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 48px;
+    }
+
+    .btn-search:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(201, 135, 58, 0.4);
+    }
+
+    /* Currency & Info Bar */
+    .pricing-meta-bar {
+      max-width: 1100px;
+      margin: 0 auto 30px;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .season-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--clr-nile);
+      background: #E0F2FE;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      border: 1px solid #BAE6FD;
+    }
+
+    .currency-selector {
+      display: inline-flex;
+      background: #E2E8F0;
+      padding: 3px;
+      border-radius: 8px;
+    }
+
+    .currency-btn {
+      padding: 6px 14px;
+      border: none;
+      background: transparent;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #475569;
+    }
+
+    .currency-btn.active {
+      background: var(--clr-nile);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Room Cards Grid */
+    .rooms-grid {
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+
+    .room-card {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid #E2E8F0;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 360px 1fr auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .room-card:hover {
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border-color: var(--clr-sand);
+    }
+
+    .room-image-box {
+      position: relative;
+      overflow: hidden;
+      min-height: 240px;
+    }
+
+    .room-image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .room-card:hover .room-image-box img {
+      transform: scale(1.05);
+    }
+
+    .room-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(27, 58, 92, 0.9);
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      backdrop-filter: blur(4px);
+    }
+
+    .room-details {
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .room-title-area h3 {
+      font-size: 1.45rem;
+      color: var(--clr-nile);
+      margin-bottom: 6px;
+      font-family: 'Cinzel', serif;
+    }
+
+    .room-arabic-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem;
+      color: var(--clr-gold);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .room-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .spec-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.82rem;
+      background: #F1F5F9;
+      color: #334155;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .room-amenities {
+      font-size: 0.84rem;
+      color: #64748B;
+      line-height: 1.5;
+    }
+
+    .room-pricing-action {
+      padding: 24px 28px;
+      background: #FAF7F2;
+      border-left: 1px solid #F1F5F9;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      min-width: 230px;
+      text-align: right;
+    }
+
+    .ota-comparison-striked {
+      font-size: 0.85rem;
+      color: #94A3B8;
+      text-decoration: line-through;
+      margin-bottom: 2px;
+    }
+
+    .direct-rate-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--clr-green);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .base-rate-tag {
+      font-size: 0.8rem;
+      color: #334155;
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .base-rate-tag strong {
+      color: var(--clr-gold);
+    }
+
+    .price-value {
+      font-size: 1.95rem;
+      font-weight: 800;
+      color: var(--clr-nile);
+      line-height: 1.1;
+      margin: 4px 0;
+    }
+
+    .price-unit {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #64748B;
+    }
+
+    .price-period {
+      font-size: 0.82rem;
+      color: #475569;
+      margin-bottom: 8px;
+    }
+
+    .savings-pill {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #15803D;
+      background: #DCFCE7;
+      border: 1px solid #BBF7D0;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    /* Master Rates Banner */
+    .rates-overview-banner {
+      background: #FFFFFF;
+      border: 1.5px solid var(--clr-gold);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    }
+
+    .rates-overview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: var(--clr-nile);
+    }
+
+    .rates-pill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+      gap: 10px;
+    }
+
+    .rates-pill-item {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 10px 8px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .rates-pill-item:hover {
+      border-color: var(--clr-gold);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .rates-pill-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #475569;
+      margin-bottom: 4px;
+    }
+
+    .rates-pill-price {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--clr-nile);
+    }
+
+    .rates-pill-sub {
+      font-size: 0.75rem;
+      color: var(--clr-gold);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .btn-book-room {
+      background: var(--clr-nile);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn-book-room:hover {
+      background: var(--clr-gold);
+      color: #fff;
+    }
+
+    /* Modal Styling */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(5px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #fff;
+      border-radius: 18px;
+      max-width: 650px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 32px;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #F1F5F9;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748B;
+    }
+
+    .voucher-card {
+      border: 2px dashed var(--clr-gold);
+      background: #FFFDF9;
+      padding: 24px;
+      border-radius: 12px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    @media (max-width: 992px) {
+      .booking-filter-card {
+        grid-template-columns: 1fr 1fr;
+      }
+      .btn-search {
+        grid-column: span 2;
+        justify-content: center;
+      }
+      .room-card {
+        grid-template-columns: 1fr;
+      }
+      .room-image-box {
+        height: 220px;
+      }
+      .room-pricing-action {
+        border-left: none;
+        border-top: 1px solid #F1F5F9;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  </style>
+
+  <!-- Firebase v10 SDK via CDN -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCcVHlZHHvHSHFsLagU6haJWZxCgxS_PUs",
+      authDomain: "henu-pyramids-hotel.firebaseapp.com",
+      projectId: "henu-pyramids-hotel",
+      storageBucket: "henu-pyramids-hotel.firebasestorage.app",
+      messagingSenderId: "310013988556",
+      appId: "1:310013988556:web:fce3c2bcc1c04bbefdfc69",
+      measurementId: "G-ZTY00XXTC8"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    window.HenuFirebase = { db, collection, getDocs, doc, getDoc, setDoc };
+  </script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar" style="background: rgba(27, 58, 92, 0.98);">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.jpg" alt="HENU Hotel" class="nav-logo-img">
+        <span class="logo-text">HENU</span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="accommodation.html">Rooms & View</a></li>
+        <li><a href="experiences.html">Rooftop & Tour</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="booking.html" class="active" style="color: var(--clr-gold);">Book Direct</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="index.html" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem;">← Back to Site</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BOOKING HERO -->
+  <header class="booking-hero">
+    <div class="container">
+      <div class="booking-badge-banner">
+        <span>✨ Best Rate Guarantee</span>
+        <span>•</span>
+        <span>Save 10% vs Booking.com & Agoda</span>
+      </div>
+      <h1>Direct Booking & Room Rates</h1>
+      <p style="max-width: 650px; margin: 0 auto; color: #CBD5E1; font-size: 1.05rem;">
+        Select your travel dates to view live room availability, October high season smart rates, and secure instant confirmation.
+      </p>
+    </div>
+  </header>
+
+  <!-- SEARCH / FILTER WIDGET -->
+  <div class="booking-filter-wrapper">
+    <div class="booking-filter-card">
+      <div class="filter-group">
+        <label for="checkinDate">Check-in Date</label>
+        <input type="date" id="checkinDate">
+      </div>
+      <div class="filter-group">
+        <label for="checkoutDate">Check-out Date</label>
+        <input type="date" id="checkoutDate">
+      </div>
+      <div class="filter-group">
+        <label for="guestCount">Guests / Capacity</label>
+        <select id="guestCount">
+          <option value="ALL" selected>All Rooms (Show All 7 Types)</option>
+          <option value="1">1 Guest (Single Room)</option>
+          <option value="2">2 Guests (Double / King)</option>
+          <option value="3">3 Guests (Triple Room)</option>
+          <option value="4">4 Guests (Family Room 103)</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="roomTypeFilter">Room Category</label>
+        <select id="roomTypeFilter">
+          <option value="ALL">All Categories (7 Room Types)</option>
+          <option value="SGL_BALC">Single Balcony — $15 (750 EGP)</option>
+          <option value="STD_DBL">Standard Double — $20 (1,000 EGP)</option>
+          <option value="DBL_BALC">Double Balcony — $22 (1,100 EGP)</option>
+          <option value="KNG_ROOM">King Room (Quiet & Spacious) — $25 (1,250 EGP)</option>
+          <option value="KNG_BALC">King Balcony (Street View) — $30 (1,500 EGP)</option>
+          <option value="TRP_FAM">Family Triple (3 Beds) — $30 (1,500 EGP)</option>
+          <option value="QUAD_FAM">Family Quadruple (Room 103) — $35 (1,750 EGP)</option>
+        </select>
+      </div>
+      <button class="btn-search" id="btnApplyFilter">
+        <span>🔍 Search Rooms</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- METADATA & CURRENCY BAR -->
+  <div class="pricing-meta-bar">
+    <div class="season-indicator" id="seasonBanner">
+      <span>📅</span>
+      <span id="seasonText">Checking seasonal rates...</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <span style="font-size: 0.85rem; font-weight: 600; color: #475569;">Display Currency:</span>
+      <div class="currency-selector">
+        <button class="currency-btn active" id="btnUSD" onclick="setCurrency('USD')">$ USD</button>
+        <button class="currency-btn" id="btnEGP" onclick="setCurrency('EGP')">ج.م EGP</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MASTER RATES REFERENCE BANNER -->
+  <div class="container" style="max-width: 1100px; margin-bottom: 20px;">
+    <div class="rates-overview-banner">
+      <div class="rates-overview-header">
+        <div style="font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+          <span>📋</span> <strong>Official Approved Base Rates (Master Hotel Setup)</strong>
+        </div>
+        <div style="font-size: 0.82rem; color: #64748B;">
+          25 Total Rooms &bull; 0 Suites &bull; 10% Direct Booking Discount
+        </div>
+      </div>
+      <div class="rates-pill-grid">
+        <div class="rates-pill-item">
+          <div class="rates-pill-title">Single Balcony</div>
+          <div class="rates-pill-price">$15 <span style="font-size:0.75rem; font-weight:normal; color:#64748B;">/night</span></div>
+          <div class="rates-pill-sub">750 EGP &bull; 3 Rooms</div>
+        </div>
+        <div class="rates-pill-item">
+          <div class="rates-pill-title">Standard Double</div>
+          <div class="rates-pill-price">$20 <span style="font-size:0.75rem; font-weight:normal; color:#64748B;">/night</span></div>
+          <div class="rates-pill-sub">1,000 EGP &bull; 7 Rooms</div>
+        </div>
+        <div class="rates-pill-item">
+          <div class="rates-pill-title">Double Balcony</div>
+          <div class="rates-pill-price">$22 <span style="font-size:0.75rem; font-weight:normal; color:#64748B;">/night</span></div>
+          <div class="rates-pill-sub">1,100 EGP &bull; 3 Rooms</div>
+        </div>
+        <div class="rates-pill-item">
+          <div class="rates-pill-title">King Room</div>
+          <div class="rates-pill-price">$25 <span style="font-size:0.75rem; font-weight:normal; color:#64748B;">/night</span></div>
+          <div class="rates-pill-sub">1,250 EGP &bull; 8 Rooms</div>
+        </div>
+        <div class="rates-pill-item">
+          <div class="rates-pill-title">King Balcony</div>
+          <div class="rates-pill-price">$30 <span style="font-size:0.75rem; font-weight:normal; color:#64748B;">/night</span></div>
+          <div class="rates-pill-sub">1,500 EGP &bull; 1 Room</div>
+        </div>
+        <div class="rates-pill-item">
+          <div class="rates-pill-title">Family Triple</div>
+          <div class="rates-pill-price">$30 <span style="font-size:0.75rem; font-weight:normal; color:#64748B;">/night</span></div>
+          <div class="rates-pill-sub">1,500 EGP &bull; 2 Rooms</div>
+        </div>
+        <div class="rates-pill-item" style="border-color: var(--clr-gold); background: #FFFDF8;">
+          <div class="rates-pill-title">Family Quad (103)</div>
+          <div class="rates-pill-price" style="color: var(--clr-gold);">$35 <span style="font-size:0.75rem; font-weight:normal; color:#64748B;">/night</span></div>
+          <div class="rates-pill-sub">1,750 EGP &bull; 1 Room</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTICE BANNER ABOUT VIEWS -->
+  <div class="container" style="max-width: 1100px; margin-bottom: 25px;">
+    <div style="background: #FFFBEB; border-right: 4px solid var(--clr-gold); padding: 12px 18px; border-radius: 8px; font-size: 0.88rem; color: #92400E; display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 1.3rem;">🏛️</span>
+      <div>
+        <strong>Hotel Layout Note:</strong> All room balconies overlook the vibrant <strong>Main Street</strong>. The unobstructed panoramic <strong>Great Pyramids View</strong> is exclusively enjoyed from our open-air <strong>Rooftop Terrace & Cafe</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- ROOMS CONTAINER -->
+  <div class="rooms-grid" id="roomsListContainer">
+    <div style="text-align: center; padding: 60px 20px; color: #64748B;">
+      <div style="font-size: 2rem; margin-bottom: 10px;">⏳</div>
+      <h3>Loading Live Room Availability from Cloud...</h3>
+    </div>
+  </div>
+
+  <!-- BOOKING MODAL -->
+  <div class="modal-backdrop" id="bookingModal">
+    <div class="modal-box">
+      <button class="close-modal" onclick="closeModal()">×</button>
+      <div id="modalStepForm">
+        <h2 style="font-family: 'Cinzel', serif; color: var(--clr-nile); font-size: 1.6rem; margin-bottom: 4px;">Confirm Your Reservation</h2>
+        <p style="color: #64748B; font-size: 0.9rem; margin-bottom: 20px;">Direct booking with Henu Hotel • No prepayment needed • Instant voucher</p>
+
+        <!-- Selected Room Summary -->
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 16px; border-radius: 12px; margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <strong id="modalRoomName" style="color: var(--clr-nile); font-size: 1.1rem;">Room Name</strong>
+            <span id="modalStayDates" style="font-size: 0.85rem; color: #64748B; background: #E2E8F0; padding: 3px 8px; border-radius: 6px;">Dates</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: #334155;">
+            <span>Duration: <strong id="modalNights">1 Night</strong></span>
+            <span>Total Rate: <strong id="modalTotalPrice" style="color: var(--clr-green); font-size: 1.1rem;">$0</strong></span>
+          </div>
+        </div>
+
+        <form id="checkoutForm" onsubmit="handleFormSubmit(event)">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+            <div class="filter-group">
+              <label>Full Guest Name *</label>
+              <input type="text" id="guestFullName" required placeholder="e.g. John Smith">
+            </div>
+            <div class="filter-group">
+              <label>WhatsApp / Phone *</label>
+              <input type="tel" id="guestPhone" required placeholder="+1 234 567 8900">
+            </div>
+          </div>
+          <div class="filter-group" style="margin-bottom: 14px;">
+            <label>Email Address *</label>
+            <input type="email" id="guestEmail" required placeholder="john@example.com">
+          </div>
+          <div class="filter-group" style="margin-bottom: 20px;">
+            <label>Special Requests (Optional)</label>
+            <input type="text" id="guestRequests" placeholder="Late check-in, extra pillows, airport pickup...">
+          </div>
+          <button type="submit" class="btn-search" style="width: 100%; justify-content: center; height: 50px;">
+            <span>Confirm Booking Now & Save 10%</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Confirmation Screen -->
+      <div id="modalStepSuccess" style="display: none;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div style="font-size: 3rem; color: var(--clr-green); margin-bottom: 10px;">✓</div>
+          <h2 style="font-family: 'Cinzel', serif; color: var(--clr-nile);">Reservation Confirmed!</h2>
+          <p style="color: #64748B; font-size: 0.95rem;">Your room has been blocked and confirmed directly with Henu Hotel Reception.</p>
+        </div>
+
+        <div class="voucher-card">
+          <div style="font-size: 0.85rem; color: #92400E; text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Official Confirmation Voucher</div>
+          <div style="font-size: 1.8rem; font-weight: 800; color: var(--clr-nile); margin: 8px 0;" id="voucherCode">HENU-2026-XXXX</div>
+          <div style="font-size: 0.9rem; color: #334155; margin-bottom: 12px;" id="voucherDetails">Room Details</div>
+          <div style="font-size: 1.2rem; font-weight: 700; color: var(--clr-green);" id="voucherTotal">Total: $0</div>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 25px;">
+          <button class="btn-search" onclick="window.print()" style="flex: 1; justify-content: center; background: var(--clr-nile);">🖨️ Print Voucher</button>
+          <button class="btn-search" onclick="location.reload()" style="flex: 1; justify-content: center; background: #64748B;">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT: REALTIME PRICING & FIREBASE LOGIC -->
+  <script>
+    let currentCurrency = 'USD';
+    let exchangeRate = 50.0;
+    let directDiscountPercent = 10;
+    let selectedRoomForBooking = null;
+
+    // Default dates: check-in tomorrow, check-out day after tomorrow (1 night default)
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const dayAfter = new Date(tomorrow);
+    dayAfter.setDate(dayAfter.getDate() + 1);
+
+    const formatDateInput = (d) => d.toISOString().split('T')[0];
+
+    // Read URL query params if user clicked from homepage search bar
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCheckin = urlParams.get('checkin') || formatDateInput(tomorrow);
+    const initialCheckout = urlParams.get('checkout') || formatDateInput(dayAfter);
+    const initialGuests = urlParams.get('guests') || "ALL";
+    const initialRoom = urlParams.get('room') || "ALL";
+
+    document.getElementById('checkinDate').value = initialCheckin;
+    document.getElementById('checkoutDate').value = initialCheckout;
+    document.getElementById('guestCount').value = initialGuests;
+    if (document.getElementById('roomTypeFilter') && initialRoom !== "ALL") {
+      document.getElementById('roomTypeFilter').value = initialRoom;
+    }
+
+    // Room categories data (matching Master Hotel Setup Excel 100% in ascending price order)
+    const roomCatalog = [
+      {
+        code: 'SGL_BALC',
+        name_en: 'Single Room with Balcony',
+        name_ar: 'غرفة سنجل فردية ببلكونة على الشارع',
+        capacity: 1,
+        beds: '1 Single Bed',
+        image: 'images/hotel/room-single.jpg',
+        view: 'Balcony on Main Street',
+        base_usd: 15,
+        base_egp: 750,
+        amenities: 'Solo traveler sanctuary, private balcony on Main Street, work desk, fast Wi-Fi, air conditioning',
+        rooms_assigned: ['201', '301', '401']
+      },
+      {
+        code: 'STD_DBL',
+        name_en: 'Standard Double Room',
+        name_ar: 'غرفة دابل قياسية',
+        capacity: 2,
+        beds: '1 Double Bed',
+        image: 'images/hotel/room-window.jpg',
+        view: 'Quiet Interior Window',
+        base_usd: 20,
+        base_egp: 1000,
+        amenities: 'Quiet interior window, clean Egyptian cotton linens, private bathroom, high-speed Wi-Fi, AC',
+        rooms_assigned: ['101', '203', '205', '207', '307', '405', '407']
+      },
+      {
+        code: 'DBL_BALC',
+        name_en: 'Double Room with Balcony',
+        name_ar: 'غرفة دابل بلكونة على الشارع',
+        capacity: 2,
+        beds: '1 Double Bed',
+        image: 'images/hotel/room-double-balcony.jpg',
+        view: 'Private Balcony on Main Street',
+        base_usd: 22,
+        base_egp: 1100,
+        amenities: 'Private balcony overlooking vibrant Main Street, electric kettle, tea & coffee set, AC, smart TV',
+        rooms_assigned: ['202', '302', '402']
+      },
+      {
+        code: 'KNG_ROOM',
+        name_en: 'King Room (Quiet & Spacious)',
+        name_ar: 'غرفة كينج سرير كبير مريح',
+        capacity: 2,
+        beds: '1 Large King Bed',
+        image: 'images/hotel/room-double.jpg',
+        view: 'Quiet Interior Window',
+        base_usd: 25,
+        base_egp: 1250,
+        amenities: 'Extra comfort king-size bed, soundproof windows, workspace desk, refrigerator minibar, AC',
+        rooms_assigned: ['102', '104', '204', '303', '304', '305', '403', '404']
+      },
+      {
+        code: 'KNG_BALC',
+        name_en: 'King Room with Balcony',
+        name_ar: 'غرفة كينج بلكونة على الشارع',
+        capacity: 2,
+        beds: '1 Large King Bed',
+        image: 'images/hotel/room-deluxe-pharaonic.jpg',
+        view: 'Private Balcony on Main Street',
+        base_usd: 30,
+        base_egp: 1500,
+        amenities: 'Private balcony facing Main Street, king-size bed, minibar fridge, flat-screen TV, marble bath',
+        rooms_assigned: ['306']
+      },
+      {
+        code: 'TRP_FAM',
+        name_en: 'Family Triple Room (3 Single Beds)',
+        name_ar: 'غرفة عائلية ثلاثية (3 أسرّة)',
+        capacity: 3,
+        beds: '3 Separate Single Beds',
+        image: 'images/hotel/room-triple.jpg',
+        view: 'Window View',
+        base_usd: 30,
+        base_egp: 1500,
+        amenities: 'Spacious 3-bed layout for friends or family, wardrobe, private bathroom, free high-speed Wi-Fi',
+        rooms_assigned: ['206', '406']
+      },
+      {
+        code: 'QUAD_FAM',
+        name_en: 'Family Quadruple Room (Room 103)',
+        name_ar: 'غرفة عائلية رباعية (الغرفة 103)',
+        capacity: 4,
+        beds: '1 King Bed + 2 Single Beds',
+        image: 'images/hotel/room-suite.jpg',
+        view: 'Wide Room Window (First Floor)',
+        base_usd: 35,
+        base_egp: 1750,
+        amenities: 'Largest family room in hotel, 4-guest capacity, refrigerator, smart TV, quiet interior window',
+        rooms_assigned: ['103']
+      }
+    ];
+
+    function calculateStayPricing(baseUSD, checkinDate, checkoutDate) {
+      const start = new Date(checkinDate);
+      const end = new Date(checkoutDate);
+      const diffTime = Math.max(0, end - start);
+      const nights = Math.max(1, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
+
+      // Check if dates fall in High Season (Starts Oct 1st to Apr 30)
+      const midDate = new Date(start.getTime() + diffTime / 2);
+      const month = midDate.getMonth(); // 0 = Jan, 9 = Oct, 10 = Nov, 11 = Dec
+      const isOctoberSeason = (month >= 9 || month <= 3);
+
+      let seasonMultiplier = isOctoberSeason ? 1.30 : 1.00;
+
+      // Rate on OTAs per night (Booking.com / Agoda)
+      const otaRatePerNight = Math.round(baseUSD * seasonMultiplier);
+
+      // Direct booking rate per night (10% off OTA rate)
+      const directDiscountAmount = Math.max(1, Math.round(otaRatePerNight * (directDiscountPercent / 100)));
+      const directRatePerNight = otaRatePerNight - directDiscountAmount;
+
+      const totalOTAPriceUSD = otaRatePerNight * nights;
+      const totalDirectPriceUSD = directRatePerNight * nights;
+      const totalSavingsUSD = totalOTAPriceUSD - totalDirectPriceUSD;
+
+      return {
+        nights,
+        isOctoberSeason,
+        seasonMultiplier,
+        baseUSD,
+        baseEGP: Math.round(baseUSD * exchangeRate),
+        otaRatePerNight,
+        directRatePerNight,
+        totalOTAPriceUSD,
+        totalDirectPriceUSD,
+        totalSavingsUSD,
+        directRatePerNightEGP: Math.round(directRatePerNight * exchangeRate),
+        otaRatePerNightEGP: Math.round(otaRatePerNight * exchangeRate),
+        totalDirectPriceEGP: Math.round(totalDirectPriceUSD * exchangeRate),
+        totalOTAPriceEGP: Math.round(totalOTAPriceUSD * exchangeRate),
+        totalSavingsEGP: Math.round(totalSavingsUSD * exchangeRate)
+      };
+    }
+
+    function renderRooms() {
+      const checkin = document.getElementById('checkinDate').value;
+      const checkout = document.getElementById('checkoutDate').value;
+      const guests = document.getElementById('guestCount').value;
+      const categoryFilter = document.getElementById('roomTypeFilter').value;
+
+      const pricingSample = calculateStayPricing(25, checkin, checkout);
+
+      // Update Season Banner
+      const seasonBanner = document.getElementById('seasonText');
+      if (pricingSample.isOctoberSeason) {
+        seasonBanner.innerHTML = `<strong>Winter High Season Active (Oct 1 – Apr 30):</strong> +30% seasonal demand adjusted automatically &bull; <strong>${pricingSample.nights} Night(s) Stay</strong>`;
+      } else {
+        seasonBanner.innerHTML = `<strong>Standard Summer Rate Active:</strong> Best base prices applied &bull; <strong>${pricingSample.nights} Night(s) Stay</strong>`;
+      }
+
+      const container = document.getElementById('roomsListContainer');
+      container.innerHTML = '';
+
+      const filteredCatalog = roomCatalog.filter(cat => {
+        if (categoryFilter !== 'ALL' && cat.code !== categoryFilter) return false;
+        if (guests !== 'ALL' && cat.capacity < parseInt(guests)) return false;
+        return true;
+      });
+
+      if (filteredCatalog.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 50px; background: #fff; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <h3>No rooms match your specific guest capacity or filter</h3>
+            <p style="color: #64748B; margin-top: 8px;">Please adjust the number of guests or select "All Categories".</p>
+          </div>
+        `;
+        return;
+      }
+
+      filteredCatalog.forEach(cat => {
+        const pricing = calculateStayPricing(cat.base_usd, checkin, checkout);
+
+        const displayedBase = currentCurrency === 'USD' ? `$${cat.base_usd}` : `${cat.base_egp.toLocaleString()} ج.م`;
+        const displayedNightlyDirect = currentCurrency === 'USD' ? `$${pricing.directRatePerNight}` : `${pricing.directRatePerNightEGP.toLocaleString()} ج.م`;
+        const displayedNightlyOTA = currentCurrency === 'USD' ? `$${pricing.otaRatePerNight}` : `${pricing.otaRatePerNightEGP.toLocaleString()} ج.م`;
+        const displayedTotalDirect = currentCurrency === 'USD' ? `$${pricing.totalDirectPriceUSD}` : `${pricing.totalDirectPriceEGP.toLocaleString()} ج.م`;
+        const displayedSavings = currentCurrency === 'USD' ? `$${pricing.totalSavingsUSD}` : `${pricing.totalSavingsEGP.toLocaleString()} ج.م`;
+
+        const card = document.createElement('div');
+        card.className = 'room-card';
+        card.innerHTML = `
+          <div class="room-image-box">
+            <img src="${cat.image}" alt="${cat.name_en}" onerror="this.src='images/hotel/room-double.jpg'">
+            <div class="room-tag">${cat.rooms_assigned.length} Room(s) in Inventory</div>
+          </div>
+          <div class="room-details">
+            <div class="room-title-area">
+              <h3>${cat.name_en}</h3>
+              <div class="room-arabic-title">${cat.name_ar}</div>
+              <div class="room-specs">
+                <span class="spec-badge">👥 Up to ${cat.capacity} Guests</span>
+                <span class="spec-badge">🛏️ ${cat.beds}</span>
+                <span class="spec-badge">📍 ${cat.view}</span>
+              </div>
+              <div class="room-amenities">
+                ${cat.amenities}
+              </div>
+            </div>
+            <div style="margin-top: 15px; font-size: 0.82rem; color: #15803D; font-weight: 600;">
+              ✓ Free Wi-Fi &bull; Free Cancellation &bull; Rooftop Pyramids View Terrace Access
+            </div>
+          </div>
+          <div class="room-pricing-action">
+            <div class="base-rate-tag">
+              Official Base: <strong>${displayedBase}</strong> / night
+            </div>
+            <div class="ota-comparison-striked">OTA (Booking.com): ${displayedNightlyOTA} / night</div>
+            <div class="direct-rate-title">Direct Web Rate (-10%)</div>
+            <div class="price-value">${displayedNightlyDirect} <span class="price-unit">/ night</span></div>
+            <div class="price-period">
+              Stay Total (${pricing.nights} Night${pricing.nights > 1 ? 's' : ''}): <strong>${displayedTotalDirect}</strong>
+            </div>
+            <div class="savings-pill">
+              🎉 Save ${displayedSavings} Total!
+            </div>
+            <button class="btn-book-room" onclick="openBookingModal('${cat.code}')">
+              Select & Book
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function setCurrency(curr) {
+      currentCurrency = curr;
+      document.getElementById('btnUSD').classList.toggle('active', curr === 'USD');
+      document.getElementById('btnEGP').classList.toggle('active', curr === 'EGP');
+      renderRooms();
+    }
+
+    function openBookingModal(categoryCode) {
+      const cat = roomCatalog.find(c => c.code === categoryCode);
+      if (!cat) return;
+
+      const checkin = document.getElementById('checkinDate').value;
+      const checkout = document.getElementById('checkoutDate').value;
+      const pricing = calculateStayPricing(cat.base_usd, checkin, checkout);
+
+      selectedRoomForBooking = {
+        category: cat,
+        checkin,
+        checkout,
+        nights: pricing.nights,
+        nightlyUSD: pricing.directRatePerNight,
+        nightlyEGP: pricing.directRatePerNightEGP,
+        totalUSD: pricing.totalDirectPriceUSD,
+        totalEGP: pricing.totalDirectPriceEGP
+      };
+
+      document.getElementById('modalRoomName').innerText = `${cat.name_en} (${cat.name_ar})`;
+      document.getElementById('modalStayDates').innerText = `${checkin} → ${checkout}`;
+      document.getElementById('modalNights').innerText = `${pricing.nights} Night(s) @ ${currentCurrency === 'USD' ? '$' + pricing.directRatePerNight : pricing.directRatePerNightEGP.toLocaleString() + ' EGP'} / night`;
+      document.getElementById('modalTotalPrice').innerText = currentCurrency === 'USD' ? `$${pricing.totalDirectPriceUSD} USD` : `${pricing.totalDirectPriceEGP.toLocaleString()} EGP`;
+
+      document.getElementById('modalStepForm').style.display = 'block';
+      document.getElementById('modalStepSuccess').style.display = 'none';
+      document.getElementById('bookingModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('bookingModal').classList.remove('active');
+    }
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      if (!selectedRoomForBooking) return;
+
+      const name = document.getElementById('guestFullName').value.trim();
+      const phone = document.getElementById('guestPhone').value.trim();
+      const email = document.getElementById('guestEmail').value.trim();
+      const requests = document.getElementById('guestRequests').value.trim();
+
+      const bookingRef = `HENU-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+      const assignedRoom = selectedRoomForBooking.category.rooms_assigned[0] || '101';
+
+      const bookingPayload = {
+        id: bookingRef,
+        room_num: assignedRoom,
+        room_category: selectedRoomForBooking.category.code,
+        room_name: selectedRoomForBooking.category.name_en,
+        guest_name: name,
+        guest_phone: phone,
+        guest_email: email,
+        special_requests: requests,
+        checkin: selectedRoomForBooking.checkin,
+        checkout: selectedRoomForBooking.checkout,
+        nights: selectedRoomForBooking.nights,
+        total_price_usd: selectedRoomForBooking.totalUSD,
+        total_price_egp: selectedRoomForBooking.totalEGP,
+        source: 'Website_Direct_Booking',
+        status: 'Confirmed',
+        created_at: new Date().toISOString()
+      };
+
+      // 1. Save reservation directly to Firebase Cloud if available
+      try {
+        if (window.HenuFirebase && window.HenuFirebase.db) {
+          const { db, doc, setDoc } = window.HenuFirebase;
+          await setDoc(doc(db, 'reservations', bookingRef), bookingPayload);
+          console.log('✅ Booking saved to Firebase Cloud:', bookingRef);
+        }
+      } catch (err) {
+        console.warn('Firebase online sync note:', err.message);
+      }
+
+      // 2. Display success screen
+      document.getElementById('voucherCode').innerText = bookingRef;
+      document.getElementById('voucherDetails').innerText = `Room: ${selectedRoomForBooking.category.name_en} (Room ${assignedRoom}) | ${selectedRoomForBooking.checkin} to ${selectedRoomForBooking.checkout} (${selectedRoomForBooking.nights} Night(s) @ $${selectedRoomForBooking.nightlyUSD}/night)`;
+      document.getElementById('voucherTotal').innerText = `Total Rate: $${selectedRoomForBooking.totalUSD} USD (~${selectedRoomForBooking.totalEGP.toLocaleString()} EGP)`;
+
+      document.getElementById('modalStepForm').style.display = 'none';
+      document.getElementById('modalStepSuccess').style.display = 'block';
+    }
+
+    document.getElementById('btnApplyFilter').addEventListener('click', renderRooms);
+    document.getElementById('checkinDate').addEventListener('change', renderRooms);
+    document.getElementById('checkoutDate').addEventListener('change', renderRooms);
+    document.getElementById('guestCount').addEventListener('change', renderRooms);
+    document.getElementById('roomTypeFilter').addEventListener('change', renderRooms);
+
+    // Initial render
+    window.addEventListener('DOMContentLoaded', () => {
+      renderRooms();
+    });
+  </script>
+
+</body>
+</html>

@@ -5,7 +5,7 @@
   "scopes": "ZohoBooks.fullaccess.all,ZohoBooks.expenses.CREATE,ZohoBooks.invoices.CREATE,ZohoBooks.contacts.CREATE",
   "data_center": "com",
   "organization_id": "934223341",
-  "access_token": "1000.b86535eebf4e312d2b83f59849a40258.6228cbddd0fc94710aee9cb71524ecb1",
+  "access_token": "1000.ed1ad3b2590b7e03b1012e8b3ff4497b.e82e1a377977fce7db4677b68c48edb5",
   "refresh_token": "1000.ae650771d73c0e7b54396a550d2fafa7.7f1aaa6dd7cf2c7a6c236d4fbed757d2",
-  "token_expiry": "2026-08-10 16:55:50"
+  "token_expiry": "2026-09-01 14:57:26"
 }

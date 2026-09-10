@@ -1,0 +1,194 @@
+<!-- wp:html -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --clr-nile-dark: #071320;
+  --clr-nile: #0B1B2B;
+  --clr-nile-mid: #14283D;
+  --clr-gold: #C9873A;
+  --clr-gold-light: #DFAB5C;
+  --clr-gold-bright: #F3C377;
+  --clr-sand: #F7F2E8;
+  --clr-sand-dark: #EADDCF;
+  --clr-ivory: #FCFAF7;
+  --clr-dark: #1A1A1A;
+  --clr-gray: #555555;
+  --font-cinzel: 'Cinzel', serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-cairo: 'Cairo', sans-serif;
+  --radius: 12px;
+  --shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.henu-section { padding: 80px 20px; font-family: var(--font-montserrat); }
+.henu-container { max-width: 1200px; margin: 0 auto; }
+.henu-badge {
+  background: var(--clr-gold);
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 5px 16px;
+  border-radius: 30px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+.henu-title {
+  font-family: var(--font-cinzel);
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--clr-nile);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+.henu-title span { color: var(--clr-gold); }
+.henu-title.light { color: #FFFFFF; }
+.henu-title.light span { color: var(--clr-gold-light); }
+.henu-subtitle {
+  font-size: 1.05rem;
+  color: var(--clr-gray);
+  max-width: 700px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+.henu-subtitle.center { margin-left: auto; margin-right: auto; text-align: center; }
+.henu-subtitle.light { color: rgba(255,255,255,0.85); }
+
+.btn-henu-gold {
+  background: var(--clr-gold);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(201,135,58,0.35);
+}
+.btn-henu-gold:hover {
+  background: var(--clr-gold-light);
+  transform: translateY(-2px);
+}
+.btn-henu-outline {
+  background: transparent;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  padding: 13px 26px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  border: 1.5px solid #FFFFFF;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-henu-outline:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: var(--clr-gold-light);
+}
+
+.henu-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+.henu-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 36px;
+  align-items: center;
+}
+.henu-card {
+  background: #FFFFFF;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--clr-sand-dark);
+  transition: all 0.35s ease;
+}
+.henu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+}
+.henu-card-img {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+.henu-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.henu-card:hover .henu-card-img img {
+  transform: scale(1.06);
+}
+.henu-card-body { padding: 24px; }
+.henu-card-price {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--clr-nile);
+  color: var(--clr-gold-light);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  font-family: var(--font-cinzel);
+}
+
+@media (max-width: 768px) {
+  .henu-title { font-size: 1.85rem; }
+  .henu-section { padding: 50px 16px; }
+}
+</style>
+
+<div class="henu-section" style="background: var(--clr-ivory); padding-top: 40px;">
+  <div class="henu-container" style="text-align: center;">
+    <span class="henu-badge">Tours & Safari</span>
+    <h1 class="henu-title">Curated Giza <span>Experiences</span></h1>
+    <p class="henu-subtitle center">Discover ancient Egypt with licensed Egyptologist guides, private desert safaris, and VIP transport.</p>
+
+    <div class="henu-grid-3" style="text-align: left;">
+      <div class="henu-card">
+        <div class="henu-card-img"><img src="/wp-content/uploads/hotel/hero-pyramids-sunset.jpg" alt="Pyramids Tour"></div>
+        <div class="henu-card-body">
+          <h3 style="font-family: var(--font-cinzel); font-size: 1.2rem; color: var(--clr-nile);">Pyramids & Sphinx VIP Tour</h3>
+          <p style="font-size: 0.85rem; color: var(--clr-gray); margin-bottom: 14px;">Skip-the-line plateau access, Great Sphinx visit, and private Egyptologist guide.</p>
+          <a href="https://wa.me/201000925827?text=Hello%20HENU,%20I%20want%20to%20book%20the%20Pyramids%20VIP%20Tour." target="_blank" class="btn-henu-gold" style="width: 100%; justify-content: center;">Book Tour via WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="henu-card">
+        <div class="henu-card-img"><img src="/wp-content/uploads/hotel/pyramids-terrace-night.jpg" alt="Sound & Light"></div>
+        <div class="henu-card-body">
+          <h3 style="font-family: var(--font-cinzel); font-size: 1.2rem; color: var(--clr-nile);">Pyramids Sound & Light Show</h3>
+          <p style="font-size: 0.85rem; color: var(--clr-gray); margin-bottom: 14px;">Watch the history of Egypt illuminate across the Pyramids from our exclusive rooftop terrace.</p>
+          <a href="https://wa.me/201000925827?text=Hello%20HENU,%20I%20want%20to%20reserve%20for%20Sound%20and%20Light%20Show." target="_blank" class="btn-henu-gold" style="width: 100%; justify-content: center;">Reserve on WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="henu-card">
+        <div class="henu-card-img"><img src="/wp-content/uploads/hotel/hero-pyramids-night.jpg" alt="Airport Pickup"></div>
+        <div class="henu-card-body">
+          <h3 style="font-family: var(--font-cinzel); font-size: 1.2rem; color: var(--clr-nile);">Private Airport Transfers</h3>
+          <p style="font-size: 0.85rem; color: var(--clr-gray); margin-bottom: 14px;">Cairo International Airport (CAI) or Sphinx Airport (SPX) directly to HENU Hotel with professional chauffeur.</p>
+          <a href="https://wa.me/201000925827?text=Hello%20HENU,%20I%20need%20Airport%20Pickup." target="_blank" class="btn-henu-gold" style="width: 100%; justify-content: center;">Request Transfer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /wp:html -->

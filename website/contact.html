@@ -36,7 +36,7 @@
             <option value="it">IT</option>
           </select>
         </div>
-        <a href="contact.html#booking" class="btn btn-gold" data-i18n="nav.book">Book Now</a>
+        <a href="booking.html" class="btn btn-gold" data-i18n="nav.book">Book Now</a>
         <button class="nav-toggle" id="navToggle" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
@@ -80,22 +80,17 @@
                   <select id="roomType" required>
                     <option value="" disabled selected data-i18n="contact.selectRoom">Choose a room type</option>
                     <optgroup label="Single Rooms">
-                      <option value="single_std" data-i18n="contact.room.single_std">Single Room (Standard) - $12/night</option>
-                      <option value="single_win" data-i18n="contact.room.single_win">Single with Window - $15/night</option>
-                      <option value="single_balc" data-i18n="contact.room.single_balc">Single with Balcony - $20/night</option>
+                      <option value="single_balc">Single Room with Balcony - $15/night</option>
                     </optgroup>
-                    <optgroup label="Double Rooms">
-                      <option value="double_std" data-i18n="contact.room.double_std">Double Room (Standard) - $18/night</option>
-                      <option value="double_win" data-i18n="contact.room.double_win">Double with Window - $22/night</option>
-                      <option value="double_balc" data-i18n="contact.room.double_balc">Double with Balcony - $25/night</option>
+                    <optgroup label="Double & King Rooms">
+                      <option value="double_std">Standard Double Room - $20/night</option>
+                      <option value="double_balc">Double with Balcony - $22/night</option>
+                      <option value="king_room">King Room (Quiet & Spacious) - $25/night</option>
+                      <option value="king_balc">King with Balcony - $30/night</option>
                     </optgroup>
-                    <optgroup label="Triple / Family Rooms">
-                      <option value="triple_std" data-i18n="contact.room.triple_std">Triple Room (Standard) - $25/night</option>
-                      <option value="triple_win" data-i18n="contact.room.triple_win">Triple with Window - $30/night</option>
-                      <option value="triple_balc" data-i18n="contact.room.triple_balc">Triple with Balcony - $35/night</option>
-                    </optgroup>
-                    <optgroup label="Suites">
-                      <option value="suite" data-i18n="contact.room.suite">King Suite — Pyramids View - $45/night</option>
+                    <optgroup label="Triple & Family Rooms">
+                      <option value="triple_fam">Family Triple Room (3 Beds) - $30/night</option>
+                      <option value="suite">Family Quadruple Room (Room 103) - $35/night</option>
                     </optgroup>
                   </select>
                 </div>

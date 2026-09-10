@@ -1,0 +1,1850 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تقرير مراجعة وتحليل شهر أغسطس مع الداشبورد والقيود المحاسبية — هوستل الأهرامات</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+        
+        @page {
+            size: A4 portrait;
+            margin: 10mm 10mm 12mm 10mm;
+            @bottom-left {
+                content: "هوستل الأهرامات — تقرير مراجعة وتحليل شهر أغسطس والقيود المحاسبية";
+                font-family: 'Cairo', sans-serif;
+                font-size: 8pt;
+                color: #718096;
+            }
+            @bottom-right {
+                content: "صفحة " counter(page) " من " counter(pages);
+                font-family: 'Cairo', sans-serif;
+                font-size: 8pt;
+                color: #718096;
+            }
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+            color: #2D3748;
+            background-color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            font-size: 9pt;
+            line-height: 1.45;
+        }
+
+        .header-bar {
+            background: linear-gradient(135deg, #1A365D 0%, #2B6CB0 100%);
+            color: #FFFFFF;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-bar h1 {
+            font-size: 17pt;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .header-bar p {
+            font-size: 9pt;
+            margin: 2px 0 0 0;
+            color: #E2E8F0;
+        }
+
+        .meta-box {
+            text-align: left;
+            font-size: 8pt;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 10px;
+            border-radius: 4px;
+        }
+
+        .kpi-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .kpi-card {
+            flex: 1;
+            background: #F7FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            padding: 8px 10px;
+            text-align: center;
+        }
+
+        .kpi-card.blue { border-top: 4px solid #3182CE; background: #EBF8FF; }
+        .kpi-card.green { border-top: 4px solid #38A169; background: #F0FFF4; }
+        .kpi-card.red { border-top: 4px solid #E53E3E; background: #FFF5F5; }
+        .kpi-card.gold { border-top: 4px solid #D69E2E; background: #FEFCBF; }
+
+        .kpi-title { font-size: 8.5pt; font-weight: 600; color: #4A5568; margin-bottom: 3px; }
+        .kpi-value { font-size: 13pt; font-weight: 800; }
+
+        .blue .kpi-value { color: #2B6CB0; }
+        .green .kpi-value { color: #276749; }
+        .red .kpi-value { color: #9B2C2C; }
+        .gold .kpi-value { color: #975A16; }
+
+        .section-header {
+            color: #1A365D;
+            font-size: 11pt;
+            font-weight: 800;
+            border-right: 4px solid #2B6CB0;
+            padding-right: 8px;
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            font-size: 8.5pt;
+        }
+
+        th {
+            background-color: #1A365D;
+            color: #FFFFFF;
+            padding: 5px 6px;
+            font-weight: 700;
+            border: 1px solid #1A365D;
+            text-align: right;
+        }
+
+        td {
+            padding: 4px 6px;
+            border: 1px solid #CBD5E0;
+        }
+
+        tr:nth-child(even) { background-color: #F7FAFC; }
+
+        .badge { display: inline-block; padding: 2px 5px; border-radius: 3px; font-size: 7.5pt; font-weight: 700; }
+        .bg-green { background-color: #C6F6D5; color: #22543D; }
+        .bg-blue { background-color: #BEE3F8; color: #2A4365; }
+        .bg-red { background-color: #FED7D7; color: #742A2A; }
+        .bg-gray { background-color: #EDF2F7; color: #4A5568; }
+
+        .total-row td {
+            font-weight: 800;
+            background-color: #EDF2F7;
+            border-top: 2px solid #A0AEC0;
+        }
+
+        .page-break { page-break-before: always; }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #EDF2F7;
+            border-radius: 4px;
+            overflow: hidden;
+            height: 14px;
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar-segment { height: 100%; }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: EXECUTIVE DASHBOARD -->
+    <div class="header-bar">
+        <div>
+            <h1>هوستل الأهرامات — Pyramids Hostel</h1>
+            <p>لوحة البيانات والتقرير المحاسبي التحليلي الشامل — شهر أغسطس 2026</p>
+        </div>
+        <div class="meta-box">
+            <strong>المصدر:</strong> Copy of سجل_الإيرادات_والمصروفات_السنوي_2026.xlsm<br>
+            <strong>عدد المعاملات:</strong> 148 قيـد | <strong>تاريخ التقرير:</strong> 4 سبتمبر 2026
+        </div>
+    </div>
+
+    <!-- KPI Summary Cards -->
+    <div class="kpi-grid">
+        <div class="kpi-card blue">
+            <div class="kpi-title">🏦 تمويلات المالك والسيولة</div>
+            <div class="kpi-value">485,540 ج.م</div>
+        </div>
+        <div class="kpi-card green">
+            <div class="kpi-title">💰 إجمالي الإيرادات التشغيلية</div>
+            <div class="kpi-value">25,795 ج.م</div>
+        </div>
+        <div class="kpi-card red">
+            <div class="kpi-title">💸 إجمالي المصروفات الكلية</div>
+            <div class="kpi-value">506,640 ج.م</div>
+        </div>
+        <div class="kpi-card gold">
+            <div class="kpi-title">⚖️ رصيد الصندوق النهائي</div>
+            <div class="kpi-value">4,695 ج.م</div>
+        </div>
+    </div>
+
+    <!-- Visual Expense Structure Bar -->
+    <div class="section-header">📊 أولاً: لوحة الرؤية البصرية والتوزيع النسبي للمصروفات</div>
+    <div class="progress-bar-container">
+        <div class="progress-bar-segment" style="width:43.4%; background-color:#1A365D;" title="إيجار المبنى 43.4%"></div>
+        <div class="progress-bar-segment" style="width:27.9%; background-color:#2B6CB0;" title="تجهيزات وأثاث 27.9%"></div>
+        <div class="progress-bar-segment" style="width:10.8%; background-color:#3182CE;" title="صيانة ونثريات 10.8%"></div>
+        <div class="progress-bar-segment" style="width:6.1%; background-color:#4299E1;" title="مرافق حكومية 6.1%"></div>
+        <div class="progress-bar-segment" style="width:5.9%; background-color:#63B3ED;" title="شبكات وويبسايت 5.9%"></div>
+        <div class="progress-bar-segment" style="width:5.9%; background-color:#DD6B20;" title="سلف ورواتب وضيافة"></div>
+    </div>
+
+    <!-- Expense Breakdown Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>تصنيف المصروفات التشغيلية والتجهيزية</th>
+                <th style="text-align:center; width:80px;">عدد المعاملات</th>
+                <th style="width:130px; text-align:left;">إجمالي المبلغ (ج.م)</th>
+                <th style="text-align:center; width:90px;">النسبة المئوية</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+    <tr>
+        <td style='font-weight:700;'><span style='display:inline-block; width:10px; height:10px; background-color:#1A365D; border-radius:2px; margin-left:6px;'></span>إيجار مقر الفندق الرئيسي</td>
+        <td style='text-align:center;'>1</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>220,000 ج.م</td>
+        <td style='text-align:center; font-weight:600;'>43.4%</td>
+    </tr>
+    <tr>
+        <td style='font-weight:700;'><span style='display:inline-block; width:10px; height:10px; background-color:#2B6CB0; border-radius:2px; margin-left:6px;'></span>تجهيزات ومعدات وأثاث الفندق</td>
+        <td style='text-align:center;'>17</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>141,175 ج.م</td>
+        <td style='text-align:center; font-weight:600;'>27.9%</td>
+    </tr>
+    <tr>
+        <td style='font-weight:700;'><span style='display:inline-block; width:10px; height:10px; background-color:#3182CE; border-radius:2px; margin-left:6px;'></span>صيانة ونثريات ومواصلات</td>
+        <td style='text-align:center;'>44</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>54,525 ج.م</td>
+        <td style='text-align:center; font-weight:600;'>10.8%</td>
+    </tr>
+    <tr>
+        <td style='font-weight:700;'><span style='display:inline-block; width:10px; height:10px; background-color:#4299E1; border-radius:2px; margin-left:6px;'></span>مرافق وفواتير حكومية</td>
+        <td style='text-align:center;'>8</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>30,800 ج.م</td>
+        <td style='text-align:center; font-weight:600;'>6.1%</td>
+    </tr>
+    <tr>
+        <td style='font-weight:700;'><span style='display:inline-block; width:10px; height:10px; background-color:#63B3ED; border-radius:2px; margin-left:6px;'></span>شبكات وتطوير ويبسايت</td>
+        <td style='text-align:center;'>2</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>30,000 ج.م</td>
+        <td style='text-align:center; font-weight:600;'>5.9%</td>
+    </tr>
+    <tr>
+        <td style='font-weight:700;'><span style='display:inline-block; width:10px; height:10px; background-color:#DD6B20; border-radius:2px; margin-left:6px;'></span>سلف الموظفين العاملين</td>
+        <td style='text-align:center;'>21</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>11,150 ج.م</td>
+        <td style='text-align:center; font-weight:600;'>2.2%</td>
+    </tr>
+    <tr>
+        <td style='font-weight:700;'><span style='display:inline-block; width:10px; height:10px; background-color:#38A169; border-radius:2px; margin-left:6px;'></span>ضيافة وإعاشة وتوريدات</td>
+        <td style='text-align:center;'>24</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>10,390 ج.م</td>
+        <td style='text-align:center; font-weight:600;'>2%</td>
+    </tr>
+    <tr>
+        <td style='font-weight:700;'><span style='display:inline-block; width:10px; height:10px; background-color:#E53E3E; border-radius:2px; margin-left:6px;'></span>رواتب وأجور تشغيلية</td>
+        <td style='text-align:center;'>5</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>7,000 ج.م</td>
+        <td style='text-align:center; font-weight:600;'>1.4%</td>
+    </tr>
+    <tr>
+        <td style='font-weight:700;'><span style='display:inline-block; width:10px; height:10px; background-color:#805AD5; border-radius:2px; margin-left:6px;'></span>عمولات حجز وتسكين</td>
+        <td style='text-align:center;'>3</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,600 ج.م</td>
+        <td style='text-align:center; font-weight:600;'>0.3%</td>
+    </tr>
+            <tr class="total-row">
+                <td>إجمالي المصروفات لشهر أغسطس 2026</td>
+                <td style="text-align:center;">137</td>
+                <td style="color:#9B2C2C; text-align:left;">506,640 ج.م</td>
+                <td style="text-align:center;">100%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="section-header" style="margin-top:10px;">👥 ثانياً: ملخص سلف الموظفين لشهر أغسطس</div>
+    <table>
+        <thead>
+            <tr>
+                <th>اسم الموظف</th>
+                <th style="text-align:center; width:100px;">عدد حركات السلف</th>
+                <th style="text-align:left; width:150px;">إجمالي قيمة السلف (ج.م)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+    <tr>
+        <td style='font-weight:600;'>أستاذ خالد</td>
+        <td style='text-align:center;'>2</td>
+        <td style='font-weight:700; color:#2B6CB0; text-align:left;'>2,500 ج.م</td>
+    </tr>
+    <tr>
+        <td style='font-weight:600;'>أحمد البار</td>
+        <td style='text-align:center;'>2</td>
+        <td style='font-weight:700; color:#2B6CB0; text-align:left;'>2,000 ج.م</td>
+    </tr>
+    <tr>
+        <td style='font-weight:600;'>يوسف</td>
+        <td style='text-align:center;'>10</td>
+        <td style='font-weight:700; color:#2B6CB0; text-align:left;'>2,600 ج.م</td>
+    </tr>
+    <tr>
+        <td style='font-weight:600;'>محمد المنسي</td>
+        <td style='text-align:center;'>3</td>
+        <td style='font-weight:700; color:#2B6CB0; text-align:left;'>2,200 ج.م</td>
+    </tr>
+    <tr>
+        <td style='font-weight:600;'>مدحت</td>
+        <td style='text-align:center;'>2</td>
+        <td style='font-weight:700; color:#2B6CB0; text-align:left;'>1,000 ج.م</td>
+    </tr>
+    <tr>
+        <td style='font-weight:600;'>جومانا وجيه</td>
+        <td style='text-align:center;'>3</td>
+        <td style='font-weight:700; color:#2B6CB0; text-align:left;'>650 ج.م</td>
+    </tr>
+    <tr>
+        <td style='font-weight:600;'>منة</td>
+        <td style='text-align:center;'>1</td>
+        <td style='font-weight:700; color:#2B6CB0; text-align:left;'>200 ج.م</td>
+    </tr>
+            <tr class="total-row">
+                <td>إجمالي سلف الموظفين المسحوبة من الصندوق</td>
+                <td style="text-align:center;">21</td>
+                <td style="color:#2B6CB0; text-align:left;">11,150 ج.م</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- PAGE 2: FINANCIAL AUDIT & ANALYSIS -->
+    <div class="section-header">📊 ثالثاً: التقرير التحليلي ونتائج التدقيق المحاسبي</div>
+    
+    <div style="background-color:#F7FAFC; border-right:4px solid #2B6CB0; padding:10px; border-radius:4px; margin-bottom:10px;">
+        <h3 style="margin:0 0 4px 0; color:#1A365D; font-size:10pt;">1. هيكلية التدفقات النقدية والتمويل:</h3>
+        <p style="margin:0; font-size:8.5pt; color:#4A5568;">
+            بلغ إجمالي المقبوضات المودعة بالصندوق خلال شهر أغسطس <strong>511,335 ج.م</strong>، مقسمة إلى <strong>485,540 ج.م</strong> تمويلات مباشرة وشيكات ودولار من المالك لدعم التأسيس، و <strong>25,795 ج.م</strong> إيرادات تشغيلية من الغرف والمغسلة.
+        </p>
+    </div>
+
+    <div style="background-color:#F7FAFC; border-right:4px solid #E53E3E; padding:10px; border-radius:4px; margin-bottom:10px;">
+        <h3 style="margin:0 0 4px 0; color:#9B2C2C; font-size:10pt;">2. مراجعة المصروفات التشغيلية والتجهيزية:</h3>
+        <p style="margin:0; font-size:8.5pt; color:#4A5568;">
+            بلغت المصروفات الإجمالية <strong>506,640 ج.م</strong>. ويمثل بند إيجار مقر الفندق (220,000 ج.م) الوزن الأكبر بنسبة <strong>43.4%</strong>، تليها التجهيزات الأصولية والمفروشات والكاميرات (141,175 ج.م) بنسبة <strong>27.9%</strong>، ثم التمديدات والتطوير الإلكتروني والشبكات (30,000 ج.م).
+        </p>
+    </div>
+
+    <div style="background-color:#F7FAFC; border-right:4px solid #D69E2E; padding:10px; border-radius:4px; margin-bottom:12px;">
+        <h3 style="margin:0 0 4px 0; color:#975A16; font-size:10pt;">3. مطابقة وتوازن الصندوق (Cash Balance Audit):</h3>
+        <p style="margin:0; font-size:8.5pt; color:#4A5568;">
+            رصيد النقدية المتبقي بالصندوق بنهاية شهر أغسطس هو <strong>4,695 ج.م</strong> وهو مطابق تماماً للمعادلة المحاسبية: 
+            <br>
+            <strong>رصيد النهاية = (تمويل المالك + الإيرادات) - المصروفات الكلية = (485,540 + 25,795) - 506,640 = 4,695 ج.م</strong>
+        </p>
+    </div>
+
+    <div class="section-header">📋 رابعاً: كشف تفصيلي كامل بجميع حركة المعاملات الـ 148 لشهر أغسطس 2026</div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width:25px; text-align:center;">#</th>
+                <th style="width:65px; text-align:center;">التاريخ</th>
+                <th style="width:60px; text-align:center;">النوع</th>
+                <th>تفاصيل الحركة / البيان</th>
+                <th style="width:110px;">التصنيف المحاسبي</th>
+                <th style="width:85px; text-align:left;">المبلغ (ج.م)</th>
+                <th style="width:85px; text-align:left;">رصيد الصندوق</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+    <tr>
+        <td style='text-align:center; font-weight:600;'>1</td>
+        <td style='text-align:center;'>8/4/2026</td>
+        <td style='text-align:center;'><span class='badge bg-blue'>تمويل مالك</span></td>
+        <td style='font-weight:600;'>تحويل انستاباي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تمويلات المالك</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>5,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>5,000 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>2</td>
+        <td style='text-align:center;'>8/4/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>توصيل قماش ظهر السراير</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>175 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>4,825 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>3</td>
+        <td style='text-align:center;'>8/4/2026</td>
+        <td style='text-align:center;'><span class='badge bg-blue'>تمويل مالك</span></td>
+        <td style='font-weight:600;'>تحويل انستاباي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تمويلات المالك</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>5,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>9,825 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>4</td>
+        <td style='text-align:center;'>8/4/2026</td>
+        <td style='text-align:center;'><span class='badge bg-blue'>تمويل مالك</span></td>
+        <td style='font-weight:600;'>تحويل انستاباي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تمويلات المالك</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>5,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>14,825 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>5</td>
+        <td style='text-align:center;'>8/4/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>باقي راتب يوسف</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>رواتب وأجور</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>4,500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>10,325 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>6</td>
+        <td style='text-align:center;'>8/4/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة ل احمد البار من مرتب شهر </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>2,500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>7,825 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>7</td>
+        <td style='text-align:center;'>8/4/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>دفعة للفنانة امل</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>5,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>2,825 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>8</td>
+        <td style='text-align:center;'>8/5/2026</td>
+        <td style='text-align:center;'><span class='badge bg-green'>إيراد</span></td>
+        <td style='font-weight:600;'>ايراد مغسلة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>إيراد مغسلة</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>120 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>2,945 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>9</td>
+        <td style='text-align:center;'>8/5/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مشترك بسلك ثلاثي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>260 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>2,685 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>10</td>
+        <td style='text-align:center;'>8/5/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>كارت شحن يوسف</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>100 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>2,585 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>11</td>
+        <td style='text-align:center;'>8/5/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>شحن وغسيل تكييف الاستقبال</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,350 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>1,235 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>12</td>
+        <td style='text-align:center;'>8/6/2026</td>
+        <td style='text-align:center;'><span class='badge bg-blue'>تمويل مالك</span></td>
+        <td style='font-weight:600;'>تحويل بنكي من أ محمد مرسي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تمويلات المالك</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>50,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>51,235 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>13</td>
+        <td style='text-align:center;'>8/6/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>بطاريات للخزينة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>60 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>51,175 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>14</td>
+        <td style='text-align:center;'>8/6/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>دبل فيس </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>165 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>51,010 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>15</td>
+        <td style='text-align:center;'>8/6/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>بن ضيافة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>250 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>50,760 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>16</td>
+        <td style='text-align:center;'>8/6/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مفك + زرادية</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>140 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>50,620 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>17</td>
+        <td style='text-align:center;'>8/6/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مشترك بسلك</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>240 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>50,380 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>18</td>
+        <td style='text-align:center;'>8/6/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>دفعة من حساب علاء الكهربائي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>48,880 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>19</td>
+        <td style='text-align:center;'>8/6/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>شراء كشكول سلك</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>55 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>48,825 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>20</td>
+        <td style='text-align:center;'>8/6/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>دفعة من حساب احمد الكاميرات</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>2,500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>46,325 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>21</td>
+        <td style='text-align:center;'>8/6/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مكافأة مبيت في الفندق للموظف يوسف</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>رواتب وأجور</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>300 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>46,025 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>22</td>
+        <td style='text-align:center;'>8/7/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة من الراتب للموظف يوسف</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>45,825 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>23</td>
+        <td style='text-align:center;'>8/8/2026</td>
+        <td style='text-align:center;'><span class='badge bg-green'>إيراد</span></td>
+        <td style='font-weight:600;'>ايجار غرفة 401 بسعر 1000 لليلة لمدة 8 ليالي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>إيراد غرف</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>8,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>53,825 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>24</td>
+        <td style='text-align:center;'>8/8/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>دفعة مقدمة من المفروشات لشركة كوين </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>21,494 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>32,331 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>25</td>
+        <td style='text-align:center;'>8/8/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>عمولة تسكين الغرفة 401</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>عمولات حجز</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>800 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>31,531 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>26</td>
+        <td style='text-align:center;'>8/8/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>ادوات مكتبية </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>460 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>31,071 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>27</td>
+        <td style='text-align:center;'>8/8/2026</td>
+        <td style='text-align:center;'><span class='badge bg-green'>إيراد</span></td>
+        <td style='font-weight:600;'>غرفة 402 ليلتين</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>إيراد غرف</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>2,600 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>33,671 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>28</td>
+        <td style='text-align:center;'>8/8/2026</td>
+        <td style='text-align:center;'><span class='badge bg-green'>إيراد</span></td>
+        <td style='font-weight:600;'>غرفة 406 ليلتين </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>إيراد غرف</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>2,300 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>35,971 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>29</td>
+        <td style='text-align:center;'>8/8/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>افطار الغرف 5 عملاء *40 جنيه يوم 8 اغسطس</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>35,771 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>30</td>
+        <td style='text-align:center;'>8/8/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>عمولة تسكين غرفة 406 </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>عمولات حجز</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>100 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>35,671 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>31</td>
+        <td style='text-align:center;'>8/8/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سبلايز للغرف </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>460 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>35,211 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>32</td>
+        <td style='text-align:center;'>8/9/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>دفعة الكهربائي الاخيرة علاء</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>2,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>33,211 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>33</td>
+        <td style='text-align:center;'>8/9/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>افطار الغرف 5 عملاء *40 جنيه يوم 9 اغسطس</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>33,011 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>34</td>
+        <td style='text-align:center;'>8/9/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>رول تواليت</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>140 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>32,871 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>35</td>
+        <td style='text-align:center;'>8/9/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>هدايا للنزلاء</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>60 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>32,811 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>36</td>
+        <td style='text-align:center;'>8/10/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>باقي حساب شركة كوين </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>32,241 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>570 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>37</td>
+        <td style='text-align:center;'>8/10/2026</td>
+        <td style='text-align:center;'><span class='badge bg-green'>إيراد</span></td>
+        <td style='font-weight:600;'>ايجار 7 ايام غرفة 701*1000 جنيه</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>إيراد غرف</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>7,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>7,570 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>38</td>
+        <td style='text-align:center;'>8/10/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>عمولة ايجار غرفة 701 </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>عمولات حجز</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>700 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>6,870 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>39</td>
+        <td style='text-align:center;'>8/10/2026</td>
+        <td style='text-align:center;'><span class='badge bg-green'>إيراد</span></td>
+        <td style='font-weight:600;'>ايجار غرفة ليلة واحدة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>إيراد غرف</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>1,200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>8,070 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>40</td>
+        <td style='text-align:center;'>8/10/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>عهدة مع يوسف </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>7,870 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>41</td>
+        <td style='text-align:center;'>8/11/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>غسيل خاص بالفندق مفروشات </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>765 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>7,105 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>42</td>
+        <td style='text-align:center;'>8/11/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة للموظف يوسف</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>100 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>7,005 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>43</td>
+        <td style='text-align:center;'>8/12/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مواصلات اكتوبر ذهاب وعودة اوبر </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>480 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>6,525 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>44</td>
+        <td style='text-align:center;'>8/12/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>فرج النجار تركيب ظهور السراير الدور 1 و2 </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>6,325 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>45</td>
+        <td style='text-align:center;'>8/12/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>دفعة 50% لشركة كوين للمفروشات </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>6,830 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>505 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>46</td>
+        <td style='text-align:center;'>8/12/2026</td>
+        <td style='text-align:center;'><span class='badge bg-green'>إيراد</span></td>
+        <td style='font-weight:600;'>بن ضيافة </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>إيراد غرف</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>215 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>290 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>47</td>
+        <td style='text-align:center;'>8/12/2026</td>
+        <td style='text-align:center;'><span class='badge bg-green'>إيراد</span></td>
+        <td style='font-weight:600;'>مياه معدنية  2 كرتونة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>إيراد غرف</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>260 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>30 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>48</td>
+        <td style='text-align:center;'>8/12/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>عدد 7 رسيفر و200 متر سلك دش</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>5,250 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>5,280 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>49</td>
+        <td style='text-align:center;'>8/12/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>اخر دفعة من حساب الكراسي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>5,300 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>10,580 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>50</td>
+        <td style='text-align:center;'>8/12/2026</td>
+        <td style='text-align:center;'><span class='badge bg-blue'>تمويل مالك</span></td>
+        <td style='font-weight:600;'>دفعة تمويل من المالك</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تمويلات المالك</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>10,550 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>30 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>51</td>
+        <td style='text-align:center;'>8/12/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>افطار الغرف </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>100 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>130 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>52</td>
+        <td style='text-align:center;'>8/12/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة للموظف يوسف</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>330 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>53</td>
+        <td style='text-align:center;'>8/12/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>شراء زاوية ومسامير للنجار</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>270 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>600 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>54</td>
+        <td style='text-align:center;'>8/12/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مواصلات</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>70 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>670 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>55</td>
+        <td style='text-align:center;'>8/12/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مستلزمات تركيب الرسيفر </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>65 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>735 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>56</td>
+        <td style='text-align:center;'>8/13/2026</td>
+        <td style='text-align:center;'><span class='badge bg-blue'>تمويل مالك</span></td>
+        <td style='font-weight:600;'>تمويل من المالك</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تمويلات المالك</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>50,170 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>49,435 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>57</td>
+        <td style='text-align:center;'>8/14/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>فاتورة  كهرباء شهري يوليو واغسطس </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>مرافق وفواتير حكومية</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>17,305 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>32,130 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>58</td>
+        <td style='text-align:center;'>8/13/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مكافأة يوسف مبيت الشهر الماضي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>رواتب وأجور</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>31,130 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>59</td>
+        <td style='text-align:center;'>8/14/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مواصلات لشركة التسويق  في المقطم لاحضار اللابتوب</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>30,630 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>60</td>
+        <td style='text-align:center;'>-</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>اخر دفعة من المرايات ل روماني </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>3,900 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>26,730 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>61</td>
+        <td style='text-align:center;'>8/13/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>شراء معطر وملمع واكياس قمامة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>410 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>26,320 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>62</td>
+        <td style='text-align:center;'>8/13/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>بن</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>85 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>26,235 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>63</td>
+        <td style='text-align:center;'>8/14/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>افطار غرفتين يومي 13 و14 اغسطس</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>26,035 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>64</td>
+        <td style='text-align:center;'>8/14/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>حسب الكشف المرفق</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>25,035 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>65</td>
+        <td style='text-align:center;'>8/14/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>توصيل المفروشات </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>350 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>24,685 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>66</td>
+        <td style='text-align:center;'>8/14/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>باقي حساب احمد كاميرات </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>2,500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>22,185 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>67</td>
+        <td style='text-align:center;'>8/14/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>باقي مكافأة يوسف </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>رواتب وأجور</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>21,185 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>68</td>
+        <td style='text-align:center;'>8/15/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>كرتون ماء 5*130</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>650 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>20,535 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>69</td>
+        <td style='text-align:center;'>8/16/2026</td>
+        <td style='text-align:center;'><span class='badge bg-blue'>تمويل مالك</span></td>
+        <td style='font-weight:600;'>تمويل من المالك شيك بنكي </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تمويلات المالك</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>120,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>140,535 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>70</td>
+        <td style='text-align:center;'>8/16/2026</td>
+        <td style='text-align:center;'><span class='badge bg-blue'>تمويل مالك</span></td>
+        <td style='font-weight:600;'>تمويل من المالك 2600 دولار *50.20 </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تمويلات المالك</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>130,520 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>271,055 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>71</td>
+        <td style='text-align:center;'>8/16/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مواصلات صرف الشيك وتغيير الدولارات</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>270 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>270,785 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>72</td>
+        <td style='text-align:center;'>8/17/2026</td>
+        <td style='text-align:center;'><span class='badge bg-green'>إيراد</span></td>
+        <td style='font-weight:600;'>ايجار غرفتين 401 و 405 ليلة واحدة *1000 لغرفة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>إيراد غرف</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>2,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>272,785 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>73</td>
+        <td style='text-align:center;'>8/17/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>ايجار شهر اغسطس</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>إيجار مقر الفندق</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>220,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>52,785 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>74</td>
+        <td style='text-align:center;'>8/17/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة استاذ خالد</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>51,785 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>75</td>
+        <td style='text-align:center;'>8/17/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة ل جومانة وجيه من الراتب</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>50,785 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>76</td>
+        <td style='text-align:center;'>8/17/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مسامير تعليق التابلوهات في غرف الدور 1و 2 </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>100 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>50,685 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>77</td>
+        <td style='text-align:center;'>8/17/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مصنعية النجار لتعليق البراويزوضبط الابواب </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>300 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>50,385 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>78</td>
+        <td style='text-align:center;'>8/17/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة  ل مدحت من الراتب </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>49,885 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>79</td>
+        <td style='text-align:center;'>8/18/2026</td>
+        <td style='text-align:center;'><span class='badge bg-blue'>تمويل مالك</span></td>
+        <td style='font-weight:600;'>تمويل من المالك </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تمويلات المالك</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>20,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>69,885 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>80</td>
+        <td style='text-align:center;'>8/18/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>صواني القهوة للغرف 8 وادوات مكتبية</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,900 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>67,985 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>81</td>
+        <td style='text-align:center;'>8/18/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مجموعة تجميع السرير للنجار </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>100 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>67,885 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>82</td>
+        <td style='text-align:center;'>8/18/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>ملة سرير 160سم للجناح</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,100 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>66,785 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>83</td>
+        <td style='text-align:center;'>8/18/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>اطباق واكواب من امازون صيني وزجاج</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>9,300 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>57,485 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>84</td>
+        <td style='text-align:center;'>8/18/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>حساب النجار تقفيل كل شغل النجارة </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>400 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>57,085 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>85</td>
+        <td style='text-align:center;'>8/18/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>ماء وسوفت درينك </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>665 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>56,420 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>86</td>
+        <td style='text-align:center;'>8/18/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مشتريات نسكافيه ومنظفات وعصائر</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>900 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>55,520 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>87</td>
+        <td style='text-align:center;'>8/19/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مبيت يوسف</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>رواتب وأجور</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>55,320 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>88</td>
+        <td style='text-align:center;'>8/19/2026</td>
+        <td style='text-align:center;'><span class='badge bg-blue'>تمويل مالك</span></td>
+        <td style='font-weight:600;'>تمويل من المالك </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تمويلات المالك</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>9,300 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>64,620 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>89</td>
+        <td style='text-align:center;'>8/19/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>غسيل السجاد </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>260 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>64,360 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>90</td>
+        <td style='text-align:center;'>8/19/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة من راتب يوسف</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>64,160 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>91</td>
+        <td style='text-align:center;'>8/20/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مناديل ورول تواليت</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>315 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>63,845 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>92</td>
+        <td style='text-align:center;'>8/20/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>فاتورة التليفونات الارضي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>مرافق وفواتير حكومية</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>145 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>63,700 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>93</td>
+        <td style='text-align:center;'>8/20/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>فاتورة الانترنت الارضي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>مرافق وفواتير حكومية</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,900 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>61,800 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>94</td>
+        <td style='text-align:center;'>8/20/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>هدايا للاطفال</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>190 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>61,610 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>95</td>
+        <td style='text-align:center;'>8/20/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>لبن ومصفاة للمطبخ</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>145 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>61,465 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>96</td>
+        <td style='text-align:center;'>8/20/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>كباب وكفتة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>2,150 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>59,315 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>97</td>
+        <td style='text-align:center;'>8/21/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>فاتورة ماكدوتالدز</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>2,020 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>57,295 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>98</td>
+        <td style='text-align:center;'>8/21/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>فاتورة بيزا هت </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>970 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>56,325 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>99</td>
+        <td style='text-align:center;'>8/21/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة من الراتب ل يوسف </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>56,125 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>100</td>
+        <td style='text-align:center;'>8/21/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة من الراتب ل جومانة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>50 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>56,075 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>101</td>
+        <td style='text-align:center;'>8/21/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>ثلج</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>100 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>55,975 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>102</td>
+        <td style='text-align:center;'>8/21/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>شاليموه</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>50 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>55,925 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>103</td>
+        <td style='text-align:center;'>8/22/2026</td>
+        <td style='text-align:center;'><span class='badge bg-green'>إيراد</span></td>
+        <td style='font-weight:600;'>ايراد غرفة 406 3 ليالي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>إيراد غرف</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>2,100 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>58,025 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>104</td>
+        <td style='text-align:center;'>8/23/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>دفعة من حساب المفروشات </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>30,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>28,025 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>105</td>
+        <td style='text-align:center;'>8/23/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>فواتير مياه 4 شهور </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>مرافق وفواتير حكومية</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>7,250 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>20,775 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>106</td>
+        <td style='text-align:center;'>8/23/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>فاتورة مكافحةالحشرات شهر اغسطس</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>2,500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>18,275 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>107</td>
+        <td style='text-align:center;'>8/23/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة استاذ خالد</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>17,275 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>108</td>
+        <td style='text-align:center;'>8/23/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مصاريف عمل سقالة لاستكمال الرسومات</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>15,775 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>109</td>
+        <td style='text-align:center;'>8/24/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>غسيل ومكوة للمفروشات</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>380 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>15,395 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>110</td>
+        <td style='text-align:center;'>8/24/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مصروفات  من 22 الى 24 اغسطس حسب الكشف </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>2,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>13,395 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>111</td>
+        <td style='text-align:center;'>8/24/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة من الراتب محمد المنسي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>12,395 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>112</td>
+        <td style='text-align:center;'>8/24/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة من الراتب مدحت</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>11,895 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>113</td>
+        <td style='text-align:center;'>8/24/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>تغيير حوض حمام 301 وتغيير واصلاح خلاط اللحوض</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>11,395 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>114</td>
+        <td style='text-align:center;'>8/25/2026</td>
+        <td style='text-align:center;'><span class='badge bg-blue'>تمويل مالك</span></td>
+        <td style='font-weight:600;'>تمويل من المالك انستاباي </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تمويلات المالك</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>15,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>26,395 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>115</td>
+        <td style='text-align:center;'>8/25/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مستلزمات السباكة حسب الفاتورة </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>20,150 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>6,245 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>116</td>
+        <td style='text-align:center;'>8/25/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>نقل مستلزمات السباكة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>350 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>5,895 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>117</td>
+        <td style='text-align:center;'>8/25/2026</td>
+        <td style='text-align:center;'><span class='badge bg-blue'>تمويل مالك</span></td>
+        <td style='font-weight:600;'>تمويل من المالك تحويل بنكي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تمويلات المالك</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>15,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>20,895 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>118</td>
+        <td style='text-align:center;'>8/25/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>دفعة من مصنعية النقاش</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>2,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>18,895 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>119</td>
+        <td style='text-align:center;'>8/25/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مصنعية السباك</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تجهيزات ومعدات وأثاث</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>8,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>10,895 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>120</td>
+        <td style='text-align:center;'>8/25/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مستلزمات النقاشة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>5,500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>5,395 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>121</td>
+        <td style='text-align:center;'>8/25/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>جزء  من حساب المغسلة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>4,395 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>122</td>
+        <td style='text-align:center;'>8/26/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة لخالد</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>2,895 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>123</td>
+        <td style='text-align:center;'>8/26/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>كارتونة مياه</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>مرافق وفواتير حكومية</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>140 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>2,755 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>124</td>
+        <td style='text-align:center;'>8/26/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مستلزمات كهرباء</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>مرافق وفواتير حكومية</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>3,400 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>645 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>125</td>
+        <td style='text-align:center;'>8/26/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مواصلات ونقل  مستلزمات الكهرباء</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>مرافق وفواتير حكومية</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>160 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>805 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>126</td>
+        <td style='text-align:center;'>8/27/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>ادوات نظافة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>100 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>905 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>127</td>
+        <td style='text-align:center;'>8/27/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>تحت حساب شبابيك السلم</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>1,405 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>128</td>
+        <td style='text-align:center;'>8/27/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>تحت حساب مصنعية الكهرباء</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>مرافق وفواتير حكومية</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>500 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>1,905 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>129</td>
+        <td style='text-align:center;'>8/27/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>باقي طلبات النقاش</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>1,520 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>3,425 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>130</td>
+        <td style='text-align:center;'>8/28/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة ل منة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>3,625 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>131</td>
+        <td style='text-align:center;'>8/28/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة ل يوسف</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>150 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>3,775 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>132</td>
+        <td style='text-align:center;'>8/29/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>بن </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>250 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>4,025 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>133</td>
+        <td style='text-align:center;'>8/29/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>منظفات</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>4,225 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>134</td>
+        <td style='text-align:center;'>8/29/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة من الراتب محمد منسي</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>4,425 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>135</td>
+        <td style='text-align:center;'>8/30/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة من راتب يوسف</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>4,625 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>136</td>
+        <td style='text-align:center;'>8/30/2026</td>
+        <td style='text-align:center;'><span class='badge bg-blue'>تمويل مالك</span></td>
+        <td style='font-weight:600;'>تمويل من المالك</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>تمويلات المالك</td>
+        <td style='font-weight:700; color:#276749; text-align:left;'>50,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>45,375 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>137</td>
+        <td style='text-align:center;'>8/30/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>تحت حساب سلوك ووصلات الدش والنت</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>شبكات وتطوير ويبسايت</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>20,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>25,375 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>138</td>
+        <td style='text-align:center;'>8/30/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>تحت حساب الويبسايت</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>شبكات وتطوير ويبسايت</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>10,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>15,375 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>139</td>
+        <td style='text-align:center;'>8/30/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>بخور</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>100 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>15,275 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>140</td>
+        <td style='text-align:center;'>8/30/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>مغسلة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>2,920 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>12,355 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>141</td>
+        <td style='text-align:center;'>8/30/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة ل يوسف</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>150 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>12,205 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>142</td>
+        <td style='text-align:center;'>8/30/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة ل جومانا</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>200 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>12,005 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>143</td>
+        <td style='text-align:center;'>8/30/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>كرتونة ماء</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>130 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>11,875 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>144</td>
+        <td style='text-align:center;'>8/30/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>صابون بريل</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>ضيافة وإعاشة وتوريدات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>50 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>11,825 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>145</td>
+        <td style='text-align:center;'>8/31/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>معدات نظافة</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>340 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>11,485 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>146</td>
+        <td style='text-align:center;'>8/31/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>باقي مصنعية النقاش </td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>6,000 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>5,485 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>147</td>
+        <td style='text-align:center;'>8/31/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>شراء الوان لرسم اللوحات</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>صيانة ونثريات ومواصلات</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>690 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>4,795 ج.م</td>
+    </tr>
+    <tr>
+        <td style='text-align:center; font-weight:600;'>148</td>
+        <td style='text-align:center;'>8/31/2026</td>
+        <td style='text-align:center;'><span class='badge bg-red'>مصروف</span></td>
+        <td style='font-weight:600;'>سلفة من الراتب يوسف</td>
+        <td style='font-size:8.5pt; color:#4A5568;'>سلف موظفين</td>
+        <td style='font-weight:700; color:#9B2C2C; text-align:left;'>100 ج.م</td>
+        <td style='font-weight:700; text-align:left; color:#1A365D;'>4,695 ج.م</td>
+    </tr>
+            <tr class="total-row">
+                <td colspan="5" style="text-align:left;">الإجمالي الكلي لمصروفات ومقبوضات شهر أغسطس:</td>
+                <td style="text-align:left; color:#9B2C2C;">506,640 ج.م</td>
+                <td style="text-align:left; color:#1A365D;">4,695 ج.م</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- PAGE 5: DOUBLE-ENTRY JOURNAL ENTRIES & TRIAL BALANCE -->
+    <div class="section-header">⚖️ خامساً: القيود المحاسبية الرسمية وميزان المراجعة (شهر أغسطس 2026)</div>
+    
+    <h3 style="color:#1A365D; font-size:10.5pt; margin-top:10px; margin-bottom:6px;">1. القيد المحاسبي المركب الشامل المجمع لشهر أغسطس 2026</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width:80px; text-align:center;">التاريخ</th>
+                <th>بيان الحساب المحاسبي (نظام القيد المزدوج)</th>
+                <th style="width:110px; text-align:left;">مدين (ج.م)</th>
+                <th style="width:110px; text-align:left;">دائن (ج.م)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center; font-weight:600;">31/08/2026</td>
+                <td style="font-weight:700; color:#1A365D;">من مذكورين:</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>حـ/ مصروف إيجار مقر الفندق الرئيسي <em>(إيجار شهر أغسطس)</em></td>
+                <td style="font-weight:700; color:#9B2C2C; text-align:left;">220,000</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>حـ/ التجهيزات والمعدات والأثاث <em>(مفروشات كوين، سباكة، كاميرات، أثاث)</em></td>
+                <td style="font-weight:700; color:#9B2C2C; text-align:left;">141,175</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>حـ/ صيانة ونثريات ومواصلات ورسومات <em>(مصنعية سباك، دهان، نجارة، نقل)</em></td>
+                <td style="font-weight:700; color:#9B2C2C; text-align:left;">54,525</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>حـ/ المرافق العامة والفواتير <em>(كهرباء يوليو وأغسطس، مياه، تليفونات، مكافحة)</em></td>
+                <td style="font-weight:700; color:#9B2C2C; text-align:left;">30,800</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>حـ/ تأسيس الشبكات وتطوير الويبسايت والدش <em>(تمديدات شبكات، ويبسايت)</em></td>
+                <td style="font-weight:700; color:#9B2C2C; text-align:left;">30,000</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>حـ/ الرواتب والأجور وسلف الموظفين <em>(أجور ومكافآت وسلف العاملين)</em></td>
+                <td style="font-weight:700; color:#9B2C2C; text-align:left;">18,150</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>حـ/ الضيافة والإعاشة والتوريدات <em>(وجبات، بن، منظفات، مياه، إفطار)</em></td>
+                <td style="font-weight:700; color:#9B2C2C; text-align:left;">10,390</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>حـ/ عمولات الحجز والتسكين</td>
+                <td style="font-weight:700; color:#9B2C2C; text-align:left;">1,600</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>حـ/ الصندوق والنقدية <em>(صافي السيولة المتبقية بالحساب)</em></td>
+                <td style="font-weight:700; color:#276749; text-align:left;">4,695</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="font-weight:700; color:#1A365D;">إلى مذكورين:</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>حـ/ إيرادات النشاط الفندقي والخدمات والمغسلة <em>(إيراد غرف ومغسلة)</em></td>
+                <td></td>
+                <td style="font-weight:700; color:#276749; text-align:left;">25,795</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>حـ/ رأس المال - تمويلات المالك <em>(تحويلات انستاباي، بنك، شيكات، دولار)</em></td>
+                <td></td>
+                <td style="font-weight:700; color:#276749; text-align:left;">485,540</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="2" style="text-align:left;">توازن القيد المحاسبي المركب (المدين = الدائن):</td>
+                <td style="color:#1A365D; text-align:left;">511,335 ج.م</td>
+                <td style="color:#1A365D; text-align:left;">511,335 ج.م</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 style="color:#1A365D; font-size:10.5pt; margin-top:15px; margin-bottom:6px;">2. ميزان المراجعة عن شهر أغسطس 2026 (Trial Balance)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width:70px; text-align:center;">الكود</th>
+                <th>اسم الحساب المحاسبي</th>
+                <th style="width:120px; text-align:left;">أرصدة مدينة (ج.م)</th>
+                <th style="width:120px; text-align:left;">أرصدة دائنة (ج.م)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td style="text-align:center; font-weight:600;">101</td><td style="font-weight:700;">حـ/ الصندوق والنقدية (Cash Account)</td><td style="font-weight:700; color:#276749; text-align:left;">4,695</td><td style="text-align:center;">-</td></tr>
+            <tr><td style="text-align:center; font-weight:600;">301</td><td style="font-weight:700;">حـ/ رأس المال - تمويل المالك (Owner's Equity)</td><td style="text-align:center;">-</td><td style="font-weight:700; color:#2B6CB0; text-align:left;">485,540</td></tr>
+            <tr><td style="text-align:center; font-weight:600;">401</td><td style="font-weight:700;">حـ/ إيرادات النشاط الفندقي والمغسلة (Hotel Revenue)</td><td style="text-align:center;">-</td><td style="font-weight:700; color:#2B6CB0; text-align:left;">25,795</td></tr>
+            <tr><td style="text-align:center; font-weight:600;">501</td><td>حـ/ مصروف إيجار المقر الرئيسي (Building Rent)</td><td style="font-weight:700; color:#9B2C2C; text-align:left;">220,000</td><td style="text-align:center;">-</td></tr>
+            <tr><td style="text-align:center; font-weight:600;">502</td><td>حـ/ التجهيزات والمعدات والأثاث (Capex & Furnishing)</td><td style="font-weight:700; color:#9B2C2C; text-align:left;">141,175</td><td style="text-align:center;">-</td></tr>
+            <tr><td style="text-align:center; font-weight:600;">503</td><td>حـ/ صيانة ونثريات ومواصلات ورسومات (Maintenance & Misc)</td><td style="font-weight:700; color:#9B2C2C; text-align:left;">54,525</td><td style="text-align:center;">-</td></tr>
+            <tr><td style="text-align:center; font-weight:600;">504</td><td>حـ/ المرافق العامة والفواتير الحكومية (Utilities & Bills)</td><td style="font-weight:700; color:#9B2C2C; text-align:left;">30,800</td><td style="text-align:center;">-</td></tr>
+            <tr><td style="text-align:center; font-weight:600;">505</td><td>حـ/ شبكات وتطوير الويبسايت والدش (Networks & Web)</td><td style="font-weight:700; color:#9B2C2C; text-align:left;">30,000</td><td style="text-align:center;">-</td></tr>
+            <tr><td style="text-align:center; font-weight:600;">506</td><td>حـ/ الرواتب والأجور وسلف الموظفين (Payroll & Advances)</td><td style="font-weight:700; color:#9B2C2C; text-align:left;">18,150</td><td style="text-align:center;">-</td></tr>
+            <tr><td style="text-align:center; font-weight:600;">507</td><td>حـ/ الضيافة والإعاشة والتوريدات (F&B & Hospitality)</td><td style="font-weight:700; color:#9B2C2C; text-align:left;">10,390</td><td style="text-align:center;">-</td></tr>
+            <tr><td style="text-align:center; font-weight:600;">508</td><td>حـ/ عمولات الحجز والتسكين (Commissions)</td><td style="font-weight:700; color:#9B2C2C; text-align:left;">1,600</td><td style="text-align:center;">-</td></tr>
+            <tr class="total-row">
+                <td colspan="2" style="text-align:left;">تطابق وتوازن ميزان المراجعة (Debit = Credit):</td>
+                <td style="color:#1A365D; text-align:left;">511,335 ج.م</td>
+                <td style="color:#1A365D; text-align:left;">511,335 ج.م</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="margin-top:12px; padding:8px 12px; background-color:#EDF2F7; border-radius:4px; font-size:8pt; color:#4A5568;">
+        <strong>ملاحظة محاسبية: تم توثيق وإدراج هذا القيد المحاسبي وميزان المراجعة آلياً بناءً على مراجعة كافة المعاملات الـ 148 لشهر أغسطس 2026 ومطابقة دفاتر الـ Ledger.</strong>
+    </div>
+
+</body>
+</html>

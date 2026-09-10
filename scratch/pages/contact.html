@@ -1,0 +1,289 @@
+<!-- wp:html -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --clr-nile-dark: #071320;
+  --clr-nile: #0B1B2B;
+  --clr-nile-mid: #14283D;
+  --clr-gold: #C9873A;
+  --clr-gold-light: #DFAB5C;
+  --clr-gold-bright: #F3C377;
+  --clr-sand: #F7F2E8;
+  --clr-sand-dark: #EADDCF;
+  --clr-ivory: #FCFAF7;
+  --clr-dark: #1A1A1A;
+  --clr-gray: #555555;
+  --font-cinzel: 'Cinzel', serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-cairo: 'Cairo', sans-serif;
+  --radius: 12px;
+  --shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.henu-section { padding: 80px 20px; font-family: var(--font-montserrat); }
+.henu-container { max-width: 1200px; margin: 0 auto; }
+.henu-badge {
+  background: var(--clr-gold);
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 5px 16px;
+  border-radius: 30px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+.henu-title {
+  font-family: var(--font-cinzel);
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--clr-nile);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+.henu-title span { color: var(--clr-gold); }
+.henu-title.light { color: #FFFFFF; }
+.henu-title.light span { color: var(--clr-gold-light); }
+.henu-subtitle {
+  font-size: 1.05rem;
+  color: var(--clr-gray);
+  max-width: 700px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+.henu-subtitle.center { margin-left: auto; margin-right: auto; text-align: center; }
+.henu-subtitle.light { color: rgba(255,255,255,0.85); }
+
+.btn-henu-gold {
+  background: var(--clr-gold);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(201,135,58,0.35);
+}
+.btn-henu-gold:hover {
+  background: var(--clr-gold-light);
+  transform: translateY(-2px);
+}
+.btn-henu-outline {
+  background: transparent;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  padding: 13px 26px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  border: 1.5px solid #FFFFFF;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-henu-outline:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: var(--clr-gold-light);
+}
+
+.henu-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+.henu-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 36px;
+  align-items: center;
+}
+.henu-card {
+  background: #FFFFFF;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--clr-sand-dark);
+  transition: all 0.35s ease;
+}
+.henu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+}
+.henu-card-img {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+.henu-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.henu-card:hover .henu-card-img img {
+  transform: scale(1.06);
+}
+.henu-card-body { padding: 24px; }
+.henu-card-price {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--clr-nile);
+  color: var(--clr-gold-light);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  font-family: var(--font-cinzel);
+}
+
+@media (max-width: 768px) {
+  .henu-title { font-size: 1.85rem; }
+  .henu-section { padding: 50px 16px; }
+}
+</style>
+
+<div class="henu-section" style="background: var(--clr-ivory); padding-top: 40px;" id="booking">
+  <div class="henu-container">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <span class="henu-badge">Contact & Booking</span>
+      <h1 class="henu-title">Book Your Stay <span>Directly</span></h1>
+      <p class="henu-subtitle center">Instant WhatsApp booking with best rate guarantee, 0% commission, and flexible payment upon arrival.</p>
+    </div>
+
+    <div class="henu-grid-2">
+      <!-- Left: Interactive WhatsApp Booking Form -->
+      <div style="background: #FFFFFF; padding: 32px; border-radius: var(--radius); border: 2px solid var(--clr-gold); box-shadow: var(--shadow);">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <span style="font-size: 1.5rem;">💬</span>
+          <h3 style="font-family: var(--font-cinzel); font-size: 1.4rem; color: var(--clr-nile);">Instant WhatsApp Booking</h3>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--clr-gray); margin-bottom: 20px;">
+          Direct Booking WhatsApp Hotline: <strong>01000925827</strong> (+20 100 092 5827)
+        </p>
+
+        <form id="wpBookingForm" onsubmit="event.preventDefault(); submitWhatsAppBooking();" style="display: flex; flex-direction: column; gap: 14px;">
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 700; color: var(--clr-nile); display: block; margin-bottom: 4px;">Select Room Category:</label>
+            <select id="roomSelect" style="width: 100%; padding: 12px; border: 1.5px solid #CBD5E1; border-radius: 6px; font-family: var(--font-montserrat); font-weight: 600;">
+              <option value="Single Standard ($12/night)">Single Standard Room — $12/night</option>
+              <option value="Single Window ($15/night)">Single with Pyramids Window — $15/night</option>
+              <option value="Single Balcony ($20/night)">Single with Private Balcony — $20/night</option>
+              <option value="Double Standard ($18/night)">Double Standard Room — $18/night</option>
+              <option value="Double Window ($22/night)">Double with Pyramids Window — $22/night</option>
+              <option value="Double Balcony ($25/night)">Double with Private Balcony — $25/night</option>
+              <option value="Triple Standard ($25/night)">Triple Family Room — $25/night</option>
+              <option value="Triple Window ($30/night)">Triple with Pyramids Window — $30/night</option>
+              <option value="Triple Balcony ($35/night)">Triple with Private Balcony — $35/night</option>
+              <option value="Royal Suite ($45/night)">Royal King Suite Pyramids View — $45/night</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 700; color: var(--clr-nile); display: block; margin-bottom: 4px;">Check-in Date:</label>
+              <input type="date" id="checkInDate" required style="width: 100%; padding: 10px; border: 1.5px solid #CBD5E1; border-radius: 6px; font-family: var(--font-montserrat);">
+            </div>
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 700; color: var(--clr-nile); display: block; margin-bottom: 4px;">Check-out Date:</label>
+              <input type="date" id="checkOutDate" required style="width: 100%; padding: 10px; border: 1.5px solid #CBD5E1; border-radius: 6px; font-family: var(--font-montserrat);">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 700; color: var(--clr-nile); display: block; margin-bottom: 4px;">Number of Guests:</label>
+              <select id="guestCount" style="width: 100%; padding: 10px; border: 1.5px solid #CBD5E1; border-radius: 6px; font-family: var(--font-montserrat);">
+                <option value="1 Guest">1 Guest</option>
+                <option value="2 Guests" selected>2 Guests</option>
+                <option value="3 Guests">3 Guests</option>
+                <option value="4+ Guests">4+ Guests (Family)</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 700; color: var(--clr-nile); display: block; margin-bottom: 4px;">Guest Name:</label>
+              <input type="text" id="guestName" placeholder="Your Name" required style="width: 100%; padding: 10px; border: 1.5px solid #CBD5E1; border-radius: 6px; font-family: var(--font-montserrat);">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-henu-gold" style="width: 100%; justify-content: center; font-size: 1.05rem; padding: 16px;">
+            📲 Book Now via WhatsApp (01000925827)
+          </button>
+        </form>
+
+        <script>
+        function submitWhatsAppBooking() {
+          var room = document.getElementById('roomSelect').value;
+          var inDate = document.getElementById('checkInDate').value;
+          var outDate = document.getElementById('checkOutDate').value;
+          var guests = document.getElementById('guestCount').value;
+          var name = document.getElementById('guestName').value;
+
+          var text = "Hello HENU Hotel! I would like to book a stay:%0A" +
+                     "- Guest Name: " + encodeURIComponent(name) + "%0A" +
+                     "- Room: " + encodeURIComponent(room) + "%0A" +
+                     "- Check-in: " + encodeURIComponent(inDate) + "%0A" +
+                     "- Check-out: " + encodeURIComponent(outDate) + "%0A" +
+                     "- Guests: " + encodeURIComponent(guests);
+
+          window.open("https://wa.me/201000925827?text=" + text, "_blank");
+        }
+        </script>
+      </div>
+
+      <!-- Right: Contact Cards & Location -->
+      <div>
+        <div style="background: #FFFFFF; padding: 24px; border-radius: var(--radius); border: 1px solid var(--clr-sand-dark); box-shadow: var(--shadow); margin-bottom: 20px;">
+          <h3 style="font-family: var(--font-cinzel); font-size: 1.3rem; color: var(--clr-nile); margin-bottom: 14px;">Hotel Contact Details</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div>
+              <div style="font-size: 0.75rem; color: var(--clr-gold); font-weight: 700; text-transform: uppercase;">Direct Booking (WhatsApp Only):</div>
+              <div style="font-size: 1.2rem; font-weight: 800; color: var(--clr-nile); font-family: var(--font-cinzel);">
+                <a href="https://wa.me/201000925827" style="color: var(--clr-nile); text-decoration: none;">+20 100 092 5827</a>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size: 0.75rem; color: var(--clr-gray); font-weight: 700; text-transform: uppercase;">General Inquiries (WhatsApp & Calls):</div>
+              <div style="font-size: 1.15rem; font-weight: 800; color: var(--clr-nile); font-family: var(--font-cinzel);">
+                <a href="tel:+201123456777" style="color: var(--clr-nile); text-decoration: none;">+20 112 345 6777</a>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size: 0.75rem; color: var(--clr-gray); font-weight: 700; text-transform: uppercase;">Official Hotel Email:</div>
+              <div style="font-size: 1.1rem; font-weight: 700; color: var(--clr-gold);">
+                <a href="mailto:info@henuhotel.com" style="color: var(--clr-gold); text-decoration: none;">info@henuhotel.com</a>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size: 0.75rem; color: var(--clr-gray); font-weight: 700; text-transform: uppercase;">Address & Location:</div>
+              <div style="font-size: 0.95rem; color: var(--clr-dark); font-weight: 600;">
+                21 Gamal Abdel Nasser St., Nazlet El-Semman, Al Haram, Giza, Egypt
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://maps.app.goo.gl/N5mhKZM6KQVVA9z26" target="_blank" class="btn-henu-gold" style="width: 100%; justify-content: center; background: var(--clr-nile);">
+          📍 Open in Google Maps Navigation →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /wp:html -->

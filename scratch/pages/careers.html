@@ -1,0 +1,199 @@
+<!-- wp:html -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --clr-nile-dark: #071320;
+  --clr-nile: #0B1B2B;
+  --clr-nile-mid: #14283D;
+  --clr-gold: #C9873A;
+  --clr-gold-light: #DFAB5C;
+  --clr-gold-bright: #F3C377;
+  --clr-sand: #F7F2E8;
+  --clr-sand-dark: #EADDCF;
+  --clr-ivory: #FCFAF7;
+  --clr-dark: #1A1A1A;
+  --clr-gray: #555555;
+  --font-cinzel: 'Cinzel', serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-cairo: 'Cairo', sans-serif;
+  --radius: 12px;
+  --shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.henu-section { padding: 80px 20px; font-family: var(--font-montserrat); }
+.henu-container { max-width: 1200px; margin: 0 auto; }
+.henu-badge {
+  background: var(--clr-gold);
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 5px 16px;
+  border-radius: 30px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+.henu-title {
+  font-family: var(--font-cinzel);
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--clr-nile);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+.henu-title span { color: var(--clr-gold); }
+.henu-title.light { color: #FFFFFF; }
+.henu-title.light span { color: var(--clr-gold-light); }
+.henu-subtitle {
+  font-size: 1.05rem;
+  color: var(--clr-gray);
+  max-width: 700px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+.henu-subtitle.center { margin-left: auto; margin-right: auto; text-align: center; }
+.henu-subtitle.light { color: rgba(255,255,255,0.85); }
+
+.btn-henu-gold {
+  background: var(--clr-gold);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(201,135,58,0.35);
+}
+.btn-henu-gold:hover {
+  background: var(--clr-gold-light);
+  transform: translateY(-2px);
+}
+.btn-henu-outline {
+  background: transparent;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  padding: 13px 26px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  border: 1.5px solid #FFFFFF;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-henu-outline:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: var(--clr-gold-light);
+}
+
+.henu-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+.henu-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 36px;
+  align-items: center;
+}
+.henu-card {
+  background: #FFFFFF;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--clr-sand-dark);
+  transition: all 0.35s ease;
+}
+.henu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+}
+.henu-card-img {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+.henu-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.henu-card:hover .henu-card-img img {
+  transform: scale(1.06);
+}
+.henu-card-body { padding: 24px; }
+.henu-card-price {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--clr-nile);
+  color: var(--clr-gold-light);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  font-family: var(--font-cinzel);
+}
+
+@media (max-width: 768px) {
+  .henu-title { font-size: 1.85rem; }
+  .henu-section { padding: 50px 16px; }
+}
+</style>
+
+<div class="henu-section" style="background: var(--clr-ivory); padding-top: 40px;">
+  <div class="henu-container">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <span class="henu-badge">Join Our Team</span>
+      <h1 class="henu-title">Careers at <span>HENU Hotel</span></h1>
+      <p class="henu-subtitle center">Join our hospitality family at the Pyramids. We are looking for talented, multilingual professionals.</p>
+    </div>
+
+    <div class="henu-grid-2">
+      <div>
+        <h3 style="font-family: var(--font-cinzel); font-size: 1.4rem; color: var(--clr-nile); margin-bottom: 14px;">Open Positions:</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+          <div style="background: #FFFFFF; padding: 16px; border-radius: 8px; border: 1px solid var(--clr-sand-dark);">
+            <h4 style="font-weight: 700; color: var(--clr-nile);">Front Desk Receptionist (Multilingual)</h4>
+            <p style="font-size: 0.85rem; color: var(--clr-gray);">English & Spanish/Italian/German speaking required.</p>
+          </div>
+          <div style="background: #FFFFFF; padding: 16px; border-radius: 8px; border: 1px solid var(--clr-sand-dark);">
+            <h4 style="font-weight: 700; color: var(--clr-nile);">Aisha Roof Lounge Barista & Server</h4>
+            <p style="font-size: 0.85rem; color: var(--clr-gray);">Experience in specialty coffee, mocktails, and guest service.</p>
+          </div>
+          <div style="background: #FFFFFF; padding: 16px; border-radius: 8px; border: 1px solid var(--clr-sand-dark);">
+            <h4 style="font-weight: 700; color: var(--clr-nile);">Housekeeping & Maintenance Supervisor</h4>
+            <p style="font-size: 0.85rem; color: var(--clr-gray);">Hospitality cleanliness & quality inspection standards.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #FFFFFF; padding: 30px; border-radius: var(--radius); border: 1px solid var(--clr-sand-dark); box-shadow: var(--shadow);">
+        <h3 style="font-family: var(--font-cinzel); font-size: 1.3rem; color: var(--clr-nile); margin-bottom: 14px;">Apply for a Job</h3>
+        <form action="mailto:info@henuhotel.com" method="post" enctype="text/plain" style="display: flex; flex-direction: column; gap: 12px;">
+          <input type="text" placeholder="Full Name" required style="padding: 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-family: var(--font-montserrat);">
+          <input type="email" placeholder="Email Address" required style="padding: 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-family: var(--font-montserrat);">
+          <input type="tel" placeholder="Mobile Phone" required style="padding: 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-family: var(--font-montserrat);">
+          <input type="text" placeholder="Position Applying For" required style="padding: 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-family: var(--font-montserrat);">
+          <textarea placeholder="Tell us about your experience and languages spoken..." rows="3" required style="padding: 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-family: var(--font-montserrat);"></textarea>
+          <button type="submit" class="btn-henu-gold" style="width: 100%; justify-content: center;">Submit Application to info@henuhotel.com</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /wp:html -->

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HENU Hotel Pyramids — Official Airport Brochure & Aisha Roof</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    :root {
+      --clr-nile-dark: #071320;
+      --clr-nile: #0F2338;
+      --clr-nile-mid: #1A3654;
+      --clr-gold: #C9873A;
+      --clr-gold-light: #DFAB5C;
+      --clr-gold-bright: #F3C377;
+      --clr-sand: #F5EFEB;
+      --clr-sand-dark: #E8DCCF;
+      --clr-ivory: #FCFAF7;
+      --clr-dark: #1A1A1A;
+      --clr-gray: #555555;
+      --clr-gray-light: #777777;
+      --font-cinzel: 'Cinzel', serif;
+      --font-montserrat: 'Montserrat', sans-serif;
+      --font-cairo: 'Cairo', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: var(--font-montserrat);
+      background: #333333;
+      color: var(--clr-dark);
+      margin: 0;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    /* Spread Container (A4 Landscape: 297mm x 210mm) */
+    .spread-page {
+      width: 297mm;
+      height: 210mm;
+      background: var(--clr-ivory);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    /* Fold Divider Lines (for realistic folding guide) */
+    .spread-page::before {
+      content: '';
+      position: absolute;
+      left: 33.333%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(201, 135, 58, 0.25);
+      z-index: 50;
+    }
+    .spread-page::after {
+      content: '';
+      position: absolute;
+      left: 66.666%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(201, 135, 58, 0.25);
+      z-index: 50;
+    }
+
+    /* Individual Panel (99mm x 210mm) */
+    .panel {
+      width: 99mm;
+      height: 210mm;
+      padding: 12mm 10mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Panel Types */
+    .panel-dark {
+      background: var(--clr-nile-dark);
+      color: #FFFFFF;
+    }
+    .panel-nile {
+      background: linear-gradient(180deg, #071320 0%, #0F2338 100%);
+      color: #FFFFFF;
+    }
+    .panel-light {
+      background: var(--clr-ivory);
+      color: var(--clr-dark);
+    }
+    .panel-sand {
+      background: var(--clr-sand);
+      color: var(--clr-dark);
+    }
+
+    /* Typography & Headers */
+    .cinzel {
+      font-family: var(--font-cinzel);
+    }
+    .cairo {
+      font-family: var(--font-cairo);
+    }
+
+    .badge-gold {
+      background: var(--clr-gold);
+      color: #FFFFFF;
+      font-family: var(--font-montserrat);
+      font-size: 7pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .panel-title-dark {
+      font-family: var(--font-cinzel);
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--clr-gold-light);
+      line-height: 1.2;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .panel-title-light {
+      font-family: var(--font-cinzel);
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--clr-nile-dark);
+      line-height: 1.2;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .panel-title-light span {
+      color: var(--clr-gold);
+    }
+
+    .panel-desc {
+      font-size: 7.5pt;
+      color: var(--clr-gray);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .panel-desc-dark {
+      font-size: 7.5pt;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    /* Decorative Gold Lines */
+    .gold-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--clr-gold);
+      margin: 6px 0 10px;
+    }
+
+    /* Feature Items */
+    .feature-item {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 7px;
+      align-items: flex-start;
+    }
+
+    .feature-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(201, 135, 58, 0.15);
+      color: var(--clr-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9pt;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .feature-text h4 {
+      font-size: 8pt;
+      font-weight: 700;
+      color: var(--clr-nile-dark);
+      margin-bottom: 1px;
+    }
+
+    .feature-text p {
+      font-size: 6.8pt;
+      color: var(--clr-gray);
+      line-height: 1.3;
+    }
+
+    /* Dark Variant Feature */
+    .feature-item-dark .feature-icon {
+      background: rgba(201, 135, 58, 0.25);
+      color: var(--clr-gold-light);
+    }
+    .feature-item-dark .feature-text h4 {
+      color: var(--clr-gold-light);
+    }
+    .feature-item-dark .feature-text p {
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* Image Cards */
+    .img-box {
+      width: 100%;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(201, 135, 58, 0.3);
+      position: relative;
+    }
+    .img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Room Pricing Grid */
+    .room-card {
+      background: #FFFFFF;
+      border: 1px solid var(--clr-sand-dark);
+      border-radius: 6px;
+      padding: 6px 8px;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .room-info h5 {
+      font-size: 7.5pt;
+      font-weight: 700;
+      color: var(--clr-nile-dark);
+    }
+    .room-info span {
+      font-size: 6.5pt;
+      color: var(--clr-gray-light);
+    }
+    .room-price {
+      text-align: right;
+    }
+    .room-price .from {
+      font-size: 6pt;
+      color: var(--clr-gray);
+      display: block;
+    }
+    .room-price .val {
+      font-size: 10pt;
+      font-weight: 800;
+      color: var(--clr-gold);
+      font-family: var(--font-cinzel);
+    }
+
+    /* QR Code Box */
+    .qr-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 8px 0;
+    }
+
+    .qr-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--clr-gold);
+      border-radius: 8px;
+      padding: 6px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .qr-card img {
+      width: 68px;
+      height: 68px;
+      display: block;
+    }
+    .qr-card .qr-lbl {
+      font-size: 6.5pt;
+      font-weight: 700;
+      color: var(--clr-nile-dark);
+      margin-top: 4px;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .qr-card .qr-sub {
+      font-size: 5.5pt;
+      color: var(--clr-gold);
+      font-weight: 600;
+    }
+
+    /* Front Cover Elements */
+    .cover-logo {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      border: 2px solid var(--clr-gold);
+      margin: 0 auto 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+    .cover-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cover-header {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .cover-title {
+      font-family: var(--font-cinzel);
+      font-size: 15pt;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: 2px;
+      line-height: 1.15;
+    }
+    .cover-title span {
+      color: var(--clr-gold-light);
+    }
+    .cover-sub {
+      font-size: 7pt;
+      color: var(--clr-sand-dark);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .cover-hero-img {
+      height: 85mm;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1.5px solid var(--clr-gold);
+      position: relative;
+      margin-bottom: 10px;
+    }
+    .cover-hero-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .cover-hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(7,19,32,0.9) 100%);
+      padding: 8px 10px;
+      text-align: center;
+    }
+    .cover-hero-tag {
+      font-size: 7pt;
+      color: var(--clr-gold-bright);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Print Specifics */
+    @media print {
+      body {
+        padding: 0;
+        background: transparent;
+      }
+      .spread-page {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====================================================================
+       SPREAD 1: OUTSIDE SPREAD (TOURS FLAP | BACK COVER | MAIN FRONT COVER)
+       ==================================================================== -->
+  <div class="spread-page" id="outsideSpread">
+    
+    <!-- PANEL 1 (OUTSIDE LEFT): TOURS & EXPERIENCES -->
+    <div class="panel panel-light">
+      <div>
+        <span class="badge-gold">Experiences</span>
+        <h3 class="panel-title-light">Pyramids & Tours <span>VIP</span></h3>
+        <p class="panel-desc">Curated Giza & Cairo excursions with licensed Egyptologists and private transfers.</p>
+        <div class="gold-divider"></div>
+
+        <div class="feature-item">
+          <div class="feature-icon">🏛️</div>
+          <div class="feature-text">
+            <h4>Pyramids & Sphinx VIP Tour</h4>
+            <p>Skip-the-line entrance, private Egyptologist guide, and history walkthrough inside Giza Plateau.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">🐪</div>
+          <div class="feature-text">
+            <h4>Sunset Camel & Horseback Safari</h4>
+            <p>Breathtaking ride across the golden desert dunes facing all 9 Giza Pyramids at sunset.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">🏎️</div>
+          <div class="feature-text">
+            <h4>Desert Quad Biking (ATVs)</h4>
+            <p>Adrenaline-pumping desert adventure around the Great Pyramids perimeter.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">⛵</div>
+          <div class="feature-text">
+            <h4>Nile Felucca & Museum Day Trips</h4>
+            <p>Private day trips to Grand Egyptian Museum (GEM), Old Cairo, and relaxing Nile sailing.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="img-box" style="height: 48mm; margin-bottom: 6px;">
+          <img src="images/hero-pyramids-sunset.jpg" alt="Sunset Desert Safari">
+        </div>
+        <div style="background: var(--clr-sand); padding: 6px 8px; border-radius: 6px; text-align: center; border: 1px solid var(--clr-sand-dark);">
+          <span style="font-size: 6.5pt; font-weight: 700; color: var(--clr-nile-dark); display: block;">🚐 Airport Meet & Assist / Private Pickup</span>
+          <span style="font-size: 6pt; color: var(--clr-gold); font-weight: 600;">Cairo Intl. Airport direct to HENU Hotel (45 Mins)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 2 (OUTSIDE MIDDLE): BACK COVER (CONTACT & QR CODES) -->
+    <div class="panel panel-sand" style="text-align: center;">
+      <div>
+        <div style="width: 50px; height: 50px; margin: 0 auto 6px; border-radius: 50%; overflow: hidden; border: 2px solid var(--clr-gold);">
+          <img src="images/hotel-logo.jpg" alt="HENU Logo" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <h3 class="panel-title-light" style="font-size: 11pt;">HENU PYRAMIDS HOTEL</h3>
+        <p style="font-size: 6.5pt; color: var(--clr-gray); margin-bottom: 8px;">21 Gamal Abdel Nasser St., Nazlet El-Semman, Giza<br>(2 Minutes Walk to the Pyramids & Sphinx Gate)</p>
+        
+        <div style="background: #FFFFFF; border: 1px solid var(--clr-sand-dark); border-radius: 6px; padding: 6px; margin-bottom: 8px;">
+          <div style="font-size: 7.5pt; font-weight: 700; color: var(--clr-nile-dark);">📞 24/7 Front Desk & Direct Booking:</div>
+          <div style="font-size: 10.5pt; font-weight: 800; color: var(--clr-gold); font-family: var(--font-cinzel); margin: 2px 0;">+20 100 092 5827</div>
+          <div style="font-size: 6.5pt; color: var(--clr-gray);">Mobile & WhatsApp: 01000925827</div>
+        </div>
+
+        <div class="qr-grid">
+          <div class="qr-card">
+            <img src="images/qr_whatsapp.png" alt="WhatsApp QR">
+            <span class="qr-lbl">WhatsApp Chat</span>
+            <span class="qr-sub">Scan to Book</span>
+          </div>
+          <div class="qr-card">
+            <img src="images/qr_website.png" alt="Website QR">
+            <span class="qr-lbl">henuhotel.com</span>
+            <span class="qr-sub">Direct Rates</span>
+          </div>
+        </div>
+
+        <div class="qr-card" style="padding: 4px; width: 100%; flex-direction: row; justify-content: center; gap: 8px;">
+          <img src="images/qr_location.png" alt="Location QR" style="width: 38px; height: 38px;">
+          <div style="text-align: left;">
+            <div style="font-size: 6.5pt; font-weight: 700; color: var(--clr-nile-dark);">📍 Google Maps Location</div>
+            <div style="font-size: 5.5pt; color: var(--clr-gray);">Scan for GPS Navigation to Hotel</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: var(--clr-nile-dark); color: #FFFFFF; padding: 8px; border-radius: 6px; border: 1px solid var(--clr-gold);">
+        <span style="font-size: 7pt; font-weight: 700; color: var(--clr-gold-light); display: block; text-transform: uppercase;">✈️ Airport Welcome Special</span>
+        <p style="font-size: 5.8pt; color: rgba(255,255,255,0.85); margin-top: 2px;">Show this brochure or message us on WhatsApp for a <strong>Free Welcome Egyptian Drink</strong> at Aisha Rooftop Lounge upon arrival!</p>
+      </div>
+    </div>
+
+    <!-- PANEL 3 (OUTSIDE RIGHT): MAIN FRONT COVER -->
+    <div class="panel panel-nile" style="text-align: center;">
+      <div>
+        <div class="cover-logo">
+          <img src="images/hotel-logo.jpg" alt="HENU Hotel Logo">
+        </div>
+
+        <div class="cover-header">
+          <h1 class="cover-title">HENU<span> HOTEL</span></h1>
+          <div class="cover-sub">PYRAMIDS VIEW · GIZA</div>
+          <div style="width: 35px; height: 2px; background: var(--clr-gold); margin: 6px auto;"></div>
+          <p style="font-size: 6.5pt; color: var(--clr-gold-light); font-style: italic;">Where Ancient Wonders Meet Modern Comfort</p>
+        </div>
+
+        <div class="cover-hero-img">
+          <img src="images/hero-pyramids-night.jpg" alt="Pyramids Night View">
+          <div class="cover-hero-overlay">
+            <div class="cover-hero-tag">🌟 Front-Row Pyramids Panorama</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(201,135,58,0.4); border-radius: 6px; padding: 6px;">
+        <div style="display: flex; justify-content: space-around; font-size: 6pt; color: #FFFFFF;">
+          <span>🏛️ 2 Min to Sphinx</span>
+          <span>☕ Aisha Rooftop</span>
+          <span>🛏️ Rooms from $12</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ====================================================================
+       SPREAD 2: INSIDE SPREAD (ACCOMMODATION | AISHA ROOF | HOSPITALITY)
+       ==================================================================== -->
+  <div class="spread-page" id="insideSpread">
+    
+    <!-- PANEL 4 (INSIDE LEFT): ACCOMMODATION & ROOMS -->
+    <div class="panel panel-light">
+      <div>
+        <span class="badge-gold">Accommodation</span>
+        <h3 class="panel-title-light">Rooms & Suites <span>from $12</span></h3>
+        <p class="panel-desc">Authentic Pharaonic elegance with modern comfort and direct pyramid views.</p>
+        <div class="gold-divider"></div>
+
+        <div class="room-card">
+          <div class="room-info">
+            <h5>Single Room</h5>
+            <span>Standard · Window · Balcony</span>
+          </div>
+          <div class="room-price">
+            <span class="from">FROM</span>
+            <span class="val">$12</span>
+          </div>
+        </div>
+
+        <div class="room-card">
+          <div class="room-info">
+            <h5>Double / Twin Room</h5>
+            <span>Standard · Window · Balcony</span>
+          </div>
+          <div class="room-price">
+            <span class="from">FROM</span>
+            <span class="val">$18</span>
+          </div>
+        </div>
+
+        <div class="room-card">
+          <div class="room-info">
+            <h5>Triple Family Room</h5>
+            <span>Window / Panoramic Balcony</span>
+          </div>
+          <div class="room-price">
+            <span class="from">FROM</span>
+            <span class="val">$25</span>
+          </div>
+        </div>
+
+        <div class="room-card" style="border: 1.5px solid var(--clr-gold); background: var(--clr-sand);">
+          <div class="room-info">
+            <h5 style="color: var(--clr-nile);">Royal Suite Pyramids View</h5>
+            <span>King Bed · Direct Pyramid Panorama</span>
+          </div>
+          <div class="room-price">
+            <span class="from">SPECIAL</span>
+            <span class="val" style="color: var(--clr-nile);">$45</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="img-box" style="height: 38mm; margin-bottom: 6px;">
+          <img src="images/room-double-balcony.jpg" alt="Balcony Room with View">
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 5.5pt; color: var(--clr-gray); text-align: center;">
+          <span>📶 Free Fast Wi-Fi</span>
+          <span>❄️ A/C & Smart TV</span>
+          <span>🚿 Marble Bath</span>
+          <span>🛎️ 24/7 Service</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 5 (INSIDE MIDDLE): AISHA ROOF LOUNGE & CAFE -->
+    <div class="panel panel-nile">
+      <div>
+        <span class="badge-gold" style="background: var(--clr-gold-light); color: var(--clr-nile-dark);">Rooftop Panorama</span>
+        <h3 class="panel-title-dark" style="color: var(--clr-gold-bright);">AISHA ROOF <span>LOUNGE</span></h3>
+        <p class="panel-desc-dark">The most magical rooftop dining experience facing the Great Pyramids & Sphinx.</p>
+        <div class="gold-divider"></div>
+
+        <div class="img-box" style="height: 48mm; margin-bottom: 10px; border-color: var(--clr-gold);">
+          <img src="images/pyramids-terrace-night.jpg" alt="Aisha Roof at Night">
+        </div>
+
+        <div class="feature-item feature-item-dark">
+          <div class="feature-icon">🍳</div>
+          <div class="feature-text">
+            <h4>Egyptian & Continental Breakfast</h4>
+            <p>Fresh gourmet breakfast served with the morning sun illuminating Khufu Pyramid.</p>
+          </div>
+        </div>
+
+        <div class="feature-item feature-item-dark">
+          <div class="feature-icon">🍽️</div>
+          <div class="feature-text">
+            <h4>Oriental Grills & International Cuisine</h4>
+            <p>Delicious grilled specialties, fresh mezze, pastas, pizzas, and local delicacies.</p>
+          </div>
+        </div>
+
+        <div class="feature-item feature-item-dark">
+          <div class="feature-icon">🍹</div>
+          <div class="feature-text">
+            <h4>Signature Mocktails & Shisha Lounge</h4>
+            <p>Fresh juices, Egyptian mint tea, Turkish coffee, and premium shisha flavors.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: rgba(201,135,58,0.15); border: 1px solid var(--clr-gold); padding: 6px; border-radius: 6px; text-align: center;">
+        <span style="font-size: 6.8pt; font-weight: 700; color: var(--clr-gold-bright); display: block;">🎆 Pyramids Sound & Light Show Front Seats</span>
+        <span style="font-size: 5.8pt; color: rgba(255,255,255,0.8);">Watch the nightly light show from our terrace for free!</span>
+      </div>
+    </div>
+
+    <!-- PANEL 6 (INSIDE RIGHT): HOSPITALITY & SERVICES -->
+    <div class="panel panel-light">
+      <div>
+        <span class="badge-gold">HENU Hospitality</span>
+        <h3 class="panel-title-light">Why Choose <span>HENU</span></h3>
+        <p class="panel-desc">Warm Egyptian welcoming and boutique hospitality tailored for international travelers.</p>
+        <div class="gold-divider"></div>
+
+        <div class="feature-item">
+          <div class="feature-icon">📍</div>
+          <div class="feature-text">
+            <h4>Unbeatable Location</h4>
+            <p>2 minutes walk to Sphinx gate. Surrounded by authentic bazaars, cafes, and restaurants in Nazlet El-Semman.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">🌍</div>
+          <div class="feature-text">
+            <h4>Multilingual Staff</h4>
+            <p>Warm, professional team fluent in English, Italian, Spanish, German, and Arabic.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">🛡️</div>
+          <div class="feature-text">
+            <h4>Hassle-Free & Safe Stay</h4>
+            <p>24/7 security, luggage storage, foreign currency exchange, laundry, and travel desk.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">💳</div>
+          <div class="feature-text">
+            <h4>Easy & Secure Payments</h4>
+            <p>Pay upon arrival in USD, EUR, GBP, or EGP. Visa and Mastercard accepted.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="img-box" style="height: 40mm; margin-bottom: 6px;">
+          <img src="images/corridor-pharaoh.jpg" alt="Pharaonic Corridor & Statues">
+        </div>
+        <div style="background: var(--clr-sand); padding: 5px; border-radius: 6px; text-align: center; border: 1px solid var(--clr-sand-dark);">
+          <span style="font-size: 6.2pt; font-weight: 700; color: var(--clr-nile-dark);">Reserve Direct for Best Rate:</span>
+          <span style="font-size: 6.2pt; font-weight: 800; color: var(--clr-gold);">WhatsApp: +20 100 092 5827</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

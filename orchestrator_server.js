@@ -10,6 +10,7 @@ const { handleBookingTask } = require('./04_Hotel_Booking_System/booking_agent')
 
 const app = express();
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'website')));
 
 const PORT = process.env.PORT || 3000;
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || '';

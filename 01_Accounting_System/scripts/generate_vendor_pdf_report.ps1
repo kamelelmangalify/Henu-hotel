@@ -1,0 +1,225 @@
+# generate_vendor_pdf_report.ps1
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+$htmlPath = "D:\Henu\01_Accounting_System\reports\تقرير_حسابات_الموردين.html"
+$pdfPath  = "D:\Henu\تقرير_حسابات_الموردين.pdf"
+
+$htmlContent = @"
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تقرير حسابات الموردين والمقاولين — هوستل الأهرامات</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+        
+        @page {
+            size: A4 portrait;
+            margin: 12mm;
+            @bottom-left {
+                content: "هوستل الأهرامات — تقرير حسابات الموردين والمقاولين";
+                font-family: 'Cairo', sans-serif;
+                font-size: 8pt;
+                color: #718096;
+            }
+            @bottom-right {
+                content: "صفحة " counter(page) " من " counter(pages);
+                font-family: 'Cairo', sans-serif;
+                font-size: 8pt;
+                color: #718096;
+            }
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            color: #2D3748;
+            margin: 0;
+            padding: 0;
+            font-size: 9.5pt;
+            line-height: 1.5;
+        }
+
+        .header {
+            border-bottom: 3px solid #1A365D;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-container h1 {
+            font-size: 18pt;
+            font-weight: 800;
+            color: #1A365D;
+            margin: 0;
+        }
+
+        .title-container p {
+            font-size: 9.5pt;
+            color: #4A5568;
+            margin: 3px 0 0 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 9pt;
+        }
+
+        th {
+            background-color: #1A365D;
+            color: #FFFFFF;
+            padding: 6px 8px;
+            font-weight: 700;
+            border: 1px solid #1A365D;
+            text-align: right;
+        }
+
+        td {
+            padding: 5px 8px;
+            border: 1px solid #CBD5E0;
+        }
+
+        tr:nth-child(even) { background-color: #F7FAFC; }
+
+        .total-row td {
+            font-weight: 800;
+            background-color: #EDF2F7;
+            border-top: 2px solid #A0AEC0;
+        }
+
+        .badge-done { background-color: #C6F6D5; color: #22543D; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 8pt; }
+        .badge-pending { background-color: #FEEBC8; color: #744210; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 8pt; }
+
+        .section-title {
+            color: #1A365D;
+            font-size: 11.5pt;
+            font-weight: 700;
+            border-right: 4px solid #3182CE;
+            padding-right: 8px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        .page-break { page-break-before: always; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="title-container">
+            <h1>هوستل الأهرامات (Pyramids Hostel)</h1>
+            <p>تقرير حسابات الموردين والمقاولين والتجهيزات — الإجمالي والتفاصيل</p>
+        </div>
+        <div style="text-align:left; font-size:8.5pt; color:#718096;">
+            <strong>التاريخ:</strong> 1 سبتمبر 2026<br>
+            <strong>المصدر:</strong> السجل المالي المعتمد
+        </div>
+    </div>
+
+    <div class="section-title">📊 أولاً: ملخص إجمالي حسابات الموردين والمقاولين</div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width:30px; text-align:center;">#</th>
+                <th>اسم المورد / المقاول</th>
+                <th>مجال التوريد والخدمة</th>
+                <th style="width:110px;">إجمالي المسدد (ج.م)</th>
+                <th>موقـف الحساب والمتبقي</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td style="text-align:center;">1</td><td style="font-weight:700;">شركة كوين للمنشوجات والمفروشات</td><td>مفروشات وملاءات الفندق بالكامل</td><td style="font-weight:700; color:#2B6CB0;">92,060 ج.م</td><td><span class="badge-pending">تسليم كلي - متبقي 6,400ج</span></td></tr>
+            <tr><td style="text-align:center;">2</td><td style="font-weight:700;">مورد ومقاول السباكة والصحي</td><td>مستلزمات ومصنعية السباكة</td><td style="font-weight:700; color:#2B6CB0;">29,000 ج.م</td><td><span class="badge-done">مُسدد بالكامل</span></td></tr>
+            <tr><td style="text-align:center;">3</td><td style="font-weight:700;">شركة التمديدات والدش والويبسايت</td><td>شبكات، دش مركز وتطوير الويبسايت</td><td style="font-weight:700; color:#2B6CB0;">30,000 ج.م</td><td><span class="badge-pending">تحت الحساب (دفعة مقدمة)</span></td></tr>
+            <tr><td style="text-align:center;">4</td><td style="font-weight:700;">مقاول النقاشة والدهانات</td><td>مستلزمات ومصنعية الدهانات</td><td style="font-weight:700; color:#2B6CB0;">15,020 ج.م</td><td><span class="badge-done">مُسدد بالكامل</span></td></tr>
+            <tr><td style="text-align:center;">5</td><td style="font-weight:700;">أمازون (Amazon)</td><td>أدوات مطبخ وأطباق صيني وزجاج</td><td style="font-weight:700; color:#2B6CB0;">9,300 ج.م</td><td><span class="badge-done">مُسدد بالكامل</span></td></tr>
+            <tr><td style="text-align:center;">6</td><td style="font-weight:700;">أحمد الكاميرات</td><td>نظام الكاميرات والمراقبة</td><td style="font-weight:700; color:#2B6CB0;">5,000 ج.م</td><td><span class="badge-done">مُسدد بالكامل</span></td></tr>
+            <tr><td style="text-align:center;">7</td><td style="font-weight:700;">مورد الكراسي والأثاث</td><td>كراسي وأثاث الفندق (بيد أ.خالد)</td><td style="font-weight:700; color:#2B6CB0;">5,300 ج.م</td><td><span class="badge-done">مُسدد بالكامل</span></td></tr>
+            <tr><td style="text-align:center;">8</td><td style="font-weight:700;">مورد الرسيفرات والدش</td><td>7 رسيفرات و200م سلك دش (بيد أ.خالد)</td><td style="font-weight:700; color:#2B6CB0;">5,315 ج.م</td><td><span class="badge-done">مُسدد بالكامل</span></td></tr>
+            <tr><td style="text-align:center;">9</td><td style="font-weight:700;">روماني لمرايات الفندق</td><td>توريد وتركيب مرايات الغرف والحمامات</td><td style="font-weight:700; color:#2B6CB0;">3,900 ج.م</td><td><span class="badge-done">مُسدد بالكامل</span></td></tr>
+            <tr><td style="text-align:center;">10</td><td style="font-weight:700;">علاء الكهربائي</td><td>تركيبات وأعمال الكهرباء</td><td style="font-weight:700; color:#2B6CB0;">3,500 ج.م</td><td><span class="badge-done">مُسدد بالكامل</span></td></tr>
+            <tr><td style="text-align:center;">11</td><td style="font-weight:700;">مستلزمات ومصنعية الكهرباء والسلم</td><td>مستلزمات وشبابيك السلم ومصنعية</td><td style="font-weight:700; color:#2B6CB0;">4,560 ج.م</td><td><span class="badge-pending">تحت الحساب</span></td></tr>
+            <tr><td style="text-align:center;">12</td><td style="font-weight:700;">شركة مكافحة الحشرات</td><td>عقد رش ومكافحة شهر أغسطس</td><td style="font-weight:700; color:#2B6CB0;">2,500 ج.م</td><td><span class="badge-done">مُسدد بالكامل</span></td></tr>
+            <tr><td style="text-align:center;">13</td><td style="font-weight:700;">فرج النجار</td><td>نجارة وتجميع أسرة وتضبيط أبواب</td><td style="font-weight:700; color:#2B6CB0;">1,270 ج.م</td><td><span class="badge-done">مُسدد بالكامل</span></td></tr>
+            <tr><td style="text-align:center;">14</td><td style="font-weight:700;">المغسلة</td><td>غسيل وتجهيز المفروشات والسجاد</td><td style="font-weight:700; color:#2B6CB0;">4,040 ج.م</td><td><span class="badge-done">مُسدد بالكامل</span></td></tr>
+            <tr class="total-row">
+                <td colspan="3" style="text-align:left;">إجمالي المدفوعات المسددة للموردين والمقاولين:</td>
+                <td style="color:#1A365D;">210,765 ج.م</td>
+                <td>-</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <div class="section-title">📋 ثانياً: الكشف التفصيلي لجميع دفوعات الموردين وملاحظات التسليم</div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width:25px; text-align:center;">#</th>
+                <th style="width:130px;">المورد / المقاول</th>
+                <th style="width:70px; text-align:center;">التاريخ</th>
+                <th>بيان الدفعة / الخدمة</th>
+                <th style="width:90px; text-align:left;">المبلغ (ج.م)</th>
+                <th>تفاصيل وملاحظات التسليم</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td style="text-align:center;">1</td><td>شركة كوين للمنسوجات</td><td style="text-align:center;">08/08</td><td>دفعة مقدمة مفروشات طلبية 1</td><td>21,494 ج.م</td><td>دفعة أستاذ خالد</td></tr>
+            <tr><td style="text-align:center;">2</td><td>شركة كوين للمنسوجات</td><td style="text-align:center;">08/10</td><td>باقي حساب شركة كوين طلبية 1</td><td>32,241 ج.م</td><td>تقفيل الطلبية الأولى</td></tr>
+            <tr><td style="text-align:center;">3</td><td>شركة كوين للمنسوجات</td><td style="text-align:center;">08/11</td><td>غسيل وتجهيز مفروشات</td><td>765 ج.م</td><td>قبل الفرش</td></tr>
+            <tr><td style="text-align:center;">4</td><td>شركة كوين للمنسوجات</td><td style="text-align:center;">08/12</td><td>دفعة 50% طلبية 2</td><td>6,830 ج.م</td><td>PO-2026-0811-V1</td></tr>
+            <tr><td style="text-align:center;">5</td><td>شركة كوين للمنسوجات</td><td style="text-align:center;">08/14</td><td>نقل وتوصيل مفروشات</td><td>350 ج.م</td><td>مصاريف نقل</td></tr>
+            <tr><td style="text-align:center;">6</td><td>شركة كوين للمنسوجات</td><td style="text-align:center;">08/23</td><td>دفعة من حساب المفروشات طلبية 2</td><td>30,000 ج.م</td><td>إذن تسليم 4113 (متبقي 13,230ج)</td></tr>
+            <tr><td style="text-align:center;">7</td><td>شركة كوين للمنسوجات</td><td style="text-align:center;">08/24</td><td>غسيل ومكوة مفروشات</td><td>380 ج.م</td><td>تجهيز ومكوة</td></tr>
+            <tr><td style="text-align:center;">8</td><td>علاء الكهربائي</td><td style="text-align:center;">08/06</td><td>دفعة أولى أعمال كهرباء</td><td>1,500 ج.م</td><td>تركيبات وتمديدات</td></tr>
+            <tr><td style="text-align:center;">9</td><td>علاء الكهربائي</td><td style="text-align:center;">08/09</td><td>دفعة الكهربائي الأخيرة</td><td>2,000 ج.م</td><td>تسوية نهائية (الرصيد 0 ج)</td></tr>
+            <tr><td style="text-align:center;">10</td><td>أحمد الكاميرات</td><td style="text-align:center;">08/06</td><td>دفعة أولى كاميرات ومراقبة</td><td>2,500 ج.م</td><td>توريد وتركيب</td></tr>
+            <tr><td style="text-align:center;">11</td><td>أحمد الكاميرات</td><td style="text-align:center;">08/14</td><td>باقي حساب الكاميرات</td><td>2,500 ج.م</td><td>تشغيل وتقفيل الحساب 0 ج</td></tr>
+            <tr><td style="text-align:center;">12</td><td>فرج النجار</td><td style="text-align:center;">08/12</td><td>تركيب ظهور السراير دور 1 و 2</td><td>200 ج.م</td><td>تجميع وتثبيت أسرة</td></tr>
+            <tr><td style="text-align:center;">13</td><td>فرج النجار</td><td style="text-align:center;">08/12</td><td>مستلزمات وزوايا ومسامير</td><td>270 ج.م</td><td>مستلزمات نجارة</td></tr>
+            <tr><td style="text-align:center;">14</td><td>فرج النجار</td><td style="text-align:center;">08/17</td><td>مصنعية تعليق براويز وضبط أبواب</td><td>300 ج.م</td><td>تشطيبات نجارة</td></tr>
+            <tr><td style="text-align:center;">15</td><td>فرج النجار</td><td style="text-align:center;">08/18</td><td>مجموعة تجميع السرير للجناح</td><td>100 ج.م</td><td>تأكيد تثبيت</td></tr>
+            <tr><td style="text-align:center;">16</td><td>فرج النجار</td><td style="text-align:center;">08/18</td><td>تقفيل كل شغل النجارة</td><td>400 ج.م</td><td>تقفيل كامل الحساب 0 ج</td></tr>
+            <tr><td style="text-align:center;">17</td><td>مقاول ومورد السباكة</td><td style="text-align:center;">08/24</td><td>تغيير حوض 301 وإصلاح خلاط</td><td>500 ج.م</td><td>صيانة حمام 301</td></tr>
+            <tr><td style="text-align:center;">18</td><td>مقاول ومورد السباكة</td><td style="text-align:center;">08/25</td><td>فاتورة مستلزمات سباكة كاملة</td><td>20,150 ج.م</td><td>مواسير وخلاطات وأدوات صحية</td></tr>
+            <tr><td style="text-align:center;">19</td><td>مقاول ومورد السباكة</td><td style="text-align:center;">08/25</td><td>نقل وتعتيق مستلزمات السباكة</td><td>350 ج.م</td><td>نقل خامات</td></tr>
+            <tr><td style="text-align:center;">20</td><td>مقاول ومورد السباكة</td><td style="text-align:center;">08/25</td><td>مصنعية السباك للتركيبات</td><td>8,000 ج.م</td><td>مصنعية التركيب الكاملة</td></tr>
+            <tr><td style="text-align:center;">21</td><td>مقاول الدهانات والنقاشة</td><td style="text-align:center;">08/25</td><td>دفعة مقدمة مصنعية النقاش</td><td>2,000 ج.م</td><td>دفعة أولى</td></tr>
+            <tr><td style="text-align:center;">22</td><td>مقاول الدهانات والنقاشة</td><td style="text-align:center;">08/25</td><td>فاتورة مستلزمات معجون وبويات</td><td>5,500 ج.م</td><td>خامات نقاشة</td></tr>
+            <tr><td style="text-align:center;">23</td><td>مقاول الدهانات والنقاشة</td><td style="text-align:center;">08/27</td><td>باقي طلبات النقاش وخامات</td><td>1,520 ج.م</td><td>تكميل خامات</td></tr>
+            <tr><td style="text-align:center;">24</td><td>مقاول الدهانات والنقاشة</td><td style="text-align:center;">08/31</td><td>باقي مصنعية النقاش وتسليم الدهان</td><td>6,000 ج.م</td><td>تقفيل مصنعية النقاشة بالكامل</td></tr>
+            <tr><td style="text-align:center;">25</td><td>مورد الرسيفرات والدش</td><td style="text-align:center;">08/12</td><td>7 رسيفرات و200م سلك دش</td><td>5,250 ج.م</td><td>بيد أستاذ خالد</td></tr>
+            <tr><td style="text-align:center;">26</td><td>مورد الرسيفرات والدش</td><td style="text-align:center;">08/12</td><td>وصلات ومستلزمات تركيب</td><td>65 ج.م</td><td>وصلات وقواطع</td></tr>
+            <tr><td style="text-align:center;">27</td><td>مورد الكراسي والأثاث</td><td style="text-align:center;">08/12</td><td>دفعة استلام كراسي الفندق</td><td>5,300 ج.م</td><td>بيد أستاذ خالد</td></tr>
+            <tr><td style="text-align:center;">28</td><td>روماني للمرايات</td><td style="text-align:center;">08/14</td><td>توريد وتركيب مرايات الفندق</td><td>3,900 ج.م</td><td>توريد وتركيب مرايات</td></tr>
+            <tr><td style="text-align:center;">29</td><td>أمازون (Amazon)</td><td style="text-align:center;">08/18</td><td>أطباق وأكواب صيني وزجاج</td><td>9,300 ج.م</td><td>تجهيز البوفيه والمطبخ</td></tr>
+            <tr><td style="text-align:center;">30</td><td>شركة مكافحة الحشرات</td><td style="text-align:center;">08/23</td><td>فاتورة رش ومكافحة حشرات اغسطس</td><td>2,500 ج.م</td><td>عقد شهر أغسطس</td></tr>
+            <tr><td style="text-align:center;">31</td><td>شركة التمديدات والويبسايت</td><td style="text-align:center;">08/30</td><td>دفعة شبكات ودش مركز ونسب</td><td>20,000 ج.م</td><td>وصلات وتمديدات مركزية</td></tr>
+            <tr><td style="text-align:center;">32</td><td>شركة التمديدات والويبسايت</td><td style="text-align:center;">08/30</td><td>دفعة حجز وتطوير الويبسايت</td><td>10,000 ج.م</td><td>دفعة مقدمة موقع إلكتروني</td></tr>
+            <tr><td style="text-align:center;">33</td><td>المغسلة</td><td style="text-align:center;">08/25</td><td>دفعة تحت حساب المغسلة</td><td>1,000 ج.م</td><td>غسيل وتجهيز مفروشات</td></tr>
+            <tr><td style="text-align:center;">34</td><td>المغسلة</td><td style="text-align:center;">08/30</td><td>غسيل وتجهيز المفروشات والسجاد</td><td>2,920 ج.م</td><td>تقفيل حساب غسيل السجاد والفرش</td></tr>
+            <tr class="total-row">
+                <td colspan="4" style="text-align:left;">إجمالي المدفوعات المسددة للموردين والمقاولين بالتفصيل:</td>
+                <td style="color:#1A365D;">210,765 ج.م</td>
+                <td>-</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
+"@
+
+[System.IO.File]::WriteAllText($htmlPath, $htmlContent, [System.Text.Encoding]::UTF8)
+
+# تحويل الـ HTML إلى PDF باستخدام Microsoft Edge Headless
+$edgeExe = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+Start-Process -FilePath $edgeExe -ArgumentList "--headless --disable-gpu --print-to-pdf=`"$pdfPath`" `"$htmlPath`"" -Wait -PassThru | Out-Null
+
+if (Test-Path $pdfPath) {
+    Write-Host "✅ تم توليد ملف الـ PDF لتقرير الموردين بنجاح: $pdfPath"
+}

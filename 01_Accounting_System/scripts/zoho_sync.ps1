@@ -21,7 +21,7 @@ $ACCOUNT = @{
     Utilities       = "628287000000000430"   # Utilities
     Housekeeping    = "628287000000093003"   # Housekeeping Expenses
     OwnersEquity    = "628287000000000382"   # Owner's Equity
-    Cash            = "628287000000000388"   # Cash (Petty Cash)
+    Cash            = "628287000000000361"   # Cash (Petty Cash)
 }
 
 # ── تحديد حساب المصروف حسب الوصف والفئة ──────────────────────

@@ -46,16 +46,19 @@ const booking = {
   },
   
   roomPrices: {
-    single_std: { price: 12, label: 'Single Room (Standard)' },
-    single_win: { price: 15, label: 'Single with Window' },
-    single_balc: { price: 20, label: 'Single with Balcony' },
-    double_std: { price: 18, label: 'Double Room (Standard)' },
-    double_win: { price: 22, label: 'Double with Window' },
-    double_balc: { price: 25, label: 'Double with Balcony' },
-    triple_std: { price: 25, label: 'Triple Room (Standard)' },
-    triple_win: { price: 30, label: 'Triple with Window' },
-    triple_balc: { price: 35, label: 'Triple with Balcony' },
-    suite: { price: 45, label: 'King Suite — Pyramids View' }
+    single_std: { price: 15, label: 'Single Room with Balcony' },
+    single_win: { price: 15, label: 'Single Room with Balcony' },
+    single_balc: { price: 15, label: 'Single Room with Balcony' },
+    double_std: { price: 20, label: 'Standard Double Room' },
+    double_win: { price: 22, label: 'Double Room with Balcony' },
+    double_balc: { price: 22, label: 'Double Room with Balcony' },
+    king_room: { price: 25, label: 'King Room (Quiet & Spacious)' },
+    king_balc: { price: 30, label: 'King Room with Balcony' },
+    triple_std: { price: 30, label: 'Family Triple Room' },
+    triple_win: { price: 30, label: 'Family Triple Room' },
+    triple_balc: { price: 30, label: 'Family Triple Room' },
+    triple_fam: { price: 30, label: 'Family Triple Room' },
+    suite: { price: 35, label: 'Family Quadruple Room (Room 103)' }
   },
   
   updateSummary() {

@@ -1,0 +1,370 @@
+{
+  "metadata": {
+    "system_version": "1.0.0",
+    "last_updated": "2026-09-09T11:17:14.274Z",
+    "hotel_id": "default"
+  },
+  "profile": {
+    "hotel_name_ar": "فندق هينو السياحي",
+    "hotel_name_en": "Henu Boutique Hotel",
+    "currency_primary": "USD",
+    "currency_secondary": "EGP",
+    "exchange_rate_usd_to_egp": 50,
+    "direct_discount_percent": 10,
+    "tax_rate_percent": 14,
+    "service_charge_percent": 12,
+    "phone_contact": 201000925827,
+    "email_contact": "info@henuhotel.com",
+    "city_location": "شارع جمالعبدالناصر ابوالهول - نزلة السمان",
+    "checkin_time": "14:00",
+    "checkout_time": "12:00"
+  },
+  "categories": [
+    {
+      "code": "SGL_BALC",
+      "name_ar": "غرفة سنجل بلكونة على الشارع",
+      "name_en": "Single Room Main Street Balcony",
+      "capacity": 1,
+      "beds": "1 سرير سنجل فردي",
+      "base_usd": 15,
+      "base_egp": 0,
+      "amenities": "بلكونة على الشارع الرئيسي، مكتب عمل، تكييف، واي فاي مجاني"
+    },
+    {
+      "code": "STD_DBL",
+      "name_ar": "غرفة دابل قياسية",
+      "name_en": "Standard Double Room",
+      "capacity": 2,
+      "beds": "1 سرير دابل كبير",
+      "base_usd": 20,
+      "base_egp": 0,
+      "amenities": "تكييف، شاشة تلفزيون، حمام خاص، واي فاي"
+    },
+    {
+      "code": "DBL_BALC",
+      "name_ar": "غرفة دابل بلكونة على الشارع",
+      "name_en": "Double Room Main Street Balcony",
+      "capacity": 2,
+      "beds": "1 سرير دابل كبير",
+      "base_usd": 22,
+      "base_egp": 0,
+      "amenities": "بلكونة على الشارع الرئيسي، تكييف، شاشة تلفزيون، واي فاي"
+    },
+    {
+      "code": "KNG_ROOM",
+      "name_ar": "غرفة كينج سرير كبير",
+      "name_en": "King Room",
+      "capacity": 2,
+      "beds": "1 سرير كينج مريح",
+      "base_usd": 25,
+      "base_egp": 0,
+      "amenities": "سرير كينج واسع، تكييف، ثلاجة ميني بار، شاشة تلفزيون"
+    },
+    {
+      "code": "KNG_BALC",
+      "name_ar": "غرفة كينج بلكونة على الشارع",
+      "name_en": "King Room Main Street Balcony",
+      "capacity": 2,
+      "beds": "1 سرير كينج مريح",
+      "base_usd": 30,
+      "base_egp": 0,
+      "amenities": "بلكونة على الشارع الرئيسي، سرير كينج واسع، ميني بار، شاشة تلفزيون"
+    },
+    {
+      "code": "TRP_FAM",
+      "name_ar": "غرفة عائلية ثلاثية (3 أسرّة)",
+      "name_en": "Family Triple Room (3 Beds)",
+      "capacity": 3,
+      "beds": "3 أسرّة فردية",
+      "base_usd": 30,
+      "base_egp": 0,
+      "amenities": "مساحة عائلية واسعة، 3 أسرة مريحة، حمام خاص، تكييف"
+    },
+    {
+      "code": "QUAD_FAM",
+      "name_ar": "غرفة عائلية رباعية (4 أفراد)",
+      "name_en": "Family Quadruple Room (4 Guests)",
+      "capacity": 4,
+      "beds": "سرير كينج + 2 سرير فردي",
+      "base_usd": 35,
+      "base_egp": 0,
+      "amenities": "أكبر غرفة عائلية بالفندق، سعة 4 أفراد، جلسة عائلية، ثلاجة، شاشة ذكية"
+    }
+  ],
+  "rooms": [
+    {
+      "room_num": "101",
+      "floor": "الدور الأول",
+      "category_code": "STD_DBL",
+      "view_desc": "شباك   داخلي هادئ",
+      "status": "متاحة",
+      "notes": "جاهزة"
+    },
+    {
+      "room_num": "102",
+      "floor": "الدور الأول",
+      "category_code": "KNG_ROOM",
+      "view_desc": "شباك داخلي هادئ",
+      "status": "متاحة",
+      "notes": "سرير كينج مريح"
+    },
+    {
+      "room_num": "103",
+      "floor": "الدور الأول",
+      "category_code": "QUAD_FAM",
+      "view_desc": "شباك واسع",
+      "status": "متاحة",
+      "notes": "غرفة عائلية رباعية 4 أفراد"
+    },
+    {
+      "room_num": "104",
+      "floor": "الدور الأول",
+      "category_code": "KNG_ROOM",
+      "view_desc": "شباك   هادئ",
+      "status": "متاحة",
+      "notes": "كينج"
+    },
+    {
+      "room_num": "201",
+      "floor": "الدور الثاني",
+      "category_code": "SGL_BALC",
+      "view_desc": "بلكونة على الشارع الرئيسي",
+      "status": "متاحة",
+      "notes": "بلكونة شارع رئيسي"
+    },
+    {
+      "room_num": "202",
+      "floor": "الدور الثاني",
+      "category_code": "DBL_BALC",
+      "view_desc": "بلكونة على الشارع الرئيسي",
+      "status": "متاحة",
+      "notes": "بلكونة شارع رئيسي"
+    },
+    {
+      "room_num": "203",
+      "floor": "الدور الثاني",
+      "category_code": "STD_DBL",
+      "view_desc": "شباك داخلي",
+      "status": "متاحة",
+      "notes": "جاهزة"
+    },
+    {
+      "room_num": "204",
+      "floor": "الدور الثاني",
+      "category_code": "KNG_ROOM",
+      "view_desc": "شباك داخلي هادئ",
+      "status": "متاحة",
+      "notes": "سرير كينج"
+    },
+    {
+      "room_num": "205",
+      "floor": "الدور الثاني",
+      "category_code": "STD_DBL",
+      "view_desc": "شباك داخلي",
+      "status": "متاحة",
+      "notes": "جاهزة"
+    },
+    {
+      "room_num": "206",
+      "floor": "الدور الثاني",
+      "category_code": "TRP_FAM",
+      "view_desc": "شباك جانبي واسع",
+      "status": "متاحة",
+      "notes": "عائلية 3 أسرة فردية"
+    },
+    {
+      "room_num": "207",
+      "floor": "الدور الثاني",
+      "category_code": "STD_DBL",
+      "view_desc": "شباك   جانبي",
+      "status": "متاحة",
+      "notes": "جاهزة"
+    },
+    {
+      "room_num": "301",
+      "floor": "الدور الثالث",
+      "category_code": "SGL_BALC",
+      "view_desc": "بلكونة على الشارع الرئيسي",
+      "status": "متاحة",
+      "notes": "بلكونة شارع رئيسي"
+    },
+    {
+      "room_num": "302",
+      "floor": "الدور الثالث",
+      "category_code": "DBL_BALC",
+      "view_desc": "بلكونة على الشارع الرئيسي",
+      "status": "متاحة",
+      "notes": "بلكونة شارع رئيسي"
+    },
+    {
+      "room_num": "303",
+      "floor": "الدور الثالث",
+      "category_code": "KNG_ROOM",
+      "view_desc": "شباك خارجي",
+      "status": "متاحة",
+      "notes": "جاهزة"
+    },
+    {
+      "room_num": "304",
+      "floor": "الدور الثالث",
+      "category_code": "KNG_ROOM",
+      "view_desc": "شباك خارجي",
+      "status": "متاحة",
+      "notes": "جاهزة"
+    },
+    {
+      "room_num": "305",
+      "floor": "الدور الثالث",
+      "category_code": "KNG_ROOM",
+      "view_desc": "شباك خارجي هادئ",
+      "status": "متاحة",
+      "notes": "جاهزة"
+    },
+    {
+      "room_num": "306",
+      "floor": "الدور الثالث",
+      "category_code": "KNG_BALC",
+      "view_desc": "بلكونة على الشارع الرئيسي",
+      "status": "متاحة",
+      "notes": "بلكونة شارع رئيسي"
+    },
+    {
+      "room_num": "307",
+      "floor": "الدور الثالث",
+      "category_code": "STD_DBL",
+      "view_desc": "شباك   جانبي",
+      "status": "متاحة",
+      "notes": "جاهزة"
+    },
+    {
+      "room_num": "401",
+      "floor": "الدور الرابع",
+      "category_code": "SGL_BALC",
+      "view_desc": "بلكونة على الشارع الرئيسي",
+      "status": "متاحة",
+      "notes": "بلكونة شارع رئيسي"
+    },
+    {
+      "room_num": "402",
+      "floor": "الدور الرابع",
+      "category_code": "DBL_BALC",
+      "view_desc": "بلكونة على الشارع الرئيسي",
+      "status": "متاحة",
+      "notes": "بلكونة شارع رئيسي"
+    },
+    {
+      "room_num": "403",
+      "floor": "الدور الرابع",
+      "category_code": "KNG_ROOM",
+      "view_desc": "شباك خارجي علوي",
+      "status": "متاحة",
+      "notes": "بالقرب من الروف"
+    },
+    {
+      "room_num": "404",
+      "floor": "الدور الرابع",
+      "category_code": "KNG_ROOM",
+      "view_desc": "شباك خارجي علوي",
+      "status": "متاحة",
+      "notes": "بالقرب من الروف"
+    },
+    {
+      "room_num": "405",
+      "floor": "الدور الرابع",
+      "category_code": "STD_DBL",
+      "view_desc": "شباك علوي هادئ",
+      "status": "متاحة",
+      "notes": "بالقرب من الروف"
+    },
+    {
+      "room_num": "406",
+      "floor": "الدور الرابع",
+      "category_code": "TRP_FAM",
+      "view_desc": "شباك عائلي علوي",
+      "status": "متاحة",
+      "notes": "عائلية 3 أسرة فردية"
+    },
+    {
+      "room_num": "407",
+      "floor": "الدور الرابع",
+      "category_code": "STD_DBL",
+      "view_desc": "شباك   علوي",
+      "status": "متاحة",
+      "notes": "جاهزة"
+    }
+  ],
+  "seasons": [
+    {
+      "name": "موسم الشتاء والذروة السياحية",
+      "start": "2026-10-01",
+      "end": "2027-04-30",
+      "multiplier": 1.3,
+      "notes": "يبدأ تلقائياً أول أكتوبر لجميع الغرف وجميع المنصات"
+    },
+    {
+      "name": "أعياد رأس السنة والكريسماس",
+      "start": "2026-12-20",
+      "end": "2027-01-08",
+      "multiplier": 1.5,
+      "notes": "ذروة الطلب العالمية - أعلى سعر للغرف"
+    },
+    {
+      "name": "موسم الصيف العادي",
+      "start": "2027-05-01",
+      "end": "2027-09-30",
+      "multiplier": 1,
+      "notes": "تطبيق السعر الأساسي للغرفة دون زيادة"
+    }
+  ],
+  "occupancy_rules": [
+    {
+      "tier": "1. إشغال مبكر / منخفض",
+      "min_occ": 0,
+      "max_occ": 35,
+      "adjustment": "-0.1",
+      "multiplier": 0.9,
+      "desc": "البيع بالسعر الأساسي لتشجيع وتثبيت الحجوزات المبكرة"
+    },
+    {
+      "tier": "2. إشغال متوسط ونشط",
+      "min_occ": 36,
+      "max_occ": 65,
+      "adjustment": "+15%",
+      "multiplier": 1.15,
+      "desc": "رفع السعر تلقائياً مع تسارع الحجوزات وتأكيد الطلب"
+    },
+    {
+      "tier": "3. إشغال مرتفع وحرج",
+      "min_occ": 66,
+      "max_occ": 85,
+      "adjustment": "+30%",
+      "multiplier": 1.3,
+      "desc": "استغلال ندرة الغرف المتبقية لتعظيم متوسط سعر الليلة ADR"
+    },
+    {
+      "tier": "4. ذروة الإشغال (آخر الغرف)",
+      "min_occ": 86,
+      "max_occ": 100,
+      "adjustment": "+50%",
+      "multiplier": 1.5,
+      "desc": "بيع آخر غرفتين إلى 3 غرف بأعلى عائد ممكن للنزلاء المضطرين"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "RES-1788950826073-970",
+      "room_num": "101",
+      "guest_name": "أحمد محمود",
+      "guest_phone": "+201012345678",
+      "guest_email": "",
+      "checkin": "2026-10-10",
+      "checkout": "2026-10-13",
+      "nights": 3,
+      "total_price_usd": 90,
+      "total_price_egp": 0,
+      "source": "Website_Direct",
+      "status": "مؤكد",
+      "created_at": "2026-09-09T10:47:06.073Z"
+    }
+  ]
+}
