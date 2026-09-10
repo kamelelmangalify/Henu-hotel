@@ -1,0 +1,493 @@
+const fs = require('fs');
+const path = require('path');
+const { execFileSync } = require('child_process');
+
+const cardsDir = path.join('d:', 'Henu', 'business_cards');
+
+if (!fs.existsSync(cardsDir)) {
+  fs.mkdirSync(cardsDir, { recursive: true });
+}
+
+function generateCardHtml(person) {
+  return `<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>${person.nameAr} — ${person.titleAr} | شركة المطعم الأرجنتيني المتطور لإدارة الفنادق والمطاعم</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: 85mm 55mm;
+      margin: 0;
+    }
+
+    :root {
+      --clr-nile-dark: #071320;
+      --clr-nile: #0B1B2B;
+      --clr-nile-card: #0D2034;
+      --clr-gold: #C9873A;
+      --clr-gold-light: #DAA856;
+      --clr-gold-bright: #F3C377;
+      --clr-sand: #F7F2E8;
+      --clr-ivory: #FAF7F2;
+      --clr-dark: #1A1A1A;
+      --clr-gray: #64748B;
+      --font-cinzel: 'Cinzel', serif;
+      --font-montserrat: 'Montserrat', sans-serif;
+      --font-cairo: 'Cairo', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      background: #262626;
+      margin: 0;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      font-family: var(--font-montserrat);
+    }
+
+    /* Standard Card: 85mm x 55mm (Landscape) */
+    .card-page {
+      width: 85mm;
+      height: 55mm;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border-radius: 2px;
+    }
+
+    /* ----------------------------------------------------
+       FACE A: ENGLISH (LUXURY EXECUTIVE DEEP NILE & GOLD)
+       ---------------------------------------------------- */
+    .card-en {
+      background: linear-gradient(135deg, #071320 0%, #0D2034 50%, #071320 100%);
+      color: #FFFFFF;
+      padding: 4.5mm 5.5mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(201, 135, 58, 0.4);
+    }
+
+    .card-en::before {
+      content: '';
+      position: absolute;
+      top: 2mm;
+      left: 2mm;
+      right: 2mm;
+      bottom: 2mm;
+      border: 0.5px solid rgba(201, 135, 58, 0.25);
+      pointer-events: none;
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hotel-brand {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+    }
+
+    .logo-img {
+      width: 10.5mm;
+      height: 10.5mm;
+      border-radius: 50%;
+      border: 1px solid var(--clr-gold);
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .brand-text h3 {
+      font-family: var(--font-cinzel);
+      font-size: 7.2pt;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: 0.8px;
+      line-height: 1.15;
+    }
+
+    .brand-text h3 span {
+      color: var(--clr-gold-light);
+    }
+
+    .brand-text p {
+      font-size: 4.2pt;
+      color: var(--clr-sand);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-top: 0.8px;
+    }
+
+    .badge-star {
+      font-size: 4.2pt;
+      color: var(--clr-gold-bright);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      font-weight: 700;
+      background: rgba(201, 135, 58, 0.15);
+      padding: 1.5px 4.5px;
+      border-radius: 10px;
+      border: 0.5px solid rgba(201, 135, 58, 0.4);
+    }
+
+    .middle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      position: relative;
+      z-index: 2;
+      margin-top: 1mm;
+    }
+
+    .person-info h1 {
+      font-family: var(--font-cinzel);
+      font-size: 11pt;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: 0.8px;
+      line-height: 1.1;
+    }
+
+    .person-info .title {
+      font-size: 5.8pt;
+      font-weight: 700;
+      color: var(--clr-gold-light);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 1px;
+    }
+
+    .gold-bar {
+      width: 22px;
+      height: 1.5px;
+      background: var(--clr-gold);
+      margin: 1.8mm 0;
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2mm;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1.8mm;
+      font-size: 5pt;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .contact-item .icon {
+      color: var(--clr-gold-light);
+      font-size: 5.5pt;
+      width: 3.5mm;
+      text-align: center;
+    }
+
+    .contact-item strong {
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    .qr-box {
+      background: #FFFFFF;
+      padding: 1.2mm;
+      border-radius: 4px;
+      border: 1px solid var(--clr-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    }
+
+    .qr-box img {
+      width: 16mm;
+      height: 16mm;
+      display: block;
+    }
+
+    .qr-box .qr-tag {
+      font-size: 3.6pt;
+      font-weight: 800;
+      color: var(--clr-nile-dark);
+      text-transform: uppercase;
+      margin-top: 0.6mm;
+      letter-spacing: 0.3px;
+    }
+
+    /* Bottom strip */
+    .bottom-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 0.5px solid rgba(201, 135, 58, 0.3);
+      padding-top: 1mm;
+      font-size: 4.4pt;
+      color: var(--clr-sand);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ----------------------------------------------------
+       FACE B: ARABIC (فخامة ملكية باللون العاجي والذهبي والنيلي)
+       ---------------------------------------------------- */
+    .card-ar {
+      background: linear-gradient(135deg, #FCFAF7 0%, #F5EFEB 100%);
+      color: var(--clr-dark);
+      padding: 4.5mm 5.5mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(201, 135, 58, 0.4);
+      direction: rtl;
+      font-family: var(--font-cairo);
+    }
+
+    .card-ar::before {
+      content: '';
+      position: absolute;
+      top: 2mm;
+      left: 2mm;
+      right: 2mm;
+      bottom: 2mm;
+      border: 0.5px solid rgba(201, 135, 58, 0.35);
+      pointer-events: none;
+    }
+
+    .hotel-brand-ar {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+    }
+
+    .brand-text-ar h3 {
+      font-size: 7.5pt;
+      font-weight: 900;
+      color: var(--clr-nile-dark);
+      line-height: 1.25;
+    }
+
+    .brand-text-ar h3 span {
+      color: var(--clr-gold);
+    }
+
+    .brand-text-ar p {
+      font-size: 4.5pt;
+      color: var(--clr-gray);
+      font-weight: 700;
+      margin-top: 0.5px;
+    }
+
+    .person-info-ar h1 {
+      font-size: 12.5pt;
+      font-weight: 900;
+      color: var(--clr-nile-dark);
+      line-height: 1.1;
+    }
+
+    .person-info-ar .title {
+      font-size: 6.8pt;
+      font-weight: 800;
+      color: var(--clr-gold);
+      margin-top: 0.5px;
+    }
+
+    .contact-item-ar {
+      display: flex;
+      align-items: center;
+      gap: 1.8mm;
+      font-size: 5.2pt;
+      color: var(--clr-dark);
+      font-weight: 600;
+    }
+
+    .contact-item-ar .icon {
+      color: var(--clr-gold);
+      font-size: 5.5pt;
+      width: 3.5mm;
+      text-align: center;
+    }
+
+    .bottom-strip-ar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 0.5px solid rgba(201, 135, 58, 0.3);
+      padding-top: 1mm;
+      font-size: 4.8pt;
+      color: var(--clr-gray);
+      font-weight: 600;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media print {
+      body { padding: 0; background: transparent; }
+      .card-page { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== FACE A: ENGLISH ==================== -->
+  <div class="card-page card-en">
+    <div class="top-row">
+      <div class="hotel-brand">
+        <img src="images/logo.jpg" alt="Company Logo" class="logo-img">
+        <div class="brand-text">
+          <h3>ADVANCED ARGENTINE <span>RESTAURANT CO.</span></h3>
+          <p>Hotel & Restaurant Management</p>
+        </div>
+      </div>
+      <div class="badge-star">★ Hospitality Co.</div>
+    </div>
+
+    <div class="middle-row">
+      <div>
+        <div class="person-info">
+          <h1>${person.nameEn}</h1>
+          <div class="title">${person.titleEn}</div>
+        </div>
+        <div class="gold-bar"></div>
+        <div class="contact-list">
+          <div class="contact-item">
+            <span class="icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+            <span>Mobile: <strong>${person.mobileFormatted}</strong></span>
+          </div>
+          <div class="contact-item">
+            <span class="icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
+            <span>Email: <strong>${person.email}</strong></span>
+          </div>
+          <div class="contact-item">
+            <span class="icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></span>
+            <span>Web: <strong>thetravelwiki.space</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="qr-box">
+        <img src="images/qr_vcard.png" alt="vCard QR Code">
+        <span class="qr-tag">Scan Contact</span>
+      </div>
+    </div>
+
+    <div class="bottom-strip">
+      <span>📍 Zamalek / Nazlet El-Semman, Giza, Egypt</span>
+      <span>Hotel & Restaurant Mgt</span>
+    </div>
+  </div>
+
+  <!-- ==================== FACE B: ARABIC ==================== -->
+  <div class="card-page card-ar">
+    <div class="top-row">
+      <div class="hotel-brand-ar">
+        <img src="images/logo.jpg" alt="شعار الشركة" class="logo-img">
+        <div class="brand-text-ar">
+          <h3>شركة المطعم <span>الأرجنتيني المتطور</span></h3>
+          <p>لإدارة الفنادق والمطاعم والتجهيزات</p>
+        </div>
+      </div>
+      <div class="badge-star" style="background: rgba(201,135,58,0.15); color: var(--clr-gold); font-family: var(--font-cairo); font-size: 4.8pt;">إدارة فندقية وتجهيزات</div>
+    </div>
+
+    <div class="middle-row">
+      <div>
+        <div class="person-info-ar">
+          <h1>${person.nameAr}</h1>
+          <div class="title">${person.titleAr}</div>
+        </div>
+        <div class="gold-bar"></div>
+        <div class="contact-list">
+          <div class="contact-item-ar">
+            <span class="icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+            <span>موبايل: <strong>${person.mobileRaw}</strong> (20+)</span>
+          </div>
+          <div class="contact-item-ar">
+            <span class="icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
+            <span>البريد: <strong>${person.email}</strong></span>
+          </div>
+          <div class="contact-item-ar">
+            <span class="icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></span>
+            <span>الموقع: <strong>thetravelwiki.space</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="qr-box">
+        <img src="images/qr_vcard.png" alt="QR Code">
+        <span class="qr-tag" style="font-family: var(--font-cairo); font-size: 4.2pt;">حفظ الكارت</span>
+      </div>
+    </div>
+
+    <div class="bottom-strip-ar">
+      <span>📍 الزمالك / 21 شارع جمال عبد الناصر، نزلة السمان، الجيزة</span>
+      <span>إدارة وتجهيزات فندقية</span>
+    </div>
+  </div>
+
+</body>
+</html>`;
+}
+
+const people = [
+  {
+    fileNameHtml: 'card_khaled_elaraby.html',
+    fileNamePdf: 'كارت_خالد_العربي_نائب_رئيس_مجلس_الإدارة.pdf',
+    nameAr: 'خالد العربي',
+    nameEn: 'Khaled Elaraby',
+    titleAr: 'نائب رئيس مجلس الإدارة',
+    titleEn: 'Vice Chairman & Executive VP',
+    mobileRaw: '01025930099',
+    mobileFormatted: '+20 102 593 0099',
+    email: 'khamedsakr@henuhotel.com'
+  },
+  {
+    fileNameHtml: 'card_kamel_elmangalify.html',
+    fileNamePdf: 'كارت_كامل_المنجليفي_المدير_العام.pdf',
+    nameAr: 'كامل المنجليفي',
+    nameEn: 'Kamel Elmangalify',
+    titleAr: 'المدير العام',
+    titleEn: 'General Manager',
+    mobileRaw: '01123456777',
+    mobileFormatted: '+20 112 345 6777',
+    email: 'kamel@henuhotel.com'
+  }
+];
+
+const edgePath = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
+const edgeAlt = 'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe';
+let exe = fs.existsSync(edgePath) ? edgePath : (fs.existsSync(edgeAlt) ? edgeAlt : 'msedge.exe');
+
+people.forEach(p => {
+  const htmlPath = path.join(cardsDir, p.fileNameHtml);
+  const pdfPath = path.join(cardsDir, p.fileNamePdf);
+
+  const htmlContent = generateCardHtml(p);
+  fs.writeFileSync(htmlPath, htmlContent, 'utf8');
+  console.log(`✅ HTML Created: ${p.fileNameHtml}`);
+
+  execFileSync(exe, ['--headless', '--disable-gpu', '--no-sandbox', '--no-pdf-header-footer', '--print-to-pdf=' + pdfPath, htmlPath]);
+  console.log(`✅ PDF Created: ${p.fileNamePdf}`);
+});
+
+console.log('\n✨ ALL BUSINESS CARDS GENERATED SUCCESSFULLY!');
