@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>يافطة الباب الرسمية — شركة المطعم الأرجنتيني المتطور لإدارة الفنادق والمطاعم (60x40 cm)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900;1000&family=Amiri:wght@700&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: 600mm 400mm;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      width: 600mm;
+      height: 400mm;
+      margin: 0;
+      padding: 0;
+      background: #0B1726;
+      font-family: 'Cairo', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Board Frame 60cm x 40cm */
+    .signboard {
+      width: 580mm;
+      height: 380mm;
+      background: linear-gradient(145deg, #091320 0%, #102238 50%, #08111D 100%);
+      border: 6mm solid #C9873A;
+      border-radius: 12mm;
+      position: relative;
+      padding: 15mm 20mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+    }
+
+    /* Inner Gold Border Ring */
+    .signboard::before {
+      content: '';
+      position: absolute;
+      top: 4mm;
+      left: 4mm;
+      right: 4mm;
+      bottom: 4mm;
+      border: 1.5mm solid rgba(217, 140, 52, 0.4);
+      border-radius: 8mm;
+      pointer-events: none;
+    }
+
+    /* Corner Luxury Ornaments */
+    .corner {
+      position: absolute;
+      width: 25mm;
+      height: 25mm;
+      border-color: #D98C34;
+      border-style: solid;
+      pointer-events: none;
+    }
+    .top-left { top: 7mm; left: 7mm; border-width: 3mm 0 0 3mm; }
+    .top-right { top: 7mm; right: 7mm; border-width: 3mm 3mm 0 0; }
+    .bottom-left { bottom: 7mm; left: 7mm; border-width: 0 0 3mm 3mm; }
+    .bottom-right { bottom: 7mm; right: 7mm; border-width: 0 3mm 3mm 0; }
+
+    /* Header Badge & Crest */
+    .header-badge {
+      display: flex;
+      align-items: center;
+      gap: 10mm;
+      margin-top: 5mm;
+    }
+
+    .crest-icon {
+      width: 38mm;
+      height: 38mm;
+      background: linear-gradient(135deg, #D98C34, #9E5E16);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(217, 140, 52, 0.4);
+      border: 1.5mm solid #FDF2E2;
+    }
+
+    .crest-icon svg {
+      width: 24mm;
+      height: 24mm;
+      fill: #FFFFFF;
+    }
+
+    .header-text h3 {
+      font-size: 26pt;
+      font-weight: 800;
+      color: #E2E8F0;
+      letter-spacing: 1px;
+    }
+
+    .header-text p {
+      font-size: 16pt;
+      color: #D98C34;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Main Company Name Title */
+    .company-title-box {
+      text-align: center;
+      width: 100%;
+      padding: 8mm 0;
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1mm solid rgba(217, 140, 52, 0.3);
+      border-bottom: 1mm solid rgba(217, 140, 52, 0.3);
+      border-radius: 6mm;
+      margin: 5mm 0;
+    }
+
+    .company-title-box h1 {
+      font-size: 46pt;
+      font-weight: 1000;
+      color: #FFFFFF;
+      line-height: 1.25;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    }
+
+    .company-title-box h1 span {
+      color: #F59E0B;
+      display: block;
+      font-size: 52pt;
+      margin-top: 2mm;
+    }
+
+    /* Activity & Purpose Subtitle */
+    .activity-box {
+      background: linear-gradient(90deg, transparent, rgba(217, 140, 52, 0.15), transparent);
+      padding: 4mm 15mm;
+      border-radius: 50px;
+      text-align: center;
+    }
+
+    .activity-box h2 {
+      font-size: 24pt;
+      font-weight: 800;
+      color: #F3F4F6;
+      letter-spacing: 0.5px;
+    }
+
+    /* Footer Legal Info Grid */
+    .legal-grid {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6mm 10mm;
+      background: rgba(10, 20, 33, 0.8);
+      border: 0.8mm solid rgba(217, 140, 52, 0.4);
+      border-radius: 6mm;
+      margin-bottom: 3mm;
+    }
+
+    .legal-item {
+      display: flex;
+      align-items: center;
+      gap: 5mm;
+    }
+
+    .legal-item .label {
+      font-size: 16pt;
+      font-weight: 700;
+      color: #94A3B8;
+    }
+
+    .legal-item .val {
+      font-size: 18pt;
+      font-weight: 900;
+      color: #FFFFFF;
+      background: rgba(217, 140, 52, 0.2);
+      padding: 2mm 6mm;
+      border-radius: 4mm;
+      border: 0.5mm solid #D98C34;
+    }
+
+    .official-seal {
+      font-size: 14pt;
+      font-weight: 800;
+      color: #10B981;
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      background: rgba(16, 185, 129, 0.1);
+      padding: 2.5mm 8mm;
+      border-radius: 50px;
+      border: 0.5mm solid #10B981;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="signboard">
+    <!-- Corner Ornaments -->
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+    <div class="corner bottom-left"></div>
+    <div class="corner bottom-right"></div>
+
+    <!-- Header Badge -->
+    <div class="header-badge">
+      <div class="crest-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/>
+        </svg>
+      </div>
+      <div class="header-text">
+        <h3>المقر الرئيسي والإدارة العامة</h3>
+        <p>ADVANCED ARGENTINE RESTAURANT CO.</p>
+      </div>
+    </div>
+
+    <!-- Main Company Name Title -->
+    <div class="company-title-box">
+      <h1>
+        شركة المطعم الأرجنتيني المتطور
+        <span>لإدارة الفنادق والمطاعم</span>
+      </h1>
+    </div>
+
+    <!-- Activity Subtitle -->
+    <div class="activity-box">
+      <h2>إدارة وتشغيل وتجهيز المنشآت الفندقية والسياحية والمطاعم</h2>
+    </div>
+
+    <!-- Legal & Inspection Details Grid -->
+    <div class="legal-grid">
+      <div class="legal-item">
+        <span class="label">الصفة القانونية:</span>
+        <span class="val">شركة إدارة وتشغيل فندقي</span>
+      </div>
+      <div class="official-seal">
+        <span>✓ المقر الرئيسي المعتمد للمعاينة</span>
+      </div>
+      <div class="legal-item">
+        <span class="label">النشاط:</span>
+        <span class="val">فنادق ومطاعم</span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
