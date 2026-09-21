@@ -17,10 +17,10 @@
 
     /* Glassmorphism for iPad Overlay */
     .glass-box {
-      background: rgba(10, 18, 30, 0.88);
+      background: rgba(8, 15, 26, 0.88);
       backdrop-filter: blur(20px);
-      border: 1.5px solid rgba(217, 140, 52, 0.45);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.75);
+      border: 1.5px solid rgba(217, 140, 52, 0.5);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
     }
 
     .gold-gradient-text {
@@ -58,16 +58,16 @@
     <!-- 4 MAIN REGION TABS (الجيزة / القاهرة / الإسكندرية / الفيوم) -->
     <div class="flex items-center bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800 gap-1 overflow-x-auto no-scrollbar">
       <button onclick="switchCategory('giza')" id="cat-tab-giza" class="cat-tab px-4 py-2 rounded-xl text-xs md:text-sm font-black transition flex items-center gap-1.5 bg-amber-500 text-slate-950 shadow-md">
-        <span>🔺</span> <span id="label-giza">Giza (الجيزة)</span>
+        <span>🔺</span> <span id="label-giza">1- Giza (الجيزة)</span>
       </button>
       <button onclick="switchCategory('cairo')" id="cat-tab-cairo" class="cat-tab px-4 py-2 rounded-xl text-xs md:text-sm font-bold text-slate-300 hover:text-white transition flex items-center gap-1.5">
-        <span>🕌</span> <span id="label-cairo">Cairo (القاهرة)</span>
+        <span>🕌</span> <span id="label-cairo">2- Cairo (القاهرة)</span>
       </button>
       <button onclick="switchCategory('alexandria')" id="cat-tab-alex" class="cat-tab px-4 py-2 rounded-xl text-xs md:text-sm font-bold text-slate-300 hover:text-white transition flex items-center gap-1.5">
-        <span>🌊</span> <span id="label-alex">Alexandria (الإسكندرية)</span>
+        <span>🌊</span> <span id="label-alex">3- Alexandria (الإسكندرية)</span>
       </button>
       <button onclick="switchCategory('fayoum')" id="cat-tab-fayoum" class="cat-tab px-4 py-2 rounded-xl text-xs md:text-sm font-bold text-slate-300 hover:text-white transition flex items-center gap-1.5">
-        <span>🌴</span> <span id="label-fayoum">Fayoum (الفيوم)</span>
+        <span>🌴</span> <span id="label-fayoum">4- Fayoum (الفيوم)</span>
       </button>
     </div>
 
@@ -113,14 +113,13 @@
     </button>
   </footer>
 
-  <!-- SIGHT-BY-SIGHT COMPLETE DATA MATRIX FOR ALL 4 REGIONS -->
+  <!-- SIGHT-BY-SIGHT STUNNING IMAGES & NO PRICES DATA MATRIX -->
   <script>
     const allDestinations = {
       giza: [
         {
           id: "giza-pyramids",
-          img: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 40,
+          img: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1600&q=85",
           duration: "3-4 Hours",
           title: { en: "The Great Pyramids of Giza", ar: "أهرامات الجيزة الخالدة (خوفو، خفرع، منقرع)", fr: "Les Grandes Pyramides de Gizeh", es: "Las Grandes Pirámides de Guiza", de: "Die Großen Pyramiden von Gizeh", it: "Le Grandi Piramidi di Giza" },
           sub: { en: "Khufu, Khafre & Menkaure Plateau", ar: "عجيبة العالم القديم الوحيدة الباقية والتصوير البانورامي", fr: "Merveille du Monde Antique", es: "Maravilla del Mundo Antiguo", de: "Weltwunder der Antike", it: "Meraviglia del Mondo Antico" },
@@ -135,8 +134,7 @@
         },
         {
           id: "giza-sphinx",
-          img: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 35,
+          img: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1600&q=85",
           duration: "2-3 Hours",
           title: { en: "The Great Sphinx & Valley Temple", ar: "تمثال أبو الهول المنيع ومعبد الوادي", fr: "Le Grand Sphinx & Temple de la Vallée", es: "La Gran Esfinge y Templo del Valle", de: "Der Große Sphinx & Tal-Tempel", it: "La Grande Sfinge e Tempio della Valle" },
           sub: { en: "Guardian of the Giza Royal Plateau", ar: "حارس الهضبة الملكية ومعبد التكفين الفرعوني", fr: "Gardien du plateau royal", es: "Guardián de la meseta real", de: "Wächter des königlichen Plateau", it: "Guardiano dell'altopiano reale" },
@@ -151,8 +149,7 @@
         },
         {
           id: "giza-dahshur-saqqara",
-          img: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 50,
+          img: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1600&q=85",
           duration: "6 Hours",
           title: { en: "Dahshur, Saqqara Step Pyramid & Memphis", ar: "دهشور وسقارة وممفيس (الأهرامات والمعابد)", fr: "Dahchour, Saqqarah & Memphis", es: "Dahshur, Saqqara y Menfis", de: "Dahschur, Saqqara & Memphis", it: "Dahshur, Saqqara e Menfi" },
           sub: { en: "Djoser Step Pyramid, Red & Bent Pyramids & Ramses II", ar: "هرم زوسر المدرج والهرم المنحني والأحمر وتماثيل رمسيس بمنف", fr: "Premières pyramides en pierre", es: "Primeras pirámides de piedra", de: "Erste Steinpyramiden", it: "Prime piramidi in pietra" },
@@ -167,8 +164,7 @@
         },
         {
           id: "giza-gem",
-          img: "https://images.unsplash.com/photo-1544945582-45a7674d8124?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 50,
+          img: "https://images.unsplash.com/photo-1544945582-45a7674d8124?auto=format&fit=crop&w=1600&q=85",
           duration: "4 Hours",
           title: { en: "Grand Egyptian Museum (GEM)", ar: "المتحف المصري الكبير (GEM)", fr: "Grand Musée Égyptien", es: "Gran Museo Egipcio", de: "Großes Ägyptisches Museum", it: "Grande Museo Egizio" },
           sub: { en: "Hanging Obelisk, Grand Atrium & King Tut's Treasures", ar: "المسلة المعلقة الأولى عالمياً وكنوز توت عنخ آمون", fr: "Le plus grand musée du monde", es: "El museo más grande del mundo", de: "Das größte Museum der Welt", it: "Il museo più grande del mondo" },
@@ -185,8 +181,7 @@
       cairo: [
         {
           id: "cairo-heritage",
-          img: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 45,
+          img: "https://images.unsplash.com/photo-1572252821143-035a02485897?auto=format&fit=crop&w=1600&q=85",
           duration: "6-7 Hours",
           title: { en: "Historic Cairo, Citadel, Bazaar & Landmarks", ar: "جولة القاهرة التاريخية ومجمع الأديان والقلعة وخان الخليلي", fr: "Le Caire Historique & Citadelle", es: "El Cairo Histórico y Ciudadela", de: "Historisches Kairo & Zitadelle", it: "Cairo Storica e Cittadella" },
           sub: { en: "Amr Ibn Al-Aas, Hanging Church, Ben Ezra, Saladin Citadel, El-Moez, El-Hussein, Cairo Tower & El-Sayeda Zeinab", ar: "جامع عمرو بن العاص، الكنيسة المعلقة، معبد بن عزرا، القلعة، المعز، الحسين، برج القاهرة والسيدة زينب", fr: "Visite complète du patrimoine", es: "Recorrido completo por el patrimonio", de: "Komplette Kulturtour", it: "Tour completo del patrimonio" },
@@ -201,8 +196,7 @@
         },
         {
           id: "cairo-nile-dinner",
-          img: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 40,
+          img: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1600&q=85",
           duration: "3-4 Hours",
           title: { en: "Nile Dinner Cruise & Show", ar: "رحلة نيلية وعشاء بوفيه مفتوح مع الحلويات والشو الشرقي", fr: "Dîner Croisière sur le Nil", es: "Crucero con Cena por el Nilo", de: "Nil-Abendessen-Kreuzfahrt", it: "Crociera con Cena sul Nilo" },
           sub: { en: "Open Buffet Dinner, Oriental Sweets, Belly Dance & Tanoura", ar: "عشاء بوفيه مفتوح فاخر، تشكيلة حلويات شرقية، رقص شرقي وعرض التنورة", fr: "Dîner buffet & spectacle", es: "Cena buffet y espectáculo", de: "Abendbuffet & Show", it: "Cena a buffet e spettacolo" },
@@ -217,8 +211,7 @@
         },
         {
           id: "cairo-classic-museum",
-          img: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 35,
+          img: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1600&q=85",
           duration: "3-4 Hours",
           title: { en: "Classic Egyptian Museum (Tahrir Square)", ar: "المتحف المصري القديم بالتحرير", fr: "Musée Égyptien Classique (Tahrir)", es: "Museo Egipcio Clásico (Tahrir)", de: "Klassisches Ägyptisches Museum", it: "Museo Egizio Classico (Tahrir)" },
           sub: { en: "120,000 Pharaonic Masterpieces & Royal Statues", ar: "120 ألف قطعة أثرية فرعونية وتماثيل الملوك العظام", fr: "120 000 chefs-d'œuvre pharaoniques", es: "120,000 obras maestras faraónicas", de: "120.000 pharaonische Meisterwerke", it: "120.000 capolavori faraonici" },
@@ -233,8 +226,7 @@
         },
         {
           id: "cairo-nmec-museum",
-          img: "https://images.unsplash.com/photo-1544945582-45a7674d8124?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 40,
+          img: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1600&q=85",
           duration: "3-4 Hours",
           title: { en: "National Museum of Egyptian Civilization (NMEC)", ar: "متحف الحضارة بالفسطاط وقاعة المومياوات الملكية", fr: "Musée National de la Civilisation (NMEC)", es: "Museo Nacional de la Civilización (NMEC)", de: "Nationalmuseum der ägyptischen Zivilisation", it: "Museo Nazionale della Civiltà Egizia" },
           sub: { en: "22 Royal Pharaonic Mummies & Egyptian History", ar: "قاعة المومياوات الملكية الـ 22 وحضارات مصر عبر العصور", fr: "22 mumies royales pharaoniques", es: "22 momias reales faraónicas", de: "22 königliche Mumien", it: "22 mummie reali faraoniche" },
@@ -251,8 +243,7 @@
       alexandria: [
         {
           id: "alex-pompey-column",
-          img: "https://images.unsplash.com/photo-1544945582-45a7674d8124?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 30,
+          img: "https://images.unsplash.com/photo-1544945582-45a7674d8124?auto=format&fit=crop&w=1600&q=85",
           duration: "2 Hours",
           title: { en: "Pompey's Pillar & Serapeum Temple", ar: "عمود السواري ومعبد السرابيوم الأثري", fr: "Colonne de Pompée & Sérapéum", es: "Columna de Pompeyo y Serapeum", de: "Pompejus-Säule & Serapeum", it: "Colonna di Pompeo e Serapeo" },
           sub: { en: "Triumphal Roman Column & Ancient Sphynxes", ar: "النصب التذكاري الروماني وتماثيل أبو الهول السكندرية", fr: "Colonne triomphale romaine", es: "Columna triunfal romana", de: "Römische Triumph-Säule", it: "Colonna trionfale romana" },
@@ -267,8 +258,7 @@
         },
         {
           id: "alex-library",
-          img: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 35,
+          img: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1600&q=85",
           duration: "3 Hours",
           title: { en: "Bibliotheca Alexandrina (Alexandria Library)", ar: "مكتبة الإسكندرية العالمية والمتاحف", fr: "Bibliotheca Alexandrina", es: "Bibliotheca Alexandrina", de: "Bibliotheca Alexandrina", it: "Bibliotheca Alexandrina" },
           sub: { en: "World-Renowned Cultural Center & Museums", ar: "الصرح الثقافي العالمي المظلم ومتاحف المخطوطات والآثار", fr: "Centre culturel mondial", es: "Centro cultural mundial", de: "Weltweites Kulturzentrum", it: "Centro culturale mondiale" },
@@ -283,8 +273,7 @@
         },
         {
           id: "alex-qaitbay",
-          img: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 35,
+          img: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1600&q=85",
           duration: "2-3 Hours",
           title: { en: "Citadel of Qaitbay", ar: "قلعة قايتباي المنيعة وموقع الفنار القديم", fr: "Citadelle de Qaitbay", es: "Ciudadela de Qaitbay", de: "Qaitbay-Zitadelle", it: "Cittadella di Qaitbay" },
           sub: { en: "15th-Century Fortress Built on Ancient Lighthouse Site", ar: "حصن قايتباي المقام على موقع فنار الإسكندرية القديم", fr: "Forteresse du 15ème siècle", es: "Fortaleza del siglo XV", de: "Festung aus dem 15. Jahrhundert", it: "Fortezza del XV secolo" },
@@ -299,8 +288,7 @@
         },
         {
           id: "alex-montaza",
-          img: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 30,
+          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=85",
           duration: "3 Hours",
           title: { en: "Montaza Palace Gardens & Royal Bay", ar: "حدائق وقصر المنتزه والخليج الملكي", fr: "Jardins du Palais de Montaza", es: "Jardines del Palacio de Montaza", de: "Montaza-Palastgärten", it: "Giardini del Palazzo di Montaza" },
           sub: { en: "King Farouk's Royal Summer Estate & Sea Bridge", ar: "قصر الملك فاروق وكوبري المنتزه وممشى الخليج", fr: "Domaine royal d'été", es: "Finca real de verano", de: "Königliches Sommeranwesen", it: "Tenuta reale estiva" },
@@ -315,8 +303,7 @@
         },
         {
           id: "alex-catacombs",
-          img: "https://images.unsplash.com/photo-1544945582-45a7674d8124?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 35,
+          img: "https://images.unsplash.com/photo-1544945582-45a7674d8124?auto=format&fit=crop&w=1600&q=85",
           duration: "3 Hours",
           title: { en: "Greco-Roman Museum & Catacombs of Kom El Shoqafa", ar: "المتحف اليوناني الروماني ومقابر كوم الشقافة", fr: "Musée Gréco-Romain & Catacombes", es: "Museo Greco-Romano y Catacumbas", de: "Griechisch-Römisches Museum & Katakomben", it: "Museo Greco-Romano e Catacombe" },
           sub: { en: "Pharaonic & Roman Fusion Art 3 Levels Underground", ar: "اندماج الفن الفرعوني والروماني 3 طوابق تحت الأرض", fr: "Fusion d'art pharaonique et romain", es: "Fusión de arte faraónico y romano", de: "Pharaonische und römische Kunst", it: "Fusione di arte faraonica e romana" },
@@ -333,8 +320,7 @@
       fayoum: [
         {
           id: "fayoum-rayan",
-          img: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 70,
+          img: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1600&q=85",
           duration: "8 Hours",
           title: { en: "Wadi El-Rayan Waterfalls & Oasis Lakes", ar: "وادي الريان وشلالات الفيوم والبحيرات", fr: "Cascades de Wadi El-Rayan & Lacs", es: "Cascadas de Wadi El-Rayan y Lagos", de: "Wadi El-Rayan Wasserfälle & Seen", it: "Cascate di Wadi El-Rayan e Laghi" },
           sub: { en: "Egypt's Only Waterfalls & Protected Desert Oasis", ar: "الشلالات الطبيعية الوحيدة في مصر وبحيرات الوادي", fr: "Seules cascades d'Égypte", es: "Únicas cascadas de Egipto", de: "Ägyptens einzige Wasserfälle", it: "Uniche cascate d'Egitto" },
@@ -349,8 +335,7 @@
         },
         {
           id: "fayoum-safari",
-          img: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1400&q=80",
-          priceUSD: 85,
+          img: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1600&q=85",
           duration: "10 Hours",
           title: { en: "Fayoum Desert Safari (Sandboarding, Camping & Horse Riding)", ar: "سفاري الفيوم (تزحلق على الرمال، تخييم وركوب خيل)", fr: "Safari Désert de Fayoum & Sandboard", es: "Safari en el Desierto de Fayoum y Sandboard", de: "Fayoum Wüstensafari & Sandboarding", it: "Safari nel Deserto di Fayoum e Sandboard" },
           sub: { en: "Magic Lake, Sand Dunes, Horse Riding & Bedouin BBQ", ar: "البحيرة السحرية، ركوب الخيل، التخييم وحفلة المشوي البدوية", fr: "Lac Magique & BBQ Bédouin", es: "Lago Mágico y Barbacoa Beduina", de: "Magischer See & Beduinen-BBQ", it: "Lago Magico e BBQ Beduino" },
@@ -413,11 +398,11 @@
                 </div>
               </div>
 
+              <!-- Concierge Action CTA (NO PRICE DISPLAYED) -->
               <div class="md:col-span-4 flex flex-col items-center md:items-end justify-center text-center md:text-right border-t md:border-t-0 md:border-l border-slate-800 pt-4 md:pt-0 md:pl-6">
-                <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider block mb-1">Trip Price From</span>
-                <span class="text-3xl md:text-4xl font-black text-emerald-400 mb-4">$${dest.priceUSD} <span class="text-xs text-slate-400 font-normal">/ person</span></span>
+                <span class="text-xs text-amber-400/90 font-bold tracking-wider uppercase block mb-3">★ HENU VIP TOUR</span>
 
-                <a href="https://wa.me/201222600296?text=${encodeURIComponent('Hello, I am interested in booking: ' + title)}" target="_blank" class="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-black text-xs md:text-sm py-3.5 px-5 rounded-2xl shadow-xl transition flex items-center justify-center gap-2 active:scale-95">
+                <a href="https://wa.me/201222600296?text=${encodeURIComponent('Hello, I am interested in booking: ' + title)}" target="_blank" class="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-black text-xs md:text-sm py-4 px-5 rounded-2xl shadow-xl transition flex items-center justify-center gap-2 active:scale-95">
                   <span>💬</span> <span>Book With Concierge</span>
                 </a>
               </div>
