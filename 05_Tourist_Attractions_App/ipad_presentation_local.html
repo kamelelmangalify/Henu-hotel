@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Egypt Master Destinations — iPad Presentation & Kiosk Deck</title>
+  <!-- Tailwind CSS v4 -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Montserrat:wght@400;600;700;800;900&family=Cinzel:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { -webkit-tap-highlight-color: transparent; user-select: none; }
+    html, body { height: 100%; margin: 0; padding: 0; overflow: hidden; font-family: 'Montserrat', 'Cairo', sans-serif; background: #050B14; color: #FFFFFF; }
+    
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-cairo { font-family: 'Cairo', sans-serif; }
+
+    /* Glassmorphism for iPad Overlay */
+    .glass-box {
+      background: rgba(10, 18, 30, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(217, 140, 52, 0.4);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #FBBF24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-badge {
+      background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+      color: #0F172A;
+      font-weight: 800;
+    }
+
+    /* Fullscreen Slide Transition */
+    .slide-stage {
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+  </style>
+</head>
+<body class="flex flex-col h-full relative">
+
+  <!-- TOP BAR: CATEGORY TABS & LANGUAGE SELECTOR -->
+  <header class="h-16 bg-slate-950/90 border-b border-amber-500/30 px-6 flex items-center justify-between z-30 shadow-2xl backdrop-blur-md">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center font-black text-slate-950 text-lg shadow-md border border-amber-300">
+        𓋹
+      </div>
+      <div>
+        <h1 class="font-cinzel text-lg font-black text-white leading-none">HENU <span class="gold-gradient-text">DESTINATIONS</span></h1>
+        <p class="text-[10px] text-amber-400 font-semibold tracking-widest uppercase">iPad Presentation Deck</p>
+      </div>
+    </div>
+
+    <!-- 3 MAIN CATEGORY TABS (الجيزة / القاهرة / الإسكندرية) -->
+    <div class="flex items-center bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800">
+      <button onclick="switchCategory('giza')" id="cat-tab-giza" class="cat-tab px-5 py-2 rounded-xl text-xs md:text-sm font-black transition flex items-center gap-2 bg-amber-500 text-slate-950 shadow-md">
+        <span>🔺</span> <span id="label-giza">Giza (الجيزة)</span>
+      </button>
+      <button onclick="switchCategory('cairo')" id="cat-tab-cairo" class="cat-tab px-5 py-2 rounded-xl text-xs md:text-sm font-bold text-slate-300 hover:text-white transition flex items-center gap-2">
+        <span>🕌</span> <span id="label-cairo">Cairo (القاهرة)</span>
+      </button>
+      <button onclick="switchCategory('alexandria')" id="cat-tab-alex" class="cat-tab px-5 py-2 rounded-xl text-xs md:text-sm font-bold text-slate-300 hover:text-white transition flex items-center gap-2">
+        <span>🌊</span> <span id="label-alex">Alexandria (الإسكندرية)</span>
+      </button>
+    </div>
+
+    <!-- Multi-Language Selector -->
+    <div class="flex items-center gap-3">
+      <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-slate-900 border border-amber-500/60 text-amber-300 font-bold text-xs md:text-sm rounded-xl px-3 py-1.5 outline-none cursor-pointer">
+        <option value="en">🇬🇧 English</option>
+        <option value="ar">🇪🇬 العربية</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="it">🇮🇹 Italiano</option>
+      </select>
+
+      <span id="slide-indicator" class="text-xs font-bold text-slate-400 bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-800">
+        1 / 8
+      </span>
+    </div>
+  </header>
+
+  <!-- SLIDE PRESENTATION MAIN CONTAINER -->
+  <main id="presentation-viewport" class="flex-1 relative overflow-hidden bg-slate-950">
+    <div id="slide-stage" class="absolute inset-0 flex slide-stage">
+      <!-- Slides Injected Dynamically by JS -->
+    </div>
+  </main>
+
+  <!-- IPAD BOTTOM NAVIGATION CONTROLS -->
+  <footer class="h-16 bg-slate-950/95 border-t border-slate-800 px-6 flex items-center justify-between z-30">
+    <!-- Previous Slide Button -->
+    <button onclick="prevSlide()" class="bg-slate-900 hover:bg-slate-800 border border-slate-700 text-white font-black text-sm px-6 py-2.5 rounded-2xl transition flex items-center gap-2 shadow-lg active:scale-95">
+      <span>◀</span> <span id="btn-prev">Previous</span>
+    </button>
+
+    <!-- Slide Thumbnails / Dots -->
+    <div id="slide-dots" class="flex items-center gap-2">
+      <!-- Dots injected dynamically -->
+    </div>
+
+    <!-- Next Slide Button -->
+    <button onclick="nextSlide()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm px-6 py-2.5 rounded-2xl transition flex items-center gap-2 shadow-lg active:scale-95">
+      <span id="btn-next">Next Destination</span> <span>▶</span>
+    </button>
+  </footer>
+
+  <!-- COMPLETE ALL DESTINATIONS DATA MATRIX -->
+  <script>
+    const allDestinations = {
+      giza: [
+        {
+          id: "giza-1",
+          img: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1400&q=80",
+          priceUSD: 45,
+          duration: "4-5 Hours",
+          title: { en: "Pyramids of Giza & Sphinx", ar: "أهرامات الجيزة الخالدة وأبو الهول", fr: "Pyramides de Gizeh & Sphinx", es: "Pirámides de Guiza y Esfinge", de: "Gizeh Pyramiden & Sphinx", it: "Piramidi di Giza e Sfinge" },
+          sub: { en: "Khufu, Khafre, Menkaure & Valley Temple", ar: "عجائب خوفو، خفرع، منقرع ومعبد الوادي", fr: "Khéops, Khéphren & Mykérinos", es: "Jufu, Jafra y Menkaura", de: "Cheops, Chephren & Mykerinos", it: "Cheope, Chefren e Micerino" },
+          desc: { 
+            en: "Explore the last surviving Wonder of the Ancient World. Walk around the Great Pyramid of Khufu, capture panoramic photos at the plateau, ride camels across the desert sands, and visit the mysterious Great Sphinx.",
+            ar: "استكشف عجيبة العالم القديم الوحيدة الباقية. التجول حول هرم خوفو الأكبر، التقاط صور بانورامية من هضبة الأهرامات، ركوب الجمال في الصحراء، وزيارة تمثال أبو الهول ومعبد الوادي."
+          },
+          highlights: {
+            en: ["Great Pyramid of Khufu Entrance", "Panoramic Photo Point & Camel Ride", "Great Sphinx & Valley Temple Tour"],
+            ar: ["دخول المنطقة الأثرية وزيارة هرم خوفو", "وقفة التصوير البانورامي وركوب الجمال", "زيارة تمثال أبو الهول ومعبد الوادي"]
+          }
+        },
+        {
+          id: "giza-2",
+          img: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1400&q=80",
+          priceUSD: 50,
+          duration: "4 Hours",
+          title: { en: "Grand Egyptian Museum (GEM)", ar: "المتحف المصري الكبير (GEM)", fr: "Grand Musée Égyptien", es: "Gran Museo Egipcio", de: "Großes Ägyptisches Museum", it: "Grande Museo Egizio" },
+          sub: { en: "World's Largest Archaeological Museum", ar: "أكبر متحف أثري في العالم ومجموعة توت عنخ آمون", fr: "Le plus grand musée du monde", es: "El museo más grande del mundo", de: "Das größte Museum der Welt", it: "Il museo più grande del mondo" },
+          desc: {
+            en: "The flagship museum next to Giza Pyramids housing over 100,000 ancient artifacts. Marvel at the Hanging Obelisk, Ramses II statue in the atrium, and King Tutankhamun's entire golden treasure.",
+            ar: "الصرح الأثري الأكبر في العالم المجاور لأهرامات الجيزة. شاهد المسلة المعلقة الأولى في العالم، تمثال رمسيس الثاني العظيم بالبهو الرئيسي، ومجموعة كنوز الملك توت عنخ آمون الذهبية بالكامل."
+          },
+          highlights: {
+            en: ["World's First Hanging Obelisk", "Grand Atrium & Ramses II Statue", "Tutankhamun Complete Golden Treasures"],
+            ar: ["المسلة المعلقة الأولى عالمياً", "البهو العظيم وتمثال رمسيس الثاني", "مجموعة كنوز توت عنخ آمون الكاملة"]
+          }
+        },
+        {
+          id: "giza-3",
+          img: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1400&q=80",
+          priceUSD: 40,
+          duration: "5 Hours",
+          title: { en: "Saqqara Step Pyramid & Memphis", ar: "هرم سقارة المدرج ومدينة منف", fr: "Pyramide à degrés de Saqqarah", es: "Pirámide escalonada de Saqqara", de: "Stufenpyramide von Saqqara", it: "Piramide a gradoni di Saqqara" },
+          sub: { en: "First Stone Pyramid & Ancient Capital", ar: "أول بناء حجري في التاريخ وعاصمة مصر القديمة", fr: "Première pyramide en pierre", es: "Primera pirámide de piedra", de: "Erste Steinpyramide", it: "Prima piramide in pietra" },
+          desc: {
+            en: "Discover Djoser's Step Pyramid built by Imhotep in 2700 BC. Tour the tombs of nobles with vivid wall paintings, Serapeum, and the open-air museum at Memphis with the colossal statue of Ramses II.",
+            ar: "اكتشف هرم زوسر المدرج أول بناية حجرية في تاريخ البشرية صممها إمحوتب عام 2700 ق.م. زيارة مقابر النبلاء والسرابيوم، ومتحف الهواء الطلق بمدينة منف ورؤية تمثال رمسيس الثاني الضخم."
+          },
+          highlights: {
+            en: ["Djoser Step Pyramid Complex", "Tombs of Nobility Reliefs & Serapeum", "Memphis Colossal Ramses II Statue"],
+            ar: ["مجمع هرم زوسر المدرج بسقارة", "مقابر النبلاء والسرابيوم الأثري", "تمثال رمسيس الثاني الضخم بمدينة منف"]
+          }
+        },
+        {
+          id: "giza-4",
+          img: "https://images.unsplash.com/photo-1544945582-45a7674d8124?auto=format&fit=crop&w=1400&q=80",
+          priceUSD: 35,
+          duration: "4 Hours",
+          title: { en: "Dahshur Bent & Red Pyramids", ar: "أهرامات دهشور (الهرم المنحني والأحمر)", fr: "Pyramides de Dahchour", es: "Pirámides de Dahshur", de: "Pyramiden von Dahschur", it: "Piramidi di Dahshur" },
+          sub: { en: "King Sneferu's Royal Necropolis", ar: "مقبرة الملك سنفرو وتطور بناء الأهرامات", fr: "Nécropole du roi Snéfrou", es: "Necrópolis del rey SNEFRU", de: "Nekropole von König Sneferu", it: "Necropoli del re Snefru" },
+          desc: {
+            en: "Visit the quiet royal necropolis of Dahshur. Step inside the Red Pyramid (the first true smooth-sided pyramid) and admire the unique geometry of the Bent Pyramid built for King Sneferu.",
+            ar: "زيارة منطقة دهشور الملكية الهادئة. دخول الهرم الأحمر من الداخل (أول هرم أملس مكتمل بالتاريخ) ومشاهدة الهندسة المعمارية الفريدة للهرم المنحني للملك سنفرو والد الملك خوفو."
+          },
+          highlights: {
+            en: ["Inside Red Pyramid Chamber Entry", "Unique Bent Pyramid Architectural View", "Quiet Crowd-Free Desert Experience"],
+            ar: ["دخول غرف الهرم الأحمر الداخلية", "مشاهدة التصميم الهندسي للهرم المنحني", "تجربة صحراوية هادئة بعيدة عن الزحام"]
+          }
+        }
+      ],
+      cairo: [
+        {
+          id: "cairo-1",
+          img: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1400&q=80",
+          priceUSD: 40,
+          duration: "5 Hours",
+          title: { en: "Egyptian Museum & Khan El-Khalili", ar: "المتحف المصري بالتحرير وخان الخليلي", fr: "Musée Égyptien & Khan El-Khalili", es: "Museo Egipcio y Khan El-Khalili", de: "Ägyptisches Museum & Bazar", it: "Museo Egizio e Khan El-Khalili" },
+          sub: { en: "Tahrir Square & Historic Medieval Bazaar", ar: "ميدان التحرير وشارع المعز ومقاهي الفيشاوي", fr: "Place Tahrir et marché médiéval", es: "Plaza Tahrir y mercado medieval", de: "Tahrir-Platz & Historischer Markt", it: "Piazza Tahrir e mercato medievale" },
+          desc: {
+            en: "Immerse yourself in 120,000 Pharaonic masterworks in Tahrir Square, then take a magical walking tour through Khan El-Khalili bazaar and medieval El-Moez street.",
+            ar: "زيارة المتحف المصري التاريخي بميدان التحرير واكتشاف أكثر من 120 ألف قطعة أثرية، ثم جولة سحرية سيراً على الأقدام في شارع المعز لدين الله الفاطمي وسوق خان الخليلي ومقهى الفيشاوي."
+          },
+          highlights: {
+            en: ["Classic Tahrir Museum Guided Tour", "El-Moez Medieval Street Walk", "El-Fishawy Historic Cafe Stop"],
+            ar: ["جولة مرشد في المتحف المصري بالتحرير", "سير في شارع المعز لدين الله الفاطمي", "استراحة بمقهى الفيشاوي التاريخي"]
+          }
+        },
+        {
+          id: "cairo-2",
+          img: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1400&q=80",
+          priceUSD: 45,
+          duration: "5 Hours",
+          title: { en: "Citadel of Saladin & Royal Mummies (NMEC)", ar: "قلعة صلاح الدين ومتحف الحضارة والمومياوات", fr: "Citadelle & Mumies Royales (NMEC)", es: "Ciudadela y Momias Reales (NMEC)", de: "Zitadelle & Königliche Mumien", it: "Cittadella e Mummie Reali (NMEC)" },
+          sub: { en: "Mohamed Ali Mosque & 22 Royal Mummies", ar: "جامع محمد علي المرمري والمومياوات الملكية الـ 22", fr: "Mosquée Mohamed Ali & NMEC", es: "Mezquita de Mohamed Alí y NMEC", de: "Mohamed Ali Moschee & NMEC", it: "Moschea di Mohamed Ali e NMEC" },
+          desc: {
+            en: "Enjoy panoramic views of Cairo from Saladin's medieval Citadel and Mohamed Ali Alabaster Mosque, followed by NMEC Museum housing 22 Ancient Royal Mummies.",
+            ar: "مشاهدة القاهرة من أعلى قلعة صلاح الدين الأيوبي وجامع مرمر محمد علي، ثم الانتقال لمتحف الحضارة بالفسطاط لدخول قاعة المومياوات الملكية الـ 22 الشهيرة."
+          },
+          highlights: {
+            en: ["Saladin Citadel Panorama", "Mohamed Ali Alabaster Mosque Entry", "22 Royal Mummies Hall at NMEC"],
+            ar: ["إطلالة بانورامية من القلعة على القاهرة", "دخول جامع مرمر محمد علي الشهير", "قاعة المومياوات الملكية بمتحف الحضارة"]
+          }
+        },
+        {
+          id: "cairo-3",
+          img: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1400&q=80",
+          priceUSD: 35,
+          duration: "4 Hours",
+          title: { en: "Coptic Cairo & Hanging Church", ar: "مجمع الأديان والكنيسة المعلقة ومصر القديمة", fr: "Le Caire Copte & Église Suspendue", es: "El Cairo Copto y Iglesia Colgante", de: "Koptisches Kairo & Hängende Kirche", it: "Cairo Copta e Chiesa Sospesa" },
+          sub: { en: "Babylon Fortress & Holy Family Trail", ar: "حصن بابليون ومسار رحلة العائلة المقدسة بمصر", fr: "Forteresse de Babylone & Famille Sainte", es: "Fortaleza de Babilonia y Sagrada Familia", de: "Babylon Festung & Heilige Familie", it: "Fortezza di Babilonia e Sacra Famiglia" },
+          desc: {
+            en: "Explore Old Coptic Cairo: Visit the Hanging Church built over Roman fortress gates, Abu Serga Crypt where the Holy Family sheltered, and Ben Ezra Synagogue.",
+            ar: "استكشف مجمع الأديان ومصر القديمة: الكنيسة المعلقة المبنية على أبراج حصن بابليون الروماني، مغارة كنيسة أبي سرجة التي أوت إليها العائلة المقدسة، ومعبد بن عزرا اليهودي."
+          },
+          highlights: {
+            en: ["Hanging Church (Al-Muallaqah) Tour", "Crypt of Holy Family Shelter (Abu Serga)", "Ben Ezra Synagogue & Babylon Fortress"],
+            ar: ["زيارة الكنيسة المعلقة بحصن بابليون", "مغارة العائلة المقدسة بكنيسة أبي سرجة", "معبد بن عزرا الأثري والمتحف القبطي"]
+          }
+        },
+        {
+          id: "cairo-4",
+          img: "https://images.unsplash.com/photo-1544945582-45a7674d8124?auto=format&fit=crop&w=1400&q=80",
+          priceUSD: 30,
+          duration: "3 Hours",
+          title: { en: "Nile Felucca Sunset & Cairo Tower", ar: "رحلة النيل الشراعية وبرج القاهرة عند الغروب", fr: "Coucher de soleil en Félouque sur le Nil", es: "Puesta de sol en Faluca y Torre del Cairo", de: "Feluke Sonnenuntergang & Kairo Turm", it: "Tramonto in Feluca e Torre del Cairo" },
+          sub: { en: "Traditional Sailing & Panoramic City View", ar: "إبحار شراعي تقليدي وإطلالة بانورامية من البرج", fr: "Voile traditionnelle sur le Nil", es: "Navegación tradicional por el Nilo", de: "Traditionelles Segeln auf dem Nil", it: "Navigazione tradizionale sul Nilo" },
+          desc: {
+            en: "Relax on a private traditional Wooden Felucca sailing down the Nile River during golden hour sunset, followed by ascending Cairo Tower for a 360-degree night city view.",
+            ar: "استرخاء ساحر على متن مركب شراعي خشبي تقليدي (فلوكة) في نهر النيل خلال غروب الشمس الذهبي، يليه صعود برج القاهرة لمشاهدة بانوراما 360 درجة للقاهرة ليلاً."
+          },
+          highlights: {
+            en: ["Private Wooden Felucca Sunset Sail", "Cairo Tower 360° Observatory Deck", "Soft Drinks & Refreshments Included"],
+            ar: ["إبحار خاص بمركب شراعي عند الغروب", "صعود قمة برج القاهرة والاستمتاع بالمنظر", "مشروبات فريش ضيافة أثناء الرحلة"]
+          }
+        }
+      ],
+      alexandria: [
+        {
+          id: "alex-1",
+          img: "https://images.unsplash.com/photo-1544945582-45a7674d8124?auto=format&fit=crop&w=1400&q=80",
+          priceUSD: 85,
+          duration: "10 Hours",
+          title: { en: "Citadel of Qaitbay & Library Tour", ar: "قلعة قايتباي ومكتبة الإسكندرية البحرية", fr: "Citadelle de Qaitbay & Bibliothèque", es: "Ciudadela de Qaitbay y Biblioteca", de: "Qaitbay-Zitadelle & Bibliothek", it: "Cittadella di Qaitbay e Biblioteca" },
+          sub: { en: "Lighthouse Site & Mediterranean Seafood", ar: "موقع فنار الإسكندرية وغداء سيفود على البحر", fr: "Phare d'Alexandrie & Déjeuner Poisson", es: "Faro de Alejandría y Almuerzo Marisco", de: "Pharos von Alexandria & Fisch-Mittagessen", it: "Faro di Alessandria e Pranzo di Pesce" },
+          desc: {
+            en: "Full day coastal trip: Visit the 15th-century Citadel of Qaitbay built on the exact location of the Ancient Lighthouse of Alexandria, followed by the modern Bibliotheca Alexandrina and fresh seafood lunch.",
+            ar: "رحلة يوم كامل لعروس البحر المتوسط: زيارة قلعة قايتباي المنيعة المبنية على حطام فنار الإسكندرية القديم، ودخول مكتبة الإسكندرية العالمية، وتناول وجبة أسماك سيفود طازجة أمام البحر."
+          },
+          highlights: {
+            en: ["Qaitbay Citadel Ancient Lighthouse Walk", "Bibliotheca Alexandrina Guided Entry", "Fresh Mediterranean Seafood Lunch"],
+            ar: ["جولة قلعة قايتباي وموقع الفنار القديم", "دخول وتجول داخل مكتبة الإسكندرية", "غداء أسماك وسيفود فاخر على البحر"]
+          }
+        },
+        {
+          id: "alex-2",
+          img: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1400&q=80",
+          priceUSD: 80,
+          duration: "10 Hours",
+          title: { en: "Montaza Palace Gardens & Roman Catacombs", ar: "حدائق قصر المنتزه والمقابر الرومانية", fr: "Jardins de Montaza & Catacombes", es: "Jardines de Montaza y Catacumbas", de: "Montaza-Palastgärten & Katakomben", it: "Giardini di Montaza e Catacombe" },
+          sub: { en: "Royal Summer Palace & Kom El-Shoqafa", ar: "قصر الملك فاروق ومقابر كُوم الشقافة الرومانية", fr: "Palais Royal & Catacombes", es: "Palacio Real y Catacumbas", de: "Königspalast & Katakomben", it: "Palazzo Reale e Catacombe" },
+          desc: {
+            en: "Tour the royal pine-lined gardens of Montaza Palace, step 3 levels underground at Kom El Shoqafa Catacombs (one of 7 Wonders of Medieval World), and view Pompey's Pillar.",
+            ar: "زيارة حدائق قصر المنتزه الملكية المطلة على خليج الإسكندرية، ونزول 3 طوابق تحت الأرض في مقابر كوم الشقافة الرومانية (إحدى عجائب القرون الوسطى)، ومشاهدة عمود السواري."
+          },
+          highlights: {
+            en: ["Montaza Royal Palace & Sea Gardens Walk", "Kom El Shoqafa Underground Catacombs", "Pompey's Pillar & Triumphal Column"],
+            ar: ["جولة حدائق قصر المنتزه والخليج الملكي", "نزول مقابر كوم الشقافة الرومانية", "مشاهدة عمود السواري والنصب الروماني"]
+          }
+        }
+      ]
+    };
+
+    let currentCategory = 'giza';
+    let currentSlideIndex = 0;
+    let currentLang = 'en';
+
+    function renderSlides() {
+      const stage = document.getElementById('slide-stage');
+      const dotsContainer = document.getElementById('slide-dots');
+      stage.innerHTML = '';
+      dotsContainer.innerHTML = '';
+
+      const slides = allDestinations[currentCategory] || [];
+
+      slides.forEach((dest, index) => {
+        const title = dest.title[currentLang] || dest.title['en'];
+        const sub = dest.sub[currentLang] || dest.sub['en'];
+        const desc = dest.desc[currentLang] || dest.desc['en'];
+        const highlights = dest.highlights[currentLang] || dest.highlights['en'];
+
+        const slideHtml = `
+          <div class="w-full h-full flex-shrink-0 relative flex items-center justify-center p-6 md:p-12" style="width: 100vw;">
+            <!-- Background Image with Dark Vignette Overlay -->
+            <div class="absolute inset-0 z-0">
+              <img src="${dest.img}" alt="${title}" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-950/40"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/60"></div>
+            </div>
+
+            <!-- Foreground Content Card (iPad Optimized) -->
+            <div class="relative z-10 w-full max-w-5xl glass-box p-8 md:p-12 rounded-3xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              
+              <div class="md:col-span-8 space-y-4">
+                <div class="flex items-center gap-3">
+                  <span class="gold-badge text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider">${currentCategory.toUpperCase()}</span>
+                  <span class="bg-slate-900/90 text-amber-300 font-bold text-xs px-3.5 py-1.5 rounded-full border border-amber-500/40">⏱️ ${dest.duration}</span>
+                </div>
+
+                <h2 class="text-3xl md:text-5xl font-black text-white leading-tight">${title}</h2>
+                <p class="text-amber-400 font-bold text-sm md:text-base">${sub}</p>
+                <p class="text-slate-200 text-sm md:text-base font-light leading-relaxed">${desc}</p>
+
+                <div class="pt-4 border-t border-slate-800 space-y-2">
+                  ${highlights.map(h => `
+                    <div class="flex items-center gap-2.5 text-xs md:text-sm text-slate-100">
+                      <span class="text-amber-400 font-bold">✓</span>
+                      <span>${h}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Price & Booking CTA -->
+              <div class="md:col-span-4 flex flex-col items-center md:items-end justify-center text-center md:text-right border-t md:border-t-0 md:border-l border-slate-800 pt-6 md:pt-0 md:pl-8">
+                <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block mb-1">Starting From</span>
+                <span class="text-4xl md:text-5xl font-black text-emerald-400 mb-6">$${dest.priceUSD} <span class="text-xs text-slate-400 font-normal">/ person</span></span>
+
+                <a href="https://wa.me/201222600296?text=${encodeURIComponent('Hello, I am interested in booking: ' + title)}" target="_blank" class="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-black text-sm md:text-base py-4 px-6 rounded-2xl shadow-xl transition flex items-center justify-center gap-2 active:scale-95">
+                  <span>💬</span> <span class="btn-book-txt">Book With Concierge</span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        `;
+        stage.innerHTML += slideHtml;
+
+        // Dot indicator
+        const dot = document.createElement('button');
+        dot.className = `w-3 h-3 rounded-full transition-all ${index === currentSlideIndex ? 'bg-amber-400 w-8' : 'bg-slate-700 hover:bg-slate-500'}`;
+        dot.onclick = () => goToSlide(index);
+        dotsContainer.appendChild(dot);
+      });
+
+      updateSlidePosition();
+    }
+
+    function updateSlidePosition() {
+      const stage = document.getElementById('slide-stage');
+      stage.style.transform = `translateX(-${currentSlideIndex * 100}vw)`;
+
+      const slides = allDestinations[currentCategory] || [];
+      document.getElementById('slide-indicator').innerText = `${currentSlideIndex + 1} / ${slides.length}`;
+
+      // Update dots styling
+      const dots = document.getElementById('slide-dots').children;
+      Array.from(dots).forEach((d, i) => {
+        d.className = `w-3 h-3 rounded-full transition-all ${i === currentSlideIndex ? 'bg-amber-400 w-8' : 'bg-slate-700 hover:bg-slate-500'}`;
+      });
+    }
+
+    function nextSlide() {
+      const slides = allDestinations[currentCategory] || [];
+      if (currentSlideIndex < slides.length - 1) {
+        currentSlideIndex++;
+      } else {
+        currentSlideIndex = 0; // Loop back
+      }
+      updateSlidePosition();
+    }
+
+    function prevSlide() {
+      const slides = allDestinations[currentCategory] || [];
+      if (currentSlideIndex > 0) {
+        currentSlideIndex--;
+      } else {
+        currentSlideIndex = slides.length - 1;
+      }
+      updateSlidePosition();
+    }
+
+    function goToSlide(index) {
+      currentSlideIndex = index;
+      updateSlidePosition();
+    }
+
+    function switchCategory(cat) {
+      currentCategory = cat;
+      currentSlideIndex = 0;
+
+      document.querySelectorAll('.cat-tab').forEach(t => {
+        t.className = "cat-tab px-5 py-2 rounded-xl text-xs md:text-sm font-bold text-slate-300 hover:text-white transition flex items-center gap-2";
+      });
+
+      if (cat === 'giza') document.getElementById('cat-tab-giza').className = "cat-tab px-5 py-2 rounded-xl text-xs md:text-sm font-black transition flex items-center gap-2 bg-amber-500 text-slate-950 shadow-md";
+      if (cat === 'cairo') document.getElementById('cat-tab-cairo').className = "cat-tab px-5 py-2 rounded-xl text-xs md:text-sm font-black transition flex items-center gap-2 bg-amber-500 text-slate-950 shadow-md";
+      if (cat === 'alexandria') document.getElementById('cat-tab-alex').className = "cat-tab px-5 py-2 rounded-xl text-xs md:text-sm font-black transition flex items-center gap-2 bg-amber-500 text-slate-950 shadow-md";
+
+      renderSlides();
+    }
+
+    function changeLanguage(lang) {
+      currentLang = lang;
+      if (lang === 'ar') {
+        document.documentElement.dir = 'rtl';
+        document.getElementById('label-giza').innerText = 'الجيرة (Giza)';
+        document.getElementById('label-cairo').innerText = 'القاهرة (Cairo)';
+        document.getElementById('label-alex').innerText = 'الإسكندرية (Alexandria)';
+        document.getElementById('btn-prev').innerText = 'السابق';
+        document.getElementById('btn-next').innerText = 'المزار التالي';
+      } else {
+        document.documentElement.dir = 'ltr';
+        document.getElementById('label-giza').innerText = 'Giza Pyramids';
+        document.getElementById('label-cairo').innerText = 'Cairo Heritage';
+        document.getElementById('label-alex').innerText = 'Alexandria Coast';
+        document.getElementById('btn-prev').innerText = 'Previous';
+        document.getElementById('btn-next').innerText = 'Next Destination';
+      }
+      renderSlides();
+    }
+
+    // Touch Swipe Gesture Handling for iPad
+    let startX = 0;
+    const viewport = document.getElementById('presentation-viewport');
+
+    viewport.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diffX = startX - endX;
+
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }, { passive: true });
+
+    // Keyboard Arrow Keys support
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Initialize Presentation
+    window.onload = function() {
+      renderSlides();
+    };
+  </script>
+</body>
+</html>
