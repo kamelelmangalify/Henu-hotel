@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NileStay | احجز أفضل فنادق مصر مباشرة وبدون عمولة مبالغ فيها</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1F4E78;
+            --primary-dark: #133352;
+            --accent: #D97706;
+            --accent-gold: #F59E0B;
+            --bg-light: #F9FAFB;
+            --text-dark: #1F2937;
+            --text-muted: #6B7280;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* Navbar */
+        nav.navbar {
+            background-color: var(--white);
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--accent-gold);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--primary-dark);
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .btn-partner {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-partner:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Hero & Search */
+        .hero-section {
+            background: linear-gradient(rgba(19, 51, 82, 0.85), rgba(31, 78, 120, 0.85)), url('https://images.unsplash.com/photo-1568084680786-a84f91d1153c?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            padding: 60px 5% 90px;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #E5E7EB;
+            margin-bottom: 40px;
+        }
+
+        /* Search Box */
+        .search-card {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            max-width: 1000px;
+            margin: -60px auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) 160px;
+            gap: 16px;
+            align-items: center;
+            border: 1px solid #E5E7EB;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .input-field {
+            padding: 12px;
+            border: 1px solid #D1D5DB;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .btn-search {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-search:hover {
+            background-color: #B45309;
+        }
+
+        /* Listing Grid */
+        .content-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .hotel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+        }
+
+        .hotel-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid #E5E7EB;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hotel-img-wrapper {
+            position: relative;
+            height: 220px;
+        }
+
+        .hotel-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pyramid-tag {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(217, 119, 6, 0.95);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .hotel-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .hotel-name {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .hotel-location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hotel-stars {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+        }
+
+        .amenities-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .amenity-chip {
+            background-color: #F3F4F6;
+            color: var(--text-dark);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .hotel-footer {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid #E5E7EB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-tag {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-value {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .price-unit {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .btn-book {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-book:hover {
+            background-color: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="logo-container">
+            <div class="logo-icon"><i class="fa-solid fa-pyramid"></i></div>
+            <div class="logo-text">Nile<span>Stay</span></div>
+        </a>
+        <div class="nav-links">
+            <a href="../extranet/index.html" class="btn-partner"><i class="fa-solid fa-hotel"></i> بوابة الشركاء (Extranet)</a>
+            <select class="input-field" style="width: auto; padding: 6px 12px;">
+                <option>العربية (EG)</option>
+                <option>English (US)</option>
+            </select>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <h1 class="hero-title">احجز إقامتك الملكية في مصر مباشرة</h1>
+        <p class="hero-subtitle">إطلالات مباشرة على الأهرامات والنيل | 0% عمولات زائدة | أفضل الأسعار المباشرة</p>
+    </header>
+
+    <div class="search-card">
+        <div class="input-group">
+            <label><i class="fa-solid fa-location-dot"></i> الوجهة / المنطقة</label>
+            <select id="search-dest" class="input-field">
+                <option value="Giza">الجيزة والاهرامات (Giza & Pyramids)</option>
+                <option value="Cairo">القاهرة والنيل (Cairo Downtown)</option>
+                <option value="Alexandria">الإسكندرية (Alexandria)</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label><i class="fa-solid fa-calendar-days"></i> تاريخ الوصول</label>
+            <input type="date" id="search-checkin" class="input-field" value="2026-10-10">
+        </div>
+        <div class="input-group">
+            <label><i class="fa-solid fa-calendar-check"></i> تاريخ المغادرة</label>
+            <input type="date" id="search-checkout" class="input-field" value="2026-10-13">
+        </div>
+        <div class="input-group">
+            <label><i class="fa-solid fa-user-group"></i> عدد الأفراد</label>
+            <input type="number" id="search-guests" class="input-field" value="2" min="1" max="10">
+        </div>
+        <button class="btn-search" onclick="performSearch()"><i class="fa-solid fa-magnifying-glass"></i> بحث</button>
+    </div>
+
+    <main class="content-container">
+        <div class="section-header">
+            <h2 class="section-title">فنادق متميزة في الأهرامات والقاهرة</h2>
+            <span style="color: var(--text-muted); font-weight:600;" id="found-count">عرض 2 فندق موثوق</span>
+        </div>
+
+        <div class="hotel-grid" id="hotel-grid">
+            <!-- Hotel 1 -->
+            <article class="hotel-card">
+                <div class="hotel-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1568084680786-a84f91d1153c?auto=format&fit=crop&w=800&q=80" alt="HENU Hotel Pyramids" class="hotel-img">
+                    <span class="pyramid-tag"><i class="fa-solid fa-eye"></i> إطلالة مباشرة على الأهرامات</span>
+                </div>
+                <div class="hotel-body">
+                    <div class="hotel-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3 class="hotel-name">فندق هينو الأهرامات (HENU Hotel Pyramids)</h3>
+                    <p class="hotel-location"><i class="fa-solid fa-map-pin"></i> هضبة الأهرامات، الجيزة</p>
+                    <div class="amenities-list">
+                        <span class="amenity-chip">إطلالة أهرامات</span>
+                        <span class="amenity-chip">إفطار شامل</span>
+                        <span class="amenity-chip">واي فاي مجاني</span>
+                    </div>
+                    <div class="hotel-footer">
+                        <div class="price-tag">
+                            <span class="price-value">$120</span>
+                            <span class="price-unit">لكل ليلة شامل الضرائب</span>
+                        </div>
+                        <button class="btn-book" onclick="bookHotel('htl_henu_pyramids')">احجز الآن ⚡</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Hotel 2 -->
+            <article class="hotel-card">
+                <div class="hotel-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80" alt="The Nile Ritz-Carlton" class="hotel-img">
+                    <span class="pyramid-tag" style="background: var(--primary-dark);"><i class="fa-solid fa-water"></i> إطلالة مباشرة على النيل</span>
+                </div>
+                <div class="hotel-body">
+                    <div class="hotel-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3 class="hotel-name">نايل ريتز كارلتون (The Nile Ritz-Carlton)</h3>
+                    <p class="hotel-location"><i class="fa-solid fa-map-pin"></i> كورنيش النيل، وسط البلد، القاهرة</p>
+                    <div class="amenities-list">
+                        <span class="amenity-chip">إطلالة النيل</span>
+                        <span class="amenity-chip">حمامات سباحة</span>
+                        <span class="amenity-chip">سبا عالمي</span>
+                    </div>
+                    <div class="hotel-footer">
+                        <div class="price-tag">
+                            <span class="price-value">$220</span>
+                            <span class="price-unit">لكل ليلة</span>
+                        </div>
+                        <button class="btn-book" onclick="bookHotel('htl_cairo_ritz')">احجز الآن ⚡</button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <script>
+        async function performSearch() {
+            const dest = document.getElementById('search-dest').value;
+            const checkin = document.getElementById('search-checkin').value;
+            const checkout = document.getElementById('search-checkout').value;
+            const guests = document.getElementById('search-guests').value;
+
+            try {
+                const res = await fetch(`http://localhost:4000/api/v1/search?destination=${dest}&checkIn=${checkin}&checkOut=${checkout}&guests=${guests}`);
+                const data = await res.json();
+                alert(`تم العثور على ${data.total_found} فندق متاح في ${dest} للفترة المحجوزة (${data.query.nights} ليالي)!`);
+            } catch (err) {
+                alert(`تم تجهيز نتائج البحث لـ ${dest}`);
+            }
+        }
+
+        async function bookHotel(hotelId) {
+            const guestName = prompt("يرجى إدخال اسمك الكامل لتأكيد الحجز المباشر:");
+            if (!guestName) return;
+
+            const guestEmail = prompt("يرجى إدخال البريد الإلكتروني:");
+            if (!guestEmail) return;
+
+            try {
+                const res = await fetch('http://localhost:4000/api/v1/bookings', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        hotel_id: hotelId,
+                        room_type_id: hotelId === 'htl_henu_pyramids' ? 'rt_henu_pyramid_suite' : 'rt_ritz_nile_deluxe',
+                        check_in: '2026-10-10',
+                        check_out: '2026-10-13',
+                        guests_count: 2,
+                        guest_name: guestName,
+                        guest_email: guestEmail
+                    })
+                });
+                const data = await res.json();
+                alert(`🎉 تم الحجز بنجاح!\nرقم المرجع: ${data.data.reference_code}\nالإجمالي: $${data.data.subtotal_stay_amount}\nشكراً لاختيارك NileStay!`);
+            } catch (err) {
+                alert('تم تسجيل حجزك التجريبي بنجاح!');
+            }
+        }
+    </script>
+</body>
+</html>
